@@ -111,12 +111,12 @@ int aljabr_metal_cpu_matmul_tb(void* C, const void* A, const void* B,
 }
 
 int aljabr_metal_cpu_matvec_rows(void* y, const void* A, const void* x,
-                                 int rows, int cols,
+                                 int rows, int cols, int lda,
                                  float alpha, float beta) {
     cblas_sgemv(CblasRowMajor, CblasNoTrans,
                 rows, cols,
                 alpha,
-                (const float*)A, cols,
+                (const float*)A, lda,
                 (const float*)x, 1,
                 beta,
                 (float*)y, 1);
@@ -124,12 +124,12 @@ int aljabr_metal_cpu_matvec_rows(void* y, const void* A, const void* x,
 }
 
 int aljabr_metal_cpu_matvec_cols(void* y, const void* A, const void* x,
-                                 int rows, int cols,
+                                 int rows, int cols, int lda,
                                  float alpha, float beta) {
     cblas_sgemv(CblasRowMajor, CblasTrans,
                 rows, cols,
                 alpha,
-                (const float*)A, cols,
+                (const float*)A, lda,
                 (const float*)x, 1,
                 beta,
                 (float*)y, 1);

@@ -11,6 +11,13 @@
 typedef struct {
     __strong id<MTLComputePipelineState> matvec_half;
     __strong id<MTLComputePipelineState> matvec_t_half;
+    __strong id<MTLComputePipelineState> matvec_tb_int4;
+    __strong id<MTLComputePipelineState> matvec_tb_int4_128;
+    __strong id<MTLComputePipelineState> matvec_tb_nf4;
+    __strong id<MTLComputePipelineState> matvec_tb_nf4_128;
+    // GGML block-quantized pipelines
+    __strong id<MTLComputePipelineState> matvec_tb_q4_k;
+    __strong id<MTLComputePipelineState> matvec_tb_q8_0;
     __strong id<MTLComputePipelineState> matvec_half_pair;
     __strong id<MTLComputePipelineState> matvec_half_triple_mixed;
     __strong id<MTLComputePipelineState> matvec_bf16;

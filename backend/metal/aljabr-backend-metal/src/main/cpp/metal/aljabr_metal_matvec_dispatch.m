@@ -60,6 +60,180 @@ int aljabr_metal_dispatch_matvec_tb_half(void* C,
     }
 }
 
+int aljabr_metal_dispatch_matvec_tb_int4(void* C,
+                                         const void* A,
+                                         const void* B,
+                                         const void* scales,
+                                         int K, int N, int blockSize,
+                                         id<MTLComputePipelineState> pipeline,
+                                         NSUInteger threads) {
+    if (!g_initialized) return -1;
+    if (K <= 0 || N <= 0) return -2;
+    if (pipeline == nil) return -3;
+    if (pipeline.maxTotalThreadsPerThreadgroup < threads) return -3;
+
+    @autoreleasepool {
+        id<MTLBuffer> bufC = wrap_ptr(C, (size_t)N * sizeof(float));
+        id<MTLBuffer> bufA = wrap_ptr((void*)A, (size_t)K * sizeof(float));
+        id<MTLBuffer> bufB = wrap_weight_ptr(B, (size_t)((N * K + 1) / 2));
+        id<MTLBuffer> bufScales = wrap_weight_ptr(scales, (size_t)((N * K / blockSize) * sizeof(float)));
+        if (bufC == nil || bufA == nil || bufB == nil || bufScales == nil) {
+            return -4;
+        }
+
+        uint32_t kk = (uint32_t)K;
+        uint32_t nn = (uint32_t)N;
+        uint32_t bs = (uint32_t)blockSize;
+        id<MTLCommandBuffer> cmd = [g_queue commandBuffer];
+        id<MTLComputeCommandEncoder> enc = [cmd computeCommandEncoder];
+        [enc setComputePipelineState:pipeline];
+        [enc setBuffer:bufC offset:0 atIndex:0];
+        [enc setBuffer:bufA offset:0 atIndex:1];
+        [enc setBuffer:bufB offset:0 atIndex:2];
+        [enc setBuffer:bufScales offset:0 atIndex:3];
+        [enc setBytes:&kk length:sizeof(kk) atIndex:4];
+        [enc setBytes:&nn length:sizeof(nn) atIndex:5];
+        [enc setBytes:&bs length:sizeof(bs) atIndex:6];
+
+        NSUInteger groups = (NSUInteger)N;
+        [enc dispatchThreadgroups:MTLSizeMake(groups, 1, 1)
+             threadsPerThreadgroup:MTLSizeMake(threads, 1, 1)];
+        [enc endEncoding];
+        [cmd commit];
+        [cmd waitUntilCompleted];
+        return ([cmd status] == MTLCommandBufferStatusCompleted) ? 0 : -1;
+    }
+}
+
+int aljabr_metal_dispatch_matvec_tb_q4_k(void* C,
+                                         const void* A,
+                                         const void* B,
+                                         int K, int N,
+                                         id<MTLComputePipelineState> pipeline,
+                                         NSUInteger threads) {
+    if (!g_initialized) return -1;
+    if (K <= 0 || N <= 0) return -2;
+    if (pipeline == nil) return -3;
+    if (pipeline.maxTotalThreadsPerThreadgroup < threads) return -3;
+
+    @autoreleasepool {
+        id<MTLBuffer> bufC = wrap_ptr(C, (size_t)N * sizeof(float));
+        id<MTLBuffer> bufA = wrap_ptr((void*)A, (size_t)K * sizeof(float));
+        // Q4_K block is 144 bytes for 256 elements
+        id<MTLBuffer> bufB = wrap_weight_ptr(B, (size_t)N * K / 256 * 144);
+        if (bufC == nil || bufA == nil || bufB == nil) {
+            return -4;
+        }
+
+        uint32_t kk = (uint32_t)K;
+        uint32_t nn = (uint32_t)N;
+        id<MTLCommandBuffer> cmd = [g_queue commandBuffer];
+        id<MTLComputeCommandEncoder> enc = [cmd computeCommandEncoder];
+        [enc setComputePipelineState:pipeline];
+        [enc setBuffer:bufC offset:0 atIndex:0];
+        [enc setBuffer:bufA offset:0 atIndex:1];
+        [enc setBuffer:bufB offset:0 atIndex:2];
+        [enc setBytes:&kk length:sizeof(kk) atIndex:3];
+        [enc setBytes:&nn length:sizeof(nn) atIndex:4];
+
+        NSUInteger groups = (NSUInteger)N;
+        [enc dispatchThreadgroups:MTLSizeMake(groups, 1, 1)
+             threadsPerThreadgroup:MTLSizeMake(threads, 1, 1)];
+        [enc endEncoding];
+        [cmd commit];
+        [cmd waitUntilCompleted];
+        return ([cmd status] == MTLCommandBufferStatusCompleted) ? 0 : -1;
+    }
+}
+
+int aljabr_metal_dispatch_matvec_tb_q8_0(void* C,
+                                         const void* A,
+                                         const void* B,
+                                         int K, int N,
+                                         id<MTLComputePipelineState> pipeline,
+                                         NSUInteger threads) {
+    if (!g_initialized) return -1;
+    if (K <= 0 || N <= 0) return -2;
+    if (pipeline == nil) return -3;
+    if (pipeline.maxTotalThreadsPerThreadgroup < threads) return -3;
+
+    @autoreleasepool {
+        id<MTLBuffer> bufC = wrap_ptr(C, (size_t)N * sizeof(float));
+        id<MTLBuffer> bufA = wrap_ptr((void*)A, (size_t)K * sizeof(float));
+        // Q8_0 block is 34 bytes for 32 elements
+        id<MTLBuffer> bufB = wrap_weight_ptr(B, (size_t)N * K / 32 * 34);
+        if (bufC == nil || bufA == nil || bufB == nil) {
+            return -4;
+        }
+
+        uint32_t kk = (uint32_t)K;
+        uint32_t nn = (uint32_t)N;
+        id<MTLCommandBuffer> cmd = [g_queue commandBuffer];
+        id<MTLComputeCommandEncoder> enc = [cmd computeCommandEncoder];
+        [enc setComputePipelineState:pipeline];
+        [enc setBuffer:bufC offset:0 atIndex:0];
+        [enc setBuffer:bufA offset:0 atIndex:1];
+        [enc setBuffer:bufB offset:0 atIndex:2];
+        [enc setBytes:&kk length:sizeof(kk) atIndex:3];
+        [enc setBytes:&nn length:sizeof(nn) atIndex:4];
+
+        NSUInteger groups = (NSUInteger)N;
+        [enc dispatchThreadgroups:MTLSizeMake(groups, 1, 1)
+             threadsPerThreadgroup:MTLSizeMake(threads, 1, 1)];
+        [enc endEncoding];
+        [cmd commit];
+        [cmd waitUntilCompleted];
+        return ([cmd status] == MTLCommandBufferStatusCompleted) ? 0 : -1;
+    }
+}
+
+int aljabr_metal_dispatch_matvec_tb_nf4(void* C,
+                                        const void* A,
+                                        const void* B_packed,
+                                        const void* absmax,
+                                        int K,
+                                        int N,
+                                        int blockSize,
+                                        id<MTLComputePipelineState> pipeline,
+                                        NSUInteger threads) {
+    if (!g_initialized) return -1;
+    if (K <= 0 || N <= 0) return -2;
+    if (pipeline == nil) return -3;
+    if (pipeline.maxTotalThreadsPerThreadgroup < threads) return -3;
+
+    @autoreleasepool {
+        id<MTLBuffer> bufC = wrap_ptr(C, (size_t)N * sizeof(float));
+        id<MTLBuffer> bufA = wrap_ptr((void*)A, (size_t)K * sizeof(float));
+        id<MTLBuffer> bufB = wrap_weight_ptr(B_packed, (size_t)((N * K + 1) / 2));
+        id<MTLBuffer> bufAbsmax = wrap_weight_ptr(absmax, (size_t)((N * K / blockSize) * sizeof(float)));
+        if (bufC == nil || bufA == nil || bufB == nil || bufAbsmax == nil) {
+            return -4;
+        }
+
+        uint32_t kk = (uint32_t)K;
+        uint32_t nn = (uint32_t)N;
+        uint32_t bs = (uint32_t)blockSize;
+        id<MTLCommandBuffer> cmd = [g_queue commandBuffer];
+        id<MTLComputeCommandEncoder> enc = [cmd computeCommandEncoder];
+        [enc setComputePipelineState:pipeline];
+        [enc setBuffer:bufC offset:0 atIndex:0];
+        [enc setBuffer:bufA offset:0 atIndex:1];
+        [enc setBuffer:bufB offset:0 atIndex:2];
+        [enc setBuffer:bufAbsmax offset:0 atIndex:3];
+        [enc setBytes:&kk length:sizeof(kk) atIndex:4];
+        [enc setBytes:&nn length:sizeof(nn) atIndex:5];
+        [enc setBytes:&bs length:sizeof(bs) atIndex:6];
+
+        NSUInteger groups = (NSUInteger)N;
+        [enc dispatchThreadgroups:MTLSizeMake(groups, 1, 1)
+             threadsPerThreadgroup:MTLSizeMake(threads, 1, 1)];
+        [enc endEncoding];
+        [cmd commit];
+        [cmd waitUntilCompleted];
+        return ([cmd status] == MTLCommandBufferStatusCompleted) ? 0 : -1;
+    }
+}
+
 int aljabr_metal_dispatch_matvec_tb_half_x4(void* C,
                                             const void* A,
                                             const void* B,

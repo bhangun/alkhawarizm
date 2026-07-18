@@ -88,6 +88,14 @@ int aljabr_metal_matmul_tb(void* C, const void* A, const void* B,
         return aljabr_metal_cpu_matmul_tb(C, A, B, M, K, N, alpha, beta);
     }
 
+    // Guard: MPS hangs indefinitely on very large F32 weight matrices (e.g.
+    // lm_head with vocab_size=152064 and hidden=7168 ~= 1.09B elements).
+    // Fall back to CPU Accelerate for safety when weight exceeds ~1 GB.
+    static const long MAX_MPS_F32_WEIGHT_ELEMENTS = 256L * 1024L * 1024L;
+    if ((long)N * K > MAX_MPS_F32_WEIGHT_ELEMENTS) {
+        return aljabr_metal_cpu_matmul_tb(C, A, B, M, K, N, alpha, beta);
+    }
+
     @autoreleasepool {
         id<MTLBuffer> bufC = wrap_ptr(C, (size_t)M * N * sizeof(float));
         id<MTLBuffer> bufA = wrap_ptr((void*)A, (size_t)M * K * sizeof(float));
@@ -109,6 +117,7 @@ int aljabr_metal_matmul_tb(void* C, const void* A, const void* B,
         return wait_for_mps_command(cmd);
     }
 }
+
 
 int aljabr_metal_matmul_tb_half(void* C, const void* A, const void* B,
                            int M, int K, int N,

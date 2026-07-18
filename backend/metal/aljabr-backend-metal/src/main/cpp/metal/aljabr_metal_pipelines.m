@@ -96,6 +96,11 @@ void aljabr_metal_compile_runtime_pipelines(AljabrMetalPipelines* pipelines) {
                                                              options:nil
                                                                error:&matvec256Error];
     if (matvec256Library != nil) {
+        pipelines->matvec_tb_int4 = compile_pipeline(matvec256Library, @"aljabr_matvec_tb_int4_kernel");
+        pipelines->matvec_tb_nf4 = compile_pipeline(matvec256Library, @"aljabr_matvec_tb_nf4_kernel");
+        // GGML block-quantized kernels
+        pipelines->matvec_tb_q4_k = compile_pipeline(matvec256Library, @"aljabr_matvec_tb_q4_k_kernel");
+        pipelines->matvec_tb_q8_0 = compile_pipeline(matvec256Library, @"aljabr_matvec_tb_q8_0_kernel");
         pipelines->matvec_bf16 = compile_pipeline(matvec256Library, @"aljabr_matvec_tb_bf16_kernel");
         pipelines->matvec_bf16_pair = compile_pipeline(matvec256Library, @"aljabr_matvec_tb_bf16_pair_kernel");
         pipelines->matvec_bf16_pair_simd = compile_pipeline(matvec256Library, @"aljabr_matvec_tb_bf16_pair_simd_kernel");
@@ -139,6 +144,8 @@ void aljabr_metal_compile_runtime_pipelines(AljabrMetalPipelines* pipelines) {
         if (matvec128Library != nil) {
             pipelines->matvec_half_128 = compile_pipeline(matvec128Library, @"aljabr_matvec_tb_half_kernel");
             pipelines->matvec_t_half_128 = compile_pipeline(matvec128Library, @"aljabr_matvec_t_half_kernel");
+            pipelines->matvec_tb_int4_128 = compile_pipeline(matvec128Library, @"aljabr_matvec_tb_int4_kernel");
+            pipelines->matvec_tb_nf4_128 = compile_pipeline(matvec128Library, @"aljabr_matvec_tb_nf4_kernel");
             pipelines->matvec_half_pair_128 = compile_pipeline(matvec128Library, @"aljabr_matvec_tb_half_pair_kernel");
             pipelines->matvec_half_gated_pair_128 = compile_pipeline(matvec128Library, @"aljabr_matvec_tb_half_gated_pair_kernel");
             pipelines->matvec_half_triple_mixed_128 = compile_pipeline(matvec128Library, @"aljabr_matvec_tb_half_triple_mixed_kernel");

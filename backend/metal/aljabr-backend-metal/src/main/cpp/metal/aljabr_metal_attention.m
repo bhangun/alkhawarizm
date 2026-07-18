@@ -182,19 +182,24 @@ static int aljabr_metal_attention_impl(
         const float* kcache = (const float*)K_cache;
         const float* vcache = (const float*)V_cache;
 
-        for (int blk = 0; blk < num_blocks; blk++) {
-            int phys = block_table[b * max_blocks + blk];
-            if (phys < 0) return -2;
-            int tokens_in_blk = (blk == num_blocks - 1) ? (ctx_len - blk * block_size) : block_size;
-
-            for (int h = 0; h < H_kv; h++) {
-                const float* src_k = kcache + ((size_t)phys * H_kv + h) * block_size * D;
-                const float* src_v = vcache + ((size_t)phys * H_kv + h) * block_size * D;
-                float* dst_k = kPtr + ((size_t)h * ctx_len + blk * block_size) * D;
-                float* dst_v = vPtr + ((size_t)h * ctx_len + blk * block_size) * D;
-                memcpy(dst_k, src_k, (size_t)tokens_in_blk * D * sizeof(float));
-                memcpy(dst_v, src_v, (size_t)tokens_in_blk * D * sizeof(float));
+        int lda = D;
+        if (block_table != NULL) {
+            for (int blk = 0; blk < num_blocks; blk++) {
+                int phys = block_table[b * max_blocks + blk];
+                if (phys < 0) return -2;
+                int tokens_in_blk = (blk == num_blocks - 1) ? (ctx_len - blk * block_size) : block_size;
+    
+                for (int h = 0; h < H_kv; h++) {
+                    const float* src_k = kcache + ((size_t)phys * H_kv + h) * block_size * D;
+                    const float* src_v = vcache + ((size_t)phys * H_kv + h) * block_size * D;
+                    float* dst_k = kPtr + ((size_t)h * ctx_len + blk * block_size) * D;
+                    float* dst_v = vPtr + ((size_t)h * ctx_len + blk * block_size) * D;
+                    memcpy(dst_k, src_k, (size_t)tokens_in_blk * D * sizeof(float));
+                    memcpy(dst_v, src_v, (size_t)tokens_in_blk * D * sizeof(float));
+                }
             }
+        } else {
+            lda = H_kv * D;
         }
 
         const float* qPtr = (const float*)Q + (size_t)b * T * H * D;
@@ -219,9 +224,14 @@ static int aljabr_metal_attention_impl(
 
                 if (use_decode_sgemv) {
                     int valid_len = max_pos - min_pos + 1;
-                    const float* kBase = kPtr + ((size_t)kv_h * ctx_len + min_pos) * D;
+                    const float* kBase;
+                    if (block_table != NULL) {
+                        kBase = kPtr + ((size_t)kv_h * ctx_len + min_pos) * D;
+                    } else {
+                        kBase = kcache + (((size_t)b * ctx_len + min_pos) * H_kv + kv_h) * D;
+                    }
                     aljabr_metal_cpu_matvec_rows(row + min_pos, kBase, qh,
-                                                 valid_len, D, scale, 0.0f);
+                                                 valid_len, D, lda, scale, 0.0f);
 
                     float mx = -1e30f;
                     for (int s = min_pos; s <= max_pos; s++) {
@@ -243,15 +253,25 @@ static int aljabr_metal_attention_impl(
                         row[s] *= inv_sum;
                     }
 
-                    const float* vBase = vPtr + ((size_t)kv_h * ctx_len + min_pos) * D;
+                    const float* vBase;
+                    if (block_table != NULL) {
+                        vBase = vPtr + ((size_t)kv_h * ctx_len + min_pos) * D;
+                    } else {
+                        vBase = vcache + (((size_t)b * ctx_len + min_pos) * H_kv + kv_h) * D;
+                    }
                     aljabr_metal_cpu_matvec_cols(oh, vBase, row + min_pos,
-                                                 valid_len, D, 1.0f, 0.0f);
+                                                 valid_len, D, lda, 1.0f, 0.0f);
                     continue;
                 }
 
                 float mx = -1e30f;
                 for (int s = min_pos; s <= max_pos; s++) {
-                    const float* kh = kPtr + ((size_t)kv_h * ctx_len + s) * D;
+                    const float* kh;
+                    if (block_table != NULL) {
+                        kh = kPtr + ((size_t)kv_h * ctx_len + s) * D;
+                    } else {
+                        kh = kcache + (((size_t)b * ctx_len + s) * H_kv + kv_h) * D;
+                    }
                     float dot = 0.0f;
                     for (int d = 0; d < D; d++) dot += qh[d] * kh[d];
 
@@ -274,7 +294,12 @@ static int aljabr_metal_attention_impl(
                 }
 
                 for (int s = min_pos; s <= max_pos; s++) {
-                    const float* vh = vPtr + ((size_t)kv_h * ctx_len + s) * D;
+                    const float* vh;
+                    if (block_table != NULL) {
+                        vh = vPtr + ((size_t)kv_h * ctx_len + s) * D;
+                    } else {
+                        vh = vcache + (((size_t)b * ctx_len + s) * H_kv + kv_h) * D;
+                    }
                     float weight = row[s];
                     for (int d = 0; d < D; d++) oh[d] += weight * vh[d];
                 }

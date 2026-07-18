@@ -16,8 +16,14 @@ public class Embedding extends Module {
         this.embeddingDim = embeddingDim;
         this.paddingIdx = paddingIdx;
 
-        // Initialize weight: [numEmbeddings, embeddingDim] with normal distribution
         Tensor weight = Tensor.randn(numEmbeddings, embeddingDim);
+        registerParameter("weight", weight);
+    }
+
+    public Embedding(Tensor weight) {
+        this.numEmbeddings = weight.shape().dim(0);
+        this.embeddingDim = weight.shape().dim(1);
+        this.paddingIdx = -1;
         registerParameter("weight", weight);
     }
 

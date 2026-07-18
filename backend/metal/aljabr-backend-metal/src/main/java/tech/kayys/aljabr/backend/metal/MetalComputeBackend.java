@@ -15,6 +15,22 @@ import java.util.List;
  */
 public class MetalComputeBackend implements ComputeBackend {
 
+    private Tensor wrap(Tensor cpuRes) {
+        if (cpuRes instanceof tech.kayys.aljabr.core.tensor.DefaultTensor dt) {
+            return new tech.kayys.aljabr.core.tensor.DefaultTensor(dt.shape(), dt.dtype(), dt.device(), dt.buffer(), this);
+        }
+        return cpuRes;
+    }
+
+    private java.util.List<Tensor> wrapList(java.util.List<Tensor> list) {
+        java.util.List<Tensor> res = new java.util.ArrayList<>(list.size());
+        for (Tensor t : list) {
+            res.add(wrap(t));
+        }
+        return res;
+    }
+
+
     private static final Logger LOG = Logger.getLogger(MetalComputeBackend.class);
     private static final String FORCE_CPU_PROPERTY = "aljabr.kernel.force.cpu";
 
@@ -71,32 +87,36 @@ public class MetalComputeBackend implements ComputeBackend {
     }
 
     @Override
-    public Tensor add(Tensor a, Tensor b) { return cpuFallback.add(a, b); }
+    public Tensor add(Tensor a, Tensor b) { return wrap(cpuFallback.add(a, b)); }
 
     @Override
-    public Tensor sub(Tensor a, Tensor b) { return cpuFallback.sub(a, b); }
+    public Tensor sub(Tensor a, Tensor b) { return wrap(cpuFallback.sub(a, b)); }
 
     @Override
-    public Tensor mul(Tensor a, float scalar) { return cpuFallback.mul(a, scalar); }
+    public Tensor mul(Tensor a, float scalar) { return wrap(cpuFallback.mul(a, scalar)); }
 
     @Override
-    public Tensor mul(Tensor a, Tensor b) { return cpuFallback.mul(a, b); }
+    public Tensor mul(Tensor a, Tensor b) { return wrap(cpuFallback.mul(a, b)); }
 
     @Override
-    public Tensor div(Tensor a, float scalar) { return cpuFallback.div(a, scalar); }
+    public Tensor div(Tensor a, float scalar) { return wrap(cpuFallback.div(a, scalar)); }
 
     @Override
-    public Tensor div(Tensor a, Tensor b) { return cpuFallback.div(a, b); }
+    public Tensor div(Tensor a, Tensor b) { return wrap(cpuFallback.div(a, b)); }
 
     @Override
-    public Tensor addScalar(Tensor a, float scalar) { return cpuFallback.addScalar(a, scalar); }
+    public Tensor addScalar(Tensor a, float scalar) { return wrap(cpuFallback.addScalar(a, scalar)); }
 
     @Override
     public Tensor matmul(Tensor a, Tensor b) {
-        if (!isNative) return cpuFallback.matmul(a, b);
+        if (!isNative) return wrap(cpuFallback.matmul(a, b));
         
         DefaultTensor da = asDefault(a);
         DefaultTensor db = asDefault(b);
+        
+        if (b.dtype() == tech.kayys.aljabr.core.tensor.DType.Q4_K || b.dtype() == tech.kayys.aljabr.core.tensor.DType.Q8_0) {
+            return matmulQuantized(da, db);
+        }
         
         int M = (int) a.shape().dim(a.shape().rank() - 2);
         int K = (int) a.shape().dim(a.shape().rank() - 1);
@@ -108,18 +128,56 @@ public class MetalComputeBackend implements ComputeBackend {
         CpuBuffer bufferC = allocate(sizeBytes);
         int status = metalBinding.matmul(bufferC.segment(), da.buffer().segment(), db.buffer().segment(), M, K, N, 1.0f, 0.0f);
         if (status != 0) {
-            return cpuFallback.matmul(a, b);
+            System.err.println("Metal matmul falling back to CPU for a=" + a.dtype() + " (shape=" + a.shape() + "), b=" + b.dtype() + " (shape=" + b.shape() + "), M=" + M + ", K=" + K + ", N=" + N);
+            return wrap(cpuFallback.matmul(a, b));
         }
         
         return new DefaultTensor(shapeC, a.dtype(), a.device(), bufferC, this);
     }
 
+    private Tensor matmulQuantized(DefaultTensor a, DefaultTensor db) {
+        int M = (int) a.shape().dim(a.shape().rank() - 2);
+        int K = (int) a.shape().dim(a.shape().rank() - 1);
+        int N = (int) db.shape().dim(0); // weight rows = output dim
+
+        Shape shapeC = new Shape(M, N);
+        CpuBuffer bufferC = allocate((long) M * N * 4);
+
+        int status = 0;
+        if (db.dtype() == tech.kayys.aljabr.core.tensor.DType.Q4_K) {
+            for (int m = 0; m < M; m++) {
+                status = metalBinding.matvecTransposedRightQ4K(
+                        bufferC.segment().asSlice(m * N * 4L, N * 4L), 
+                        a.buffer().segment().asSlice(m * K * 4L, K * 4L), 
+                        db.buffer().segment(), K, N);
+                if (status != 0) break;
+            }
+        } else if (db.dtype() == tech.kayys.aljabr.core.tensor.DType.Q8_0) {
+            for (int m = 0; m < M; m++) {
+                status = metalBinding.matvecTransposedRightQ8_0(
+                        bufferC.segment().asSlice(m * N * 4L, N * 4L), 
+                        a.buffer().segment().asSlice(m * K * 4L, K * 4L), 
+                        db.buffer().segment(), K, N);
+                if (status != 0) break;
+            }
+        } else {
+            status = -1;
+        }
+        
+        if (status != 0) {
+            System.err.println("Metal matmul falling back to CPU for a=" + a.dtype() + " (shape=" + a.shape() + "), b=" + db.dtype() + " (shape=" + db.shape() + "), M=" + M + ", K=" + K + ", N=" + N + ", status=" + status);
+            return wrap(cpuFallback.matmul(a, db));
+        }
+
+        return new DefaultTensor(shapeC, tech.kayys.aljabr.core.tensor.DType.F32, a.device(), bufferC, this);
+    }
+
     @Override
-    public Tensor reshape(Tensor a, long... newShape) { return cpuFallback.reshape(a, newShape); }
+    public Tensor reshape(Tensor a, long... newShape) { return wrap(cpuFallback.reshape(a, newShape)); }
 
     @Override
     public Tensor attention(Tensor Q, Tensor K, Tensor V) {
-        if (!isNative) return cpuFallback.attention(Q, K, V);
+        if (!isNative) return wrap(cpuFallback.attention(Q, K, V));
         
         DefaultTensor dQ = asDefault(Q);
         DefaultTensor dK = asDefault(K);
@@ -130,23 +188,32 @@ public class MetalComputeBackend implements ComputeBackend {
         int H = (int) Q.shape().dim(2);
         int Hkv = (int) K.shape().dim(2);
         int D = (int) Q.shape().dim(3);
+        int Skv = (int) K.shape().dim(1);
 
         Shape shapeOut = Q.shape();
         long sizeBytes = shapeOut.numel() * byteSize(Q.dtype());
         CpuBuffer bufferOut = allocate(sizeBytes);
 
-        MemorySegment empty = MemorySegment.NULL;
         int status;
-        if (H == Hkv) {
-            status = metalBinding.attention(bufferOut.segment(), dQ.buffer().segment(), dK.buffer().segment(), dV.buffer().segment(),
-                    empty, empty, B, T, H, D, 16, 1024, (float)(1.0/Math.sqrt(D)), 1, 0.0f);
-        } else {
-            status = metalBinding.attentionGqa(bufferOut.segment(), dQ.buffer().segment(), dK.buffer().segment(), dV.buffer().segment(),
-                    empty, empty, B, T, H, Hkv, D, 16, 1024, (float)(1.0/Math.sqrt(D)), 1, 0.0f);
+        try (java.lang.foreign.Arena arena = java.lang.foreign.Arena.ofConfined()) {
+            java.lang.foreign.MemorySegment contextLens = arena.allocate(java.lang.foreign.ValueLayout.JAVA_INT, B);
+            for (int b = 0; b < B; b++) {
+                contextLens.setAtIndex(java.lang.foreign.ValueLayout.JAVA_INT, b, Skv);
+            }
+            
+            java.lang.foreign.MemorySegment empty = java.lang.foreign.MemorySegment.NULL;
+            
+            if (H == Hkv) {
+                status = metalBinding.attention(bufferOut.segment(), dQ.buffer().segment(), dK.buffer().segment(), dV.buffer().segment(),
+                        empty, contextLens, B, T, H, D, 16, 1024, (float)(1.0/Math.sqrt(D)), 1, 0.0f);
+            } else {
+                status = metalBinding.attentionGqa(bufferOut.segment(), dQ.buffer().segment(), dK.buffer().segment(), dV.buffer().segment(),
+                        empty, contextLens, B, T, H, Hkv, D, 16, 1024, (float)(1.0/Math.sqrt(D)), 1, 0.0f);
+            }
         }
 
         if (status != 0) {
-            return cpuFallback.attention(Q, K, V);
+            return wrap(cpuFallback.attention(Q, K, V));
         }
 
         return new DefaultTensor(shapeOut, Q.dtype(), Q.device(), bufferOut, this);
@@ -154,7 +221,7 @@ public class MetalComputeBackend implements ComputeBackend {
 
     @Override
     public Tensor softmax(Tensor a) {
-        if (!isNative || a.dtype() != DType.F32) return cpuFallback.softmax(a);
+        if (!isNative || a.dtype() != DType.F32) return wrap(cpuFallback.softmax(a));
         
         DefaultTensor da = asDefault(a);
         Shape shape = a.shape();
@@ -163,42 +230,42 @@ public class MetalComputeBackend implements ComputeBackend {
         
         int status = metalBinding.softmax(bufferOut.segment(), da.buffer().segment(), n);
         if (status != 0) {
-            return cpuFallback.softmax(a);
+            return wrap(cpuFallback.softmax(a));
         }
         
         return new DefaultTensor(shape, a.dtype(), a.device(), bufferOut, this);
     }
 
     @Override
-    public Tensor slice(Tensor a, long[] offsets, long[] sizes) { return cpuFallback.slice(a, offsets, sizes); }
+    public Tensor slice(Tensor a, long[] offsets, long[] sizes) { return wrap(cpuFallback.slice(a, offsets, sizes)); }
 
     @Override
-    public List<Tensor> split(Tensor a, int axis, int parts) { return cpuFallback.split(a, axis, parts); }
+    public List<Tensor> split(Tensor a, int axis, int parts) { return wrapList(cpuFallback.split(a, axis, parts)); }
 
     @Override
-    public Tensor pow(Tensor a, float exponent) { return cpuFallback.pow(a, exponent); }
+    public Tensor pow(Tensor a, float exponent) { return wrap(cpuFallback.pow(a, exponent)); }
 
     @Override
-    public Tensor mean(Tensor a) { return cpuFallback.mean(a); }
+    public Tensor mean(Tensor a) { return wrap(cpuFallback.mean(a)); }
 
     @Override
-    public Tensor abs(Tensor a) { return cpuFallback.abs(a); }
+    public Tensor abs(Tensor a) { return wrap(cpuFallback.abs(a)); }
 
     @Override
-    public Tensor crossEntropy(Tensor pred, Tensor target) { return cpuFallback.crossEntropy(pred, target); }
+    public Tensor crossEntropy(Tensor pred, Tensor target) { return wrap(cpuFallback.crossEntropy(pred, target)); }
 
     @Override
-    public Tensor binaryCrossEntropy(Tensor pred, Tensor target) { return cpuFallback.binaryCrossEntropy(pred, target); }
+    public Tensor binaryCrossEntropy(Tensor pred, Tensor target) { return wrap(cpuFallback.binaryCrossEntropy(pred, target)); }
 
     @Override
-    public Tensor cast(Tensor a, tech.kayys.aljabr.core.tensor.DType dtype) { return cpuFallback.cast(a, dtype); }
+    public Tensor cast(Tensor a, tech.kayys.aljabr.core.tensor.DType dtype) { return wrap(cpuFallback.cast(a, dtype)); }
 
     @Override
     public Tensor to(Tensor a, tech.kayys.aljabr.core.tensor.DeviceType device) {
         if (device == DeviceType.METAL || device == DeviceType.CPU) {
             return a;
         }
-        return cpuFallback.to(a, device);
+        return wrap(cpuFallback.to(a, device));
     }
 
     @Override
@@ -210,26 +277,26 @@ public class MetalComputeBackend implements ComputeBackend {
     }
 
     @Override
-    public Tensor sqrt(Tensor a) { return cpuFallback.sqrt(a); }
+    public Tensor sqrt(Tensor a) { return wrap(cpuFallback.sqrt(a)); }
 
     @Override
-    public Tensor relu(Tensor a) { return cpuFallback.relu(a); }
+    public Tensor relu(Tensor a) { return wrap(cpuFallback.relu(a)); }
 
     @Override
-    public Tensor sigmoid(Tensor a) { return cpuFallback.sigmoid(a); }
+    public Tensor sigmoid(Tensor a) { return wrap(cpuFallback.sigmoid(a)); }
 
     @Override
-    public Tensor tanh(Tensor a) { return cpuFallback.tanh(a); }
+    public Tensor tanh(Tensor a) { return wrap(cpuFallback.tanh(a)); }
 
     @Override
-    public Tensor log(Tensor a) { return cpuFallback.log(a); }
+    public Tensor log(Tensor a) { return wrap(cpuFallback.log(a)); }
 
     @Override
-    public Tensor exp(Tensor a) { return cpuFallback.exp(a); }
+    public Tensor exp(Tensor a) { return wrap(cpuFallback.exp(a)); }
 
     @Override
     public Tensor silu(Tensor a) {
-        if (!isNative || a.dtype() != DType.F32) return cpuFallback.silu(a);
+        if (!isNative || a.dtype() != DType.F32) return wrap(cpuFallback.silu(a));
         
         DefaultTensor da = asDefault(a);
         Shape shape = a.shape();
@@ -238,30 +305,30 @@ public class MetalComputeBackend implements ComputeBackend {
         
         int status = metalBinding.silu(bufferOut.segment(), da.buffer().segment(), n);
         if (status != 0) {
-            return cpuFallback.silu(a);
+            return wrap(cpuFallback.silu(a));
         }
         
         return new DefaultTensor(shape, a.dtype(), a.device(), bufferOut, this);
     }
 
     @Override
-    public Tensor flatten(Tensor a) { return cpuFallback.flatten(a); }
+    public Tensor flatten(Tensor a) { return wrap(cpuFallback.flatten(a)); }
 
     @Override
-    public Tensor unsqueeze(Tensor a, int dim) { return cpuFallback.unsqueeze(a, dim); }
+    public Tensor unsqueeze(Tensor a, int dim) { return wrap(cpuFallback.unsqueeze(a, dim)); }
 
     @Override
-    public Tensor squeeze(Tensor a) { return cpuFallback.squeeze(a); }
+    public Tensor squeeze(Tensor a) { return wrap(cpuFallback.squeeze(a)); }
 
     @Override
-    public Tensor transpose(Tensor a) { return cpuFallback.transpose(a); }
+    public Tensor transpose(Tensor a) { return wrap(cpuFallback.transpose(a)); }
 
     @Override
-    public Tensor transpose(Tensor a, int d0, int d1) { return cpuFallback.transpose(a, d0, d1); }
+    public Tensor transpose(Tensor a, int d0, int d1) { return wrap(cpuFallback.transpose(a, d0, d1)); }
 
     @Override
     public Tensor gelu(Tensor a) {
-        if (!isNative || a.dtype() != DType.F32) return cpuFallback.gelu(a);
+        if (!isNative || a.dtype() != DType.F32) return wrap(cpuFallback.gelu(a));
         
         DefaultTensor da = asDefault(a);
         Shape shape = a.shape();
@@ -270,7 +337,7 @@ public class MetalComputeBackend implements ComputeBackend {
         
         int status = metalBinding.gelu(bufferOut.segment(), da.buffer().segment(), n);
         if (status != 0) {
-            return cpuFallback.gelu(a);
+            return wrap(cpuFallback.gelu(a));
         }
         
         return new DefaultTensor(shape, a.dtype(), a.device(), bufferOut, this);
@@ -278,7 +345,7 @@ public class MetalComputeBackend implements ComputeBackend {
 
     @Override
     public Tensor softmax(Tensor a, int dim) {
-        if (!isNative || a.dtype() != DType.F32) return cpuFallback.softmax(a, dim);
+        if (!isNative || a.dtype() != DType.F32) return wrap(cpuFallback.softmax(a, dim));
         
         if (dim == a.shape().rank() - 1) {
             int rows = 1;
@@ -294,27 +361,27 @@ public class MetalComputeBackend implements ComputeBackend {
                 return new DefaultTensor(a.shape(), a.dtype(), a.device(), bufferOut, this);
             }
         }
-        return cpuFallback.softmax(a, dim);
+        return wrap(cpuFallback.softmax(a, dim));
     }
 
     @Override
-    public Tensor logSoftmax(Tensor a, int dim) { return cpuFallback.logSoftmax(a, dim); }
+    public Tensor logSoftmax(Tensor a, int dim) { return wrap(cpuFallback.logSoftmax(a, dim)); }
 
     @Override
-    public Tensor mean(Tensor a, int dim, boolean keepDim) { return cpuFallback.mean(a, dim, keepDim); }
+    public Tensor mean(Tensor a, int dim, boolean keepDim) { return wrap(cpuFallback.mean(a, dim, keepDim)); }
 
     @Override
-    public Tensor sum(Tensor a) { return cpuFallback.sum(a); }
+    public Tensor sum(Tensor a) { return wrap(cpuFallback.sum(a)); }
 
     @Override
-    public Tensor sum(Tensor a, int dim, boolean keepDim) { return cpuFallback.sum(a, dim, keepDim); }
+    public Tensor sum(Tensor a, int dim, boolean keepDim) { return wrap(cpuFallback.sum(a, dim, keepDim)); }
 
     @Override
-    public Tensor max(Tensor a) { return cpuFallback.max(a); }
+    public Tensor max(Tensor a) { return wrap(cpuFallback.max(a)); }
 
     @Override
     public Tensor layerNorm(Tensor input, long[] normalizedShape, Tensor weight, Tensor bias, float eps) {
-        if (!isNative || input.dtype() != DType.F32) return cpuFallback.layerNorm(input, normalizedShape, weight, bias, eps);
+        if (!isNative || input.dtype() != DType.F32) return wrap(cpuFallback.layerNorm(input, normalizedShape, weight, bias, eps));
 
         DefaultTensor dInput = asDefault(input);
         DefaultTensor dWeight = weight != null ? asDefault(weight) : null;
@@ -344,7 +411,7 @@ public class MetalComputeBackend implements ComputeBackend {
         }
 
         if (status != 0) {
-            return cpuFallback.layerNorm(input, normalizedShape, weight, bias, eps);
+            return wrap(cpuFallback.layerNorm(input, normalizedShape, weight, bias, eps));
         }
 
         return new DefaultTensor(shape, input.dtype(), input.device(), bufferOut, this);
@@ -352,7 +419,7 @@ public class MetalComputeBackend implements ComputeBackend {
 
     @Override
     public Tensor rmsNorm(Tensor input, Tensor weight, float eps) {
-        if (!isNative || input.dtype() != DType.F32) return cpuFallback.rmsNorm(input, weight, eps);
+        if (!isNative || input.dtype() != DType.F32) return wrap(cpuFallback.rmsNorm(input, weight, eps));
         
         DefaultTensor dInput = asDefault(input);
         DefaultTensor dWeight = asDefault(weight);
@@ -373,7 +440,7 @@ public class MetalComputeBackend implements ComputeBackend {
         }
         
         if (status != 0) {
-            return cpuFallback.rmsNorm(input, weight, eps);
+            return wrap(cpuFallback.rmsNorm(input, weight, eps));
         }
         
         return new DefaultTensor(shape, input.dtype(), input.device(), bufferOut, this);
@@ -381,36 +448,34 @@ public class MetalComputeBackend implements ComputeBackend {
 
     @Override
     public Tensor batchNorm(Tensor input, Tensor weight, Tensor bias, Tensor runningMean, Tensor runningVar, boolean training, float momentum, float eps) {
-        return cpuFallback.batchNorm(input, weight, bias, runningMean, runningVar, training, momentum, eps);
+        return wrap(cpuFallback.batchNorm(input, weight, bias, runningMean, runningVar, training, momentum, eps));
     }
 
     @Override
     public Tensor conv2d(Tensor input, Tensor weight, Tensor bias, int stride, int padding, int dilation, int groups) {
-        return cpuFallback.conv2d(input, weight, bias, stride, padding, dilation, groups);
+        return wrap(cpuFallback.conv2d(input, weight, bias, stride, padding, dilation, groups));
     }
 
     @Override
     public Tensor maxPool2d(Tensor input, int kernelSize, int stride, int padding) {
-        return cpuFallback.maxPool2d(input, kernelSize, stride, padding);
+        return wrap(cpuFallback.maxPool2d(input, kernelSize, stride, padding));
     }
 
     @Override
     public Tensor adaptiveAvgPool2d(Tensor input, int outputH, int outputW) {
-        return cpuFallback.adaptiveAvgPool2d(input, outputH, outputW);
+        return wrap(cpuFallback.adaptiveAvgPool2d(input, outputH, outputW));
     }
 
     @Override
     public Tensor dropout(Tensor input, float p, boolean training) {
-        return cpuFallback.dropout(input, p, training);
+        return wrap(cpuFallback.dropout(input, p, training));
     }
 
     @Override
     public Tensor embedding(Tensor weight, Tensor input, long paddingIdx) {
-        return cpuFallback.embedding(weight, input, paddingIdx);
+        return wrap(cpuFallback.embedding(weight, input, paddingIdx));
     }
 
     @Override
-    public long numel(Tensor a) {
-        return cpuFallback.numel(a);
-    }
+    public long numel(Tensor a) { return cpuFallback.numel(a); }
 }

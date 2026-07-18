@@ -72,6 +72,10 @@ public class MetalBinding {
     private static final String FN_BF16_FFN_MATVEC_ROWS_VARIANT = "aljabr_metal_bf16_ffn_matvec_rows_variant";
     private static final String FN_MATVEC_TB_HALF = "aljabr_metal_matvec_tb_half";
     private static final String FN_MATVEC_TB_HALF_MPS = "aljabr_metal_matvec_tb_half_mps";
+    private static final String FN_MATVEC_TB_NF4 = "aljabr_metal_matvec_tb_nf4";
+    private static final String FN_MATVEC_TB_INT4 = "aljabr_metal_matvec_tb_int4";
+    private static final String FN_MATVEC_TB_Q4_K = "aljabr_metal_matvec_tb_q4_k";
+    private static final String FN_MATVEC_TB_Q8_0 = "aljabr_metal_matvec_tb_q8_0";
     private static final String FN_MATVEC_T_HALF = "aljabr_metal_matvec_t_half";
     private static final String FN_MATVEC_TB_HALF_PAIR = "aljabr_metal_matvec_tb_half_pair";
     private static final String FN_MATVEC_TB_HALF_TRIPLE_MIXED = "aljabr_metal_matvec_tb_half_triple_mixed";
@@ -707,6 +711,15 @@ public class MetalBinding {
         return !useCpuFallback() && handles.containsKey(FN_MATVEC_TB_HALF);
     }
 
+    public boolean supportsMatvecTransposedRightNf4() {
+        return !useCpuFallback() && handles.containsKey(FN_MATVEC_TB_NF4);
+    }
+
+    public boolean supportsMatvecTransposedRightInt4() {
+        return !useCpuFallback() && handles.containsKey(FN_MATVEC_TB_INT4);
+    }
+
+
     public boolean supportsMatvecTransposedRightHalfMps() {
         return !useCpuFallback() && handles.containsKey(FN_MATVEC_TB_HALF_MPS);
     }
@@ -730,6 +743,46 @@ public class MetalBinding {
             return -2;
         }
         return (int) invoke(FN_MATVEC_TB_HALF, C, A, B, K, N);
+    }
+
+    public int matvecTransposedRightInt4(MemorySegment C,
+            MemorySegment A,
+            MemorySegment B_packed,
+            MemorySegment scales,
+            int K, int N, int blockSize) {
+        if (useCpuFallback()) {
+            throw new UnsupportedOperationException("Metal matvecTransposedRightInt4 not supported in CPU fallback");
+        }
+        if (!handles.containsKey(FN_MATVEC_TB_INT4)) {
+            return -2;
+        }
+        return (int) invoke(FN_MATVEC_TB_INT4, C, A, B_packed, scales, K, N, blockSize);
+    }
+
+    public int matvecTransposedRightQ4K(MemorySegment C, MemorySegment A, MemorySegment B, int K, int N) {
+        if (useCpuFallback()) throw new UnsupportedOperationException("Metal Q4_K not available in CPU fallback");
+        if (!handles.containsKey(FN_MATVEC_TB_Q4_K)) return -2;
+        return (int) invoke(FN_MATVEC_TB_Q4_K, C, A, B, K, N);
+    }
+
+    public int matvecTransposedRightQ8_0(MemorySegment C, MemorySegment A, MemorySegment B, int K, int N) {
+        if (useCpuFallback()) throw new UnsupportedOperationException("Metal Q8_0 not available in CPU fallback");
+        if (!handles.containsKey(FN_MATVEC_TB_Q8_0)) return -2;
+        return (int) invoke(FN_MATVEC_TB_Q8_0, C, A, B, K, N);
+    }
+
+    public int matvecTransposedRightNf4(MemorySegment C,
+            MemorySegment A,
+            MemorySegment B_packed,
+            MemorySegment absmax,
+            int K, int N, int blockSize) {
+        if (useCpuFallback()) {
+            throw new UnsupportedOperationException("Metal matvecTransposedRightNf4 not supported in CPU fallback");
+        }
+        if (!handles.containsKey(FN_MATVEC_TB_NF4)) {
+            return -2;
+        }
+        return (int) invoke(FN_MATVEC_TB_NF4, C, A, B_packed, absmax, K, N, blockSize);
     }
 
     public int matvecTransposedRightHalfMps(MemorySegment C,
@@ -1268,6 +1321,19 @@ public class MetalBinding {
                 ValueLayout.JAVA_INT, ValueLayout.JAVA_INT));
 
         bind(FN_MATVEC_TB_HALF_MPS, FunctionDescriptor.of(ValueLayout.JAVA_INT,
+                ValueLayout.ADDRESS, ValueLayout.ADDRESS, ValueLayout.ADDRESS,
+                ValueLayout.JAVA_INT, ValueLayout.JAVA_INT));
+
+        bind(FN_MATVEC_TB_NF4, FunctionDescriptor.of(ValueLayout.JAVA_INT,
+                ValueLayout.ADDRESS, ValueLayout.ADDRESS, ValueLayout.ADDRESS, ValueLayout.ADDRESS,
+                ValueLayout.JAVA_INT, ValueLayout.JAVA_INT, ValueLayout.JAVA_INT));
+        bind(FN_MATVEC_TB_INT4, FunctionDescriptor.of(ValueLayout.JAVA_INT,
+                ValueLayout.ADDRESS, ValueLayout.ADDRESS, ValueLayout.ADDRESS, ValueLayout.ADDRESS,
+                ValueLayout.JAVA_INT, ValueLayout.JAVA_INT, ValueLayout.JAVA_INT));
+        bind(FN_MATVEC_TB_Q4_K, FunctionDescriptor.of(ValueLayout.JAVA_INT,
+                ValueLayout.ADDRESS, ValueLayout.ADDRESS, ValueLayout.ADDRESS,
+                ValueLayout.JAVA_INT, ValueLayout.JAVA_INT));
+        bind(FN_MATVEC_TB_Q8_0, FunctionDescriptor.of(ValueLayout.JAVA_INT,
                 ValueLayout.ADDRESS, ValueLayout.ADDRESS, ValueLayout.ADDRESS,
                 ValueLayout.JAVA_INT, ValueLayout.JAVA_INT));
 

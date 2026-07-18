@@ -40,6 +40,21 @@ public class Conv2d extends Module {
     public Conv2d(long inChannels, long outChannels, long kernelSize) {
         this(inChannels, outChannels, kernelSize, 1, 0, 1, 1, true);
     }
+    
+    public Conv2d(Tensor weight, Tensor bias, int stride, int padding, int dilation, int groups) {
+        this.outChannels = weight.shape().dim(0);
+        this.inChannels = weight.shape().dim(1) * groups;
+        this.kernelSize = weight.shape().dim(2);
+        this.stride = stride;
+        this.padding = padding;
+        this.dilation = dilation;
+        this.groups = groups;
+        this.hasBias = (bias != null);
+        registerParameter("weight", weight);
+        if (bias != null) {
+            registerParameter("bias", bias);
+        }
+    }
 
     public Conv2d(long inChannels, long outChannels, long kernelSize, int stride, int padding) {
         this(inChannels, outChannels, kernelSize, stride, padding, 1, 1, true);

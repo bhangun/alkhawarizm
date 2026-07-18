@@ -26,6 +26,16 @@ public class Linear extends Module {
         }
     }
 
+    public Linear(Tensor weight, Tensor bias) {
+        this.outFeatures = weight.shape().dim(0);
+        this.inFeatures = weight.shape().dim(1);
+        this.hasBias = (bias != null);
+        registerParameter("weight", weight);
+        if (bias != null) {
+            registerParameter("bias", bias);
+        }
+    }
+
     public Linear(long inFeatures, long outFeatures) {
         this(inFeatures, outFeatures, true);
     }
@@ -33,7 +43,14 @@ public class Linear extends Module {
     @Override
     public Tensor forward(Tensor input) {
         Tensor weight = parameters.get("weight");
-        Tensor output = input.matmul(weight.transpose(0, 1));
+        Tensor output;
+        
+        if (weight.dtype().blockSize() > 1) {
+            // Quantized tensors (e.g. Q4_K) natively expect [out_features, in_features] layout
+            output = input.matmul(weight);
+        } else {
+            output = input.matmul(weight.transpose(0, 1));
+        }
 
         if (hasBias) {
             Tensor bias = parameters.get("bias");

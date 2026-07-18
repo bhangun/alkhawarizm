@@ -13,10 +13,10 @@ int aljabr_metal_cpu_matmul_tb(void* C, const void* A, const void* B,
                                int M, int K, int N,
                                float alpha, float beta);
 int aljabr_metal_cpu_matvec_rows(void* y, const void* A, const void* x,
-                                 int rows, int cols,
+                                 int rows, int cols, int lda,
                                  float alpha, float beta);
 int aljabr_metal_cpu_matvec_cols(void* y, const void* A, const void* x,
-                                 int rows, int cols,
+                                 int rows, int cols, int lda,
                                  float alpha, float beta);
 int aljabr_metal_cpu_rmsnorm(void* out, const void* x, const void* weight, int N, float eps, int addOne);
 int aljabr_metal_cpu_silu_ffn(void* out, const void* gate, const void* up, int N);

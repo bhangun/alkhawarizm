@@ -16,6 +16,19 @@ int aljabr_metal_dispatch_matvec_tb_half(void* C,
                                          id<MTLComputePipelineState> pipeline,
                                          NSUInteger threads);
 
+int aljabr_metal_dispatch_matvec_tb_int4(void* C, const void* A, const void* B, const void* scales, int K, int N, int blockSize, id<MTLComputePipelineState> pipeline, NSUInteger threads);
+int aljabr_metal_dispatch_matvec_tb_q4_k(void* C, const void* A, const void* B, int K, int N, id<MTLComputePipelineState> pipeline, NSUInteger threads);
+int aljabr_metal_dispatch_matvec_tb_q8_0(void* C, const void* A, const void* B, int K, int N, id<MTLComputePipelineState> pipeline, NSUInteger threads);
+int aljabr_metal_dispatch_matvec_tb_nf4(void* C,
+                                        const void* A,
+                                        const void* B_packed,
+                                        const void* absmax,
+                                        int K,
+                                        int N,
+                                        int blockSize,
+                                        id<MTLComputePipelineState> pipeline,
+                                        NSUInteger threads);
+
 int aljabr_metal_dispatch_matvec_tb_half_x4(void* C,
                                             const void* A,
                                             const void* B,
@@ -70,5 +83,9 @@ int aljabr_metal_dispatch_matvec_tb_half_triple_mixed(void* C0,
 #define dispatch_matvec_t_half aljabr_metal_dispatch_matvec_t_half
 #define dispatch_matvec_tb_half_pair aljabr_metal_dispatch_matvec_tb_half_pair
 #define dispatch_matvec_tb_half_triple_mixed aljabr_metal_dispatch_matvec_tb_half_triple_mixed
+#define dispatch_matvec_tb_int4 aljabr_metal_dispatch_matvec_tb_int4
+#define dispatch_matvec_tb_q4_k aljabr_metal_dispatch_matvec_tb_q4_k
+#define dispatch_matvec_tb_q8_0 aljabr_metal_dispatch_matvec_tb_q8_0
+#define dispatch_matvec_tb_nf4 aljabr_metal_dispatch_matvec_tb_nf4
 
 #endif

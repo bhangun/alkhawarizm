@@ -53,19 +53,40 @@ public final class TensorFactory {
         return new DefaultTensor(new Shape(shape), DType.F32, DeviceType.CPU, buf, backend);
     }
 
+    public static Tensor ofQuantized(java.lang.foreign.MemorySegment data, DType dtype, long... shape) {
+        long n = numel(shape);
+        long bytes = (n / dtype.blockSize()) * dtype.blockByteSize();
+        if (data.byteSize() < bytes) throw new IllegalArgumentException("segment too small for quantized tensor");
+
+        ComputeBackend backend = findDefaultBackend();
+        tech.kayys.aljabr.core.memory.CpuBuffer buf = new tech.kayys.aljabr.core.memory.CpuBuffer(data, null);
+        return new DefaultTensor(new Shape(shape), dtype, DeviceType.CPU, buf, backend);
+    }
+
     private static long numel(long... shape) {
         long n = 1;
         for (long s : shape) n *= s;
         return n;
     }
 
+    private static volatile ComputeBackend defaultBackend;
+
     private static ComputeBackend findDefaultBackend() {
-        try {
-            Class<?> c = Class.forName("tech.kayys.aljabr.backend.cpu.CpuBackend");
-            return (ComputeBackend) c.getDeclaredConstructor().newInstance();
-        } catch (Throwable t) {
-            // Fallback backend that throws on use
-            return new ComputeBackend() {
+        if (defaultBackend != null) return defaultBackend;
+        synchronized (TensorFactory.class) {
+            if (defaultBackend != null) return defaultBackend;
+            try {
+                // Try Metal first for hardware acceleration
+                Class<?> c = Class.forName("tech.kayys.aljabr.backend.metal.MetalComputeBackend");
+                defaultBackend = (ComputeBackend) c.getDeclaredConstructor().newInstance();
+            } catch (Throwable t) {
+                try {
+                    // Fallback to CPU backend
+                    Class<?> c = Class.forName("tech.kayys.aljabr.backend.cpu.CpuBackend");
+                    defaultBackend = (ComputeBackend) c.getDeclaredConstructor().newInstance();
+                } catch (Throwable t2) {
+                    // Fallback backend that throws on use
+                    defaultBackend = new ComputeBackend() {
                 private UnsupportedOperationException u() { return new UnsupportedOperationException("No backend available"); }
                 @Override public Tensor add(Tensor a, Tensor b){ throw u(); }
                 @Override public Tensor sub(Tensor a, Tensor b){ throw u(); }
@@ -116,7 +137,10 @@ public final class TensorFactory {
                 @Override public Tensor cast(Tensor a, tech.kayys.aljabr.core.tensor.DType dtype){ throw u(); }
                 @Override public Tensor to(Tensor a, tech.kayys.aljabr.core.tensor.DeviceType device){ throw u(); }
                 @Override public long numel(Tensor a){ throw u(); }
-            };
+                    };
+                }
+            }
+            return defaultBackend;
         }
     }
 }

@@ -57,6 +57,7 @@ public final class CpuBackend implements ComputeBackend {
 
     @Override
     public Tensor add(Tensor a, Tensor b) {
+        if (!a.shape().equals(b.shape())) return broadcastOp(a, b, 0);
         Shape s = a.shape(); long n = s.numel(); CpuBuffer o = allocate(n * 4);
         CpuOps.add(seg(a), seg(b), o.segment(), n);
         return out(s, o);
@@ -64,6 +65,7 @@ public final class CpuBackend implements ComputeBackend {
 
     @Override
     public Tensor sub(Tensor a, Tensor b) {
+        if (!a.shape().equals(b.shape())) return broadcastOp(a, b, 3);
         Shape s = a.shape(); long n = s.numel(); CpuBuffer o = allocate(n * 4);
         CpuOps.sub(seg(a), seg(b), o.segment(), n);
         return out(s, o);
@@ -78,6 +80,7 @@ public final class CpuBackend implements ComputeBackend {
 
     @Override
     public Tensor mul(Tensor a, Tensor b) {
+        if (!a.shape().equals(b.shape())) return broadcastOp(a, b, 1);
         Shape s = a.shape(); long n = s.numel(); CpuBuffer o = allocate(n * 4);
         CpuOps.mul(seg(a), seg(b), o.segment(), n);
         return out(s, o);
@@ -90,9 +93,75 @@ public final class CpuBackend implements ComputeBackend {
 
     @Override
     public Tensor div(Tensor a, Tensor b) {
+        if (!a.shape().equals(b.shape())) return broadcastOp(a, b, 2);
         Shape s = a.shape(); long n = s.numel(); CpuBuffer o = allocate(n * 4);
         CpuOps.div(seg(a), seg(b), o.segment(), n);
         return out(s, o);
+    }
+    
+
+    
+    private Tensor broadcastOp(Tensor a, Tensor b, int op) {
+        // Simple naive broadcasting for CPU fallback
+        long[] shapeA = a.shape().dims();
+        long[] shapeB = b.shape().dims();
+        int maxRank = Math.max(shapeA.length, shapeB.length);
+        long[] outDims = new long[maxRank];
+        long[] stridesA = new long[maxRank];
+        long[] stridesB = new long[maxRank];
+        
+        long numel = 1;
+        for (int i = 0; i < maxRank; i++) {
+            int aIdx = shapeA.length - 1 - i;
+            int bIdx = shapeB.length - 1 - i;
+            long dimA = aIdx >= 0 ? shapeA[aIdx] : 1;
+            long dimB = bIdx >= 0 ? shapeB[bIdx] : 1;
+            if (dimA != dimB && dimA != 1 && dimB != 1) {
+                throw new UnsupportedOperationException("Shapes not broadcastable: " + a.shape() + " and " + b.shape());
+            }
+            outDims[maxRank - 1 - i] = Math.max(dimA, dimB);
+            numel *= outDims[maxRank - 1 - i];
+        }
+        
+        long sa = 1, sb = 1;
+        for (int i = 0; i < maxRank; i++) {
+            int aIdx = shapeA.length - 1 - i;
+            int bIdx = shapeB.length - 1 - i;
+            long dimA = aIdx >= 0 ? shapeA[aIdx] : 1;
+            long dimB = bIdx >= 0 ? shapeB[bIdx] : 1;
+            stridesA[maxRank - 1 - i] = dimA == 1 ? 0 : sa;
+            stridesB[maxRank - 1 - i] = dimB == 1 ? 0 : sb;
+            if (aIdx >= 0) sa *= shapeA[aIdx];
+            if (bIdx >= 0) sb *= shapeB[bIdx];
+        }
+        
+        CpuBuffer o = allocate(numel * 4);
+        MemorySegment segA = seg(a);
+        MemorySegment segB = seg(b);
+        MemorySegment segO = o.segment();
+        
+        for (long i = 0; i < numel; i++) {
+            long flatA = 0;
+            long flatB = 0;
+            long remaining = i;
+            for (int d = 0; d < maxRank; d++) {
+                long div = 1;
+                for (int j = d + 1; j < maxRank; j++) div *= outDims[j];
+                long idx = remaining / div;
+                remaining %= div;
+                flatA += idx * stridesA[d];
+                flatB += idx * stridesB[d];
+            }
+            float valA = segA.get(java.lang.foreign.ValueLayout.JAVA_FLOAT, flatA * 4);
+            float valB = segB.get(java.lang.foreign.ValueLayout.JAVA_FLOAT, flatB * 4);
+            float res = 0;
+            if (op == 0) res = valA + valB;
+            else if (op == 1) res = valA * valB;
+            else if (op == 2) res = valA / valB;
+            else if (op == 3) res = valA - valB;
+            segO.set(java.lang.foreign.ValueLayout.JAVA_FLOAT, i * 4, res);
+        }
+        return out(new Shape(outDims), o);
     }
 
     @Override
@@ -281,8 +350,12 @@ public final class CpuBackend implements ComputeBackend {
                 inIdx  += cursor[d] * inStrides[inD];
                 outIdx += cursor[d] * outStrides[d];
             }
+            long memOffset = inIdx * 4L;
+            if (memOffset >= src.byteSize()) {
+                System.err.println("OOB Access! inDims=" + java.util.Arrays.toString(inDims) + ", d0=" + d0 + ", d1=" + d1 + ", outDims=" + java.util.Arrays.toString(outDims) + ", inStrides=" + java.util.Arrays.toString(inStrides) + ", outStrides=" + java.util.Arrays.toString(outStrides) + ", cursor=" + java.util.Arrays.toString(cursor) + ", inIdx=" + inIdx + ", memOffset=" + memOffset + ", byteSize=" + src.byteSize());
+            }
             dst.set(ValueLayout.JAVA_FLOAT, outIdx * 4L,
-                    src.get(ValueLayout.JAVA_FLOAT, inIdx * 4L));
+                    src.get(ValueLayout.JAVA_FLOAT, memOffset));
             for (int d = rank - 1; d >= 0; d--) {
                 if (++cursor[d] < outDims[d]) break;
                 cursor[d] = 0;
@@ -503,6 +576,9 @@ public final class CpuBackend implements ComputeBackend {
     private Tensor reduceAlongDim(Tensor a, int dim, boolean keepDim, boolean isSum) {
         long[] inDims  = a.shape().dims();
         int rank = inDims.length;
+        if (dim < 0) {
+            dim = rank + dim;
+        }
         long dimLen = inDims[dim];
 
         long[] outDims = new long[keepDim ? rank : rank - 1];

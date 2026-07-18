@@ -39,6 +39,8 @@
 #define g_pipelines (*aljabr_metal_pipelines())
 #define g_matvec_half_pipeline g_pipelines.matvec_half
 #define g_matvec_t_half_pipeline g_pipelines.matvec_t_half
+#define g_matvec_tb_nf4_pipeline g_pipelines.matvec_tb_nf4
+#define g_matvec_tb_nf4_128_pipeline g_pipelines.matvec_tb_nf4_128
 #define g_matvec_half_pair_pipeline g_pipelines.matvec_half_pair
 #define g_matvec_half_triple_mixed_pipeline g_pipelines.matvec_half_triple_mixed
 #define g_matvec_bf16_pipeline g_pipelines.matvec_bf16
@@ -245,6 +247,118 @@ int aljabr_metal_matvec_tb_half_mps(void* C,
         aljabr_metal_mps_matvec_restore_overrides(snapshot);
         return rc;
     }
+}
+
+#define g_matvec_tb_int4_pipeline g_pipelines.matvec_tb_int4
+#define g_matvec_tb_int4_128_pipeline g_pipelines.matvec_tb_int4_128
+
+int aljabr_metal_matvec_tb_int4(void* C,
+                           const void* A,
+                           const void* B_packed,
+                           const void* scales,
+                           int K, int N,
+                           int blockSize) {
+    if (!g_initialized) return -1;
+    if (K <= 0 || N <= 0) return -2;
+    
+    NSString* key = matvec_shape_key("tb_int4", K, N, blockSize, 0);
+    NSUInteger threads = cached_matvec_threads(key);
+    BOOL can128 = g_matvec_tb_int4_128_pipeline != nil;
+    
+    if (threads == 0 && matvec_autotune_enabled(K, N, can128) && g_matvec_tb_int4_pipeline != nil) {
+        uint64_t start128 = monotonic_nanos();
+        int rc128 = dispatch_matvec_tb_int4(C, A, B_packed, scales, K, N, blockSize,
+                g_matvec_tb_int4_128_pipeline, ALJABR_MATVEC_THREADS_128);
+        uint64_t nanos128 = monotonic_nanos() - start128;
+        
+        uint64_t start256 = monotonic_nanos();
+        int rc256 = dispatch_matvec_tb_int4(C, A, B_packed, scales, K, N, blockSize,
+                g_matvec_tb_int4_pipeline, ALJABR_MATVEC_THREADS_256);
+        uint64_t nanos256 = monotonic_nanos() - start256;
+        
+        if (rc128 == 0 && rc256 == 0) {
+            threads = matvec_autotune_prefers_128(nanos128, nanos256)
+                    ? ALJABR_MATVEC_THREADS_128
+                    : ALJABR_MATVEC_THREADS_256;
+            cache_matvec_threads(key, threads);
+            log_matvec_autotune("tb_int4", K, N, 0, 0, nanos128, nanos256, threads);
+            if (threads == ALJABR_MATVEC_THREADS_128) {
+                return dispatch_matvec_tb_int4(C, A, B_packed, scales, K, N, blockSize,
+                        g_matvec_tb_int4_128_pipeline, ALJABR_MATVEC_THREADS_128);
+            }
+            return 0;
+        }
+        if (rc256 == 0) return 0;
+    } else {
+        if (threads == 0) {
+            threads = default_matvec_threads(g_matvec_tb_int4_128_pipeline, K, N);
+        }
+        id<MTLComputePipelineState> pipeline =
+            threads == ALJABR_MATVEC_THREADS_128 ? g_matvec_tb_int4_128_pipeline : g_matvec_tb_int4_pipeline;
+        return dispatch_matvec_tb_int4(C, A, B_packed, scales, K, N, blockSize, pipeline, threads);
+    }
+}
+
+#define g_matvec_tb_q4_k_pipeline g_pipelines.matvec_tb_q4_k
+#define g_matvec_tb_q8_0_pipeline g_pipelines.matvec_tb_q8_0
+
+int aljabr_metal_matvec_tb_q4_k(void* C, const void* A, const void* B, int K, int N) {
+    if (!g_initialized) return -1;
+    if (K <= 0 || N <= 0) return -2;
+    if (g_matvec_tb_q4_k_pipeline == nil) return -3;
+    return dispatch_matvec_tb_q4_k(C, A, B, K, N, g_matvec_tb_q4_k_pipeline, ALJABR_MATVEC_THREADS_256);
+}
+
+int aljabr_metal_matvec_tb_q8_0(void* C, const void* A, const void* B, int K, int N) {
+    if (!g_initialized) return -1;
+    if (K <= 0 || N <= 0) return -2;
+    if (g_matvec_tb_q8_0_pipeline == nil) return -3;
+    return dispatch_matvec_tb_q8_0(C, A, B, K, N, g_matvec_tb_q8_0_pipeline, ALJABR_MATVEC_THREADS_256);
+}
+
+int aljabr_metal_matvec_tb_nf4(void* C,
+                               const void* A,
+                               const void* B_packed,
+                               const void* absmax,
+                               int K, int N,
+                               int blockSize) {
+    if (!g_initialized) return -1;
+    if (K <= 0 || N <= 0) return -2;
+
+    NSString* key = matvec_shape_key("tb_nf4", K, N, 0, 0);
+    NSUInteger threads = cached_matvec_threads(key);
+    BOOL can128 = g_matvec_tb_nf4_128_pipeline != nil;
+    if (threads == 0 && matvec_autotune_enabled(K, N, can128) && g_matvec_tb_nf4_pipeline != nil) {
+        uint64_t start128 = monotonic_nanos();
+        int rc128 = dispatch_matvec_tb_nf4(C, A, B_packed, absmax, K, N, blockSize,
+                g_matvec_tb_nf4_128_pipeline, ALJABR_MATVEC_THREADS_128);
+        uint64_t nanos128 = monotonic_nanos() - start128;
+        uint64_t start256 = monotonic_nanos();
+        int rc256 = dispatch_matvec_tb_nf4(C, A, B_packed, absmax, K, N, blockSize,
+                g_matvec_tb_nf4_pipeline, ALJABR_MATVEC_THREADS_256);
+        uint64_t nanos256 = monotonic_nanos() - start256;
+        if (rc128 == 0 && rc256 == 0) {
+            threads = matvec_autotune_prefers_128(nanos128, nanos256)
+                    ? ALJABR_MATVEC_THREADS_128
+                    : ALJABR_MATVEC_THREADS_256;
+            cache_matvec_threads(key, threads);
+            log_matvec_autotune("tb_nf4", K, N, 0, 0, nanos128, nanos256, threads);
+            if (threads == ALJABR_MATVEC_THREADS_128) {
+                return dispatch_matvec_tb_nf4(C, A, B_packed, absmax, K, N, blockSize,
+                        g_matvec_tb_nf4_128_pipeline, ALJABR_MATVEC_THREADS_128);
+            }
+            return 0;
+        }
+        if (rc256 == 0) return 0;
+        if (rc128 == 0) return 0;
+        return rc256;
+    }
+    if (threads == 0) {
+        threads = default_matvec_threads(g_matvec_tb_nf4_128_pipeline, K, N);
+    }
+    id<MTLComputePipelineState> pipeline =
+            threads == ALJABR_MATVEC_THREADS_128 ? g_matvec_tb_nf4_128_pipeline : g_matvec_tb_nf4_pipeline;
+    return dispatch_matvec_tb_nf4(C, A, B_packed, absmax, K, N, blockSize, pipeline, threads);
 }
 
 int aljabr_metal_matvec_t_half(void* C,

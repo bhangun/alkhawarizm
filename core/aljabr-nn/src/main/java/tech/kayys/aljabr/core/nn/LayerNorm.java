@@ -25,6 +25,19 @@ public class LayerNorm extends Module {
     public LayerNorm(long... normalizedShape) {
         this(normalizedShape, 1e-5f, true);
     }
+    
+    public LayerNorm(Tensor weight, Tensor bias, float eps) {
+        this.normalizedShape = new long[weight.shape().rank()];
+        for(int i=0; i<this.normalizedShape.length; i++) {
+            this.normalizedShape[i] = weight.shape().dim(i);
+        }
+        this.eps = eps;
+        this.elementwiseAffine = true;
+        registerParameter("weight", weight);
+        if (bias != null) {
+            registerParameter("bias", bias);
+        }
+    }
 
     @Override
     public Tensor forward(Tensor input) {

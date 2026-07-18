@@ -33,6 +33,20 @@ int aljabr_metal_matvec_tb_bf16(void* C,
                                 int K,
                                 int N);
 
+int aljabr_metal_matvec_tb_int4(void* C, const void* A, const void* B_packed, const void* scales, int K, int N, int blockSize);
+
+// GGML-format quantized kernels (block formats from GGUF)
+int aljabr_metal_matvec_tb_q4_k(void* C, const void* A, const void* B, int K, int N);
+int aljabr_metal_matvec_tb_q8_0(void* C, const void* A, const void* B, int K, int N);
+
+int aljabr_metal_matvec_tb_nf4(void* C,
+                               const void* A,
+                               const void* B_packed,
+                               const void* absmax,
+                               int K,
+                               int N,
+                               int blockSize);
+
 int aljabr_metal_matvec_tb_half_pair(void* C0,
                                      void* C1,
                                      const void* A,
