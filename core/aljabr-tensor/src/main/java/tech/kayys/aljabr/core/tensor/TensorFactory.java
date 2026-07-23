@@ -76,15 +76,20 @@ public final class TensorFactory {
         synchronized (TensorFactory.class) {
             if (defaultBackend != null) return defaultBackend;
             try {
-                // Try Metal first for hardware acceleration
-                Class<?> c = Class.forName("tech.kayys.aljabr.backend.metal.MetalComputeBackend");
+                // Try HAT Tensor Backend first (Hardware accelerated via OpenJDK Babylon)
+                Class<?> c = Class.forName("tech.kayys.aljabr.backend.hat.HatComputeBackend");
                 defaultBackend = (ComputeBackend) c.getDeclaredConstructor().newInstance();
-            } catch (Throwable t) {
+            } catch (Throwable tHat) {
                 try {
-                    // Fallback to CPU backend
-                    Class<?> c = Class.forName("tech.kayys.aljabr.backend.cpu.CpuBackend");
+                    // Fallback to Metal native bindings
+                    Class<?> c = Class.forName("tech.kayys.aljabr.backend.metal.MetalComputeBackend");
                     defaultBackend = (ComputeBackend) c.getDeclaredConstructor().newInstance();
-                } catch (Throwable t2) {
+                } catch (Throwable tMetal) {
+                    try {
+                        // Fallback to CPU backend
+                        Class<?> c = Class.forName("tech.kayys.aljabr.backend.cpu.CpuBackend");
+                        defaultBackend = (ComputeBackend) c.getDeclaredConstructor().newInstance();
+                    } catch (Throwable tCpu) {
                     // Fallback backend that throws on use
                     defaultBackend = new ComputeBackend() {
                 private UnsupportedOperationException u() { return new UnsupportedOperationException("No backend available"); }
@@ -138,6 +143,7 @@ public final class TensorFactory {
                 @Override public Tensor to(Tensor a, tech.kayys.aljabr.core.tensor.DeviceType device){ throw u(); }
                 @Override public long numel(Tensor a){ throw u(); }
                     };
+                }
                 }
             }
             return defaultBackend;

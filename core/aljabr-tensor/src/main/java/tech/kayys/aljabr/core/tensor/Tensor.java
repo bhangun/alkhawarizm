@@ -135,6 +135,14 @@ public interface Tensor {
     Tensor dropout(float p, boolean training);
     Tensor attention(Tensor K, Tensor V);
     Tensor embedding(Tensor weight, long paddingIdx);
+    
+    default Tensor applyRoPE(float freqBase) {
+        throw new UnsupportedOperationException("RoPE not supported by " + getClass().getSimpleName());
+    }
+    
+    default Tensor updateKVCache(int layerIdx, String type) {
+        throw new UnsupportedOperationException("KVCache not supported by " + getClass().getSimpleName());
+    }
 
     long numel();
     float[] toFloatArray();
