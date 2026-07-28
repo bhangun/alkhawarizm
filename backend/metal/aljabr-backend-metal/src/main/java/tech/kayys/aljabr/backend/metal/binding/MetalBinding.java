@@ -86,8 +86,10 @@ public class MetalBinding {
     private static final String FN_ATTENTION_GQA = "aljabr_metal_attention_gqa";
     private static final String FN_ATTENTION_WINDOWED = "aljabr_metal_attention_windowed";
     private static final String FN_ATTENTION_GQA_WINDOWED = "aljabr_metal_attention_gqa_windowed";
+    private static final String FN_FLASH_ATTENTION = "aljabr_metal_flash_attention";
     private static final String FN_RMSNORM = "aljabr_metal_rmsnorm";
     private static final String FN_RMSNORM_ROWS = "aljabr_metal_rmsnorm_rows";
+    private static final String FN_ROPE         = "aljabr_metal_rope";
     private static final String FN_LAYERNORM = "aljabr_metal_layernorm";
     private static final String FN_LAYERNORM_ROWS = "aljabr_metal_layernorm_rows";
     private static final String FN_SILU = "aljabr_metal_silu";
@@ -909,6 +911,20 @@ public class MetalBinding {
         return attentionWindowed(out, Q, K_cache, V_cache, blockTable, contextLens,
                 B, T, H, H, D, blockSize, maxBlocks, scale, isCausal, 0, 0, softCap);
     }
+    
+    public int flashAttention(MemorySegment out, MemorySegment q, MemorySegment k, MemorySegment v,
+            int b, int seqLen, int numHeads, int headDim) {
+        if (!isRuntimeActive()) return -1;
+        MethodHandle mh = handles.get(FN_FLASH_ATTENTION);
+        if (mh == null) return -1;
+        try {
+            return (int) invoke(FN_FLASH_ATTENTION,
+                    out, q, k, v, b, seqLen, numHeads, headDim);
+        } catch (Throwable t) {
+            LOG.errorf(t, "Failed to invoke %s", FN_FLASH_ATTENTION);
+            return -1;
+        }
+    }
 
     public int attentionWindowed(MemorySegment out, MemorySegment Q,
             MemorySegment K_cache, MemorySegment V_cache,
@@ -981,6 +997,29 @@ public class MetalBinding {
 
     public boolean isWindowedAttentionAvailable() {
         return isRuntimeActive() && handles.containsKey(FN_ATTENTION_WINDOWED);
+    }
+
+    /**
+     * Rotary Positional Embedding (RoPE).
+     * <p>Supports both GPT-NeoX style ({@code isNeox=true}: pairs {@code [i, i+headDim/2]})
+     * and LLaMA/Gemma style ({@code isNeox=false}: interleaved pairs {@code [2i, 2i+1]}).
+     * The {@code isNeox} flag makes the operation fully model-agnostic.</p>
+     *
+     * @param out      output buffer (same shape as {@code x})
+     * @param x        input buffer [seqLen * numHeads * headDim] floats
+     * @param n        total number of elements (seqLen * numHeads * headDim)
+     * @param headDim  size of each head's dimension
+     * @param posOffset absolute position offset (for autoregressive decoding)
+     * @param freqBase  base frequency (e.g., 10000.0f for vanilla RoPE)
+     * @param isNeox   true = GPT-NeoX/HF half-half, false = LLaMA interleaved
+     * @return 0 on success, non-zero on error
+     */
+    public int rope(MemorySegment out, MemorySegment x,
+            int n, int headDim, int posOffset, float freqBase, boolean isNeox) {
+        if (!nativeAvailable || !handles.containsKey(FN_ROPE)) {
+            return MetalCpuFallback.rope(out, x, n, headDim, posOffset, freqBase, isNeox);
+        }
+        return (int) invoke(FN_ROPE, out, x, n, headDim, posOffset, freqBase, isNeox ? 1 : 0);
     }
 
     /**
@@ -1398,11 +1437,21 @@ public class MetalBinding {
                 ValueLayout.JAVA_INT, ValueLayout.JAVA_FLOAT, ValueLayout.JAVA_INT,
                 ValueLayout.JAVA_INT, ValueLayout.JAVA_INT, ValueLayout.JAVA_FLOAT));
 
+        bind(FN_FLASH_ATTENTION, FunctionDescriptor.of(ValueLayout.JAVA_INT,
+                ValueLayout.ADDRESS, ValueLayout.ADDRESS, ValueLayout.ADDRESS, ValueLayout.ADDRESS,
+                ValueLayout.JAVA_INT, ValueLayout.JAVA_INT, ValueLayout.JAVA_INT, ValueLayout.JAVA_INT));
+
         bind(FN_SOFTMAX, FunctionDescriptor.of(ValueLayout.JAVA_INT,
                 ValueLayout.ADDRESS, ValueLayout.ADDRESS, ValueLayout.JAVA_INT));
 
         bind(FN_SOFTMAX + "_rows", FunctionDescriptor.of(ValueLayout.JAVA_INT,
                 ValueLayout.ADDRESS, ValueLayout.ADDRESS, ValueLayout.JAVA_INT, ValueLayout.JAVA_INT));
+
+        // int aljabr_metal_rope(out, x, n, head_dim, pos_offset, freq_base, is_neox)
+        bind(FN_ROPE, FunctionDescriptor.of(ValueLayout.JAVA_INT,
+                ValueLayout.ADDRESS, ValueLayout.ADDRESS,
+                ValueLayout.JAVA_INT, ValueLayout.JAVA_INT, ValueLayout.JAVA_INT,
+                ValueLayout.JAVA_FLOAT, ValueLayout.JAVA_INT));
 
         // int aljabr_metal_rmsnorm(out, x, weight, N, eps, add_one)
         bind(FN_RMSNORM, FunctionDescriptor.of(ValueLayout.JAVA_INT,

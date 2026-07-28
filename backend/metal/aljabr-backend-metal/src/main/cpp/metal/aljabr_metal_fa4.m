@@ -182,81 +182,56 @@ int aljabr_metal_fa4_attention(
 
     if (!g_initialized) return -1;
 
-    // Current direct safetensor tensors are FP32 in [B,T,H,D] / [B,S,H_kv,D] layout.
-    // MPSGraph SDPA expects [B,H,T,D] and [B,H_kv,S,D], so transpose explicitly.
     MPSDataType dtype = MPSDataTypeFloat32;
     size_t elemBytes = sizeof(float);
-
-    float* qTransposed = transpose_bthd_to_bhtd((const float*) query, B, T, H, D);
-    float* kTransposed = transpose_bthd_to_bhtd((const float*) key,   B, S, H_kv, D);
-    float* vTransposed = transpose_bthd_to_bhtd((const float*) value, B, S, H_kv, D);
-    float* oTransposed = (float*) calloc((size_t) B * H * T * D, sizeof(float));
-    if (!qTransposed || !kTransposed || !vTransposed || !oTransposed) {
-        if (qTransposed) free(qTransposed);
-        if (kTransposed) free(kTransposed);
-        if (vTransposed) free(vTransposed);
-        if (oTransposed) free(oTransposed);
-        return -1;
-    }
-
-    size_t qBytes = (size_t)B * T     * H    * D * elemBytes;
-    size_t kBytes = (size_t)B * S     * H_kv * D * elemBytes;
-    size_t oBytes = (size_t)B * T     * H    * D * elemBytes;
-
-    id<MTLBuffer> qBuf = wrap_ptr_fa4(qTransposed, qBytes);
-    id<MTLBuffer> kBuf = wrap_ptr_fa4(kTransposed, kBytes);
-    id<MTLBuffer> vBuf = wrap_ptr_fa4(vTransposed, kBytes);
-    id<MTLBuffer> oBuf = wrap_ptr_fa4(oTransposed, oBytes);
 
     if (@available(macOS 15.0, *)) {
     if (soft_cap <= 0.0f) {
         // ── MPSGraph SDPA path (macOS 15+, M3+ optimised) ─────────────────────
         // Fused single-pass attention: no intermediate attention matrix on DRAM.
+        size_t qBytes = (size_t)B * T     * H    * D * elemBytes;
+        size_t kBytes = (size_t)B * S     * H_kv * D * elemBytes;
+        size_t oBytes = (size_t)B * T     * H    * D * elemBytes;
+
+        id<MTLBuffer> qBuf = wrap_ptr_fa4((void*)query, qBytes);
+        id<MTLBuffer> kBuf = wrap_ptr_fa4((void*)key, kBytes);
+        id<MTLBuffer> vBuf = wrap_ptr_fa4((void*)value, kBytes);
+        id<MTLBuffer> oBuf = wrap_ptr_fa4((void*)output, oBytes);
+
         MPSGraph* graph = [MPSGraph new];
 
-        // Shape descriptors: [B, H, T, D] for MPSGraph SDPA convention
-        NSArray<NSNumber*>* qShape = @[@(B), @(H),    @(T), @(D)];
-        NSArray<NSNumber*>* kShape = @[@(B), @(H_kv), @(S), @(D)];
+        // Shape descriptors: [B, T, H, D]
+        NSArray<NSNumber*>* qShapeOrig = @[@(B), @(T), @(H), @(D)];
+        NSArray<NSNumber*>* kShapeOrig = @[@(B), @(S), @(H_kv), @(D)];
         NSArray<NSNumber*>* mShape = @[@(B), @1, @(T), @(S)];
 
-        MPSGraphTensor* qT = [graph placeholderWithShape:qShape
-                                                dataType:dtype
-                                                    name:@"Q"];
-        MPSGraphTensor* kT = [graph placeholderWithShape:kShape
-                                                dataType:dtype
-                                                    name:@"K"];
-        MPSGraphTensor* vT = [graph placeholderWithShape:kShape
-                                                dataType:dtype
-                                                    name:@"V"];
+        MPSGraphTensor* qT_orig = [graph placeholderWithShape:qShapeOrig dataType:dtype name:@"Q_orig"];
+        MPSGraphTensor* kT_orig = [graph placeholderWithShape:kShapeOrig dataType:dtype name:@"K_orig"];
+        MPSGraphTensor* vT_orig = [graph placeholderWithShape:kShapeOrig dataType:dtype name:@"V_orig"];
+
+        // Transpose [B, T, H, D] -> [B, H, T, D]
+        MPSGraphTensor* qT = [graph transposeTensor:qT_orig dimension:1 withDimension:2 name:@"Q"];
+        MPSGraphTensor* kT = [graph transposeTensor:kT_orig dimension:1 withDimension:2 name:@"K"];
+        MPSGraphTensor* vT = [graph transposeTensor:vT_orig dimension:1 withDimension:2 name:@"V"];
+
         MPSGraphTensor* mT = nil;
         if (is_causal) {
-            mT = [graph placeholderWithShape:mShape
-                                    dataType:dtype
-                                        name:@"MASK"];
+            mT = [graph placeholderWithShape:mShape dataType:dtype name:@"MASK"];
         }
 
         MPSGraphTensor* attnOut = is_causal
-                ? [graph scaledDotProductAttentionWithQueryTensor:qT
-                                                        keyTensor:kT
-                                                      valueTensor:vT
-                                                       maskTensor:mT
-                                                            scale:scale
-                                                             name:@"sdpa"]
-                : [graph scaledDotProductAttentionWithQueryTensor:qT
-                                                        keyTensor:kT
-                                                      valueTensor:vT
-                                                            scale:scale
-                                                             name:@"sdpa"];
+                ? [graph scaledDotProductAttentionWithQueryTensor:qT keyTensor:kT valueTensor:vT maskTensor:mT scale:scale name:@"sdpa"]
+                : [graph scaledDotProductAttentionWithQueryTensor:qT keyTensor:kT valueTensor:vT scale:scale name:@"sdpa"];
+
+        // Transpose [B, H, T, D] -> [B, T, H, D]
+        MPSGraphTensor* finalOut = [graph transposeTensor:attnOut dimension:1 withDimension:2 name:@"O_t"];
 
         // Feed data
-        MPSGraphTensorData* qData = [[MPSGraphTensorData alloc]
-                initWithMTLBuffer:qBuf shape:qShape dataType:dtype];
-        MPSGraphTensorData* kData = [[MPSGraphTensorData alloc]
-                initWithMTLBuffer:kBuf shape:kShape dataType:dtype];
-        MPSGraphTensorData* vData = [[MPSGraphTensorData alloc]
-                initWithMTLBuffer:vBuf shape:kShape dataType:dtype];
-        MPSGraphTensorData* oData = [[MPSGraphTensorData alloc]
-                initWithMTLBuffer:oBuf shape:qShape dataType:dtype];
+        MPSGraphTensorData* qData = [[MPSGraphTensorData alloc] initWithMTLBuffer:qBuf shape:qShapeOrig dataType:dtype];
+        MPSGraphTensorData* kData = [[MPSGraphTensorData alloc] initWithMTLBuffer:kBuf shape:kShapeOrig dataType:dtype];
+        MPSGraphTensorData* vData = [[MPSGraphTensorData alloc] initWithMTLBuffer:vBuf shape:kShapeOrig dataType:dtype];
+        MPSGraphTensorData* oData = [[MPSGraphTensorData alloc] initWithMTLBuffer:oBuf shape:qShapeOrig dataType:dtype];
+
         id<MTLBuffer> mBuf = nil;
         MPSGraphTensorData* mData = nil;
         float* maskData = NULL;
@@ -264,10 +239,6 @@ int aljabr_metal_fa4_attention(
             size_t maskElems = (size_t) B * T * S;
             maskData = (float*) calloc(maskElems, sizeof(float));
             if (!maskData) {
-                free(qTransposed);
-                free(kTransposed);
-                free(vTransposed);
-                free(oTransposed);
                 return -1;
             }
             for (int b = 0; b < B; b++) {
@@ -285,13 +256,13 @@ int aljabr_metal_fa4_attention(
         }
 
         NSMutableDictionary<MPSGraphTensor*, MPSGraphTensorData*>* feeds = [@{
-            qT: qData, kT: kData, vT: vData
+            qT_orig: qData, kT_orig: kData, vT_orig: vData
         } mutableCopy];
         if (mData != nil && mT != nil) {
             feeds[mT] = mData;
         }
         NSDictionary<MPSGraphTensor*, MPSGraphTensorData*>* results = @{
-            attnOut: oData
+            finalOut: oData
         };
 
         MPSCommandBuffer* cmdBuf = [MPSCommandBuffer commandBufferFromCommandQueue:g_queue];
@@ -306,20 +277,23 @@ int aljabr_metal_fa4_attention(
         if ([cmdBuf status] == MTLCommandBufferStatusError) {
             NSLog(@"[AljabrMetal FA4] SDPA error: %@", [cmdBuf error]);
             if (maskData) free(maskData);
-            free(qTransposed);
-            free(kTransposed);
-            free(vTransposed);
-            free(oTransposed);
             return -1;
         }
-        transpose_bhtd_to_bthd_inplace(oTransposed, (float*) output, B, T, H, D);
         if (maskData) free(maskData);
-        free(qTransposed);
-        free(kTransposed);
-        free(vTransposed);
-        free(oTransposed);
         return 0;
     }
+    }
+
+    float* qTransposed = transpose_bthd_to_bhtd((const float*) query, B, T, H, D);
+    float* kTransposed = transpose_bthd_to_bhtd((const float*) key,   B, S, H_kv, D);
+    float* vTransposed = transpose_bthd_to_bhtd((const float*) value, B, S, H_kv, D);
+    float* oTransposed = (float*) calloc((size_t) B * H * T * D, sizeof(float));
+    if (!qTransposed || !kTransposed || !vTransposed || !oTransposed) {
+        if (qTransposed) free(qTransposed);
+        if (kTransposed) free(kTransposed);
+        if (vTransposed) free(vTransposed);
+        if (oTransposed) free(oTransposed);
+        return -1;
     }
 
     // ── Fallback path for macOS 13 (separate MPS matmuls) ────────────────────

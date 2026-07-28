@@ -36,6 +36,7 @@ public interface ComputeBackend {
     // ── Linear algebra ────────────────────────────────────────────────
     Tensor matmul(Tensor a, Tensor b);
     Tensor embedding(Tensor weight, Tensor input, long paddingIdx);
+    Tensor applyRoPE(Tensor input, int posOffset, float freqBase, boolean isNeox);
 
     // ── Shape manipulation ────────────────────────────────────────────
     Tensor reshape(Tensor a, long... newShape);

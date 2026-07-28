@@ -50,15 +50,20 @@ typedef struct {
     __strong id<MTLComputePipelineState> add;
     __strong id<MTLComputePipelineState> silu_ffn;
     __strong id<MTLComputePipelineState> gelu_ffn;
+    __strong id<MTLComputePipelineState> rope;
+    __strong id<MTLComputePipelineState> rope_float2;
     __strong id<MTLComputePipelineState> rmsnorm;
+    __strong id<MTLComputePipelineState> rmsnorm_float4;
     __strong id<MTLComputePipelineState> rmsnorm_rows;
     __strong id<MTLComputePipelineState> layernorm;
+    __strong id<MTLComputePipelineState> layernorm_float4;
     __strong id<MTLComputePipelineState> layernorm_rows;
     __strong id<MTLComputePipelineState> silu;
     __strong id<MTLComputePipelineState> gelu;
     __strong id<MTLComputePipelineState> softmax;
     __strong id<MTLComputePipelineState> softmax_rows;
     __strong id<MTLComputePipelineState> decode_attention;
+    __strong id<MTLComputePipelineState> flash_attention;
 } AljabrMetalPipelines;
 
 AljabrMetalPipelines* aljabr_metal_pipelines(void);

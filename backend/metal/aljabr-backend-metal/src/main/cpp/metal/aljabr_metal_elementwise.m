@@ -54,6 +54,52 @@ int aljabr_metal_add(void* C, const void* A, const void* B, int N) {
     }
 }
 
+int aljabr_metal_rope(void* out, const void* x, int N, int headDim, int posOffset, float freqBase, int isNeox) {
+    AljabrMetalPipelines* pipelines = aljabr_metal_pipelines();
+    if (!g_initialized || N <= 0 || !g_elementwise_enabled || pipelines->rope == nil) {
+        return 1; // Fallback to CPU
+    }
+
+    @autoreleasepool {
+        id<MTLBuffer> bufOut = wrap_ptr(out, (size_t)N * sizeof(float));
+        id<MTLBuffer> bufX = wrap_ptr((void*)x, (size_t)N * sizeof(float));
+        if (bufOut == nil || bufX == nil) {
+            return 1; // Fallback to CPU
+        }
+
+        unsigned int n = (unsigned int)N;
+        unsigned int h = (unsigned int)headDim;
+        unsigned int p = (unsigned int)posOffset;
+        unsigned int neox = (unsigned int)isNeox;
+        
+        id<MTLCommandBuffer> cmd = [g_queue commandBuffer];
+        id<MTLComputeCommandEncoder> enc = [cmd computeCommandEncoder];
+        // Use float2 kernel when N is even: reads each (x0,x1) pair as float2,
+        // halving memory transactions with no change in correctness.
+        BOOL useFloat2 = (N % 2 == 0) && (pipelines->rope_float2 != nil);
+        id<MTLComputePipelineState> ropePipeline = useFloat2 ? pipelines->rope_float2 : pipelines->rope;
+        [enc setComputePipelineState:ropePipeline];
+        [enc setBuffer:bufOut offset:0 atIndex:0];
+        [enc setBuffer:bufX offset:0 atIndex:1];
+        [enc setBytes:&n length:sizeof(n) atIndex:2];
+        [enc setBytes:&h length:sizeof(h) atIndex:3];
+        [enc setBytes:&p length:sizeof(p) atIndex:4];
+        [enc setBytes:&freqBase length:sizeof(freqBase) atIndex:5];
+        [enc setBytes:&neox length:sizeof(neox) atIndex:6];
+        
+        NSUInteger threads = (NSUInteger)(n / 2);
+        NSUInteger maxThreads = ropePipeline.maxTotalThreadsPerThreadgroup;
+        NSUInteger tG = (threads < maxThreads) ? threads : maxThreads;
+        [enc dispatchThreads:MTLSizeMake(threads, 1, 1)
+       threadsPerThreadgroup:MTLSizeMake(tG, 1, 1)];
+       
+        [enc endEncoding];
+        [cmd commit];
+        [cmd waitUntilCompleted];
+    }
+    return 0;
+}
+
 int aljabr_metal_rmsnorm(void* out, const void* x, const void* weight, int N, float eps, int addOne) {
     AljabrMetalPipelines* pipelines = aljabr_metal_pipelines();
     if (!g_initialized || N <= 0) return aljabr_metal_cpu_rmsnorm(out, x, weight, N, eps, addOne);
@@ -74,7 +120,11 @@ int aljabr_metal_rmsnorm(void* out, const void* x, const void* weight, int N, fl
         unsigned int add = addOne ? 1u : 0u;
         id<MTLCommandBuffer> cmd = [g_queue commandBuffer];
         id<MTLComputeCommandEncoder> enc = [cmd computeCommandEncoder];
-        [enc setComputePipelineState:pipelines->rmsnorm];
+        if (N % 4 == 0 && pipelines->rmsnorm_float4 != nil) {
+            [enc setComputePipelineState:pipelines->rmsnorm_float4];
+        } else {
+            [enc setComputePipelineState:pipelines->rmsnorm];
+        }
         [enc setBuffer:bufOut offset:0 atIndex:0];
         [enc setBuffer:bufX offset:0 atIndex:1];
         [enc setBuffer:bufWeight offset:0 atIndex:2];
@@ -270,7 +320,10 @@ int aljabr_metal_layernorm(void* out, const void* x, const void* weight, const v
         unsigned int n = (unsigned int)N;
         id<MTLCommandBuffer> cmd = [g_queue commandBuffer];
         id<MTLComputeCommandEncoder> enc = [cmd computeCommandEncoder];
-        [enc setComputePipelineState:pipelines->layernorm];
+        // Use float4 kernel when N is a multiple of 4: reduces memory transactions
+        // in both the reduction and write-back loops by 4x.
+        BOOL useFloat4 = (N % 4 == 0) && (pipelines->layernorm_float4 != nil);
+        [enc setComputePipelineState:useFloat4 ? pipelines->layernorm_float4 : pipelines->layernorm];
         [enc setBuffer:bufOut offset:0 atIndex:0];
         [enc setBuffer:bufX offset:0 atIndex:1];
         if (bufWeight != nil) [enc setBuffer:bufWeight offset:0 atIndex:2];
@@ -308,7 +361,10 @@ int aljabr_metal_layernorm_rows(void* out, const void* x, const void* weight, co
         unsigned int n = (unsigned int)N;
         id<MTLCommandBuffer> cmd = [g_queue commandBuffer];
         id<MTLComputeCommandEncoder> enc = [cmd computeCommandEncoder];
-        [enc setComputePipelineState:pipelines->layernorm_rows];
+        // Rows variant: float4 kernel processes each row with 4-wide vector loads/stores.
+        // Each threadgroup handles one row, so the dispatch shape stays the same.
+        BOOL useFloat4Rows = (N % 4 == 0) && (pipelines->layernorm_float4 != nil);
+        [enc setComputePipelineState:useFloat4Rows ? pipelines->layernorm_float4 : pipelines->layernorm_rows];
         [enc setBuffer:bufOut offset:0 atIndex:0];
         [enc setBuffer:bufX offset:0 atIndex:1];
         if (bufWeight != nil) [enc setBuffer:bufWeight offset:0 atIndex:2];

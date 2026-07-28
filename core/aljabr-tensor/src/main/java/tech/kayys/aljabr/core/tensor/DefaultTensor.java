@@ -98,6 +98,10 @@ public final class DefaultTensor implements Tensor {
         return backend.embedding(weight, this, paddingIdx);
     }
 
+    @Override public Tensor applyRoPE(int posOffset, float freqBase, boolean isNeox) {
+        return backend.applyRoPE(this, posOffset, freqBase, isNeox);
+    }
+
     @Override public long numel()                    { return shape.numel(); }
     @Override public float[] toFloatArray()          { return buffer.segment().toArray(java.lang.foreign.ValueLayout.JAVA_FLOAT); }
     @Override public float item()                    { return 0f; }

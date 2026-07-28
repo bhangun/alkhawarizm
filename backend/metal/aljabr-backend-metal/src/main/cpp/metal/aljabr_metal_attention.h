@@ -79,6 +79,8 @@ int aljabr_metal_attention_gqa_windowed(void* out,
                                         int sliding_window,
                                         float soft_cap);
 
+int aljabr_metal_flash_attention(void* out, const void* q, const void* k, const void* v, int B, int seq_len, int num_heads, int head_dim);
+
 #ifdef __cplusplus
 }
 #endif

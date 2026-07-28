@@ -136,9 +136,7 @@ public interface Tensor {
     Tensor attention(Tensor K, Tensor V);
     Tensor embedding(Tensor weight, long paddingIdx);
     
-    default Tensor applyRoPE(float freqBase) {
-        throw new UnsupportedOperationException("RoPE not supported by " + getClass().getSimpleName());
-    }
+    Tensor applyRoPE(int posOffset, float freqBase, boolean isNeox);
     
     default Tensor updateKVCache(int layerIdx, String type) {
         throw new UnsupportedOperationException("KVCache not supported by " + getClass().getSimpleName());

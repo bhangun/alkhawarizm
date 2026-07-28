@@ -204,8 +204,8 @@ public class MetalComputeBackend implements ComputeBackend {
             java.lang.foreign.MemorySegment empty = java.lang.foreign.MemorySegment.NULL;
             
             if (H == Hkv) {
-                status = metalBinding.attention(bufferOut.segment(), dQ.buffer().segment(), dK.buffer().segment(), dV.buffer().segment(),
-                        empty, contextLens, B, T, H, D, 16, 1024, (float)(1.0/Math.sqrt(D)), 1, 0.0f);
+                status = metalBinding.flashAttention(bufferOut.segment(), dQ.buffer().segment(), dK.buffer().segment(), dV.buffer().segment(),
+                        B, T, H, D);
             } else {
                 status = metalBinding.attentionGqa(bufferOut.segment(), dQ.buffer().segment(), dK.buffer().segment(), dV.buffer().segment(),
                         empty, contextLens, B, T, H, Hkv, D, 16, 1024, (float)(1.0/Math.sqrt(D)), 1, 0.0f);
@@ -474,6 +474,26 @@ public class MetalComputeBackend implements ComputeBackend {
     @Override
     public Tensor embedding(Tensor weight, Tensor input, long paddingIdx) {
         return wrap(cpuFallback.embedding(weight, input, paddingIdx));
+    }
+
+    @Override
+    public Tensor applyRoPE(Tensor input, int posOffset, float freqBase, boolean isNeox) {
+        if (!isNative || input.dtype() != DType.F32) {
+            return wrap(cpuFallback.applyRoPE(input, posOffset, freqBase, isNeox));
+        }
+
+        DefaultTensor dInput = (DefaultTensor) input;
+        int n = (int) dInput.shape().numel();
+        int headDim = (int) dInput.shape().dim(dInput.shape().rank() - 1); // Last dimension is headDim
+        
+        CpuBuffer bufferOut = allocate((long) n * 4);
+        int status = metalBinding.rope(bufferOut.segment(), dInput.buffer().segment(), n, headDim, posOffset, freqBase, isNeox);
+
+        if (status != 0) {
+            bufferOut.release();
+            return wrap(cpuFallback.applyRoPE(input, posOffset, freqBase, isNeox));
+        }
+        return new DefaultTensor(input.shape(), DType.F32, DeviceType.METAL, bufferOut, this);
     }
 
     @Override

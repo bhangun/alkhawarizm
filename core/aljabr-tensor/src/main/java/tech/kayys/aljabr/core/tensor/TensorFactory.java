@@ -102,6 +102,7 @@ public final class TensorFactory {
                 @Override public Tensor addScalar(Tensor a, float scalar){ throw u(); }
                 @Override public Tensor matmul(Tensor a, Tensor b){ throw u(); }
                 @Override public Tensor embedding(Tensor weight, Tensor input, long paddingIdx){ throw u(); }
+                @Override public Tensor applyRoPE(Tensor input, int posOffset, float freqBase, boolean isNeox){ throw u(); }
                 @Override public Tensor reshape(Tensor a, long... newShape){ throw u(); }
                 @Override public Tensor slice(Tensor a, long[] offsets, long[] sizes){ throw u(); }
                 @Override public java.util.List<Tensor> split(Tensor a, int axis, int parts){ throw u(); }

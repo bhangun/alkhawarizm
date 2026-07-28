@@ -62,6 +62,7 @@ public enum OpType {
     ADAPTIVE_AVG_POOL_2D,
     DROPOUT,
     EMBEDDING,
+    ROPE,
     
     // Loss
     CROSS_ENTROPY,

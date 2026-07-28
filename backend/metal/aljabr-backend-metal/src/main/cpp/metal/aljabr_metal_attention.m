@@ -348,3 +348,42 @@ int aljabr_metal_attention_gqa_windowed(
     return aljabr_metal_attention_impl(out, Q, K_cache, V_cache, block_table, context_lens,
             B, T, H, H_kv, D, block_size, max_blocks, scale, is_causal, query_start_pos, sliding_window, soft_cap);
 }
+
+int aljabr_metal_flash_attention(void* out, const void* q, const void* k, const void* v, int B, int seq_len, int num_heads, int head_dim) {
+    id<MTLComputePipelineState> pipeline = aljabr_metal_pipelines()->flash_attention;
+    if (!g_initialized || pipeline == nil) return -3;
+    
+    @autoreleasepool {
+        size_t size = (size_t)B * seq_len * num_heads * head_dim * sizeof(float);
+        
+        id<MTLBuffer> bufOut = wrap_ptr(out, size);
+        id<MTLBuffer> bufQ = wrap_ptr((void*)q, size);
+        id<MTLBuffer> bufK = wrap_ptr((void*)k, size);
+        id<MTLBuffer> bufV = wrap_ptr((void*)v, size);
+        
+        if (bufOut == nil || bufQ == nil || bufK == nil || bufV == nil) return -4;
+        
+        id<MTLCommandBuffer> cmd = [g_queue commandBuffer];
+        id<MTLComputeCommandEncoder> enc = [cmd computeCommandEncoder];
+        [enc setComputePipelineState:pipeline];
+        [enc setBuffer:bufOut offset:0 atIndex:0];
+        [enc setBuffer:bufQ offset:0 atIndex:1];
+        [enc setBuffer:bufK offset:0 atIndex:2];
+        [enc setBuffer:bufV offset:0 atIndex:3];
+        
+        uint32_t slen = (uint32_t)seq_len;
+        uint32_t hdim = (uint32_t)head_dim;
+        [enc setBytes:&slen length:sizeof(uint32_t) atIndex:4];
+        [enc setBytes:&hdim length:sizeof(uint32_t) atIndex:5];
+        
+        uint32_t grid_x = (slen + 31) / 32;
+        MTLSize grid = MTLSizeMake(grid_x, num_heads, B);
+        MTLSize threads = MTLSizeMake(32, 1, 1);
+        
+        [enc dispatchThreadgroups:grid threadsPerThreadgroup:threads];
+        [enc endEncoding];
+        [cmd commit];
+        [cmd waitUntilCompleted];
+    }
+    return 0;
+}

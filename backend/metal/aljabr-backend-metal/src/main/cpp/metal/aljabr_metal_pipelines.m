@@ -76,9 +76,13 @@ void aljabr_metal_compile_runtime_pipelines(AljabrMetalPipelines* pipelines) {
     pipelines->add = compile_pipeline(library, @"aljabr_add_kernel");
     pipelines->silu_ffn = compile_pipeline(library, @"aljabr_silu_ffn_kernel");
     pipelines->gelu_ffn = compile_pipeline(library, @"aljabr_gelu_ffn_kernel");
+    pipelines->rope = compile_pipeline(library, @"aljabr_rope_kernel");
+    pipelines->rope_float2 = compile_pipeline(library, @"aljabr_rope_float2_kernel");
     pipelines->rmsnorm = compile_pipeline(library, @"aljabr_rmsnorm_kernel");
+    pipelines->rmsnorm_float4 = compile_pipeline(library, @"aljabr_rmsnorm_float4_kernel");
     pipelines->rmsnorm_rows = compile_pipeline(library, @"aljabr_rmsnorm_rows_kernel");
     pipelines->layernorm = compile_pipeline(library, @"aljabr_layernorm_kernel");
+    pipelines->layernorm_float4 = compile_pipeline(library, @"aljabr_layernorm_float4_kernel");
     pipelines->layernorm_rows = compile_pipeline(library, @"aljabr_layernorm_rows_kernel");
     pipelines->silu = compile_pipeline(library, @"aljabr_silu_kernel");
     pipelines->gelu = compile_pipeline(library, @"aljabr_gelu_kernel");
@@ -90,6 +94,7 @@ void aljabr_metal_compile_runtime_pipelines(AljabrMetalPipelines* pipelines) {
     pipelines->matvec_half_gated_pair = compile_pipeline(library, @"aljabr_matvec_tb_half_gated_pair_kernel");
     pipelines->matvec_half_triple_mixed = compile_pipeline(library, @"aljabr_matvec_tb_half_triple_mixed_kernel");
     pipelines->decode_attention = compile_pipeline(library, @"aljabr_decode_attention_kernel");
+    pipelines->flash_attention = compile_pipeline(library, @"aljabr_flash_attention_kernel");
 
     NSError* matvec256Error = nil;
     id<MTLLibrary> matvec256Library = [g_device newLibraryWithSource:aljabr_metal_matvec_kernel_source(ALJABR_MATVEC_THREADS_256)

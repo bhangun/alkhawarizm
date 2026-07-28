@@ -369,4 +369,9 @@ public class LazyTensor implements Tensor {
     public Tensor embedding(Tensor weight, long paddingIdx) {
         return op(OpType.EMBEDDING, List.of(this, weight), new Object[]{paddingIdx}, this.shape() /* shape inference */, weight.dtype());
     }
+
+    @Override
+    public Tensor applyRoPE(int posOffset, float freqBase, boolean isNeox) {
+        return op(OpType.ROPE, List.of(this), new Object[]{posOffset, freqBase, isNeox}, this.shape(), this.dtype());
+    }
 }

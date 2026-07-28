@@ -498,6 +498,11 @@ public final class CpuBackend implements ComputeBackend {
     }
 
     @Override
+    public Tensor applyRoPE(Tensor input, int posOffset, float freqBase, boolean isNeox) {
+        throw new UnsupportedOperationException("CpuBackend RoPE not implemented yet");
+    }
+
+    @Override
     public Tensor batchNorm(Tensor input, Tensor weight, Tensor bias,
                             Tensor runningMean, Tensor runningVar,
                             boolean training, float momentum, float eps) {

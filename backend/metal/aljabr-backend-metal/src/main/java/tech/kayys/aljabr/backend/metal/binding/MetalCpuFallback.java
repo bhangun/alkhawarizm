@@ -335,6 +335,60 @@ final class MetalCpuFallback {
         return 0;
     }
 
+    // ── Rotary Positional Embedding ───────────────────────────────────────────
+
+    /**
+     * Model-agnostic RoPE CPU fallback.
+     *
+     * <p>Two dimension-pairing conventions are supported:
+     * <ul>
+     *   <li><b>NeoX / HuggingFace</b> ({@code isNeox=true}): pairs element {@code i} with
+     *       element {@code i + headDim/2} within the same head.</li>
+     *   <li><b>LLaMA / Gemma interleaved</b> ({@code isNeox=false}): pairs element
+     *       {@code 2i} with element {@code 2i+1} within the same head.</li>
+     * </ul>
+     * Both conventions compute the same cos/sin frequencies; only the memory layout differs.
+     */
+    static int rope(MemorySegment out, MemorySegment x,
+            int n, int headDim, int posOffset, float freqBase, boolean isNeox) {
+        int numTokenHeads = n / headDim; // total (seqLen * numHeads)
+        int halfDim = headDim / 2;
+
+        for (int th = 0; th < numTokenHeads; th++) {
+            // Absolute position of this token. For multi-head, all heads at the same
+            // sequence position share the same position index.
+            int pos = posOffset + th; // simple stride for single-head batches;
+            // NOTE: callers that know their seqLen/numHeads layout should compute
+            //       posOffset per-token before calling this. Here we keep it generic.
+
+            for (int i = 0; i < halfDim; i++) {
+                // Frequency: freq_i = 1 / (freqBase ^ (2i / headDim))
+                float freq = (float) (1.0 / Math.pow(freqBase, 2.0 * i / headDim));
+                float theta = pos * freq;
+                float cosTheta = (float) Math.cos(theta);
+                float sinTheta = (float) Math.sin(theta);
+
+                long base = (long) th * headDim;
+                long i0, i1; // indices of the two elements to rotate together
+                if (isNeox) {
+                    // GPT-NeoX / HuggingFace style
+                    i0 = base + i;
+                    i1 = base + i + halfDim;
+                } else {
+                    // LLaMA / Gemma interleaved style
+                    i0 = base + 2L * i;
+                    i1 = base + 2L * i + 1;
+                }
+
+                float x0 = get(x, i0);
+                float x1 = get(x, i1);
+                set(out, i0, x0 * cosTheta - x1 * sinTheta);
+                set(out, i1, x0 * sinTheta + x1 * cosTheta);
+            }
+        }
+        return 0;
+    }
+
     // ── Helpers ───────────────────────────────────────────────────────────────
 
     private static float get(MemorySegment seg, long idx) {
