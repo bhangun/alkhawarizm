@@ -20,12 +20,12 @@ plugins {
     id("io.quarkus") version "3.32.2" apply false
 }
 
-extra["aljabrVersion"] = "0.1.0"
+extra["alkhawarizmVersion"] = "0.1.0-SNAPSHOT"
 extra["quarkusVersion"] = "3.32.2"
 
 allprojects {
-    group = "tech.kayys.aljabr"
-    version = rootProject.extra["aljabrVersion"] as String
+    group = "tech.kayys.alkhawarizm"
+    version = rootProject.extra["alkhawarizmVersion"] as String
 
     repositories {
         google()

@@ -30,7 +30,7 @@ jobs:
           java-version: '17'
 
       - name: Make deploy script executable
-        run: chmod +x aljabr/scripts/deploy.sh
+        run: chmod +x alkhawarizm/scripts/deploy.sh
 
       - name: Run Aljabr deploy (publish to mavenLocal or remote)
         env:
@@ -43,8 +43,8 @@ jobs:
           if [ "${{ github.event.inputs.publish_remote }}" != 'true' ]; then
             ARGS="$ARGS --local-maven"
           fi
-          echo "Running: aljabr/scripts/deploy.sh $ARGS"
-          aljabr/scripts/deploy.sh $ARGS
+          echo "Running: alkhawarizm/scripts/deploy.sh $ARGS"
+          alkhawarizm/scripts/deploy.sh $ARGS
 
       - name: Upload mavenLocal cache (optional)
         if: always()

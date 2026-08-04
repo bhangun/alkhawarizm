@@ -2,8 +2,8 @@ Legacy compatibility source area for trainer migration.
 
 Canonical trainer modules are now:
 
-- `:trainer:aljabr-trainer-api` at `trainer/aljabr-trainer-api`
-- `:trainer:aljabr-trainer` at `trainer/aljabr-trainer`
+- `:trainer:alkhawarizm-trainer-api` at `trainer/alkhawarizm-trainer-api`
+- `:trainer:alkhawarizm-trainer` at `trainer/alkhawarizm-trainer`
 
 Do not add new Gradle runtime code here.
-Use `trainer/aljabr-trainer` for canonical trainer runtime changes.
+Use `trainer/alkhawarizm-trainer` for canonical trainer runtime changes.

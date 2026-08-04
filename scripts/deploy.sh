@@ -113,9 +113,9 @@ if [ -n "$NEW_VERSION" ]; then
     # Update version in build.gradle.kts
     echo -e "${BLUE}>>> Updating Gradle configurations...${NC}"
     if [ "$DRY_RUN" = true ]; then
-        echo -e "${YELLOW}[DRY-RUN]${NC} sed -i.bak -e \"s/extra\\[\\\"aljabrVersion\\\"\\] = \\\".*\\\"/extra\\[\\\"aljabrVersion\\\"\\] = \\\"$NEW_VERSION\\\"/\" build.gradle.kts"
+        echo -e "${YELLOW}[DRY-RUN]${NC} sed -i.bak -e \"s/extra\\[\\\"alkhawarizmVersion\\\"\\] = \\\".*\\\"/extra\\[\\\"alkhawarizmVersion\\\"\\] = \\\"$NEW_VERSION\\\"/\" build.gradle.kts"
     else
-        sed -i.bak -e "s/extra\[\"aljabrVersion\"\] = \".*\"/extra\[\"aljabrVersion\"\] = \"$NEW_VERSION\"/" build.gradle.kts
+        sed -i.bak -e "s/extra\[\"alkhawarizmVersion\"\] = \".*\"/extra\[\"alkhawarizmVersion\"\] = \"$NEW_VERSION\"/" build.gradle.kts
         rm -f build.gradle.kts.bak
     fi
     
@@ -198,7 +198,7 @@ if [ "$RUN_GRADLE" = true ]; then
         GRADLE_ARGS="clean build publishToMavenLocal publish"
     fi
 
-    # Prevent including gollek composite during aljabr deploy by default — can be overridden with -PskipGollek=false
+    # Prevent including gollek composite during alkhawarizm deploy by default — can be overridden with -PskipGollek=false
     GRADLE_ARGS="$GRADLE_ARGS -PskipGollek=true"
     
     # Exclude autograd module (training-only) from foundational builds

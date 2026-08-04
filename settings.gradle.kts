@@ -1,4 +1,4 @@
-rootProject.name = "aljabr-engine"
+rootProject.name = "alkhawarizm-engine"
 
 fun includeOptionalProject(projectPath: String, vararg candidatePaths: String) {
     val projectDir = candidatePaths
@@ -13,49 +13,52 @@ fun includeOptionalProject(projectPath: String, vararg candidatePaths: String) {
 }
 
 
-includeOptionalProject("core:aljabr-core", "core/aljabr-core")
+includeOptionalProject("core:alkhawarizm-core", "core/alkhawarizm-core")
 
-// Map gollek core (used by some aljabr integration tests) if present in repo
+// Map gollek core (used by some alkhawarizm integration tests) if present in repo
 /* val skipGollek = gradle.startParameter.projectProperties["skipGollek"] == "true"
 if (!skipGollek) {
     includeOptionalProject("core:gollek-core", "../gollek/core/gollek-core", "../gollek/core/gollek-core")
 } else {
-    println("[aljabr] skipGollek=true -> not including core:gollek-core in composite build")
+    println("[alkhawarizm] skipGollek=true -> not including core:gollek-core in composite build")
 }
  */
 
 // Autograd is training-only; exclude from foundational builds
-val skipAutograd = gradle.startParameter.projectProperties["skipAutograd"] == "true" ||
-                   gradle.startParameter.projectProperties["skipGollek"] == "true"
+val skipAutograd = true
 if (!skipAutograd) {
     include("core:autograd")
 }
 
-include("core:aljabr-tensor")
-include("core:aljabr-core")
-include("core:aljabr-error-code")
-include("core:aljabr-nn")
+include("core:alkhawarizm-tensor")
+include("core:alkhawarizm-core")
+include("core:alkhawarizm-error-code")
+include("core:alkhawarizm-nn")
 
-include("core:aljabr-spi-model")
+include("core:alkhawarizm-spi-model")
 
-//include("backend:blackwell:aljabr-kernel-blackwell")
+//include("backend:blackwell:alkhawarizm-kernel-blackwell")
 
-include("backend:cpu:aljabr-backend-cpu")
-include("backend:cuda:aljabr-backend-cuda")
-include("backend:cuda:aljabr-kernel-cuda")
-//include("backend:cuda:aljabr-plugin-kernel-cuda")
-//include("backend:directml:aljabr-plugin-kernel-directml")
-include("backend:hat:aljabr-backend-hat")
-include("backend:metal:aljabr-backend-metal")
-//include("backend:metal:aljabr-mlx-binding")
-//include("backend:rocm:aljabr-kernel-rocm")
-//include("backend:rocm:aljabr-plugin-kernel-rocm")
+include("backend:cpu:alkhawarizm-backend-cpu")
+include("backend:cuda:alkhawarizm-backend-cuda")
+include("backend:cuda:alkhawarizm-kernel-cuda")
+//include("backend:cuda:alkhawarizm-plugin-kernel-cuda")
+//include("backend:directml:alkhawarizm-plugin-kernel-directml")
+val skipHat = gradle.startParameter.projectProperties["skipHat"] == "true"
+if (!skipHat) {
+    include("backend:hat:alkhawarizm-backend-hat")
+}
+include("backend:metal:alkhawarizm-backend-metal")
+//include("backend:metal:alkhawarizm-mlx-binding")
+
+//include("backend:rocm:alkhawarizm-kernel-rocm")
+//include("backend:rocm:alkhawarizm-plugin-kernel-rocm")
 
 // Dynamically include model family projects under models/
 file("models")
     .listFiles { candidate ->
         candidate.isDirectory &&
-                candidate.name.startsWith("aljabr-model-") &&
+                candidate.name.startsWith("alkhawarizm-model-") &&
                 (candidate.resolve("build.gradle.kts").isFile || candidate.resolve("build.gradle").isFile)
     }
     ?.sortedBy { it.name }
@@ -66,5 +69,5 @@ file("models")
 
 
 
-include("core:aljabr-rocksdb")
-include("core:aljabr-helixdb")
+include("core:alkhawarizm-rocksdb")
+include("core:alkhawarizm-helixdb")
