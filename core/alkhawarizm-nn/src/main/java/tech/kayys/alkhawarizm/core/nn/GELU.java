@@ -5,7 +5,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 /**
  * GELU activation layer.
  */
-public class GELU extends Module {
+public class GELU extends NNModule {
 
     @Override
     public Tensor forward(Tensor input) {

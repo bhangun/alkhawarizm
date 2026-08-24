@@ -24,7 +24,9 @@ public record ModelPromptTraits(
         boolean validateContinuationTokensByDecode,
         boolean rejectEmptyDecodedTokens,
         boolean skipDefaultSystemPromptInjection,
-        String defaultSystemPrompt) {
+        String defaultSystemPrompt,
+        Set<String> turnPromptPrefixes,
+        boolean requiresChatTemplateFormatting) {
 
     public static final String DEFAULT_SYSTEM_PROMPT = "You are a helpful assistant.";
 
@@ -36,5 +38,8 @@ public record ModelPromptTraits(
         defaultSystemPrompt = defaultSystemPrompt == null || defaultSystemPrompt.isBlank()
                 ? DEFAULT_SYSTEM_PROMPT
                 : defaultSystemPrompt;
+        turnPromptPrefixes = turnPromptPrefixes == null
+                ? Set.of()
+                : Set.copyOf(turnPromptPrefixes);
     }
 }

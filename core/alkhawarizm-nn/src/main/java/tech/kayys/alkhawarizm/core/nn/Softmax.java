@@ -5,7 +5,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 /**
  * Softmax activation layer.
  */
-public class Softmax extends Module {
+public class Softmax extends NNModule {
 
     private final int dim;
 

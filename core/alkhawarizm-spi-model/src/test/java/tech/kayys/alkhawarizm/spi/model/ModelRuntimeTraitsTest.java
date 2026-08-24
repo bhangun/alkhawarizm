@@ -33,9 +33,9 @@ class ModelRuntimeTraitsTest {
         }
 
         @Test
-        void gemma4TextSkipsDefaultSystemPromptInjection() {
+        void nativeBf16MatvecSkipsDefaultSystemPromptInjection() {
                 ModelRuntimeTraits traits = ModelRuntimeTraits.builder()
-                                .gemma4Text()
+                                .nativeBf16Matvec()
                                 .build();
 
                 assertTrue(traits.skipDefaultSystemPromptInjection());
@@ -44,11 +44,11 @@ class ModelRuntimeTraitsTest {
         @Test
         void builderDerivesPromptAndAttentionDefaultsFromNamedFlags() {
                 ModelRuntimeTraits traits = ModelRuntimeTraits.builder()
-                                .gemma4Text()
+                                .nativeBf16Matvec()
                                 .perLayerInputPath()
                                 .build();
 
-                assertTrue(traits.gemma4Text());
+                assertTrue(traits.nativeBf16Matvec());
                 assertTrue(traits.perLayerInputPath());
                 assertEquals(ModelRuntimeTraits.PromptBosPolicy.NEVER, traits.promptBosPolicy());
                 assertTrue(traits.allowedControlTokenTexts().contains("<|channel>"));

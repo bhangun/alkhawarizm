@@ -5,7 +5,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 /**
  * ReLU activation layer.
  */
-public class ReLU extends Module {
+public class ReLU extends NNModule {
 
     private final boolean inplace;
 

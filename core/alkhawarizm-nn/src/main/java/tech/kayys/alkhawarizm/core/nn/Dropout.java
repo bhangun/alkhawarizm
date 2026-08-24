@@ -5,7 +5,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 /**
  * Dropout layer for regularization during training.
  */
-public class Dropout extends Module {
+public class Dropout extends NNModule {
 
     private final float probability;
 

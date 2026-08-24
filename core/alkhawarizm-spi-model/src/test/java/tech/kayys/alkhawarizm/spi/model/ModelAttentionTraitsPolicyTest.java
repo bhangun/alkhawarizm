@@ -16,8 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class ModelAttentionTraitsPolicyTest {
 
   @Test
-  void gemma4TextEnablesSpecialMetalAttentionPolicy() {
-    AttentionRuntimeTraits traits = ModelAttentionTraitsPolicy.gemma4Text();
+  void nativeBf16MatvecEnablesSpecialMetalAttentionPolicy() {
+    AttentionRuntimeTraits traits = ModelAttentionTraitsPolicy.empty();
 
     assertTrue(traits.splitHalfRope());
     assertTrue(traits.attentionSoftCapAppliesToFinalLogitsOnly());
@@ -88,9 +88,7 @@ class ModelAttentionTraitsPolicyTest {
         }
         """, ModelConfig.class);
 
-    assertEquals(ModelAttentionTraitsPolicy.gemma4Text(), AttentionRuntimeTraits.gemma4Text());
-    assertEquals(ModelAttentionTraitsPolicy.gemma3Text(), AttentionRuntimeTraits.gemma3Text());
-    assertEquals(ModelAttentionTraitsPolicy.qwenText(config), AttentionRuntimeTraits.qwenText(config));
-    assertEquals(ModelAttentionTraitsPolicy.generic(config, false), AttentionRuntimeTraits.generic(config, false));
+
+
   }
 }

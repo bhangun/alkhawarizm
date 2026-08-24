@@ -5,7 +5,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 /**
  * 2D max pooling layer.
  */
-public class MaxPool2d extends Module {
+public class MaxPool2d extends NNModule {
 
     private final int kernelSize;
     private final int stride;

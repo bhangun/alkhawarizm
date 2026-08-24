@@ -4,7 +4,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 public record ModelFamilyQuantizedLoaderProfile(
-        boolean gemma4MobileQat,
+        boolean mobileQatSupported,
         boolean inferredFromConfig,
         String format,
         String container,
@@ -34,29 +34,29 @@ public record ModelFamilyQuantizedLoaderProfile(
             boolean hasVision = configContent.contains("\"vision_config\"");
             boolean hasAudio = configContent.contains("\"audio_config\"");
 
-            boolean gemma4Mobile = isGemma4 && hasQuantMethodGemma && (hasVision || hasAudio);
+            boolean supportsMobileQat = isGemma4 && hasQuantMethodGemma && (hasVision || hasAudio);
 
-            if (!gemma4Mobile) {
-                // If it is not gemma4 mobile and has no other known format, we might just
+            if (!supportsMobileQat) {
+                // If it is not mobile qat and has no other known format, we might just
                 // return generic
                 if (!configContent.contains("\"future_format\"")) {
                     return null;
                 }
             }
 
-            String format = gemma4Mobile ? "mobile" : "future_format";
-            String container = gemma4Mobile ? "transformers" : "future_container";
-            String scope = gemma4Mobile ? "metadata_only_pending_mobile_quant_loader"
+            String format = supportsMobileQat ? "mobile" : "future_format";
+            String container = supportsMobileQat ? "transformers" : "future_container";
+            String scope = supportsMobileQat ? "metadata_only_pending_mobile_quant_loader"
                     : "metadata_only_pending_future_quant_loader";
             List<String> codes = new java.util.ArrayList<>();
-            if (gemma4Mobile) {
+            if (supportsMobileQat) {
                 codes.add(ModelFamilyProblemCodes.QAT_MOBILE_LOADER_PENDING);
             } else {
                 codes.add(ModelFamilyProblemCodes.QUANTIZED_WEIGHT_LOADER_PENDING);
             }
 
             return new ModelFamilyQuantizedLoaderProfile(
-                    gemma4Mobile, true, format, container, scope, codes);
+                    supportsMobileQat, true, format, container, scope, codes);
         } catch (Exception e) {
             return null;
         }

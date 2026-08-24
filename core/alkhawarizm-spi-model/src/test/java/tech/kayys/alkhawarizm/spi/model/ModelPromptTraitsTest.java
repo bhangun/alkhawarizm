@@ -47,6 +47,6 @@ class ModelPromptTraitsTest {
                 {"model_type":"gemma","architectures":["GemmaForCausalLM"]}
                 """, ModelConfig.class);
 
-        assertEquals(PromptBosPolicy.GEMMA_TURN_AWARE, ModelPromptTraits.fromConfig(config).promptBosPolicy());
+        assertEquals(PromptBosPolicy.TURN_AWARE, ModelPromptTraits.fromConfig(config).promptBosPolicy());
     }
 }

@@ -3,7 +3,7 @@ package tech.kayys.alkhawarizm.core.nn;
 import tech.kayys.alkhawarizm.core.tensor.Tensor;
 import tech.kayys.alkhawarizm.core.tensor.TensorFactory;
 
-public class RMSNorm extends Module {
+public class RMSNorm extends NNModule {
     private final int dim;
     private final float eps;
 

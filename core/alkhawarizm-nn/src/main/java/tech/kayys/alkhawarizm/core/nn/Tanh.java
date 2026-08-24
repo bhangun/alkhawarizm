@@ -5,7 +5,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 /**
  * Tanh activation layer.
  */
-public class Tanh extends Module {
+public class Tanh extends NNModule {
 
     @Override
     public Tensor forward(Tensor input) {

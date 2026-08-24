@@ -5,7 +5,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 /**
  * Multi-head attention mechanism.
  */
-public class MultiheadAttention extends Module {
+public class MultiheadAttention extends NNModule {
 
     private final long embedDim;
     private final int numHeads;

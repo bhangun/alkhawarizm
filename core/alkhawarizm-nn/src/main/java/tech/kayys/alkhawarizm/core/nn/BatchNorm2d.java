@@ -5,7 +5,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 /**
  * 2D Batch Normalization layer.
  */
-public class BatchNorm2d extends Module {
+public class BatchNorm2d extends NNModule {
 
     private final long numFeatures;
     private final float eps;

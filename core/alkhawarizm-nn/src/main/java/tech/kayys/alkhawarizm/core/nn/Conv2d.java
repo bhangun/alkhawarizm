@@ -5,7 +5,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 /**
  * 2D convolution layer.
  */
-public class Conv2d extends Module {
+public class Conv2d extends NNModule {
 
     private final long inChannels;
     private final long outChannels;

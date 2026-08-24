@@ -232,7 +232,7 @@ class ModelFamilyPluginRegistryTest {
             assertTrue(registry
                     .directSafetensorCompatibilitySummaryForFamilies(List.of("missing-runtime-family"))
                     .empty());
-            assertTrue(plugin.runtimeTraits(config).gemma4Text());
+            assertTrue(plugin.runtimeTraits(config).nativeBf16Matvec());
         } finally {
             registry.unregister(plugin.id());
         }
@@ -279,7 +279,7 @@ class ModelFamilyPluginRegistryTest {
     }
 
     @Test
-    void quantizedLoaderProfileInfersGemma4MobileQatFromUpstreamConfigShape() throws Exception {
+    void quantizedLoaderProfileInfersMobileQatSupportedFromUpstreamConfigShape() throws Exception {
         Files.writeString(tempDir.resolve("config.json"), """
                 {
                   "model_type": "gemma4",
@@ -301,7 +301,7 @@ class ModelFamilyPluginRegistryTest {
 
         ModelFamilyQuantizedLoaderProfile profile = ModelFamilyQuantizedLoaderProfile.fromModelDir(tempDir);
 
-        assertTrue(profile.gemma4MobileQat());
+        assertTrue(profile.mobileQatSupported());
         assertTrue(profile.inferredFromConfig());
         assertEquals("mobile", profile.format());
         assertEquals("transformers", profile.container());
@@ -310,7 +310,7 @@ class ModelFamilyPluginRegistryTest {
     }
 
     @Test
-    void quantizedLoaderProfileDoesNotInferGemma4MobileQatWithoutMultimodalTowers() throws Exception {
+    void quantizedLoaderProfileDoesNotInferMobileQatSupportedWithoutMultimodalTowers() throws Exception {
         Files.writeString(tempDir.resolve("config.json"), """
                 {
                   "model_type": "gemma4",
@@ -400,7 +400,9 @@ class ModelFamilyPluginRegistryTest {
 
     @Test
     void pluginRuntimeTraitsDelegateToMatchingArchitectureAdapter() throws Exception {
-        ModelRuntimeTraits adapterTraits = new ModelRuntimeTraits(false, false, true, false);
+        ModelRuntimeTraits adapterTraits = ModelRuntimeTraits.builder()
+                .perLayerInputEmbedding()
+                .build();
         ModelFamilyPlugin plugin = new ModelFamilyPlugin() {
             @Override
             public ModelFamilyDescriptor descriptor() {

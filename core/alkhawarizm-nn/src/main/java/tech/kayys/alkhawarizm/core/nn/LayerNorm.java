@@ -5,7 +5,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 /**
  * Layer Normalization.
  */
-public class LayerNorm extends Module {
+public class LayerNorm extends NNModule {
 
     private final long[] normalizedShape;
     private final float eps;

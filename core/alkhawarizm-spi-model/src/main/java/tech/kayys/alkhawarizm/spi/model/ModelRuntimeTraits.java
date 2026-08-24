@@ -13,14 +13,15 @@ import java.util.Set;
  * decisions that do not belong in tensor-name resolution.
  */
 public record ModelRuntimeTraits(
-        boolean gemma4Text,
-        boolean gemma3Text,
-        boolean qwenText,
+        boolean nativeBf16Matvec,
+        boolean geluGatedFfn,
+        boolean perLayerInputEmbedding,
         boolean perLayerInputPath,
         PromptBosPolicy promptBosPolicy,
         Set<String> allowedControlTokenTexts,
         boolean validateContinuationTokensByDecode,
         boolean rejectEmptyDecodedTokens,
+        Set<String> turnPromptPrefixes,
         AttentionRuntimeTraits attention,
         boolean audioModel,
         boolean visionModel,
@@ -29,7 +30,7 @@ public record ModelRuntimeTraits(
     public enum PromptBosPolicy {
         DEFAULT,
         NEVER,
-        GEMMA_TURN_AWARE
+        TURN_AWARE
     }
 
     public record AttentionRuntimeTraits(
@@ -47,30 +48,19 @@ public record ModelRuntimeTraits(
 
         public static final AttentionRuntimeTraits EMPTY = ModelAttentionTraitsPolicy.empty();
 
-        public static AttentionRuntimeTraits gemma4Text() {
-            return ModelAttentionTraitsPolicy.gemma4Text();
-        }
-
-        public static AttentionRuntimeTraits gemma3Text() {
-            return ModelAttentionTraitsPolicy.gemma3Text();
-        }
-
-        public static AttentionRuntimeTraits qwenText(ModelConfig config) {
-            return ModelAttentionTraitsPolicy.qwenText(config);
+        public static AttentionRuntimeTraits generic(ModelConfig config, boolean perLayerInputPath) {
+            return ModelAttentionTraitsPolicy.generic(config, perLayerInputPath);
         }
 
         public static AttentionRuntimeTraits phiText(ModelConfig config) {
             return ModelAttentionTraitsPolicy.phiText(config);
         }
 
-        public static AttentionRuntimeTraits generic(ModelConfig config, boolean perLayerInputPath) {
-            return ModelAttentionTraitsPolicy.generic(config, perLayerInputPath);
-        }
     }
 
     public static final String DEFAULT_SYSTEM_PROMPT = ModelPromptTraits.DEFAULT_SYSTEM_PROMPT;
 
-    public static final ModelRuntimeTraits EMPTY = new ModelRuntimeTraits(false, false, false, false);
+    public static final ModelRuntimeTraits EMPTY = new ModelRuntimeTraits(false, false, false, false, PromptBosPolicy.DEFAULT, Set.of(), false, false, Set.of(), null, false, false, false);
 
     public static Builder builder() {
         return new Builder();
@@ -92,57 +82,58 @@ public record ModelRuntimeTraits(
                 ? Set.of()
                 : Set.copyOf(allowedControlTokenTexts);
         attention = attention == null
-                ? defaultAttentionTraits(gemma4Text, gemma3Text, qwenText, perLayerInputPath, null)
+                ? defaultAttentionTraits(nativeBf16Matvec, false, false, perLayerInputPath, null)
                 : attention;
         multimodalModel = multimodalModel || audioModel || visionModel;
     }
 
-    public ModelRuntimeTraits(boolean gemma4Text, boolean gemma3Text, boolean qwenText,
+    public ModelRuntimeTraits(boolean nativeBf16Matvec, boolean geluGatedFfn, boolean perLayerInputEmbedding,
             boolean perLayerInputPath) {
-        this(gemma4Text, gemma3Text, qwenText, perLayerInputPath,
-                gemma4Text ? PromptBosPolicy.NEVER : (gemma3Text ? PromptBosPolicy.GEMMA_TURN_AWARE : PromptBosPolicy.DEFAULT),
-                gemma4Text ? Set.of("<|channel>", "<channel|>", "<|think|>") : Set.of(),
-                gemma4Text,
-                gemma4Text,
+        this(nativeBf16Matvec, geluGatedFfn, perLayerInputEmbedding, perLayerInputPath,
+                nativeBf16Matvec ? PromptBosPolicy.NEVER : (geluGatedFfn ? PromptBosPolicy.TURN_AWARE : PromptBosPolicy.DEFAULT),
+                nativeBf16Matvec ? Set.of("<|channel>", "<channel|>", "<|think|>") : Set.of(),
+                nativeBf16Matvec,
+                nativeBf16Matvec,
+                Set.of(),
                 null,
                 false,
                 false,
                 false);
     }
 
-    public ModelRuntimeTraits(boolean gemma4Text, boolean gemma3Text, boolean qwenText,
+    public ModelRuntimeTraits(boolean nativeBf16Matvec, boolean geluGatedFfn, boolean perLayerInputEmbedding,
             boolean perLayerInputPath, PromptBosPolicy promptBosPolicy, Set<String> allowedControlTokenTexts,
             boolean validateContinuationTokensByDecode, boolean rejectEmptyDecodedTokens) {
-        this(gemma4Text, gemma3Text, qwenText, perLayerInputPath,
+        this(nativeBf16Matvec, geluGatedFfn, perLayerInputEmbedding, perLayerInputPath,
                 promptBosPolicy, allowedControlTokenTexts,
-                validateContinuationTokensByDecode, rejectEmptyDecodedTokens, null, false, false, false);
+                validateContinuationTokensByDecode, rejectEmptyDecodedTokens, Set.of(), null, false, false, false);
     }
 
-    public ModelRuntimeTraits(boolean gemma4Text, boolean gemma3Text, boolean qwenText,
+    public ModelRuntimeTraits(boolean nativeBf16Matvec, boolean geluGatedFfn, boolean perLayerInputEmbedding,
             boolean perLayerInputPath, PromptBosPolicy promptBosPolicy, Set<String> allowedControlTokenTexts,
             boolean validateContinuationTokensByDecode, boolean rejectEmptyDecodedTokens,
             AttentionRuntimeTraits attention) {
-        this(gemma4Text, gemma3Text, qwenText, perLayerInputPath,
+        this(nativeBf16Matvec, geluGatedFfn, perLayerInputEmbedding, perLayerInputPath,
                 promptBosPolicy, allowedControlTokenTexts,
-                validateContinuationTokensByDecode, rejectEmptyDecodedTokens, attention, false, false, false);
+                validateContinuationTokensByDecode, rejectEmptyDecodedTokens, Set.of(), attention, false, false, false);
     }
 
-    public ModelRuntimeTraits(boolean gemma4Text, boolean gemma3Text, boolean qwenText,
+    public ModelRuntimeTraits(boolean nativeBf16Matvec, boolean geluGatedFfn, boolean perLayerInputEmbedding,
             boolean perLayerInputPath, PromptBosPolicy promptBosPolicy, Set<String> allowedControlTokenTexts,
             boolean validateContinuationTokensByDecode, boolean rejectEmptyDecodedTokens,
             AttentionRuntimeTraits attention, boolean audioModel) {
-        this(gemma4Text, gemma3Text, qwenText, perLayerInputPath,
+        this(nativeBf16Matvec, geluGatedFfn, perLayerInputEmbedding, perLayerInputPath,
                 promptBosPolicy, allowedControlTokenTexts,
-                validateContinuationTokensByDecode, rejectEmptyDecodedTokens, attention, audioModel, false, audioModel);
+                validateContinuationTokensByDecode, rejectEmptyDecodedTokens, Set.of(), attention, audioModel, false, audioModel);
     }
 
-    public ModelRuntimeTraits(boolean gemma4Text, boolean gemma3Text, boolean qwenText,
+    public ModelRuntimeTraits(boolean nativeBf16Matvec, boolean geluGatedFfn, boolean perLayerInputEmbedding,
             boolean perLayerInputPath, PromptBosPolicy promptBosPolicy, Set<String> allowedControlTokenTexts,
             boolean validateContinuationTokensByDecode, boolean rejectEmptyDecodedTokens,
             AttentionRuntimeTraits attention, boolean audioModel, boolean multimodalModel) {
-        this(gemma4Text, gemma3Text, qwenText, perLayerInputPath,
+        this(nativeBf16Matvec, geluGatedFfn, perLayerInputEmbedding, perLayerInputPath,
                 promptBosPolicy, allowedControlTokenTexts,
-                validateContinuationTokensByDecode, rejectEmptyDecodedTokens, attention,
+                validateContinuationTokensByDecode, rejectEmptyDecodedTokens, Set.of(), attention,
                 audioModel, false, multimodalModel);
     }
 
@@ -170,27 +161,29 @@ public record ModelRuntimeTraits(
             return EMPTY;
         }
         String modelType = normalizedModelType(config);
-        boolean gemma4Text = modelType.startsWith("gemma4");
-        boolean gemma3Text = modelType.startsWith("gemma3");
-        boolean gemmaFamily = modelType.startsWith("gemma");
-        boolean qwenText = modelType.contains("qwen");
-        PromptBosPolicy promptBosPolicy = gemma4Text ? PromptBosPolicy.NEVER : (gemma3Text || gemmaFamily ? PromptBosPolicy.GEMMA_TURN_AWARE : PromptBosPolicy.DEFAULT);
+        boolean nativeBf16Matvec = modelType.startsWith("gemma4");
+        boolean isGemma3Text = modelType.startsWith("gemma3");
+        boolean isGemmaFamily = modelType.startsWith("gemma");
+        boolean isQwenText = modelType.contains("qwen");
+        PromptBosPolicy promptBosPolicy = nativeBf16Matvec ? PromptBosPolicy.NEVER : (isGemma3Text || isGemmaFamily ? PromptBosPolicy.TURN_AWARE : PromptBosPolicy.DEFAULT);
         ModelPromptTraits prompt = new ModelPromptTraits(
                 promptBosPolicy,
-                gemma4Text ? Set.of("<|channel>", "<channel|>", "<|think|>") : Set.of(),
-                gemma4Text,
-                gemma4Text,
-                gemma4Text,
-                qwenText ? "You are Qwen, created by Alibaba Cloud. You are a helpful assistant." : ModelPromptTraits.DEFAULT_SYSTEM_PROMPT);
+                nativeBf16Matvec ? Set.of("<|channel>", "<channel|>", "<|think|>") : Set.of(),
+                nativeBf16Matvec,
+                nativeBf16Matvec,
+                nativeBf16Matvec,
+                isQwenText ? "You are Qwen, created by Alibaba Cloud. You are a helpful assistant." : ModelPromptTraits.DEFAULT_SYSTEM_PROMPT,
+                nativeBf16Matvec ? Set.of("<|turn>") : (isGemma3Text || isGemmaFamily ? Set.of("<start_of_turn>") : Set.of()),
+                isGemma3Text || isQwenText);
         ModelModalityTraits modality = ModelModalityTraits.fromConfig(config);
         boolean perLayerInputPath = config.hiddenSizePerLayerInput() > 0 || config.vocabSizePerLayerInput() > 0;
         return builder()
-                .gemma4Text(gemma4Text)
-                .gemma3Text(gemma3Text)
-                .qwenText(qwenText)
+                .nativeBf16Matvec(nativeBf16Matvec)
+                .geluGatedFfn(isGemma3Text || nativeBf16Matvec)
+                .perLayerInputEmbedding(nativeBf16Matvec && perLayerInputPath)
                 .perLayerInputPath(perLayerInputPath)
                 .prompt(prompt)
-                .attention(defaultAttentionTraits(gemma4Text, gemma3Text, qwenText, perLayerInputPath, config))
+                .attention(defaultAttentionTraits(nativeBf16Matvec, isGemma3Text, isQwenText, perLayerInputPath, config))
                 .modalities(modality)
                 .build();
     }
@@ -225,11 +218,11 @@ public record ModelRuntimeTraits(
     }
 
     public boolean skipDefaultSystemPromptInjection() {
-        return gemma4Text;
+        return nativeBf16Matvec;
     }
 
     public String defaultSystemPrompt() {
-        return qwenText ? "You are Qwen, created by Alibaba Cloud. You are a helpful assistant." : ModelPromptTraits.DEFAULT_SYSTEM_PROMPT;
+        return ModelPromptTraits.DEFAULT_SYSTEM_PROMPT;
     }
 
     private static String normalizedModelType(ModelConfig config) {
@@ -238,10 +231,19 @@ public record ModelRuntimeTraits(
                 : config.modelType().toLowerCase(Locale.ROOT);
     }
 
-    private static AttentionRuntimeTraits defaultAttentionTraits(boolean gemma4Text, boolean gemma3Text,
-            boolean qwenText, boolean perLayerInputPath, ModelConfig config) {
-        return ModelAttentionTraitsPolicy.fromFlags(
-                gemma4Text, gemma3Text, qwenText, perLayerInputPath, config);
+    private static AttentionRuntimeTraits defaultAttentionTraits(boolean nativeBf16Matvec, boolean isGemma3Text,
+            boolean isQwenText, boolean perLayerInputPath, ModelConfig config) {
+        if (nativeBf16Matvec) {
+            return new AttentionRuntimeTraits(true, true, true, true, true, true, true, 0, false, false, false);
+        }
+        if (isGemma3Text) {
+            return new AttentionRuntimeTraits(true, false, false, false, false, false, false, 0, false, false, false);
+        }
+        if (isQwenText) {
+            boolean compact = ModelAttentionTraitsPolicy.isCompactAttentionMatvecCandidate(config);
+            return new AttentionRuntimeTraits(false, false, false, false, false, false, false, compact ? 128 : 0, compact, ModelAttentionTraitsPolicy.isLargeAttentionMatvecCandidate(config, false, false), false);
+        }
+        return ModelAttentionTraitsPolicy.generic(config, perLayerInputPath);
     }
 
     /**
@@ -249,9 +251,9 @@ public record ModelRuntimeTraits(
      * policy readable and avoids positional boolean mistakes as traits grow.
      */
     public static final class Builder {
-        private boolean gemma4Text;
-        private boolean gemma3Text;
-        private boolean qwenText;
+        private boolean nativeBf16Matvec;
+        private boolean geluGatedFfn;
+        private boolean perLayerInputEmbedding;
         private boolean perLayerInputPath;
         private PromptBosPolicy promptBosPolicy;
         private Set<String> allowedControlTokenTexts;
@@ -260,6 +262,8 @@ public record ModelRuntimeTraits(
         private boolean validateContinuationTokensByDecodeSet;
         private boolean rejectEmptyDecodedTokens;
         private boolean rejectEmptyDecodedTokensSet;
+        private Set<String> turnPromptPrefixes;
+        private boolean turnPromptPrefixesSet;
         private AttentionRuntimeTraits attention;
         private boolean audioModel;
         private boolean visionModel;
@@ -268,30 +272,30 @@ public record ModelRuntimeTraits(
         private Builder() {
         }
 
-        public Builder gemma4Text() {
-            return gemma4Text(true);
+        public Builder nativeBf16Matvec() {
+            return nativeBf16Matvec(true);
         }
 
-        public Builder gemma4Text(boolean gemma4Text) {
-            this.gemma4Text = gemma4Text;
+        public Builder nativeBf16Matvec(boolean nativeBf16Matvec) {
+            this.nativeBf16Matvec = nativeBf16Matvec;
             return this;
         }
 
-        public Builder gemma3Text() {
-            return gemma3Text(true);
+        public Builder geluGatedFfn() {
+            return geluGatedFfn(true);
         }
 
-        public Builder gemma3Text(boolean gemma3Text) {
-            this.gemma3Text = gemma3Text;
+        public Builder geluGatedFfn(boolean geluGatedFfn) {
+            this.geluGatedFfn = geluGatedFfn;
             return this;
         }
 
-        public Builder qwenText() {
-            return qwenText(true);
+        public Builder perLayerInputEmbedding() {
+            return perLayerInputEmbedding(true);
         }
 
-        public Builder qwenText(boolean qwenText) {
-            this.qwenText = qwenText;
+        public Builder perLayerInputEmbedding(boolean perLayerInputEmbedding) {
+            this.perLayerInputEmbedding = perLayerInputEmbedding;
             return this;
         }
 
@@ -311,7 +315,8 @@ public record ModelRuntimeTraits(
             return promptBosPolicy(prompt.promptBosPolicy())
                     .allowedControlTokenTexts(prompt.allowedControlTokenTexts())
                     .validateContinuationTokensByDecode(prompt.validateContinuationTokensByDecode())
-                    .rejectEmptyDecodedTokens(prompt.rejectEmptyDecodedTokens());
+                    .rejectEmptyDecodedTokens(prompt.rejectEmptyDecodedTokens())
+                    .turnPromptPrefixes(prompt.turnPromptPrefixes());
         }
 
         public Builder promptBosPolicy(PromptBosPolicy promptBosPolicy) {
@@ -336,6 +341,14 @@ public record ModelRuntimeTraits(
         public Builder rejectEmptyDecodedTokens(boolean rejectEmptyDecodedTokens) {
             this.rejectEmptyDecodedTokens = rejectEmptyDecodedTokens;
             this.rejectEmptyDecodedTokensSet = true;
+            return this;
+        }
+
+        public Builder turnPromptPrefixes(Set<String> turnPromptPrefixes) {
+            this.turnPromptPrefixes = turnPromptPrefixes == null
+                    ? Set.of()
+                    : Set.copyOf(turnPromptPrefixes);
+            this.turnPromptPrefixesSet = true;
             return this;
         }
 
@@ -382,22 +395,25 @@ public record ModelRuntimeTraits(
 
         public ModelRuntimeTraits build() {
             return new ModelRuntimeTraits(
-                    gemma4Text,
-                    gemma3Text,
-                    qwenText,
+                    nativeBf16Matvec,
+                    geluGatedFfn,
+                    perLayerInputEmbedding,
                     perLayerInputPath,
                     promptBosPolicy == null
-                            ? (gemma4Text ? PromptBosPolicy.NEVER : (gemma3Text ? PromptBosPolicy.GEMMA_TURN_AWARE : PromptBosPolicy.DEFAULT))
+                            ? (nativeBf16Matvec ? PromptBosPolicy.NEVER : (geluGatedFfn ? PromptBosPolicy.TURN_AWARE : PromptBosPolicy.DEFAULT))
                             : promptBosPolicy,
                     allowedControlTokenTextsSet
                             ? allowedControlTokenTexts
-                            : (gemma4Text ? Set.of("<|channel>", "<channel|>", "<|think|>") : Set.of()),
+                            : (nativeBf16Matvec ? Set.of("<|channel>", "<channel|>", "<|think|>") : Set.of()),
                     validateContinuationTokensByDecodeSet
                             ? validateContinuationTokensByDecode
-                            : gemma4Text,
+                            : nativeBf16Matvec,
                     rejectEmptyDecodedTokensSet
                             ? rejectEmptyDecodedTokens
-                            : gemma4Text,
+                            : nativeBf16Matvec,
+                    turnPromptPrefixesSet
+                            ? turnPromptPrefixes
+                            : (nativeBf16Matvec ? Set.of("<|turn>") : Set.of()),
                     attention,
                     audioModel,
                     visionModel,
@@ -408,14 +424,15 @@ public record ModelRuntimeTraits(
             if (traits == null) {
                 return this;
             }
-            return gemma4Text(traits.gemma4Text())
-                    .gemma3Text(traits.gemma3Text())
-                    .qwenText(traits.qwenText())
+            return nativeBf16Matvec(traits.nativeBf16Matvec())
+                    .geluGatedFfn(traits.geluGatedFfn())
+                    .perLayerInputEmbedding(traits.perLayerInputEmbedding())
                     .perLayerInputPath(traits.perLayerInputPath())
                     .promptBosPolicy(traits.promptBosPolicy())
                     .allowedControlTokenTexts(traits.allowedControlTokenTexts())
                     .validateContinuationTokensByDecode(traits.validateContinuationTokensByDecode())
                     .rejectEmptyDecodedTokens(traits.rejectEmptyDecodedTokens())
+                    .turnPromptPrefixes(traits.turnPromptPrefixes())
                     .attention(traits.attention())
                     .audioModel(traits.audioModel())
                     .visionModel(traits.visionModel())

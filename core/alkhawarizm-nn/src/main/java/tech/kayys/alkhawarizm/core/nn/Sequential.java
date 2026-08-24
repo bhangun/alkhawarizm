@@ -7,39 +7,39 @@ import java.util.List;
 /**
  * Sequential container that chains modules together.
  */
-public class Sequential extends Module {
+public class Sequential extends NNModule {
 
-    private final List<Module> moduleList = new ArrayList<>();
+    private final List<NNModule> moduleList = new ArrayList<>();
 
     public Sequential() {
     }
 
-    public Sequential(Module... modules) {
+    public Sequential(NNModule... modules) {
         for (int i = 0; i < modules.length; i++) {
             add(String.valueOf(i), modules[i]);
         }
     }
 
-    public Sequential add(String name, Module module) {
+    public Sequential add(String name, NNModule module) {
         registerModule(name, module);
         moduleList.add(module);
         return this;
     }
 
-    public Sequential add(Module module) {
+    public Sequential add(NNModule module) {
         return add(String.valueOf(moduleList.size()), module);
     }
 
     @Override
     public Tensor forward(Tensor input) {
         Tensor output = input;
-        for (Module module : moduleList) {
+        for (NNModule module : moduleList) {
             output = module.forward(output);
         }
         return output;
     }
 
-    public Module get(int index) {
+    public NNModule get(int index) {
         return moduleList.get(index);
     }
 

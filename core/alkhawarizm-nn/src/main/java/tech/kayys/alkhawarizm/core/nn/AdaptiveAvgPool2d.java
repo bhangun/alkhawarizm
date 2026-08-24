@@ -5,7 +5,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 /**
  * Adaptive average pooling 2D layer.
  */
-public class AdaptiveAvgPool2d extends Module {
+public class AdaptiveAvgPool2d extends NNModule {
 
     private final int outputH;
     private final int outputW;

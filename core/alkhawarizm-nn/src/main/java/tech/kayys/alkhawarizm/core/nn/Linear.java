@@ -5,7 +5,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 /**
  * Fully connected (linear) layer: y = xW^T + b.
  */
-public class Linear extends Module {
+public class Linear extends NNModule {
 
     private final long inFeatures;
     private final long outFeatures;

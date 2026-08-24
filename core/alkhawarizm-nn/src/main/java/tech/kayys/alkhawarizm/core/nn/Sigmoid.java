@@ -5,7 +5,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 /**
  * Sigmoid activation layer.
  */
-public class Sigmoid extends Module {
+public class Sigmoid extends NNModule {
 
     @Override
     public Tensor forward(Tensor input) {

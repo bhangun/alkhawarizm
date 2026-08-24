@@ -116,7 +116,7 @@ class ModelConfigGemma4TextMergeTest {
             assertEquals(512, cfg.resolvedHeadDimForLayer(5));
             assertEquals(1024, cfg.slidingWindowSize());
             assertEquals(131072, cfg.maxPositionEmbeddings());
-            assertTrue(ModelRuntimeTraits.fallbackFromConfig(cfg).gemma4Text());
+            assertTrue(ModelRuntimeTraits.fallbackFromConfig(cfg).nativeBf16Matvec());
         } finally {
             Files.deleteIfExists(cfgPath);
             Files.deleteIfExists(dir);

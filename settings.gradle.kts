@@ -15,14 +15,14 @@ fun includeOptionalProject(projectPath: String, vararg candidatePaths: String) {
 
 includeOptionalProject("core:alkhawarizm-core", "core/alkhawarizm-core")
 
-// Map gollek core (used by some alkhawarizm integration tests) if present in repo
-/* val skipGollek = gradle.startParameter.projectProperties["skipGollek"] == "true"
+val skipGollek = gradle.startParameter.projectProperties["skipGollek"] == "true"
 if (!skipGollek) {
-    includeOptionalProject("core:gollek-core", "../gollek/core/gollek-core", "../gollek/core/gollek-core")
-} else {
-    println("[alkhawarizm] skipGollek=true -> not including core:gollek-core in composite build")
+    includeOptionalProject("core:gollek-core", "../gollek/framework/core/gollek-core")
+    includeOptionalProject("core:gollek-tokenizer-core", "../gollek/framework/core/gollek-tokenizer-core")
+    includeOptionalProject("spi:gollek-spi", "../gollek/framework/spi/gollek-spi")
+    includeOptionalProject("spi:gollek-spi-multimodal", "../gollek/framework/spi/gollek-spi-multimodal")
+    includeOptionalProject("spi:gollek-spi-inference", "../gollek/framework/spi/gollek-spi-inference")
 }
- */
 
 // Autograd is training-only; exclude from foundational builds
 val skipAutograd = true
@@ -71,3 +71,14 @@ file("models")
 
 include("core:alkhawarizm-rocksdb")
 include("core:alkhawarizm-helixdb")
+
+include(":core:alkhawarizm-safetensor-api")
+include(":core:alkhawarizm-safetensor-core")
+include(":core:alkhawarizm-safetensor-loader")
+include(":core:alkhawarizm-safetensor-quantization")
+include(":core:alkhawarizm-safetensor-spi")
+include(":core:alkhawarizm-gguf-bridge")
+include(":core:alkhawarizm-gguf-fast-bridge")
+include(":core:alkhawarizm-gguf-converter")
+include(":core:alkhawarizm-gguf-converter-java")
+include(":core:alkhawarizm-gguf-core")

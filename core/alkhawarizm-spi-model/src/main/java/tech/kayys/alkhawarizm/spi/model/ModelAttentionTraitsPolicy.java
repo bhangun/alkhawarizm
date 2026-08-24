@@ -27,81 +27,6 @@ public final class ModelAttentionTraitsPolicy {
                 false, false, false, false, false, false, false, 0, false, false, false);
     }
 
-    public static AttentionRuntimeTraits fromFlags(boolean gemma4Text, boolean gemma3Text,
-            boolean qwenText, boolean perLayerInputPath, ModelConfig config) {
-        if (gemma4Text) {
-            return gemma4Text();
-        }
-        if (gemma3Text) {
-            return gemma3Text();
-        }
-        if (qwenText) {
-            return qwenText(config);
-        }
-        return generic(config, perLayerInputPath);
-    }
-
-    public static AttentionRuntimeTraits gemma4Text() {
-        return new AttentionRuntimeTraits(
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                true,
-                0,
-                false,
-                false,
-                false);
-    }
-
-    public static AttentionRuntimeTraits gemma3Text() {
-        return new AttentionRuntimeTraits(
-                true,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                0,
-                false,
-                false,
-                false);
-    }
-
-    public static AttentionRuntimeTraits qwenText(ModelConfig config) {
-        boolean compact = isCompactAttentionMatvecCandidate(config);
-        return new AttentionRuntimeTraits(
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                compact ? DEFAULT_QWEN_PAGED_METAL_PREFILL_MAX_TOKENS : 0,
-                compact,
-                isLargeAttentionMatvecCandidate(config, false, false),
-                false);
-    }
-
-    public static AttentionRuntimeTraits phiText(ModelConfig config) {
-        return new AttentionRuntimeTraits(
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                0,
-                false,
-                isLargeAttentionMatvecCandidate(config, false, false),
-                true);
-    }
-
     public static AttentionRuntimeTraits generic(ModelConfig config, boolean perLayerInputPath) {
         return new AttentionRuntimeTraits(
                 false,
@@ -117,6 +42,22 @@ public final class ModelAttentionTraitsPolicy {
                 false);
     }
 
+    
+    public static AttentionRuntimeTraits phiText(ModelConfig config) {
+        return new AttentionRuntimeTraits(
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                0,
+                false,
+                false,
+                true);
+    }
+
     public static boolean isCompactAttentionMatvecCandidate(ModelConfig config) {
         return config != null
                 && config.numHiddenLayers() >= 20
@@ -124,9 +65,9 @@ public final class ModelAttentionTraitsPolicy {
                 && config.intermediateSize() >= 2048;
     }
 
-    public static boolean isLargeAttentionMatvecCandidate(ModelConfig config, boolean gemma4Text,
+    public static boolean isLargeAttentionMatvecCandidate(ModelConfig config, boolean nativeBf16Matvec,
             boolean perLayerInputPath) {
-        if (config == null || gemma4Text || perLayerInputPath) {
+        if (config == null || nativeBf16Matvec || perLayerInputPath) {
             return false;
         }
         return config.numHiddenLayers() >= 30
