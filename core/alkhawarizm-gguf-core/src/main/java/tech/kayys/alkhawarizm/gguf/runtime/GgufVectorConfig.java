@@ -11,6 +11,7 @@ import jdk.incubator.vector.VectorSpecies;
  *
  * <p>The runtime uses this helper to keep SIMD lane choices and property-driven
  * vector enablement consistent across dense and quantized paths.</p>
+ * @author bhangun
  */
 final class GgufVectorConfig {
     static final VectorSpecies<Byte> Q4_DOT_BYTE_SPECIES = ByteVector.SPECIES_64;

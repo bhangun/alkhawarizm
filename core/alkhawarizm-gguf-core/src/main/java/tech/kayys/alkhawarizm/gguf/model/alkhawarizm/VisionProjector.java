@@ -4,7 +4,18 @@ import tech.kayys.alkhawarizm.core.nn.Linear;
 import tech.kayys.alkhawarizm.core.nn.NNModule;
 import tech.kayys.alkhawarizm.core.tensor.Tensor;
 import tech.kayys.alkhawarizm.core.tensor.WeightAdapter;
-
+/**
+ * 
+ * Core class for alkhawarizm module.
+ *
+ * <p>Key functionality:
+ * <ul>
+ * <li>Provides core class operations
+ * </ul>
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public class VisionProjector extends NNModule {
     private final Linear proj;
 

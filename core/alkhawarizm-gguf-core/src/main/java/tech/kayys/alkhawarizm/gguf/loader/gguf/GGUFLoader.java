@@ -10,7 +10,18 @@ import java.util.*;
 
 import tech.kayys.alkhawarizm.gguf.core.GGUFTensorInfo;
 import tech.kayys.alkhawarizm.gguf.core.GgmlType;
-
+/**
+ * 
+ * Core class for alkhawarizm module.
+ *
+ * <p>Key functionality:
+ * <ul>
+ * <li>Provides core class operations
+ * </ul>
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public class GGUFLoader {
     
     public static GGUFFile load(Path path) throws IOException {

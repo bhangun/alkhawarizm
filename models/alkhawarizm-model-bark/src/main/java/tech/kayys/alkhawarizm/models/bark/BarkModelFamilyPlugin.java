@@ -26,7 +26,6 @@ public class BarkModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/bark",
                         "tokenizer", "processor_backed_text_to_audio_tokenizer",
                         "direct_safetensor", "pending_bark_semantic_coarse_fine_codec_runtime",
                         "version", "0.1.0-SNAPSHOT"));

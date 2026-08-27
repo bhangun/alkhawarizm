@@ -45,6 +45,7 @@ import java.util.*;
  * Used internally by the loader when
  * {@code gollek.safetensor.loader.validation.strict=true},
  * and also available directly for external model validation workflows.
+ * @author bhangun
  */
 @ApplicationScoped
 public class SafetensorValidator {

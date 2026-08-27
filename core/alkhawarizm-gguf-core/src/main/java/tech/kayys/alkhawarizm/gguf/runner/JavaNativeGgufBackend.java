@@ -25,6 +25,7 @@ import tech.kayys.alkhawarizm.gguf.loader.model.ModelConfig;
 /**
  * Java-native GGUF backend scaffold backed by the active GGUF tensor
  * primitives.
+ * @author bhangun
  */
 public class JavaNativeGgufBackend implements GgufBackend {
     private final GGUFModel model;

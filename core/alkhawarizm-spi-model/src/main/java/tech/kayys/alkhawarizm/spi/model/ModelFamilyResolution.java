@@ -2,6 +2,13 @@ package tech.kayys.alkhawarizm.spi.model;
 
 import java.util.List;
 import java.util.Optional;
+/**
+ * Immutable record representing modelfamilyresolution data.
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
+
 
 public record ModelFamilyResolution(
         Status status,
@@ -13,7 +20,18 @@ public record ModelFamilyResolution(
         List<ModelTokenizerDescriptor> tokenizerDescriptors,
         List<String> problemCodes,
         List<String> remediationHints,
-        String summary) {
+        String summary) {/**
+ * Enumeration of status values.
+ *
+ * <p>Key functionality:
+ * <ul>
+ * <li>Provides core enum operations
+ * </ul>
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
+
 
     public enum Status {
         RESOLVED,

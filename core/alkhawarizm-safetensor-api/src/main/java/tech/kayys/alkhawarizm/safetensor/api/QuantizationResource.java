@@ -32,8 +32,8 @@ import java.util.concurrent.CompletableFuture;
  * REST resource for model quantization operations.
  * Uses reflection/Object to avoid circular dependencies with Quantization
  * module.
+ * @author bhangun
  */
-@jakarta.ws.rs.Path("/api/v1/quantization")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class QuantizationResource {

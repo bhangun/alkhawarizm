@@ -7,7 +7,7 @@ import tech.kayys.alkhawarizm.core.model.ModelFormat;
 /**
  * Progress update for model conversion.
  *
- * @author Bhangun
+ * @author bhangun
  * @version 1.0.0
  */
 public class ConversionProgress {

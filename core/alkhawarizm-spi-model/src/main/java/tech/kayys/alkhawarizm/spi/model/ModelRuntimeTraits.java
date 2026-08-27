@@ -25,7 +25,18 @@ public record ModelRuntimeTraits(
         AttentionRuntimeTraits attention,
         boolean audioModel,
         boolean visionModel,
-        boolean multimodalModel) {
+        boolean multimodalModel) {/**
+ * Enumeration of promptbospolicy values.
+ *
+ * <p>Key functionality:
+ * <ul>
+ * <li>Provides core enum operations
+ * </ul>
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
+
 
     public enum PromptBosPolicy {
         DEFAULT,

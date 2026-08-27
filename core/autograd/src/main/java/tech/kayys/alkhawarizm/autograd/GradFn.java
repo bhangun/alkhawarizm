@@ -2,7 +2,12 @@ package tech.kayys.alkhawarizm.autograd;
 
 import tech.kayys.gollek.ir.*;
 import java.util.Map;
-
+/**
+ * Core interface for tech module.
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public interface GradFn {
     /**
      *

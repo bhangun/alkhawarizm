@@ -7,6 +7,7 @@ import tech.kayys.alkhawarizm.core.model.ModelFormat;
 /**
  * Represents the location of a model artifact, including its URI and additional
  * metadata.
+ * @author bhangun
  */
 public record ArtifactLocation(
         String uri,

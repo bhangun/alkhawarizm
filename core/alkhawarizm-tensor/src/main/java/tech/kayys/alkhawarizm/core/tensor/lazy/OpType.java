@@ -3,6 +3,7 @@ package tech.kayys.alkhawarizm.core.tensor.lazy;
 /**
  * Enumeration of operation types supported by the computation graph.
  * These map to methods on the ComputeBackend.
+ * @author bhangun
  */
 public enum OpType {
     // Structural

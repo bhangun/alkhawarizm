@@ -15,7 +15,18 @@ public record HealthStatus(
         Status status,
         String message,
         Instant timestamp,
-        Map<String, Object> diagnostics) {
+        Map<String, Object> diagnostics) {/**
+ * Enumeration of status values.
+ *
+ * <p>Key functionality:
+ * <ul>
+ * <li>Provides core enum operations
+ * </ul>
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
+
 
     public enum Status {
         UP, // Alias for HEALTHY

@@ -8,6 +8,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
  * <p>
  * Wraps a base Linear layer and injects trainable low-rank matrices (A and B)
  * while freezing the base layer's parameters.
+ * @author bhangun
  */
 public class LoRALayer extends NNModule {
 

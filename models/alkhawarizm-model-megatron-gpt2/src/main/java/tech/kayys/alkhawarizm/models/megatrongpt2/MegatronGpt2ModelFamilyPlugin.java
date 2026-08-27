@@ -22,7 +22,6 @@ public class MegatronGpt2ModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.CAUSAL_LM, ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/megatron_gpt2",
                         "tokenizer", "byte_level_bpe",
                         "direct_safetensor", "not_direct_runtime_megatron_gpt2_checkpoint_conversion_metadata",
                         "version", "0.1.0-SNAPSHOT"));

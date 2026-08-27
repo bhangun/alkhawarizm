@@ -24,7 +24,6 @@ public class LightOnOcrModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/lighton_ocr",
                         "tokenizer", "qwen3_hf_bpe",
                         "image_processor", "pixtral_style_image_processor",
                         "direct_safetensor", "pending_lighton_ocr_pixtral_qwen_runtime",

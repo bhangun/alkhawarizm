@@ -7,6 +7,7 @@ import tech.kayys.alkhawarizm.gguf.core.GgmlType;
  *
  * <p>Keep raw block sizes and type-family decisions here so tensor kernels can
  * share one source of truth with profiling and cache planning code.</p>
+ * @author bhangun
  */
 final class GgufQuantFormats {
     static final int Q4_0_BLOCK_SIZE = 32;

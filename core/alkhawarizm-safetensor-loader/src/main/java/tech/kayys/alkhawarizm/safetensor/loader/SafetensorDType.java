@@ -30,6 +30,7 @@ import java.util.Locale;
  * <p>
  * Maps directly to the {@code dtype} field in the SafeTensors JSON header.
  * Use {@link #fromJson(String)} to parse the string coming out of the file.
+ * @author bhangun
  */
 public enum SafetensorDType {
 

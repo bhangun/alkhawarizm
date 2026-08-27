@@ -24,6 +24,7 @@ import java.util.List;
  * where possible, keeping the heavy lifting completely off the Java heap to
  * minimize
  * GC pressure and maximize throughput.
+ * @author bhangun
  */
 public interface ComputeBackend {
 

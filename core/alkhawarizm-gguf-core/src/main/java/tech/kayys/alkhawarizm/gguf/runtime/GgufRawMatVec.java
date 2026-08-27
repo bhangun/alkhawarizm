@@ -11,6 +11,7 @@ import java.lang.foreign.MemorySegment;
  * prepared matrix cache is unavailable or intentionally bypassed. Keeping it
  * outside {@link GgufTensorOps} lets the facade focus on API validation and
  * cache selection.</p>
+ * @author bhangun
  */
 final class GgufRawMatVec {
     private static final int DIRECT_TINY_ROW_LIMIT = 4;

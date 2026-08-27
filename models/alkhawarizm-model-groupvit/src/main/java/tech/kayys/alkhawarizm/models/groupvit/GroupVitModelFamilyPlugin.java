@@ -24,7 +24,6 @@ public class GroupVitModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/groupvit",
                         "tokenizer", "clip_byte_level_bpe",
                         "image_processor", "groupvit_image_processor",
                         "direct_safetensor", "pending_groupvit_segmentation_runtime",

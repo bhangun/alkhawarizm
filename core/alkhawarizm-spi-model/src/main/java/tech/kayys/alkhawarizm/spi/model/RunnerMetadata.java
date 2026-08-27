@@ -11,6 +11,7 @@ import java.util.Map;
  * <p>
  * This lives in {@code spi.model} because the active {@code ModelRunner}
  * contract references {@code tech.kayys.alkhawarizm.spi.model.RunnerMetadata}.
+ * @author bhangun
  */
 public record RunnerMetadata(
                 String name,

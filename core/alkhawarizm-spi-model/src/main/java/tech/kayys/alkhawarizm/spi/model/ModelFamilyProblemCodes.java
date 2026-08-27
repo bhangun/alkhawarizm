@@ -1,5 +1,11 @@
 package tech.kayys.alkhawarizm.spi.model;
-
+/**
+ * 
+ * Core class for kayys module.
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public final class ModelFamilyProblemCodes {
     public static final String UNSUPPORTED_ARCHITECTURE = "unsupported_architecture";
     public static final String MISSING_TOKENIZER_DESCRIPTOR = "missing_tokenizer_descriptor";

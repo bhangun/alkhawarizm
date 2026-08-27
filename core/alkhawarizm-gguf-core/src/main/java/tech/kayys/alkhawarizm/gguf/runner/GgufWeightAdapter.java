@@ -22,6 +22,7 @@ import java.util.Map;
  * pathway weights. When the original local safetensor checkpoint is available,
  * we supplement those tensors directly from that checkpoint instead of waiting
  * for a fully Gemma-4-complete converter.
+ * @author bhangun
  */
 public final class GgufWeightAdapter {
 

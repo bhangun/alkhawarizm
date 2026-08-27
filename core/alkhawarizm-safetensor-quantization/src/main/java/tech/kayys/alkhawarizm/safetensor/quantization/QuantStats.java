@@ -16,7 +16,7 @@ import java.util.Objects;
 /**
  * Statistics and metrics from quantization process.
  *
- * @author Bhangun
+ * @author bhangun
  * @version 1.0.0
  */
 public class QuantStats {

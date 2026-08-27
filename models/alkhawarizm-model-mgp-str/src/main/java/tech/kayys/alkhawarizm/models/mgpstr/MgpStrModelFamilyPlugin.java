@@ -23,7 +23,6 @@ public class MgpStrModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.VISION, ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/mgp_str",
                         "tokenizer", "character_vocab_metadata_only",
                         "processor", "mgp_str_scene_text_processor",
                         "direct_safetensor", "pending_scene_text_decoder_runtime",

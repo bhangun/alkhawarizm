@@ -15,6 +15,7 @@ import java.nio.ByteOrder;
  * <p>The K formats share super-block scale/min packing but differ in low-bit
  * and high-bit layouts. Keeping those kernels here leaves {@link GgufTensorOps}
  * focused on orchestration and row/matrix traversal.</p>
+ * @author bhangun
  */
 final class GgufKBlockDequantizer {
     private static final ThreadLocal<int[]> Q3K_SCALES = ThreadLocal.withInitial(() -> new int[16]);

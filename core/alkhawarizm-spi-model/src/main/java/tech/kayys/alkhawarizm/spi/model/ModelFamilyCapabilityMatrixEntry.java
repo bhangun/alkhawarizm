@@ -7,6 +7,7 @@ package tech.kayys.alkhawarizm.spi.model;
  *
  * <p>
  * Create instances via {@link #from(ModelFamilySupportReport)}.
+ * @author bhangun
  */
 public final class ModelFamilyCapabilityMatrixEntry {
 

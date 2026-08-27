@@ -23,7 +23,6 @@ public class MaskFormerModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.VISION),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/maskformer,mask2former",
                         "image_processor", "maskformer_image_processor",
                         "direct_safetensor", "pending_mask_decoder_panoptic_runtime",
                         "version", "0.1.0-SNAPSHOT"));

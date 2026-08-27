@@ -24,7 +24,6 @@ public class Starcoder2ModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/starcoder2",
                         "tokenizer", "tokenizer_json_bpe",
                         "direct_safetensor", "pending_starcoder2_grouped_query_runtime",
                         "version", "0.1.0-SNAPSHOT"));

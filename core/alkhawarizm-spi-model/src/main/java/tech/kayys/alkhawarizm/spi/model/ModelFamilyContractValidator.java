@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
  * <p>
  * Call {@link #validate(ModelFamilyPlugin)} for a single plugin or
  * {@link #validateAll(List)} to detect cross-plugin conflicts.
+ * @author bhangun
  */
 public final class ModelFamilyContractValidator {
 

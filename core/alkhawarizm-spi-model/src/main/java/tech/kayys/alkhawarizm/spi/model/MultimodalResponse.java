@@ -5,6 +5,7 @@ import java.util.Map;
 
 /**
  * Multimodal response from inference.
+ * @author bhangun
  */
 public class MultimodalResponse {
 

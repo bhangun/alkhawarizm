@@ -11,7 +11,7 @@
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
  *
- * @author Bhangun
+ * @author bhangun
  */
 
 package tech.kayys.alkhawarizm.spi.model;
@@ -23,6 +23,13 @@ import tech.kayys.alkhawarizm.core.model.ModelFormat;
 import java.nio.file.Path;
 import java.time.Duration;
 import java.util.Map;
+/**
+ * Repository for Context data access operations.
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
+
 
 public record RepositoryContext(
                 Path cacheDir,

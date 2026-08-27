@@ -21,6 +21,7 @@ import java.util.Objects;
 
 /**
  * Prepared matrix builder for Q8-family, nibble, and ternary GGUF formats.
+ * @author bhangun
  */
 final class GgufQ8Build {
     private static final ValueLayout.OfShort LE_SHORT = ValueLayout.JAVA_SHORT_UNALIGNED

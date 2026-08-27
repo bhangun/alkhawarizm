@@ -25,7 +25,6 @@ public class OwlVitModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/owlvit",
                         "tokenizer", "clip_byte_level_bpe",
                         "image_processor", "owlvit_image_processor",
                         "direct_safetensor", "pending_open_vocab_detection_runtime",

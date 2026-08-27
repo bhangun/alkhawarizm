@@ -24,7 +24,6 @@ public class NllbModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/nllb",
                         "tokenizer", "sentencepiece_multilingual_nllb",
                         "direct_safetensor", "pending_nllb_seq2seq_runtime",
                         "version", "0.1.0-SNAPSHOT"));

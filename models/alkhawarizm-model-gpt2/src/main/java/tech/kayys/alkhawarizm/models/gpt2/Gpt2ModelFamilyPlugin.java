@@ -22,7 +22,6 @@ public class Gpt2ModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.CAUSAL_LM, ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/gpt2",
                         "tokenizer", "byte_level_bpe",
                         "direct_safetensor", "pending_conv1d_weight_layout_and_layer_norm_runtime",
                         "version", "0.1.0-SNAPSHOT"));

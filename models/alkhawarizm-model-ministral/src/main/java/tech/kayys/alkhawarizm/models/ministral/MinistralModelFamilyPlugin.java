@@ -26,7 +26,6 @@ public class MinistralModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/ministral",
                         "tokenizer", "mistral_tekken_or_hf_tokenizer_json",
                         "direct_safetensor", "pending_ministral_runtime_validation",
                         "version", "0.1.0-SNAPSHOT"));

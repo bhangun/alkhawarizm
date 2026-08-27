@@ -6,7 +6,7 @@ import tech.kayys.alkhawarizm.gguf.core.*;
 /**
  * Progress update for model conversion.
  *
- * @author Bhangun
+ * @author bhangun
  * @version 1.0.0
  */
 public class ConversionProgress {

@@ -24,7 +24,6 @@ public class BertJapaneseModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of( ModelFamilyCapability.TOKENIZER, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/bert_japanese",
                         "tokenizer", "japanese_wordpiece_or_sentencepiece",
                         "direct_safetensor", "not_direct_runtime_tokenizer_only_over_bert_backbone",
                         "version", "0.1.0-SNAPSHOT"));

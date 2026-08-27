@@ -17,6 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Factory for resolving ModelRepository instances.
  * Provides support for both CDI-managed environments and standalone Java usage.
+ * @author bhangun
  */
 public final class ModelHubFactory {
 

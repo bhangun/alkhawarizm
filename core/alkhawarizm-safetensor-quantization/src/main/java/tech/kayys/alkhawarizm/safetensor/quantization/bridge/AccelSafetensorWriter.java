@@ -17,6 +17,7 @@ import java.util.Map;
 
 /**
  * High-performance Safetensor writer optimized for AccelTensor (FFM MemorySegment).
+ * @author bhangun
  */
 public class AccelSafetensorWriter {
 

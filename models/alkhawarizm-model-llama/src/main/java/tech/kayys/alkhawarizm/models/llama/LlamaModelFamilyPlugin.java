@@ -26,7 +26,6 @@ public class LlamaModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE, ModelFamilyCapability.DIRECT_SAFETENSOR_INFERENCE),
                 Map.of(
                         "bundle_profile", "core",
-                        "origin", "3rdparty/transformers/src/transformers/models/llama",
                         "version", "0.1.0-SNAPSHOT"));
     }
 

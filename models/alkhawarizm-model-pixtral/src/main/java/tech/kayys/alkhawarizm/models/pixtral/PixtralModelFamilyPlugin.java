@@ -25,7 +25,6 @@ public class PixtralModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/pixtral",
                         "tokenizer", "mistral_bpe_with_pixtral_processor",
                         "image_processor", "pixtral_image_processor",
                         "direct_safetensor", "pending_pixtral_vision_patch_projector_runtime",

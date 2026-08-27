@@ -1,5 +1,15 @@
 package tech.kayys.alkhawarizm.core.tensor;
-
+/**
+ * Enumeration of d values.
+ *
+ * <p>Key functionality:
+ * <ul>
+ * <li>Provides core enum operations
+ * </ul>
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public enum DType {
     // ── Floating point ────────────────────────────────────────────────────────
     F32(1, 4),

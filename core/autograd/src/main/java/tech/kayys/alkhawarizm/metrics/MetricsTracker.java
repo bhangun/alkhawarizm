@@ -30,6 +30,7 @@ import java.util.*;
  * System.out.println("Best loss: " + tracker.min("train/loss"));
  * tracker.exportCsv(Path.of("metrics.csv"));
  * }</pre>
+ * @author bhangun
  */
 public final class MetricsTracker {
 

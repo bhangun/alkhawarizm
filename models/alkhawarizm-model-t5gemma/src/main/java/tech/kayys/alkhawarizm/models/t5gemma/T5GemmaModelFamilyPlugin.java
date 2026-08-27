@@ -24,7 +24,6 @@ public class T5GemmaModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/t5gemma",
                         "tokenizer", "gemma_sentencepiece_seq2seq",
                         "direct_safetensor", "pending_seq2seq_runtime",
                         "version", "0.1.0-SNAPSHOT"));

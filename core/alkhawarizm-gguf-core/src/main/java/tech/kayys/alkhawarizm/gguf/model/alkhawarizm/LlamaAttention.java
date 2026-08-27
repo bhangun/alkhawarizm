@@ -6,7 +6,18 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 import tech.kayys.alkhawarizm.core.tensor.TensorFactory;
 import tech.kayys.alkhawarizm.core.tensor.WeightAdapter;
 import tech.kayys.alkhawarizm.gguf.model.ModelConfig;
-
+/**
+ * 
+ * Core class for alkhawarizm module.
+ *
+ * <p>Key functionality:
+ * <ul>
+ * <li>Provides core class operations
+ * </ul>
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public class LlamaAttention extends NNModule {
     private final int nHeads;
     private final int nKVHeads;

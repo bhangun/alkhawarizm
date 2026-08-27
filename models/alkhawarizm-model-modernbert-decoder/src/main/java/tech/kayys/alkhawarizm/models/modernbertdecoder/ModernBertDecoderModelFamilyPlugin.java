@@ -24,7 +24,6 @@ public class ModernBertDecoderModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/modernbert_decoder",
                         "tokenizer", "tokenizer_json_bpe",
                         "direct_safetensor", "pending_modernbert_decoder_runtime",
                         "version", "0.1.0-SNAPSHOT"));

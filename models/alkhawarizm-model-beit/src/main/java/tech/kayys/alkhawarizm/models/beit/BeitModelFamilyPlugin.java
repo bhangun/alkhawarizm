@@ -23,7 +23,6 @@ public class BeitModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.VISION, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/beit",
                         "image_processor", "beit_image_processor",
                         "direct_safetensor", "pending_beit_relative_position_and_segmentation_runtime",
                         "version", "0.1.0-SNAPSHOT"));

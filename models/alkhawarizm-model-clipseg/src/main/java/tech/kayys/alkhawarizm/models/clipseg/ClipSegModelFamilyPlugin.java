@@ -24,7 +24,6 @@ public class ClipSegModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/clipseg",
                         "tokenizer", "clip_byte_level_bpe",
                         "image_processor", "clipseg_processor",
                         "direct_safetensor", "pending_clipseg_decoder_runtime",

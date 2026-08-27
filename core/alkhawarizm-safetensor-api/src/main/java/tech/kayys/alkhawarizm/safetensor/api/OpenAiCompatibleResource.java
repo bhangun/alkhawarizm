@@ -28,8 +28,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * OpenAI-compatible inference REST API.
  * Uses reflection to access Engine and HubClient to avoid circular
  * dependencies.
+ * @author bhangun
  */
-@jakarta.ws.rs.Path("/v1")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Tag(name = "Inference", description = "OpenAI-compatible inference endpoints")

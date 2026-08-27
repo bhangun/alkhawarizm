@@ -11,6 +11,7 @@ import java.nio.ByteOrder;
 
 /**
  * Raw Q32-family metadata probes for affine block-bias routing.
+ * @author bhangun
  */
 final class GgufQ32Meta {
     private static final ValueLayout.OfShort LE_SHORT = ValueLayout.JAVA_SHORT_UNALIGNED

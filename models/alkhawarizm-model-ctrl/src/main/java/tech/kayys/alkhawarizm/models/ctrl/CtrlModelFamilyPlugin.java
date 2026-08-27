@@ -22,7 +22,6 @@ public class CtrlModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.CAUSAL_LM, ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/ctrl",
                         "tokenizer", "bpe_vocab_and_merges_with_control_codes",
                         "direct_safetensor", "pending_ctrl_relative_attention_runtime",
                         "version", "0.1.0-SNAPSHOT"));

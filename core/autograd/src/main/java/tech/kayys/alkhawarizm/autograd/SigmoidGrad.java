@@ -2,7 +2,18 @@ package tech.kayys.alkhawarizm.autograd;
 
 import tech.kayys.gollek.ir.*;
 import java.util.*;
-
+/**
+ * 
+ * Core class for tech module.
+ *
+ * <p>Key functionality:
+ * <ul>
+ * <li>Provides core class operations
+ * </ul>
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public final class SigmoidGrad implements GradFn {
     @Override
     public Map<GValueId, GValueId> backward(

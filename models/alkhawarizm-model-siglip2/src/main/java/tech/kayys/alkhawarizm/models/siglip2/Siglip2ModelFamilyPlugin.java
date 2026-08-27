@@ -26,7 +26,6 @@ public class Siglip2ModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/siglip2",
                         "tokenizer", "sentencepiece_unigram_metadata_only",
                         "image_processor", "siglip2_image_processor",
                         "direct_safetensor", "not_causal_lm_siglip2_runtime_pending",

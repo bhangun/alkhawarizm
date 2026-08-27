@@ -21,7 +21,6 @@ public class UperNetModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.VISION),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/upernet",
                         "image_processor", "semantic_segmentation_image_processor",
                         "direct_safetensor", "pending_pyramid_pooling_segmentation_head_runtime",
                         "version", "0.1.0-SNAPSHOT"));

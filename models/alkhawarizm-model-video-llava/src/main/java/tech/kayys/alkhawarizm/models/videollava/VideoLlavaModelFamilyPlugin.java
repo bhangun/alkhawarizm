@@ -26,7 +26,6 @@ public class VideoLlavaModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/video_llava,vipllava",
                         "tokenizer", "llava_text_tokenizer_with_video_processor",
                         "image_processor", "video_llava_image_processor",
                         "video_processor", "video_llava_video_processor",

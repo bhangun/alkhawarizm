@@ -14,6 +14,7 @@ import java.util.*;
  * registry.register("softmax", new SoftmaxGrad());
  * registry.register("layernorm", new LayerNormGrad());
  * registry.register("attention", new AttentionGrad());
+ * @author bhangun
  */
 public final class CrossEntropyGrad implements GradFn {
         @Override

@@ -5,6 +5,7 @@ import java.util.Collection;
 
 /**
  * Gradient clipping utility to prevent exploding gradients.
+ * @author bhangun
  */
 public class GradientClipper {
 

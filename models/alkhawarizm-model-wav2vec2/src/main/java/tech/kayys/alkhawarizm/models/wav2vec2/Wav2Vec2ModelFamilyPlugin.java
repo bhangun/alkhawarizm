@@ -25,7 +25,6 @@ public class Wav2Vec2ModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of( ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/wav2vec2",
                         "feature_extractor", "wav2vec2_feature_extractor",
                         "tokenizer", "ctc_vocab_metadata_only",
                         "direct_safetensor", "pending_audio_feature_extractor_and_ctc_runtime",

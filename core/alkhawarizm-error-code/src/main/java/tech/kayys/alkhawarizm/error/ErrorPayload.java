@@ -14,6 +14,7 @@ import java.util.Objects;
 /**
  * Standardized error payload for all inference failures.
  * Integrates with alkhawarizm's error-as-input pattern.
+ * @author bhangun
  */
 public final class ErrorPayload {
 

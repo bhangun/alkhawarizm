@@ -19,6 +19,7 @@ import java.util.Objects;
 
 /**
  * Prepared matrix builder for 32-value legacy quant blocks.
+ * @author bhangun
  */
 final class GgufQ32Build {
     private static final float[] EMPTY_FLOAT_ARRAY = new float[0];

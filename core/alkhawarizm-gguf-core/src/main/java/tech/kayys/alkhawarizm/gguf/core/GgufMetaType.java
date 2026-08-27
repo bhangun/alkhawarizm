@@ -3,6 +3,7 @@ package tech.kayys.alkhawarizm.gguf.core;
 /**
  * GGUF metadata value types (gguf_type enum from the spec).
  * Values are little-endian uint32 on disk.
+ * @author bhangun
  */
 public enum GgufMetaType {
     UINT8(0, 1),

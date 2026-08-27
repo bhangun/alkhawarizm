@@ -12,6 +12,7 @@ package tech.kayys.alkhawarizm.safetensor.spi;
  *
  * <p>Implement this interface and annotate the class with {@code @ApplicationScoped}
  * to register a new feature.
+ * @author bhangun
  */
 public interface SafetensorFeature {
 

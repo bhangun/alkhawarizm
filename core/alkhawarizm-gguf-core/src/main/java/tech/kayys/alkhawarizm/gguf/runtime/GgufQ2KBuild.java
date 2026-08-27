@@ -22,6 +22,7 @@ import java.util.Objects;
 
 /**
  * Prepared matrix builder for Q2_K tensors with optional group mins.
+ * @author bhangun
  */
 final class GgufQ2KBuild {
     private static final float[] EMPTY_FLOAT_ARRAY = new float[0];

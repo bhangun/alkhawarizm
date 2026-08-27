@@ -1,7 +1,12 @@
 package tech.kayys.alkhawarizm.core.tensor;
 
 import tech.kayys.alkhawarizm.core.tensor.Tensor;
-
+/**
+ * Core interface for kayys module.
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public interface WeightAdapter {
     /**
      * Get weight tensor by name

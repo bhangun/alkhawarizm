@@ -21,7 +21,6 @@ public class YolosModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.VISION),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/yolos",
                         "image_processor", "yolos_image_processor",
                         "direct_safetensor", "pending_yolos_detection_head_runtime",
                         "version", "0.1.0-SNAPSHOT"));

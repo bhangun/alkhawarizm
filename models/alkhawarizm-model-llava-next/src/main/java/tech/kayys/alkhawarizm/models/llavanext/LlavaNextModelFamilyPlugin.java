@@ -24,7 +24,6 @@ public class LlavaNextModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/llava_next",
                         "tokenizer", "delegated_text_backbone_bpe_or_sentencepiece",
                         "image_processor", "llava_next_image_processor",
                         "direct_safetensor", "pending_llava_next_vision_projector_runtime",

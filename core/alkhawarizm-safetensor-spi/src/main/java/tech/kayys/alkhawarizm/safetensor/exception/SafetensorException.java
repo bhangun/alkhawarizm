@@ -23,6 +23,7 @@ import java.nio.file.Path;
  *   <li>{@link ShardException} — error in a specific shard of a multi-file model</li>
  *   <li>{@link DTypeMismatchException} — operation requires a different dtype</li>
  * </ul>
+ * @author bhangun
  */
 public class SafetensorException extends RuntimeException {
 
@@ -189,11 +190,6 @@ public class SafetensorException extends RuntimeException {
      * Thrown when an I/O error occurs while reading a SafeTensors file.
      */
     public static final class IoException extends SafetensorException {
-        /**
-         * @param message description of the I/O failure
-         * @param path    file path
-         * @param cause   the underlying I/O exception
-         */
         public IoException(String message, Path path, Throwable cause) {
             super(message, path, cause);
         }

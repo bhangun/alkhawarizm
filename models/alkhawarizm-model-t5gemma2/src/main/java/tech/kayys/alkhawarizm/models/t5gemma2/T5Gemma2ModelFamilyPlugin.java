@@ -26,7 +26,6 @@ public class T5Gemma2ModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.VISION),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/t5gemma2",
                         "tokenizer", "gemma_sentencepiece_seq2seq_with_optional_vision_projector",
                         "direct_safetensor", "pending_t5gemma2_seq2seq_runtime",
                         "version", "0.1.0-SNAPSHOT"));

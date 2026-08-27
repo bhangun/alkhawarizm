@@ -26,7 +26,6 @@ public class FastVlmModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/fast_vlm",
                         "tokenizer", "qwen2_bpe_with_llava_clip_processor",
                         "direct_safetensor", "pending_fastvlm_timm_vision_and_projector_runtime",
                         "version", "0.1.0-SNAPSHOT"));

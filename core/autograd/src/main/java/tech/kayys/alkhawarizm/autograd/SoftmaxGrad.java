@@ -7,6 +7,7 @@ import java.util.*;
  * SOFTMAX BACKWARD
  * Formula:
  * dX = Y * (dY - sum(dY * Y))
+ * @author bhangun
  */
 public final class SoftmaxGrad implements GradFn {
         @Override

@@ -21,8 +21,8 @@ import java.util.Map;
 /**
  * REST control plane for A/B model routing.
  * Uses reflection to access ModelRouter to avoid circular dependencies in Maven.
+ * @author bhangun
  */
-@jakarta.ws.rs.Path("/v1/routing")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Tag(name = "Routing", description = "A/B model routing and canary deploys")

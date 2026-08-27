@@ -24,7 +24,6 @@ public class JambaModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/jamba",
                         "tokenizer", "jamba_tokenizer_metadata_only",
                         "direct_safetensor", "pending_hybrid_attention_mamba_moe_runtime",
                         "version", "0.1.0-SNAPSHOT"));

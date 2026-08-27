@@ -27,7 +27,6 @@ public class Qwen35ModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/qwen3_5",
                         "tokenizer", "qwen3_5_tokenizer_with_vision_processor",
                         "direct_safetensor", "pending_qwen3_5_vision_and_runtime_validation",
                         "version", "0.1.0-SNAPSHOT"));

@@ -22,7 +22,6 @@ public class Dinov2WithRegistersModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.VISION, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/dinov2_with_registers",
                         "image_processor", "vit_image_processor",
                         "direct_safetensor", "pending_dinov2_register_token_runtime_validation",
                         "version", "0.1.0-SNAPSHOT"));

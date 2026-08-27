@@ -24,7 +24,7 @@ import java.lang.foreign.ValueLayout;
  * at 0 for efficient integer arithmetic.
  * </p>
  *
- * @author Bhangun
+ * @author bhangun
  * @version 1.0.0
  */
 public class INT8Quantizer implements Quantizer {

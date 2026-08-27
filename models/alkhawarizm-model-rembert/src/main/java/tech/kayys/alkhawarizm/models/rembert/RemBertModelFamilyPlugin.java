@@ -27,7 +27,6 @@ public class RemBertModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/rembert",
                         "tokenizer", "sentencepiece_unigram_metadata_only",
                         "direct_safetensor", "pending_rembert_unigram_encoder_runtime",
                         "version", "0.1.0-SNAPSHOT"));

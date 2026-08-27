@@ -36,6 +36,7 @@ import io.smallrye.config.WithName;
  * @Inject
  * SafetensorLoaderConfig config;
  * }</pre>
+ * @author bhangun
  */
 @ConfigMapping(prefix = "gollek.safetensor.loader")
 public interface SafetensorLoaderConfig {

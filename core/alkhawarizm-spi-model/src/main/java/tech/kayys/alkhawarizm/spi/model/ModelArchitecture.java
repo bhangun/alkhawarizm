@@ -18,6 +18,7 @@ import java.util.List;
  * Implementations are auto-discovered via CDI
  * {@code Instance<ModelArchitecture>}.
  * </p>
+ * @author bhangun
  */
 public interface ModelArchitecture {
 

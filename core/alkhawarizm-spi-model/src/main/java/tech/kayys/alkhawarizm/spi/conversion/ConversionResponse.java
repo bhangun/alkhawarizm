@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
  * Response DTO for conversion operations.
+ * @author bhangun
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ConversionResponse {

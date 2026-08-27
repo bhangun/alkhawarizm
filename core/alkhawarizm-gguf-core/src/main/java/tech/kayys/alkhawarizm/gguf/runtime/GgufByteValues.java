@@ -8,6 +8,7 @@ import java.lang.foreign.ValueLayout;
  *
  * <p>Centralizing little-endian and packed-byte decoding keeps quant format
  * code consistent across heap arrays and foreign memory segments.</p>
+ * @author bhangun
  */
 final class GgufByteValues {
     private GgufByteValues() {

@@ -25,7 +25,6 @@ public class ClapModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/clap",
                         "tokenizer", "clap_processor_text_audio_features",
                         "direct_safetensor", "not_causal_lm_audio_text_embedding_runtime_pending",
                         "version", "0.1.0-SNAPSHOT"));

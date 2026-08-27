@@ -14,6 +14,7 @@ import java.util.Map;
 /**
  * SDK-friendly GGUF Writer.
  * Supports exporting models to GGUF (F32/F16).
+ * @author bhangun
  */
 public final class GgufWriter {
 

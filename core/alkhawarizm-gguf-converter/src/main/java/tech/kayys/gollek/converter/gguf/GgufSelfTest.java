@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * Simple self-contained integration tests (no JUnit dependency).
  * Run via: {@code java -cp gguf-converter.jar io.gguf.GgufSelfTest}
+ * @author bhangun
  */
 public final class GgufSelfTest {
 

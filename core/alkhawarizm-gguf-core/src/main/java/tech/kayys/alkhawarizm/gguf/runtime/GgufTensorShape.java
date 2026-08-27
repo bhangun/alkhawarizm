@@ -12,6 +12,7 @@ import java.util.WeakHashMap;
  *
  * <p>GGUF stores matrix columns in the first shape dimension; this helper owns
  * that convention and the guardrails around Java array-sized operations.</p>
+ * @author bhangun
  */
 final class GgufTensorShape {
     private static final int RECENT_DIM_SLOTS = 256;

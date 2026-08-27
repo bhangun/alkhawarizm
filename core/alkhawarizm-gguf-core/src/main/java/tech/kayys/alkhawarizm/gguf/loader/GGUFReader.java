@@ -10,6 +10,7 @@ import java.lang.foreign.ValueLayout;
 
 /**
  * Handles zero-copy memory mapping of GGUF model files using FFM.
+ * @author bhangun
  */
 public final class GGUFReader implements AutoCloseable {
 

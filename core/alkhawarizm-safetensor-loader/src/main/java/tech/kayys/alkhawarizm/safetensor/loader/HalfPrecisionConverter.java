@@ -35,6 +35,7 @@ import java.nio.ByteOrder;
  *
  * <p>
  * All methods are static; no instantiation needed.
+ * @author bhangun
  */
 public final class HalfPrecisionConverter {
 

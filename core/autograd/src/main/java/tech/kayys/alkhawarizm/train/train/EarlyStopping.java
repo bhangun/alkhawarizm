@@ -34,9 +34,7 @@ public class EarlyStopping implements Callback {
      * Monitoring mode.
      */
     public enum Mode {
-        /** Metric should decrease (e.g., loss) */
         MIN,
-        /** Metric should increase (e.g., accuracy) */
         MAX
     }
 

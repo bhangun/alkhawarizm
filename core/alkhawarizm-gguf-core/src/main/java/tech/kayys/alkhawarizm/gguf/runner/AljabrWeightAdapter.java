@@ -9,7 +9,18 @@ import tech.kayys.alkhawarizm.gguf.loader.quant.Dequantizer;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * 
+ * Core class for kayys module.
+ *
+ * <p>Key functionality:
+ * <ul>
+ * <li>Provides core class operations
+ * </ul>
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public class AljabrWeightAdapter implements WeightAdapter {
     private final GGUFFile gguf;
     private final int numLayers;

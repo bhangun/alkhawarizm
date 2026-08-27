@@ -25,7 +25,6 @@ public class Qwen2MoeModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/qwen2_moe",
                         "tokenizer", "qwen_huggingface_bpe",
                         "direct_safetensor", "pending_qwen2_moe_expert_routing_runtime",
                         "version", "0.1.0-SNAPSHOT"));

@@ -8,6 +8,7 @@ import tech.kayys.alkhawarizm.gguf.core.GgmlType;
  * <p>Q4/Q5 legacy quant formats share the same prepared cache family but need
  * distinct raw row kernels. Keeping that subtype decision in a tiny table keeps
  * decode-time dispatch cheap and centralizes future Q32-family additions.</p>
+ * @author bhangun
  */
 final class GgufQ32Route {
     static final int UNSUPPORTED = 0;

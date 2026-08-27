@@ -20,6 +20,7 @@ import java.nio.ByteOrder;
  * <p>Q4_K stores unsigned nibbles with compact six-bit scales and optional
  * group mins. This helper owns both direct dot-product decoding and the
  * mat-vec variant that reuses precomputed vector group sums.</p>
+ * @author bhangun
  */
 final class GgufQ4RawDot {
     private static final int QK_GROUPS = QK_K / 32;

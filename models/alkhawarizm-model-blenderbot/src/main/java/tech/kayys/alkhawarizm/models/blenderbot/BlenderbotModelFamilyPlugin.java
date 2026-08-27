@@ -24,7 +24,6 @@ public class BlenderbotModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER, ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/blenderbot",
                         "tokenizer", "byte_level_bpe",
                         "direct_safetensor", "pending_blenderbot_encoder_decoder_runtime",
                         "version", "0.1.0-SNAPSHOT"));

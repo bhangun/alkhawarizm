@@ -16,6 +16,7 @@ import java.lang.foreign.MemorySegment;
  * <p>The public tensor facade validates model/tensor shape and lands here with
  * a concrete row offset. Raw mat-vec fallback also uses this helper directly,
  * so fallback arithmetic no longer needs to depend on {@link GgufTensorOps}.</p>
+ * @author bhangun
  */
 final class GgufRowDot {
     private GgufRowDot() {

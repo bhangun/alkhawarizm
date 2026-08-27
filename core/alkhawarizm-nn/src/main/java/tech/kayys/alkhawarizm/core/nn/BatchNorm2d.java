@@ -4,6 +4,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 
 /**
  * 2D Batch Normalization layer.
+ * @author bhangun
  */
 public class BatchNorm2d extends NNModule {
 

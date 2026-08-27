@@ -2,6 +2,13 @@ package tech.kayys.alkhawarizm.spi.model;
 
 import java.nio.file.Path;
 import java.util.List;
+/**
+ * Immutable record representing modelfamilyquantizedloaderprofile data.
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
+
 
 public record ModelFamilyQuantizedLoaderProfile(
         boolean mobileQatSupported,

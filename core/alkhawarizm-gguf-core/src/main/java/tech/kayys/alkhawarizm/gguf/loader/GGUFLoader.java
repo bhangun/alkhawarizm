@@ -21,6 +21,7 @@ import java.io.IOException;
 /**
  * High-level loader that maps a parsed GGUF model to the engine's internal 
  * TransformerLayerWeights structures, performing necessary prepacking.
+ * @author bhangun
  */
 public final class GGUFLoader {
 

@@ -19,6 +19,7 @@ import jdk.incubator.vector.VectorOperators;
  * <p>Q4_0/Q5_0-style prepared matrices share 32-value blocks. This helper owns
  * the bias and no-bias reducers so the tensor facade only coordinates row
  * traversal and scheduling.</p>
+ * @author bhangun
  */
 final class GgufQ32Dot {
     private GgufQ32Dot() {

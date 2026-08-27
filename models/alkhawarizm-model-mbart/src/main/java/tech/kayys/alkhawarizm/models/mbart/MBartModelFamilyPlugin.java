@@ -25,7 +25,6 @@ public class MBartModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/mbart",
                         "tokenizer", "sentencepiece_unigram_metadata_only",
                         "direct_safetensor", "pending_encoder_decoder_runtime",
                         "version", "0.1.0-SNAPSHOT"));

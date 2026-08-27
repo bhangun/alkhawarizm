@@ -19,6 +19,7 @@ import java.util.List;
  * <p>
  * The entire file is memory-mapped via {@link FileChannel#map} through
  * {@link Arena} so no heap copies are needed for tensor data.
+ * @author bhangun
  */
 public final class GgufReader implements AutoCloseable {
 

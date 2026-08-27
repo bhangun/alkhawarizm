@@ -24,7 +24,6 @@ public class ColQwen2ModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/colqwen2",
                         "tokenizer", "qwen2_vl_bpe_with_retrieval_processor",
                         "processor", "colqwen2_retrieval_processor",
                         "direct_safetensor", "pending_multivector_retrieval_runtime",

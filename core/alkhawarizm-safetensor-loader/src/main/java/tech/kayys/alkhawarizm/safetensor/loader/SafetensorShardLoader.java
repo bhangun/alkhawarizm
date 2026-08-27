@@ -59,6 +59,7 @@ import java.util.stream.Collectors;
  *     float[] weights = q.toFloatArray();
  * }
  * }</pre>
+ * @author bhangun
  */
 @ApplicationScoped
 public class SafetensorShardLoader {

@@ -4,6 +4,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 
 /**
  * ReLU activation layer.
+ * @author bhangun
  */
 public class ReLU extends NNModule {
 

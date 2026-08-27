@@ -4,6 +4,7 @@ import java.util.*;
 
 /**
  * Comprehensive evaluation metrics for classification and regression.
+ * @author bhangun
  */
 public class Metrics {
 

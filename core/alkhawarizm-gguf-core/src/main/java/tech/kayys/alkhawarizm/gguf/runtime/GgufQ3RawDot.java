@@ -17,6 +17,7 @@ import java.nio.ByteOrder;
  * <p>Q3_K stores two-bit quants with separate high-bit masks and signed group
  * scales. This helper keeps that decoding isolated from the public tensor
  * facade and raw row scheduling.</p>
+ * @author bhangun
  */
 final class GgufQ3RawDot {
     private static final ThreadLocal<int[]> SCALES = ThreadLocal.withInitial(() -> new int[16]);

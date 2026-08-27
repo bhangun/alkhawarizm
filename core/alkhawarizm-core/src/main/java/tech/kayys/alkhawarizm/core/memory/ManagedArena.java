@@ -14,6 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * tensors.
  * The underlying native memory is only freed when the reference count drops to
  * zero.
+ * @author bhangun
  */
 public final class ManagedArena implements AutoCloseable {
 

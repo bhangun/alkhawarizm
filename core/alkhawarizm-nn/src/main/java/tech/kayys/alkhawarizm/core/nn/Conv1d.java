@@ -1,7 +1,18 @@
 package tech.kayys.alkhawarizm.core.nn;
 
 import tech.kayys.alkhawarizm.core.tensor.Tensor;
-
+/**
+ * 
+ * Core class for kayys module.
+ *
+ * <p>Key functionality:
+ * <ul>
+ * <li>Provides core class operations
+ * </ul>
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public class Conv1d extends NNModule {
     private final long inChannels;
     private final long outChannels;

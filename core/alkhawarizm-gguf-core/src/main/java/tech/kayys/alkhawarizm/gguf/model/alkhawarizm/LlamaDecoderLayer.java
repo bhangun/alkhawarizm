@@ -5,7 +5,18 @@ import tech.kayys.alkhawarizm.core.nn.RMSNorm;
 import tech.kayys.alkhawarizm.core.tensor.Tensor;
 import tech.kayys.alkhawarizm.core.tensor.WeightAdapter;
 import tech.kayys.alkhawarizm.gguf.model.ModelConfig;
-
+/**
+ * 
+ * Core class for alkhawarizm module.
+ *
+ * <p>Key functionality:
+ * <ul>
+ * <li>Provides core class operations
+ * </ul>
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public class LlamaDecoderLayer extends NNModule {
     private final LlamaAttention selfAttn;
     private final LlamaMLP mlp;

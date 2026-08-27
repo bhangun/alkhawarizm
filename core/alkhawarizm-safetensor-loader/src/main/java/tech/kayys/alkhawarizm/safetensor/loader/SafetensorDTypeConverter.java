@@ -42,6 +42,7 @@ import tech.kayys.gollek.safetensor.exception.SafetensorException;
  *
  * <p>
  * Thread-safe: all methods are pure functions with no shared mutable state.
+ * @author bhangun
  */
 public final class SafetensorDTypeConverter {
 

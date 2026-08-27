@@ -3,7 +3,18 @@ package tech.kayys.alkhawarizm.gguf.loader.model;
 import tech.kayys.alkhawarizm.gguf.loader.gguf.GGUFFile;
 import tech.kayys.alkhawarizm.gguf.core.GGUFTensorInfo;
 import tech.kayys.alkhawarizm.gguf.loader.quant.Dequantizer;
-
+/**
+ * 
+ * Core class for kayys module.
+ *
+ * <p>Key functionality:
+ * <ul>
+ * <li>Provides core class operations
+ * </ul>
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public class LlamaWeights {
     public float[] tokenEmbed;
     public float[] outputNorm;

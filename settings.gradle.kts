@@ -36,6 +36,7 @@ include("core:alkhawarizm-error-code")
 include("core:alkhawarizm-nn")
 
 include("core:alkhawarizm-spi-model")
+include("core:alkhawarizm-3d")
 
 //include("backend:blackwell:alkhawarizm-kernel-blackwell")
 

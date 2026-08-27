@@ -15,6 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * view of the ByteBuffer using MemorySegment.ofByteBuffer via reflection. Falls
  * back to allocating
  * a new Arena+segment and copying the contents if necessary.
+ * @author bhangun
  */
 public final class ByteBufferBackedBuffer implements Buffer {
     private final ByteBuffer byteBuffer;

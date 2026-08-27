@@ -11,6 +11,7 @@ import java.util.List;
  * A node can either be a structural CONSTANT (representing a materialized
  * Tensor)
  * or an operation with dependencies (inputs) and arguments.
+ * @author bhangun
  */
 public class GraphNode {
 

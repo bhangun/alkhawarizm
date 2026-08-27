@@ -18,6 +18,7 @@ import java.util.Arrays;
  * ClassificationMetrics.Result r = ClassificationMetrics.compute(predicted, actual, 3);
  * System.out.printf("F1=%.3f Acc=%.3f%n", r.f1(), r.accuracy());
  * }</pre>
+ * @author bhangun
  */
 public final class ClassificationMetrics {
 

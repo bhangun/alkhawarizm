@@ -26,7 +26,6 @@ public class MllamaModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/mllama",
                         "tokenizer", "llama_bpe_with_mllama_processor",
                         "image_processor", "mllama_image_processor",
                         "direct_safetensor", "pending_mllama_cross_attention_vision_runtime",

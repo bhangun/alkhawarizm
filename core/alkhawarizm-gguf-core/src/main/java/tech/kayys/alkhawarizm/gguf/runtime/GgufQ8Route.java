@@ -8,6 +8,7 @@ import tech.kayys.alkhawarizm.gguf.core.GgmlType;
  * <p>The outer raw route only knows that a tensor belongs to the broad Q8
  * prepared-cache family. This table keeps the hotter inner subtype dispatch to
  * one array load for both single-row dots and multi-row matvecs.</p>
+ * @author bhangun
  */
 final class GgufQ8Route {
     static final int UNSUPPORTED = 0;

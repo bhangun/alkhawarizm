@@ -24,7 +24,6 @@ public class IBertModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of( ModelFamilyCapability.TOKENIZER, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/ibert",
                         "tokenizer", "roberta_bpe_or_wordpiece",
                         "direct_safetensor", "pending_integer_quantized_encoder_runtime",
                         "version", "0.1.0-SNAPSHOT"));

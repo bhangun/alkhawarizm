@@ -10,6 +10,7 @@ import java.lang.foreign.MemorySegment;
  *
  * <p>Q8_0, Q8_1, and Q8_K share vector/scalar row traversal over raw
  * {@link MemorySegment} data while delegating arithmetic to {@link GgufQ8RawDot}.</p>
+ * @author bhangun
  */
 final class GgufQ8RawRows {
     private GgufQ8RawRows() {

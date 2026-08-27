@@ -12,6 +12,7 @@ import java.util.function.Consumer;
  * Behavior: store pages as direct ByteBuffer of floats, evict oldest entries
  * when capacity exceeded
  * and notify eviction listeners.
+ * @author bhangun
  */
 public class PagedKVCache {
     private final long capacityBytes;

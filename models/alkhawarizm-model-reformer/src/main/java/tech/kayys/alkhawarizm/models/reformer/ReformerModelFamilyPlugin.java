@@ -25,7 +25,6 @@ public class ReformerModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/reformer",
                         "tokenizer", "sentencepiece_bpe_metadata_only",
                         "direct_safetensor", "pending_reformer_lsh_attention_runtime",
                         "version", "0.1.0-SNAPSHOT"));

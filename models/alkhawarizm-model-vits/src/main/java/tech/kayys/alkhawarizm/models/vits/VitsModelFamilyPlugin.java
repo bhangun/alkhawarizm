@@ -24,7 +24,6 @@ public class VitsModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/vits",
                         "tokenizer", "vits_text_tokenizer",
                         "direct_safetensor", "pending_vits_duration_flow_decoder_vocoder_runtime",
                         "version", "0.1.0-SNAPSHOT"));

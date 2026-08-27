@@ -2,7 +2,13 @@ package tech.kayys.alkhawarizm.spi.model;
 
 import java.util.List;
 import java.util.Map;
-
+/**
+ * 
+ * Core interface for kayys module.
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public interface ModelFamilyPlugin {
 
     default String id() {

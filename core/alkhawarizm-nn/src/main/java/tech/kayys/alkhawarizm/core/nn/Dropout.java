@@ -4,6 +4,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 
 /**
  * Dropout layer for regularization during training.
+ * @author bhangun
  */
 public class Dropout extends NNModule {
 

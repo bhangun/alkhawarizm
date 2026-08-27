@@ -24,7 +24,7 @@ import java.util.Arrays;
  * information to quantize weights layer-by-layer with minimal accuracy loss.
  * </p>
  *
- * @author Bhangun
+ * @author bhangun
  * @version 1.0.0
  */
 public class GPTQQuantizer implements Quantizer {

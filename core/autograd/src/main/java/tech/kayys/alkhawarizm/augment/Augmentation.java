@@ -7,6 +7,7 @@ import java.util.Random;
 /**
  * Data augmentation transforms for training robust vision models.
  * All transforms operate on {@code [C, H, W]} float tensors in [0, 1].
+ * @author bhangun
  */
 public interface Augmentation {
 

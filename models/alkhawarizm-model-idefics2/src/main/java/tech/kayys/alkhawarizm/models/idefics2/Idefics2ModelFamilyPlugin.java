@@ -26,7 +26,6 @@ public class Idefics2ModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/idefics2",
                         "tokenizer", "processor_backed_tokenizer_json",
                         "image_processor", "idefics2_image_processor",
                         "direct_safetensor", "pending_idefics2_vision_resampler_runtime",

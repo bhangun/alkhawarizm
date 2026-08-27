@@ -24,7 +24,6 @@ public class DonutModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.VISION, ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/donut",
                         "tokenizer", "processor_backed_ocr_tokenizer",
                         "direct_safetensor", "pending_donut_swin_processor_and_decoder_composition_runtime",
                         "version", "0.1.0-SNAPSHOT"));

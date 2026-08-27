@@ -15,6 +15,7 @@ import jakarta.enterprise.inject.Produces;
 
 /**
  * CDI producer for SafeTensor module beans.
+ * @author bhangun
  */
 @ApplicationScoped
 public class SafetensorConfigProducer {

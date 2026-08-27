@@ -24,7 +24,6 @@ public class DepthModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.VISION, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/dpt,depth_anything,depth_pro,zoedepth",
                         "image_processor", "depth_estimation_image_processor",
                         "direct_safetensor", "pending_depth_decoder_metric_head_runtime",
                         "version", "0.1.0-SNAPSHOT"));

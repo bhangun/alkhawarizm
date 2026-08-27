@@ -28,7 +28,7 @@ import tech.kayys.alkhawarizm.safetensor.quantization.QuantizationEngine;
  * <li>E5M2: 5 exponent bits, 2 mantissa bits - better dynamic range</li>
  * </ul>
  *
- * @author Bhangun
+ * @author bhangun
  * @version 1.0.0
  */
 public class FP8Quantizer implements Quantizer {
@@ -39,10 +39,6 @@ public class FP8Quantizer implements Quantizer {
      * FP8 format types.
      */
     public enum FP8Format {
-        /**
-         * E4M3 format - 4 exponent, 3 mantissa bits.
-         * Better precision in normal range, recommended for inference.
-         */
         E4M3(4, 3, 0b01111000, 240),
 
         /**

@@ -24,6 +24,7 @@ import java.util.Map;
  * <li>Use a writable memory-mapped region for the meta section so the
  * final tensor count can be patched in place.</li>
  * </ol>
+ * @author bhangun
  */
 public final class GgufWriter {
 

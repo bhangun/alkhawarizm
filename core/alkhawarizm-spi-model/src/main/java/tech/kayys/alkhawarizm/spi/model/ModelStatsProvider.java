@@ -10,6 +10,7 @@ import io.smallrye.mutiny.Uni;
  * Provider interface for model statistics.
  * This allows the registry module to get stats without depending on the engine
  * module.
+ * @author bhangun
  */
 public interface ModelStatsProvider {
 

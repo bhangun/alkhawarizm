@@ -11,6 +11,7 @@ import java.util.Map;
  * scale loss → compute grads → unscale → update
  *
  * registry.register("gradscaler", new GradScaler());
+ * @author bhangun
  */
 public final class GradScaler {
     private float scale = 1024.0f;

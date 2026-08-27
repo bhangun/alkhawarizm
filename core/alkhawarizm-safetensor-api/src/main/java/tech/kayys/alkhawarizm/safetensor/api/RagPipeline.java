@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * Interface for the RAG pipeline.
+ * @author bhangun
  */
 public interface RagPipeline {
 

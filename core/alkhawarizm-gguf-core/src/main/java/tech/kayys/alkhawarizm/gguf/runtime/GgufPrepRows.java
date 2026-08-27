@@ -18,6 +18,7 @@ import java.util.Objects;
  * <p>Prepared matrices have already unpacked quant data into cache-friendly
  * byte arrays. This helper keeps their row execution separate from the public
  * tensor facade and from raw GGUF row decoding.</p>
+ * @author bhangun
  */
 final class GgufPrepRows {
     private static final ThreadLocal<Q4KWorkBuffer> WORK_BUFFER =

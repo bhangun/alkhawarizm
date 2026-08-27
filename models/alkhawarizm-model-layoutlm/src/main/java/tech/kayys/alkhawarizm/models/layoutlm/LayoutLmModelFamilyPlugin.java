@@ -26,7 +26,6 @@ public class LayoutLmModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.VISION, ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/layoutlm,layoutlmv2,layoutlmv3",
                         "tokenizer", "layout_aware_wordpiece_or_bpe_processor",
                         "direct_safetensor", "not_causal_lm_layout_processor_runtime_pending",
                         "version", "0.1.0-SNAPSHOT"));

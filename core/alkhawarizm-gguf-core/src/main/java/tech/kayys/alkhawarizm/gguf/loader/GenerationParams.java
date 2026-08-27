@@ -21,6 +21,7 @@ import java.util.List;
  * }</pre>
  *
  * @see GGUFProvider
+ * @author bhangun
  */
 public class GenerationParams {
     private final int maxTokens;

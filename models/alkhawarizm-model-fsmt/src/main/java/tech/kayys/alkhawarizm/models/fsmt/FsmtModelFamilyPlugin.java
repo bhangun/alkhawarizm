@@ -24,7 +24,6 @@ public class FsmtModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/fsmt",
                         "tokenizer", "moses_bpe",
                         "direct_safetensor", "pending_fsmt_seq2seq_runtime",
                         "version", "0.1.0-SNAPSHOT"));

@@ -26,7 +26,6 @@ public class AltClipModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/altclip",
                         "tokenizer", "xlm_roberta_sentencepiece_metadata_only",
                         "image_processor", "clip_image_processor",
                         "direct_safetensor", "pending_altclip_dual_encoder_runtime",

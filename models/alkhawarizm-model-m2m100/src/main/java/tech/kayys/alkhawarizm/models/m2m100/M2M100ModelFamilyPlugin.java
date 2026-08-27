@@ -25,7 +25,6 @@ public class M2M100ModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/m2m_100",
                         "tokenizer", "sentencepiece_multilingual_m2m100",
                         "direct_safetensor", "pending_m2m100_seq2seq_runtime",
                         "version", "0.1.0-SNAPSHOT"));

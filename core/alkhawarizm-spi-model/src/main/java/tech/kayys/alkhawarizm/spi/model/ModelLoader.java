@@ -10,6 +10,7 @@ import java.nio.file.Path;
 
 /**
  * Interface for loading model artifacts
+ * @author bhangun
  */
 public interface ModelLoader {
 

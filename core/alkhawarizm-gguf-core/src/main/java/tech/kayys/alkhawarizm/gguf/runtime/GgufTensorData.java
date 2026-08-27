@@ -16,6 +16,7 @@ import java.util.WeakHashMap;
  *
  * <p>This class keeps bounds-checked tensor slicing close to the runtime so
  * callers do not repeat offset arithmetic against the shared model segment.</p>
+ * @author bhangun
  */
 final class GgufTensorData {
     private static final int RECENT_SLICE_SLOTS = 256;

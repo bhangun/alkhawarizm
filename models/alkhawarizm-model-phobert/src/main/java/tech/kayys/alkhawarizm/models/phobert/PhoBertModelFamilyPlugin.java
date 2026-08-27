@@ -25,7 +25,6 @@ public class PhoBertModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of( ModelFamilyCapability.TOKENIZER, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/phobert",
                         "tokenizer", "phobert_bpe_vocab_and_codes",
                         "direct_safetensor", "roberta_backbone_tokenizer_only_metadata",
                         "version", "0.1.0-SNAPSHOT"));

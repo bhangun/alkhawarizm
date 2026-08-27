@@ -7,6 +7,7 @@ import tech.kayys.alkhawarizm.core.tensor.DType;
  * Manages precision casting for mixed-precision training.
  * Forward pass can run in reduced precision (FP16/BF16) for speed,
  * while gradients are accumulated in FP32 for numerical stability.
+ * @author bhangun
  */
 public final class PrecisionManager {
     private final PrecisionMode mode;

@@ -14,7 +14,7 @@ import java.util.Objects;
 /**
  * Configuration for model quantization.
  *
- * @author Bhangun
+ * @author bhangun
  * @version 1.0.0
  */
 public class QuantConfig {

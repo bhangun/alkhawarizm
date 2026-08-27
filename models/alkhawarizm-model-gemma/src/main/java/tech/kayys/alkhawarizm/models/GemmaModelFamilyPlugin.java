@@ -30,7 +30,6 @@ public class GemmaModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.DIRECT_SAFETENSOR_INFERENCE),
                 Map.ofEntries(
                         entry("bundle_profile", "core"),
-                        entry("origin", "3rdparty/transformers/src/transformers/models/gemma"),
                         entry("direct_safetensor", "ready"),
                         entry("tokenizer", "gemma_sentencepiece_with_audio_vision_processor"),
                         entry("version", "0.1.0-SNAPSHOT")));

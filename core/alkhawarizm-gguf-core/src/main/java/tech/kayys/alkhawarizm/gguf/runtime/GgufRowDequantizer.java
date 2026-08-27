@@ -16,6 +16,7 @@ import java.nio.ByteOrder;
  * <p>This helper owns the format-to-block traversal for materializing quantized
  * rows as floats. Compact block decoders live in {@link GgufBlockDequantizer};
  * K-family block decoders live in {@link GgufKBlockDequantizer}.</p>
+ * @author bhangun
  */
 final class GgufRowDequantizer {
     private static final ValueLayout.OfShort LE_SHORT = ValueLayout.JAVA_SHORT_UNALIGNED

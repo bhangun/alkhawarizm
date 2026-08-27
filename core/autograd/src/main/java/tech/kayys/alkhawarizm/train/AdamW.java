@@ -6,6 +6,7 @@ import java.util.Map;
 
 /**
  * AdamW optimizer with decoupled weight decay.
+ * @author bhangun
  */
 public final class AdamW implements Optimizer {
     private final float lr;

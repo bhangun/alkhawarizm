@@ -24,7 +24,6 @@ public class FalconModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/falcon",
                         "direct_safetensor", "pending_non_gated_gelu_ffn",
                         "version", "0.1.0-SNAPSHOT"));
     }

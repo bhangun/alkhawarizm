@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * Sequential container that chains modules together.
+ * @author bhangun
  */
 public class Sequential extends NNModule {
 

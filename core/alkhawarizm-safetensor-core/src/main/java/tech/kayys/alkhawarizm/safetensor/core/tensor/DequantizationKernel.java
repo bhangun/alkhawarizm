@@ -10,6 +10,7 @@ import java.lang.foreign.ValueLayout;
  * SIMD-optimized dequantization kernels using Java Vector API.
  * <p>
  * Supports INT8 and INT4 (GPTQ-style packed) formats.
+ * @author bhangun
  */
 public class DequantizationKernel {
 

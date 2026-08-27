@@ -4,6 +4,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 
 /**
  * Softmax activation layer.
+ * @author bhangun
  */
 public class Softmax extends NNModule {
 

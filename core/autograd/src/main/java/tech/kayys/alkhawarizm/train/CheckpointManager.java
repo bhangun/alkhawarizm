@@ -10,7 +10,23 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
-
+/**
+ * Manager/handler for checkpoint operations.
+ *
+ * <p>Key functionality:
+ * <ul>
+/**
+ * Operations.
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
+ * <li>Provides core class operations
+ * </ul>
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public final class CheckpointManager implements AutoCloseable {
 
     private final Path checkpointDir;

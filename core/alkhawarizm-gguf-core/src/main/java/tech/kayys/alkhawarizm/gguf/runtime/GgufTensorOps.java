@@ -15,6 +15,7 @@ import java.util.Objects;
  * <p>This remains the public facade for row-dot, mat-vec, and prepared matrix
  * operations. Package-private helpers hold format, cache, and scheduling
  * details so this class can keep shrinking toward orchestration plus kernels.</p>
+ * @author bhangun
  */
 public final class GgufTensorOps {
     private GgufTensorOps() {

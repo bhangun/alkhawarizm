@@ -9,6 +9,7 @@ import java.util.WeakHashMap;
 
 /**
  * Stable tensor identity shared by GGUF prepared-matrix caches and estimate caches.
+ * @author bhangun
  */
 final class GgufKey {
     private static final int RECENT_KEY_SLOTS = 256;

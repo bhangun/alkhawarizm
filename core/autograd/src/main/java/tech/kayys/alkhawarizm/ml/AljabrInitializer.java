@@ -9,6 +9,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 /**
  * Central initialization point for Aljabr ML.
  * Call this once at application startup.
+ * @author bhangun
  */
 public final class AljabrInitializer {
     private static volatile boolean initialized = false;

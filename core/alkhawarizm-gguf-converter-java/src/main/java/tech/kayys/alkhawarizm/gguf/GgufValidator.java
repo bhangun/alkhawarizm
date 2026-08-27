@@ -9,6 +9,7 @@ import java.util.*;
 
 /**
  * GGUF file validator - checks spec compliance.
+ * @author bhangun
  */
 public final class GgufValidator {
 

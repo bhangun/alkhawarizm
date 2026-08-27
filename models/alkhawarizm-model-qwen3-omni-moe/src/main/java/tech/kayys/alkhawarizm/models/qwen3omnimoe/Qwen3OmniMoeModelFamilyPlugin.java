@@ -32,7 +32,6 @@ public class Qwen3OmniMoeModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE, ModelFamilyCapability.VISION, ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/qwen3_omni_moe",
                         "tokenizer", "qwen_hf_bpe_with_omni_moe_processors",
                         "direct_safetensor", "pending_qwen3_omni_moe_multimodal_moe_runtime",
                         "version", "0.1.0-SNAPSHOT"));

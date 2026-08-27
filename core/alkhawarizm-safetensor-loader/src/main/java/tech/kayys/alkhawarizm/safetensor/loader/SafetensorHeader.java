@@ -55,6 +55,7 @@ import java.util.*;
  * prefix and the first tensor byte. It is produced by
  * {@link tech.kayys.gollek.inference.safetensor.ffm.SafetensorHeaderParser}
  * and consumed by the tensor accessor layer.
+ * @author bhangun
  */
 @JsonDeserialize(using = SafetensorHeader.Deserializer.class)
 public final class SafetensorHeader {

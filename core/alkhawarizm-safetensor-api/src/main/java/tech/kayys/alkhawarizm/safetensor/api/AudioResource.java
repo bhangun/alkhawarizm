@@ -26,8 +26,8 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * OpenAI-compatible audio transcription API using Whisper.
  * Uses reflection to access WhisperEngine to avoid circular dependencies.
+ * @author bhangun
  */
-@jakarta.ws.rs.Path("/v1/audio")
 @Tag(name = "Audio", description = "Speech-to-text and text-to-speech via Whisper")
 public class AudioResource {
 

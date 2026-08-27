@@ -26,7 +26,6 @@ public class SpeechT5ModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/speecht5",
                         "tokenizer", "speecht5_processor_tokenizer",
                         "direct_safetensor", "pending_speecht5_feature_extractor_vocoder_runtime",
                         "version", "0.1.0-SNAPSHOT"));

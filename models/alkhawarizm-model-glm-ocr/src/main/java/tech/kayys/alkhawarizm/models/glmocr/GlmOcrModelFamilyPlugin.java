@@ -25,7 +25,6 @@ public class GlmOcrModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/glm_ocr",
                         "tokenizer", "glm_qwen_style_bpe",
                         "image_processor", "glm_ocr_image_processor",
                         "direct_safetensor", "pending_glm_ocr_vision_text_runtime",

@@ -2,6 +2,13 @@ package tech.kayys.alkhawarizm.gguf.loader.gguf;
 
 import tech.kayys.alkhawarizm.gguf.core.GGUFTensorInfo;
 import java.util.*;
+/**
+ * Immutable record representing gguffile data.
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
+
 
 public record GGUFFile(int version, Map<String, Object> metadata, Map<String, GGUFTensorInfo> tensors) {
     

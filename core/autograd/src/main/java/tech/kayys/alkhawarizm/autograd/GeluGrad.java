@@ -7,6 +7,7 @@ import java.util.*;
  * GELU Backward
  * dX = dY * (0.5 * (1 + tanh(√(2/π) * (x + 0.044715 * x³)))
  * + 0.5 * x * sech²(...) * √(2/π) * (1 + 3*0.044715*x²))
+ * @author bhangun
  */
 public final class GeluGrad implements GradFn {
     @Override

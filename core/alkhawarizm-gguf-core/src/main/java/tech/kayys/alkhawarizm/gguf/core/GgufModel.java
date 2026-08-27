@@ -14,6 +14,7 @@ import java.util.*;
  * <li>An optional byte array of raw tensor data (null when writing
  * lazily).</li>
  * </ul>
+ * @author bhangun
  */
 public final class GgufModel {
 
@@ -24,7 +25,6 @@ public final class GgufModel {
     public static final byte[] MAGIC_BYTES = { 'G', 'G', 'U', 'F' };
     /** Current GGUF specification version. */
     public static final int VERSION = 3;
-    /** Default alignment for tensor data (bytes). */
     public static final int DEFAULT_ALIGNMENT = 32;
 
     // ── Fields ────────────────────────────────────────────────────────────

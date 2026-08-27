@@ -21,7 +21,6 @@ public class CvtModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.VISION, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/cvt",
                         "image_processor", "cvt_image_processor",
                         "direct_safetensor", "pending_cvt_convolutional_projection_runtime",
                         "version", "0.1.0-SNAPSHOT"));

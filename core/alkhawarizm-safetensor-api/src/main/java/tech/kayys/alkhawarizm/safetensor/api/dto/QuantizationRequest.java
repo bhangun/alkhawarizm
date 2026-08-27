@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Request payload for quantization operations.
  *
- * @author Bhangun
+ * @author bhangun
  * @version 1.0.0
  */
 public class QuantizationRequest {

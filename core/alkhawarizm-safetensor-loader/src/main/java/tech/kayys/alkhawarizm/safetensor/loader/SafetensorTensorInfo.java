@@ -39,6 +39,7 @@ import java.util.Objects;
  * Instances are created by the JSON deserialiser inside
  * {@link SafetensorHeader} and are subsequently kept alive for the lifetime of
  * the loaded model. They are safe to share across threads.
+ * @author bhangun
  */
 public final class SafetensorTensorInfo {
 

@@ -10,6 +10,7 @@ import java.lang.foreign.ValueLayout;
  * <p>
  * This is a prototype helper to be used by the native runner to prepack model weights
  * after GGUF / SafeTensor loading. It operates on raw MemorySegment handles (FFM).
+ * @author bhangun
  */
 public final class QKVPrepacker {
 

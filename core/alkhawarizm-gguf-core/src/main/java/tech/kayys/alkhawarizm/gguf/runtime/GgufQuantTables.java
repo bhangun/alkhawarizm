@@ -5,6 +5,7 @@ package tech.kayys.alkhawarizm.gguf.runtime;
  *
  * <p>This class owns reusable byte/nibble expansion tables so the hot paths in
  * {@link GgufTensorOps} can stay focused on tensor traversal and arithmetic.</p>
+ * @author bhangun
  */
 final class GgufQuantTables {
     private static final int NIBBLE_PAIR_VALUES_PER_BYTE = 2;

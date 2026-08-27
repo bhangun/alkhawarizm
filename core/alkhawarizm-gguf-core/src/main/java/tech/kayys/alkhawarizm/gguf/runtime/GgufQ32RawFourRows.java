@@ -21,6 +21,7 @@ import java.lang.foreign.MemorySegment;
  * walkers commonly consume four adjacent rows at a time. Keeping that fused
  * traversal here avoids repeating the single-row setup and preserves the exact
  * per-row summation order from {@link GgufQ32RawDot}.</p>
+ * @author bhangun
  */
 final class GgufQ32RawFourRows {
     private GgufQ32RawFourRows() {

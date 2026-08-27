@@ -22,7 +22,7 @@ import java.util.HexFormat;
  * All methods are thread-safe. Memory management is handled through
  * Arena scopes to prevent leaks.
  * 
- * @author Bhangun
+ * @author bhangun
  * @version 1.0.0
  */
 public final class GGUFNative {

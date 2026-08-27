@@ -23,7 +23,6 @@ public class MarkupLmModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of( ModelFamilyCapability.TOKENIZER, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/markuplm",
                         "tokenizer", "byte_level_bpe",
                         "processor", "html_xpath_processor",
                         "direct_safetensor", "pending_xpath_feature_processor_runtime",

@@ -8,6 +8,7 @@ package tech.kayys.alkhawarizm.spi.model;
  * @param code    a stable, lowercase-underscore identifier for tooling (e.g.
  *                {@code "invalid_family_id"})
  * @param summary a human-readable description of the violation
+ * @author bhangun
  */
 public record ModelFamilyContractViolation(String familyId, String code, String summary) {
 

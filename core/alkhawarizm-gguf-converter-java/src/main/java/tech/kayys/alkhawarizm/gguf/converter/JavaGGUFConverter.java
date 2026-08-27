@@ -27,6 +27,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Pure Java GGUF model converter service.
  * Supports only Safetensors as input format.
+ * @author bhangun
  */
 @ApplicationScoped
 public class JavaGGUFConverter {

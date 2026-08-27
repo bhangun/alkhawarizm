@@ -19,6 +19,7 @@ import java.nio.ByteOrder;
  * scales. Isolating the decode keeps the public tensor facade out of the
  * bit-packing details and gives future vector or Metal parity work a narrow
  * target.</p>
+ * @author bhangun
  */
 final class GgufQ6RawDot {
     private static final ValueLayout.OfShort LE_SHORT = ValueLayout.JAVA_SHORT_UNALIGNED

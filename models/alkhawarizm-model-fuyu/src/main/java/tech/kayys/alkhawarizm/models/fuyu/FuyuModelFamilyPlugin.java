@@ -25,7 +25,6 @@ public class FuyuModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/fuyu",
                         "tokenizer", "persimmon_text_tokenizer_with_fuyu_processor",
                         "image_processor", "fuyu_image_processor",
                         "direct_safetensor", "pending_fuyu_image_patch_and_persimmon_runtime",

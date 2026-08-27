@@ -4,6 +4,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 
 /**
  * GELU activation layer.
+ * @author bhangun
  */
 public class GELU extends NNModule {
 

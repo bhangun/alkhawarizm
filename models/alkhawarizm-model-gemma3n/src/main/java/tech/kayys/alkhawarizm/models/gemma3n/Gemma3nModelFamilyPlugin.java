@@ -24,7 +24,6 @@ public class Gemma3nModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE, ModelFamilyCapability.VISION, ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/gemma3n",
                         "tokenizer", "gemma_sentencepiece_with_audio_vision_processor",
                         "direct_safetensor", "pending_gemma3n_audio_vision_projector_runtime",
                         "version", "0.1.0-SNAPSHOT"));

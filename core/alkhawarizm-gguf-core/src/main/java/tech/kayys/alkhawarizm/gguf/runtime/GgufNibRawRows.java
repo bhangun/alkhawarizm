@@ -9,6 +9,7 @@ import java.lang.foreign.MemorySegment;
  *
  * <p>The methods here only advance row offsets for MXFP4, NVFP4, IQ4_NL, and
  * IQ4_XS. Format arithmetic stays isolated in {@link GgufNibRawDot}.</p>
+ * @author bhangun
  */
 final class GgufNibRawRows {
     private GgufNibRawRows() {

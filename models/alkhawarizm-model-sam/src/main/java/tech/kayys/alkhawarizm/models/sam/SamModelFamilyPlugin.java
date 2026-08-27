@@ -21,7 +21,6 @@ public class SamModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.VISION),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/sam",
                         "image_processor", "sam_image_processor",
                         "direct_safetensor", "not_causal_lm",
                         "version", "0.1.0-SNAPSHOT"));

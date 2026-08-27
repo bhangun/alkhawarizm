@@ -23,7 +23,6 @@ public class BloomModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.CAUSAL_LM, ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/bloom",
                         "tokenizer", "byte_level_bpe",
                         "direct_safetensor", "pending_bloom_alibi_attention_and_weight_layout_runtime",
                         "version", "0.1.0-SNAPSHOT"));

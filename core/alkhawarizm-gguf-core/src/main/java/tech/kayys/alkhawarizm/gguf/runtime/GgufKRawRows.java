@@ -9,6 +9,7 @@ import java.lang.foreign.MemorySegment;
  * kernel has different packing and min-correction rules. Keeping the walkers
  * here leaves {@link GgufTensorOps} to choose the path instead of owning every
  * per-format loop.</p>
+ * @author bhangun
  */
 final class GgufKRawRows {
     private static final ThreadLocal<int[]> Q3K_SCALES = ThreadLocal.withInitial(() -> new int[16]);

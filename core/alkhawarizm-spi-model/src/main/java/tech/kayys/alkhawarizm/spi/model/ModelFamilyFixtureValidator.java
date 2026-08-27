@@ -21,6 +21,7 @@ import java.util.stream.StreamSupport;
  * (in HuggingFace format). This validator cross-checks the fixture's declared
  * {@code model_type} and {@code architectures} against the plugin's descriptor,
  * adapter list, and tokenizer descriptors.
+ * @author bhangun
  */
 public final class ModelFamilyFixtureValidator {
 

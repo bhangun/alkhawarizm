@@ -24,7 +24,6 @@ public class CpmAntModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/cpmant",
                         "tokenizer", "cpmant_wordpiece_with_rjieba",
                         "direct_safetensor", "pending_cpmant_segment_position_runtime",
                         "version", "0.1.0-SNAPSHOT"));

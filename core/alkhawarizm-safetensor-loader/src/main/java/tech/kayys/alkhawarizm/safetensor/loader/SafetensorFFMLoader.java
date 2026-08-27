@@ -87,6 +87,7 @@ import java.util.Objects;
  *     float[] weights = result.tensor("lm_head.weight").toFloatArray();
  * }
  * }</pre>
+ * @author bhangun
  */
 @ApplicationScoped
 public class SafetensorFFMLoader {

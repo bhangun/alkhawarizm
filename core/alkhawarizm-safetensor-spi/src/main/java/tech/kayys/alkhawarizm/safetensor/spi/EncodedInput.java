@@ -7,6 +7,7 @@ import tech.kayys.alkhawarizm.spi.model.ModalityType;
  * 
  * <p>Used by encoder plugins to return pre-processed hidden states 
  * before they are merged by a {@link FusionEngine}.
+ * @author bhangun
  */
 public record EncodedInput(
     ModalityType modality,

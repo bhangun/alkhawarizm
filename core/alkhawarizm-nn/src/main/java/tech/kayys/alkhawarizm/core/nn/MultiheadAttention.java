@@ -4,6 +4,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 
 /**
  * Multi-head attention mechanism.
+ * @author bhangun
  */
 public class MultiheadAttention extends NNModule {
 

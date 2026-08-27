@@ -6,6 +6,7 @@ import tech.kayys.alkhawarizm.core.backend.ComputeBackend;
 /**
  * Factory for creating tensors.
  * This is used by static methods in the {@link Tensor} interface.
+ * @author bhangun
  */
 public final class TensorFactory {
     private static final Random RNG = new Random();

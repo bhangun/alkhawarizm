@@ -6,6 +6,7 @@ import tech.kayys.alkhawarizm.core.model.ModelFormat;
 
 /**
  * Supported FFN activation functions.
+ * @author bhangun
  */
 public enum FFNActivationType {
     SILU, // LLaMA, Mistral

@@ -11,7 +11,7 @@ import java.util.HashMap;
  * This class provides a type-safe, builder-based API for configuring
  * model conversions with sensible defaults.
  *
- * @author Bhangun
+ * @author bhangun
  * @version 1.0.0
  */
 public class GGUFConversionParams {

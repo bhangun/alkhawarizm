@@ -24,8 +24,8 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * RAG pipeline REST interface — ingest, query, and manage document collections.
  * Uses reflection to access RagPipeline to avoid circular dependencies.
+ * @author bhangun
  */
-@jakarta.ws.rs.Path("/v1/rag")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Tag(name = "RAG", description = "Retrieval-Augmented Generation pipeline")

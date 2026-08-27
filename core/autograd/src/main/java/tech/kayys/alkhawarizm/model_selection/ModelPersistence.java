@@ -11,6 +11,7 @@ import tech.kayys.alkhawarizm.ml.linear_model.*;
 /**
  * Save and load scikit-learn compatible models.
  * Supports all estimators and transformers.
+ * @author bhangun
  */
 public class ModelPersistence {
 

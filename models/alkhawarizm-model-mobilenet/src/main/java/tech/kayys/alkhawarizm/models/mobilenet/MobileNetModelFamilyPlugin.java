@@ -23,7 +23,6 @@ public class MobileNetModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.VISION, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/mobilenet_v1,mobilenet_v2",
                         "image_processor", "mobilenet_image_processor",
                         "direct_safetensor", "pending_depthwise_conv_image_runtime_validation",
                         "version", "0.1.0-SNAPSHOT"));

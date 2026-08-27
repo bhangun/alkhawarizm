@@ -11,6 +11,7 @@ import java.util.Objects;
 
 /**
  * Model information DTO representing metadata about an available model.
+ * @author bhangun
  */
 public final class ModelInfo {
 

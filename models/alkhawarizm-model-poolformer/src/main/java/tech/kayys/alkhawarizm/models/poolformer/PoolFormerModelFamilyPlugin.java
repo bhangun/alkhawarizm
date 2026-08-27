@@ -21,7 +21,6 @@ public class PoolFormerModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.VISION, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/poolformer",
                         "image_processor", "poolformer_image_processor",
                         "direct_safetensor", "pending_poolformer_token_mixer_runtime",
                         "version", "0.1.0-SNAPSHOT"));

@@ -23,6 +23,7 @@ import java.util.Optional;
  *
  * <p>The probe measures row-dot and prepared mat-vec paths, giving the CLI and
  * tests a cheap signal for whether the Java runtime is ready for a model.</p>
+ * @author bhangun
  */
 public record GgufRuntimeProbe(
         GgufRuntimeProfile profile,

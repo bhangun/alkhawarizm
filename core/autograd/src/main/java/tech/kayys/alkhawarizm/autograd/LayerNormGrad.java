@@ -10,6 +10,7 @@ import java.util.*;
  * (N*dY - sum(dY) - x
  * ̂ * sum(dY * x
  * ̂))
+ * @author bhangun
  */
 public final class LayerNormGrad implements GradFn {
         @Override

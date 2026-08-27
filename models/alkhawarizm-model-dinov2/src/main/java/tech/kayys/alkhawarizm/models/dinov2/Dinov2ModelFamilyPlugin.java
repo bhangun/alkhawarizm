@@ -21,7 +21,6 @@ public class Dinov2ModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.VISION, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/dinov2",
                         "image_processor", "vit_image_processor",
                         "direct_safetensor", "pending_dinov2_backbone_runtime_validation",
                         "version", "0.1.0-SNAPSHOT"));

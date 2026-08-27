@@ -12,6 +12,7 @@ import tech.kayys.alkhawarizm.core.tensor.DType;
  * Unlike standard uncompressed buffers, quantized buffers must keep track of
  * their underlying quantization format (e.g., Q8_0, Q4_K) to properly decode
  * blocks during execution.
+ * @author bhangun
  */
 public final class QuantizedBuffer implements Buffer {
 

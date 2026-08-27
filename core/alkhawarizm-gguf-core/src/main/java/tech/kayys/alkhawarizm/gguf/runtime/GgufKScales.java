@@ -8,6 +8,7 @@ import static tech.kayys.alkhawarizm.gguf.runtime.GgufKQuantLayout.scaleMinK4Pac
 
 /**
  * Prepared K-quant scale/min expansion for Q4_K and Q5_K matrices.
+ * @author bhangun
  */
 final class GgufKScales {
     private GgufKScales() {

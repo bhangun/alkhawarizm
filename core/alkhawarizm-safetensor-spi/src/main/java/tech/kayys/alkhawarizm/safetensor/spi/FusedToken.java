@@ -7,6 +7,7 @@ import tech.kayys.alkhawarizm.spi.model.ModalityType;
  * 
  * <p>Contains the embedding vector, its original modality, and its 
  * assigned sequence position.
+ * @author bhangun
  */
 public record FusedToken(
     float[] embedding,

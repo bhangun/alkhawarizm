@@ -20,6 +20,7 @@ import java.nio.ByteOrder;
  * <p>Q2_K packs eight 16-value groups per 128-value super block. The generic
  * path handles inline min correction, while specialized no-min and cached
  * group-sum paths remove that branch work for already-classified tensors.</p>
+ * @author bhangun
  */
 final class GgufQ2RawDot {
     private static final long HIGH_NIBBLE_MASK = 0xF0F0F0F0F0F0F0F0L;

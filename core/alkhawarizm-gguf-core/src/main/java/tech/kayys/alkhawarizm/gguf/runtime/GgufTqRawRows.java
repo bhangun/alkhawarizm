@@ -9,6 +9,7 @@ import java.lang.foreign.MemorySegment;
  *
  * <p>This helper advances matrix rows for Q1_0, TQ1_0, and TQ2_0 while
  * delegating the row arithmetic to {@link GgufTqRawDot}.</p>
+ * @author bhangun
  */
 final class GgufTqRawRows {
     private GgufTqRawRows() {

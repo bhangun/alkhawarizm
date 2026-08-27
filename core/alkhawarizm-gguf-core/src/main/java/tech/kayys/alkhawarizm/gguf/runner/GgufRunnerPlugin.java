@@ -13,6 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Unified GGUF runner plugin that defaults to Java-native execution but can
  * fall back to or explicitly use llama.cpp bindings.
+ * @author bhangun
  */
 @ApplicationScoped
 @Unremovable

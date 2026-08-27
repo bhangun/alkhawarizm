@@ -40,7 +40,7 @@ import java.util.Optional;
  * method handles for calling quantization functions directly
  * from Java without JNI overhead.
  *
- * @author Bhangun
+ * @author bhangun
  * @version 1.0.0
  */
 public final class LlamaFfmBindings {

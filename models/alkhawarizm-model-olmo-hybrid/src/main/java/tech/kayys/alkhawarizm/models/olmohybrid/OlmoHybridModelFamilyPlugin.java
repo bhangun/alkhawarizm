@@ -23,7 +23,6 @@ public class OlmoHybridModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/olmo_hybrid",
                         "tokenizer", "byte_level_bpe",
                         "direct_safetensor", "pending_olmo_hybrid_ssm_attention_runtime",
                         "version", "0.1.0-SNAPSHOT"));

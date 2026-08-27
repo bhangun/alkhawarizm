@@ -13,6 +13,7 @@ import java.util.WeakHashMap;
  * and row-count contracts. Raw FFM-backed paths also need the same parallel
  * fallback when a confined {@code MemorySegment} cannot be read from worker
  * threads, so both policies live here instead of being repeated per format.</p>
+ * @author bhangun
  */
 final class GgufRows {
     private static final int DIRECT_PREPARED_ROW_LIMIT = 4;

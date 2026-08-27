@@ -6,6 +6,7 @@ import tech.kayys.alkhawarizm.core.model.ModelFormat;
 
 /**
  * Resource utilization metrics for a model runner
+ * @author bhangun
  */
 public record ResourceMetrics(
                 long cpuUsagePercent,

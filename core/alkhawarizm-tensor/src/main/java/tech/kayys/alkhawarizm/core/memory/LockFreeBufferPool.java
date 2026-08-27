@@ -9,6 +9,7 @@ import java.util.concurrent.atomic.LongAdder;
  * Lock-free, size-bucketed off-heap memory pool (Treiber stacks per bucket).
  * This is a drop-in alternative to OffHeapBufferPool for high-concurrency
  * workloads.
+ * @author bhangun
  */
 public final class LockFreeBufferPool implements AutoCloseable {
 

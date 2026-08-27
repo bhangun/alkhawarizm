@@ -23,7 +23,6 @@ public class RwkvModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.CAUSAL_LM, ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/rwkv",
                         "tokenizer", "rwkv_tokenizer_metadata_only",
                         "direct_safetensor", "pending_recurrent_time_mix_runtime",
                         "version", "0.1.0-SNAPSHOT"));

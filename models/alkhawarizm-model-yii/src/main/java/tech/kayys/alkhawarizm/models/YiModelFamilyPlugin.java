@@ -24,7 +24,6 @@ public class YiModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE, ModelFamilyCapability.DIRECT_SAFETENSOR_INFERENCE),
                 Map.of(
                         "bundle_profile", "optional",
-                        "origin", "3rdparty/transformers/src/transformers/models/llama",
                         "compatible_base", "llama",
                         "version", "0.1.0-SNAPSHOT"));
     }

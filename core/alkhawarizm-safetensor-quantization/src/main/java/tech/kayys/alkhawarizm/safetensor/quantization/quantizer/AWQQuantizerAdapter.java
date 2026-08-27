@@ -14,6 +14,7 @@ import java.util.Arrays;
 
 /**
  * Adapter for Activation-aware Weight Quantization (AWQ).
+ * @author bhangun
  */
 public class AWQQuantizerAdapter implements Quantizer {
 

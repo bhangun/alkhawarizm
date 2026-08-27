@@ -4,6 +4,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 
 /**
  * Embedding layer — a lookup table for fixed-size vectors.
+ * @author bhangun
  */
 public class Embedding extends NNModule {
 

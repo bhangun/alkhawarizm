@@ -24,7 +24,6 @@ public class NemotronModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/nemotron",
                         "tokenizer", "sentencepiece_or_tokenizer_json",
                         "direct_safetensor", "pending_nemotron_relu2_norm_and_rotary_runtime",
                         "version", "0.1.0-SNAPSHOT"));

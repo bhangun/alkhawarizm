@@ -45,6 +45,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * // Get best quantizer for config
  * Quantizer best = QuantizerRegistry.selectBest(config);
  * }</pre>
+ * @author bhangun
  */
 public final class QuantizerRegistry {
 

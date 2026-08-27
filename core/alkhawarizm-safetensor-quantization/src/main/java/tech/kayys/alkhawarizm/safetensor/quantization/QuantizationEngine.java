@@ -53,7 +53,7 @@ import java.util.stream.Collectors;
  * <li>FP8 - 8-bit floating point quantization (E4M3/E5M2)</li>
  * </ul>
  *
- * @author Bhangun
+ * @author bhangun
  * @version 1.0.0
  */
 @ApplicationScoped
@@ -65,40 +65,13 @@ public class QuantizationEngine {
      * Quantization strategy.
      */
     public enum QuantStrategy {
-        /**
-         * No quantization (passthrough).
-         */
         NONE,
-        /**
-         * 4-bit integer quantization (GPTQ).
-         * Best for CPU inference with significant memory reduction.
-         */
         INT4,
-        /**
-         * 8-bit integer quantization.
-         * Good balance between quality and performance.
-         */
         INT8,
-        /**
-         * 8-bit floating point quantization (E4M3/E5M2).
-         * Best for GPU inference with FP8 tensor cores.
-         */
         FP8,
-        /**
-         * TurboQuant (SIMD-optimized MSE/InnerProduct).
-         */
         TURBO,
-        /**
-         * AWQ (Activation-aware Weight Quantization).
-         */
         AWQ,
-        /**
-         * GPTQ (Generative Pre-Trained Transformer Quantization).
-         */
         GPTQ,
-        /**
-         * BitsAndBytes (NF4/INT8).
-         */
         BNB
     }
 

@@ -9,6 +9,7 @@ import tech.kayys.alkhawarizm.ml.metrics.Metrics;
 /**
  * Randomized search for hyperparameter optimization.
  * More efficient than grid search for high-dimensional parameter spaces.
+ * @author bhangun
  */
 public class RandomizedSearchCV {
     private final BaseEstimator estimator;

@@ -7,6 +7,7 @@ import tech.kayys.alkhawarizm.gguf.core.GgmlType;
  *
  * <p>Keeping these knobs outside {@link GgufPreparedMatrixCache} leaves the
  * cache class focused on LRU storage while this class owns type-to-budget routing.</p>
+ * @author bhangun
  */
 final class GgufPreparedCachePolicy {
     private static final Family[] CACHE_FAMILIES = Family.values();

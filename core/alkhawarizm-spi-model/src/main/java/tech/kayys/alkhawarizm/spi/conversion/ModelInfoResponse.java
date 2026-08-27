@@ -6,6 +6,7 @@ import tech.kayys.alkhawarizm.spi.model.ModelMetadata;
 
 /**
  * Model information response DTO.
+ * @author bhangun
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ModelInfoResponse {

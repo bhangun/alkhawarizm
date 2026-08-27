@@ -6,6 +6,7 @@ import java.util.Map;
 
 /**
  * Optimizer contract for parameter updates during training.
+ * @author bhangun
  */
 public interface Optimizer {
 

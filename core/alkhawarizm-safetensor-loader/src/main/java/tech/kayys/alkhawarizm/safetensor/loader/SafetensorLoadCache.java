@@ -45,6 +45,7 @@ import java.util.Map;
  * <p>
  * Use {@link #getOrLoad(Path, SafetensorFFMLoader)} to load a file with
  * automatic cache lookup and insertion.
+ * @author bhangun
  */
 @ApplicationScoped
 public class SafetensorLoadCache {

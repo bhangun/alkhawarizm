@@ -4,6 +4,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 
 /**
  * Adaptive average pooling 2D layer.
+ * @author bhangun
  */
 public class AdaptiveAvgPool2d extends NNModule {
 

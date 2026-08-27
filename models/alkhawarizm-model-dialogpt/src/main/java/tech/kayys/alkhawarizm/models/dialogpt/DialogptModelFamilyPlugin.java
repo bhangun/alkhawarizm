@@ -23,7 +23,6 @@ public class DialogptModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/dialogpt",
                         "tokenizer", "byte_level_bpe",
                         "direct_safetensor", "not_direct_runtime_dialogpt_gpt2_conversion_metadata",
                         "version", "0.1.0-SNAPSHOT"));

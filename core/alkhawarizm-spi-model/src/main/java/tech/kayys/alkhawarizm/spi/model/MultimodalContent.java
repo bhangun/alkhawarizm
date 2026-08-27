@@ -11,6 +11,7 @@ import java.util.Objects;
 /**
  * Unified content carrier for a single modality part inside a multimodal
  * request.
+ * @author bhangun
  */
 @JsonInclude(Include.NON_NULL)
 public final class MultimodalContent {

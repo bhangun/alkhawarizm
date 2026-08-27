@@ -24,7 +24,6 @@ public class LlavaOnevisionModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/llava_onevision",
                         "tokenizer", "delegated_qwen_or_sentencepiece_tokenizer",
                         "image_processor", "llava_onevision_image_processor",
                         "video_processor", "llava_onevision_video_processor",

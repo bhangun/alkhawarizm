@@ -53,6 +53,7 @@ import java.util.logging.Logger;
  * <li>Bloom filter: enabled by default (10 bits per key)</li>
  * <li>Async WAL disable: for write-heavy inference caches</li>
  * </ul>
+ * @author bhangun
  */
 public final class RocksDbMemoryStore implements UnifiedMemoryStore {
 

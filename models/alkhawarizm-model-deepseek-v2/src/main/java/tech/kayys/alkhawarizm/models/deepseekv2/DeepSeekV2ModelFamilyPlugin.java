@@ -24,7 +24,6 @@ public class DeepSeekV2ModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "experimental",
-                        "origin", "3rdparty/transformers/src/transformers/models/deepseek_v2",
                         "direct_safetensor", "pending_deepseek_v2_mla_sparse_moe_runtime",
                         "version", "0.1.0-SNAPSHOT"));
     }

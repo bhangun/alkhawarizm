@@ -13,7 +13,18 @@ import tech.kayys.alkhawarizm.gguf.model.ModelConfig;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * 
+ * Core class for alkhawarizm module.
+ *
+ * <p>Key functionality:
+ * <ul>
+ * <li>Provides core class operations
+ * </ul>
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public class LlamaModel extends NNModule {
     private final Embedding embedTokens;
     private final List<LlamaDecoderLayer> layers = new ArrayList<>();

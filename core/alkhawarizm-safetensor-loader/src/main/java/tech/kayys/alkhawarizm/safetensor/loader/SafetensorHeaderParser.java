@@ -45,6 +45,7 @@ import java.util.*;
  * Instances should be obtained via the Quarkus CDI container or by calling
  * {@link #create(ObjectMapper)}. The {@link ObjectMapper} is expected to be
  * the application-wide Quarkus-managed instance.
+ * @author bhangun
  */
 public final class SafetensorHeaderParser {
 

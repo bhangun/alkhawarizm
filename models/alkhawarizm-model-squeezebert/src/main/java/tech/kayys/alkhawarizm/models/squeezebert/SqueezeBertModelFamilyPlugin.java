@@ -25,7 +25,6 @@ public class SqueezeBertModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of( ModelFamilyCapability.TOKENIZER, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/squeezebert",
                         "tokenizer", "bert_wordpiece_alias",
                         "direct_safetensor", "not_causal_lm_squeezebert_runtime_pending",
                         "version", "0.1.0-SNAPSHOT"));

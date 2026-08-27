@@ -16,6 +16,7 @@ import tech.kayys.alkhawarizm.gguf.runtime.GgufTensorOps.Q32Matrix;
  * <p>These builders unpack compact GGUF rows into cache-friendly byte/scale
  * arrays while preserving the public matrix record types exposed by
  * {@link GgufTensorOps}.</p>
+ * @author bhangun
  */
 final class GgufBuild {
     private GgufBuild() {

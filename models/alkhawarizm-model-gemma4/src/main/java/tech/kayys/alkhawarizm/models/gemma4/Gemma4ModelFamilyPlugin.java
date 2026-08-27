@@ -39,7 +39,6 @@ public class Gemma4ModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.DIRECT_SAFETENSOR_INFERENCE),
                 Map.ofEntries(
                         entry("bundle_profile", "optional"),
-                        entry("origin", "3rdparty/transformers/src/transformers/models/gemma4"),
                         entry("direct_safetensor", "ready_text_path_guarded_by_runtime"),
                         entry("direct_safetensor_scope", "text_only_gemma4_text_and_unified_text"),
                         entry("moe_direct_safetensor", "pending_packed_expert_router_runtime"),

@@ -11,6 +11,7 @@ import static tech.kayys.alkhawarizm.gguf.runtime.GgufVectorConfig.SIGNED_BYTE_D
  *
  * <p>Prepared K matrices reuse the same row traversal patterns with different
  * group widths and optional mins. This helper keeps those variants together.</p>
+ * @author bhangun
  */
 final class GgufKRows {
     private static final int K16_NO_MIN_VECTOR = 1;

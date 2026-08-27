@@ -26,7 +26,6 @@ public class VideoLlama3ModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/video_llama_3",
                         "tokenizer", "qwen_style_bpe_with_video_llama_3_processors",
                         "direct_safetensor", "pending_video_llama_3_video_projector_runtime",
                         "version", "0.1.0-SNAPSHOT"));

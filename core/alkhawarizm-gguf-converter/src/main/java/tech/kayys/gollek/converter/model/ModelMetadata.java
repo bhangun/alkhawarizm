@@ -12,7 +12,7 @@ import java.util.Locale;
  * Contains information about a model's architecture, parameters,
  * and resource requirements.
  * 
- * @author Bhangun
+ * @author bhangun
  * @version 1.0.0
  */
 public class ModelMetadata {

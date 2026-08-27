@@ -15,6 +15,7 @@ import java.util.Optional;
  * exist" group, which lets families support both {@code tokenizer.json} and
  * split {@code vocab.json + merges.txt} layouts without shipping code.
  * </p>
+ * @author bhangun
  */
 public record ModelTokenizerDescriptor(
         String id,

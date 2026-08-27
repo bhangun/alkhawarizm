@@ -23,7 +23,6 @@ public class GptNeoXJapaneseModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.CAUSAL_LM, ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/gpt_neox_japanese",
                         "tokenizer", "gpt_neox_japanese_subword_bpe",
                         "direct_safetensor", "pending_gpt_neox_japanese_runtime_validation",
                         "version", "0.1.0-SNAPSHOT"));

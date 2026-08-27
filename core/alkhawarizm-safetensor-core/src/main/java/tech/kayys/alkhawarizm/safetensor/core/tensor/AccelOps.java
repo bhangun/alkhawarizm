@@ -37,6 +37,7 @@ import java.util.stream.IntStream;
  * <p>
  * Designed for direct use with Apple Accelerate (cblas_sgemm, vDSP)
  * and SIMD via Vector API.
+ * @author bhangun
  */
 public final class AccelOps {
 

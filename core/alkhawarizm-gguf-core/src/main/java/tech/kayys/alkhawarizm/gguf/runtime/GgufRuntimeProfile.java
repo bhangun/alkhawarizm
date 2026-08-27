@@ -29,6 +29,7 @@ import java.util.Set;
  * and inspect many models today, but generation should only be enabled after we
  * can prove the tensor layout, quant families, and decoder tensor set are
  * complete.</p>
+ * @author bhangun
  */
 public record GgufRuntimeProfile(
         String architecture,

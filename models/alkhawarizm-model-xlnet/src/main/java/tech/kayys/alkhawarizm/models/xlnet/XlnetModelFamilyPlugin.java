@@ -25,7 +25,6 @@ public class XlnetModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/xlnet",
                         "tokenizer", "sentencepiece_unigram_metadata_only",
                         "direct_safetensor", "pending_two_stream_relative_attention_runtime",
                         "version", "0.1.0-SNAPSHOT"));

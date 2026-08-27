@@ -18,6 +18,7 @@ import java.lang.ref.WeakReference;
  * <p>Raw affine K/Q32 formats can skip expensive vector sums when all scanned
  * rows have zero mins/biases. Positive partial scans are safe to cache for the
  * whole tensor; negative hints are cached only after scanning the full matrix.</p>
+ * @author bhangun
  */
 final class GgufRawPathHints {
     private static final int RECENT_HINT_SLOTS = 256;

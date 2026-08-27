@@ -15,6 +15,7 @@ import java.util.Optional;
 
 /**
  * Stateless utility for detecting {@link ModelFormat} from a file path.
+ * @author bhangun
  */
 public final class ModelFormatDetector {
 

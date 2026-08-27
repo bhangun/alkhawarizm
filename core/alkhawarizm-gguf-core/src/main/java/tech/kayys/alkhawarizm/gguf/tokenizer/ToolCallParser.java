@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 /**
  * Parses tool/function calls from model output.
  * Supports multiple formats used by different models.
+ * @author bhangun
  */
 public class ToolCallParser {
 

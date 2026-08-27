@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * Immutable sampling configuration for an autoregressive generation session.
+ * @author bhangun
  */
 public final class GenerationConfig {
 
@@ -77,35 +78,20 @@ public final class GenerationConfig {
 
     /** @return the sampling strategy */
     public SamplingStrategy strategy() { return strategy; }
-    /** @return sampling temperature (default: 1.0) */
     public float temperature() { return temperature; }
-    /** @return top-k candidate count (default: 50) */
     public int topK() { return topK; }
-    /** @return nucleus sampling threshold (default: 1.0 = disabled) */
     public float topP() { return topP; }
-    /** @return probability scaling floor threshold (default: 0.0 = disabled) */
     public float minP() { return minP; }
-    /** @return beam width for beam search (default: 1) */
     public int beamWidth() { return beamWidth; }
-    /** @return maximum number of new tokens to generate (default: 512) */
     public int maxNewTokens() { return maxNewTokens; }
-    /** @return minimum number of new tokens to generate (default: 1) */
     public int minNewTokens() { return minNewTokens; }
-    /** @return token IDs that terminate generation early */
     public List<Integer> stopTokenIds() { return stopTokenIds; }
-    /** @return stop strings that terminate generation early */
     public List<String> stopStrings() { return stopStrings; }
-    /** @return repetition penalty applied to already-generated tokens (default: 1.0 = none) */
     public float repetitionPenalty() { return repetitionPenalty; }
-    /** @return frequency penalty applied to token logits (default: 0.0 = none) */
     public float frequencyPenalty() { return frequencyPenalty; }
-    /** @return {@code true} if KV caching is enabled (default: true) */
     public boolean useKvCache() { return useKvCache; }
-    /** @return maximum number of tokens the KV cache can hold (default: 8192) */
     public int maxKvCacheTokens() { return maxKvCacheTokens; }
-    /** @return KV cache quantization strategy (default: NONE) */
     public KvCacheQuantization kvCacheQuant() { return kvCacheQuant; }
-    /** @return RNG seed; {@code -1} means random (default: -1) */
     public long seed() { return seed; }
 
     /**
@@ -166,35 +152,20 @@ public final class GenerationConfig {
 
         /** @param v sampling strategy */
         public Builder strategy(SamplingStrategy v) { this.strategy = v; return this; }
-        /** @param v sampling temperature; lower = more deterministic */
         public Builder temperature(float v) { this.temperature = v; return this; }
-        /** @param v top-k candidate count */
         public Builder topK(int v) { this.topK = v; return this; }
-        /** @param v nucleus sampling threshold in {@code (0, 1]}; 1.0 disables */
         public Builder topP(float v) { this.topP = v; return this; }
-        /** @param v minimum probability scaling threshold */
         public Builder minP(float v) { this.minP = v; return this; }
-        /** @param v beam width for beam search; 1 = greedy */
         public Builder beamWidth(int v) { this.beamWidth = v; return this; }
-        /** @param v maximum new tokens to generate; must be &gt; 0 */
         public Builder maxNewTokens(int v) { this.maxNewTokens = v; return this; }
-        /** @param v minimum new tokens before stop sequences are checked */
         public Builder minNewTokens(int v) { this.minNewTokens = v; return this; }
-        /** @param v token IDs that terminate generation */
         public Builder stopTokenIds(List<Integer> v) { this.stopTokenIds = v; return this; }
-        /** @param v strings that terminate generation */
         public Builder stopStrings(List<String> v) { this.stopStrings = v; return this; }
-        /** @param v repetition penalty; 1.0 = no penalty */
         public Builder repetitionPenalty(float v) { this.repetitionPenalty = v; return this; }
-        /** @param v frequency penalty; 0.0 = no penalty */
         public Builder frequencyPenalty(float v) { this.frequencyPenalty = v; return this; }
-        /** @param v {@code true} to enable KV caching */
         public Builder useKvCache(boolean v) { this.useKvCache = v; return this; }
-        /** @param v maximum KV cache capacity in tokens */
         public Builder maxKvCacheTokens(int v) { this.maxKvCacheTokens = v; return this; }
-        /** @param v KV cache quantization strategy */
         public Builder kvCacheQuant(KvCacheQuantization v) { this.kvCacheQuant = v; return this; }
-        /** @param v RNG seed; {@code -1} for random */
         public Builder seed(long v) { this.seed = v; return this; }
 
         /**

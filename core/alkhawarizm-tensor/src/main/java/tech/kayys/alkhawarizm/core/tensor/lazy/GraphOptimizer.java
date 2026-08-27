@@ -5,6 +5,7 @@ import java.util.Map;
 
 /**
  * Optimizes a computation DAG by applying fusion and rewrite rules.
+ * @author bhangun
  */
 public class GraphOptimizer {
 

@@ -34,6 +34,7 @@ import java.util.Objects;
  *     <li>INT8: 8-bit integer with scales</li>
  *     <li>INT4: 4-bit packed integer (GPTQ style) with scales/zeros</li>
  * </ul>
+ * @author bhangun
  */
 public class AccelTensor implements AutoCloseable {
 

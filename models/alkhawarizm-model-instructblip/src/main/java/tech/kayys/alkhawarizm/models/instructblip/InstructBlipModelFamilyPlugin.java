@@ -26,7 +26,6 @@ public class InstructBlipModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.VISION, ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/instructblip",
                         "tokenizer", "qformer_processor_text_tokenizer",
                         "image_processor", "instructblip_vision_processor",
                         "direct_safetensor", "pending_blip_qformer_bridge_runtime",

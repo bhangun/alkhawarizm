@@ -12,7 +12,7 @@ package tech.kayys.alkhawarizm.safetensor.quantization;
 /**
  * Metadata for a quantized tensor.
  *
- * @author Bhangun
+ * @author bhangun
  * @version 1.0.0
  */
 public class QuantizedTensorInfo {

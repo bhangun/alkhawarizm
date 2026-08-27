@@ -13,6 +13,7 @@ import java.lang.foreign.MemorySegment;
  * <p>Dense matrices share simple row iteration and delegate all arithmetic to
  * {@link GgufDenseDot}. Keeping the walkers here avoids duplicating dispatch
  * decisions in the public tensor facade.</p>
+ * @author bhangun
  */
 final class GgufDenseRows {
     private GgufDenseRows() {

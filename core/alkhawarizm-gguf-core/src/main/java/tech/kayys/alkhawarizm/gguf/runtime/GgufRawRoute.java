@@ -8,6 +8,7 @@ import java.lang.foreign.MemorySegment;
 
 /**
  * Raw GGUF mat-vec fallback routes used after prepared-cache admission misses.
+ * @author bhangun
  */
 final class GgufRawRoute {
     static final int ROUTE_FALLBACK = 0;

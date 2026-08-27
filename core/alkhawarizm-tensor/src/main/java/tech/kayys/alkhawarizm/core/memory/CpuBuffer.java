@@ -3,7 +3,12 @@ package tech.kayys.alkhawarizm.core.memory;
 import java.lang.foreign.Arena;
 import java.lang.foreign.MemorySegment;
 
-/** CPU-backed off-heap buffer using FFM Arena. */
+/**
+ * CPU-backed off-heap buffer using FFM Arena.
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public final class CpuBuffer implements Buffer {
 
     private final Arena arena;

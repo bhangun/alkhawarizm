@@ -16,6 +16,7 @@ import java.util.WeakHashMap;
 
 /**
  * Prepared-matrix byte estimation and estimate-cache bookkeeping.
+ * @author bhangun
  */
 final class GgufPreparedMatrixEstimator {
     private static final int RECENT_ESTIMATE_SLOTS = 256;

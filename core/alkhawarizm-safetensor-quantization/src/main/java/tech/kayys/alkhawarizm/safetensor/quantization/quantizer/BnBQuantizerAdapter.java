@@ -17,6 +17,7 @@ import java.lang.foreign.ValueLayout;
  * the old approach of {@code tensor.toFloatArray()} would exhaust JVM direct buffer
  * memory. Chunked streaming quantization caps peak allocation at ~4MB per chunk
  * regardless of tensor size.
+ * @author bhangun
  */
 public class BnBQuantizerAdapter implements Quantizer {
 

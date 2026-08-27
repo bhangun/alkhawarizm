@@ -4,6 +4,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 
 /**
  * Flatten layer — reshapes input to [batch_size, -1].
+ * @author bhangun
  */
 public class Flatten extends NNModule {
 

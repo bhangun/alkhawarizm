@@ -1,5 +1,16 @@
 package tech.kayys.alkhawarizm.core.memory;
-
+/**
+ * 
+ * Configuration class for memorystore settings.
+ *
+ * <p>Key functionality:
+ * <ul>
+ * <li>Provides core class operations
+ * </ul>
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public class MemoryStoreConfig {
     private String engineType;
     private String dbPath;

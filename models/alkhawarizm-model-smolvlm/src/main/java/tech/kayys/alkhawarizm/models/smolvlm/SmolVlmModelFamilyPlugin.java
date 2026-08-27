@@ -26,7 +26,6 @@ public class SmolVlmModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/smolvlm",
                         "tokenizer", "processor_backed_tokenizer_json",
                         "direct_safetensor", "pending_smolvlm_image_video_processor_connector_runtime",
                         "version", "0.1.0-SNAPSHOT"));

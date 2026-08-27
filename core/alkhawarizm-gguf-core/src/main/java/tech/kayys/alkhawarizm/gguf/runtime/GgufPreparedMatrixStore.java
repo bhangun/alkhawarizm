@@ -16,6 +16,7 @@ import tech.kayys.alkhawarizm.gguf.runtime.GgufTensorOps.PreparedMatrix;
  *
  * <p>Each quant family is declared as a {@link GgufSlot}; slot storage and
  * admission stay out of the public {@link GgufTensorOps} surface.</p>
+ * @author bhangun
  */
 final class GgufPreparedMatrixStore {
     private static final GgufSlot<Q32Matrix, Q32ModelCache> Q32_SLOT =

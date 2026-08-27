@@ -24,7 +24,6 @@ public class ErnieModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of( ModelFamilyCapability.TOKENIZER, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/ernie",
                         "tokenizer", "wordpiece",
                         "direct_safetensor", "pending_task_id_bert_variant_runtime",
                         "version", "0.1.0-SNAPSHOT"));

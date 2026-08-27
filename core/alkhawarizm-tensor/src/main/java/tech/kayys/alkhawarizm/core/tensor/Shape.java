@@ -2,6 +2,12 @@ package tech.kayys.alkhawarizm.core.tensor;
 
 import java.util.Arrays;
 
+/**
+ * Represents the shape (dimensions) of a tensor.
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public final class Shape {
     private final long[] dims;
     private final long numel;

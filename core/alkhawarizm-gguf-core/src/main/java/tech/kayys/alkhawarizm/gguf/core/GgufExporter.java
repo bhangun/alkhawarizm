@@ -32,6 +32,7 @@ import java.util.Set;
  *         .quantization(Quantization.INT8)
  *         .export(Path.of("model.gguf"));
  * }</pre>
+ * @author bhangun
  */
 public final class GgufExporter {
 

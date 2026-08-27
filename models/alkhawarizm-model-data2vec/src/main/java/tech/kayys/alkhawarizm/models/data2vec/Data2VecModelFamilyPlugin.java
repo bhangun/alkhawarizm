@@ -29,7 +29,6 @@ public class Data2VecModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of( ModelFamilyCapability.TOKENIZER, ModelFamilyCapability.EMBEDDING, ModelFamilyCapability.VISION),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/data2vec",
                         "tokenizer", "roberta_byte_level_bpe_for_text",
                         "audio_processor", "wav2vec2_style_feature_extractor",
                         "image_processor", "beit_style_image_processor",

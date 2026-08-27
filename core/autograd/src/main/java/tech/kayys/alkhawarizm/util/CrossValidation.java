@@ -8,6 +8,7 @@ import java.util.stream.*;
 
 /**
  * Cross-validation utilities.
+ * @author bhangun
  */
 public class CrossValidation {
 

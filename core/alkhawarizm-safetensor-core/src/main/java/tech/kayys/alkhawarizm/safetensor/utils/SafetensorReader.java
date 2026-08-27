@@ -17,6 +17,7 @@ import java.util.Map;
 
 /**
  * Utility for reading tensors in the Safetensor format.
+ * @author bhangun
  */
 public class SafetensorReader {
 

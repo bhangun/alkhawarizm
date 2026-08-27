@@ -24,7 +24,6 @@ public class ZambaModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/zamba,zamba2",
                         "tokenizer", "hybrid_llama_compatible_tokenizer",
                         "direct_safetensor", "pending_zamba_hybrid_attention_mamba_runtime",
                         "version", "0.1.0-SNAPSHOT"));

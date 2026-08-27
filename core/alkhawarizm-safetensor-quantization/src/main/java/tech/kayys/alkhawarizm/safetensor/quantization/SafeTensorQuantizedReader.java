@@ -25,7 +25,7 @@ import java.util.*;
 /**
  * Reader for quantized SafeTensor models.
  *
- * @author Bhangun
+ * @author bhangun
  * @version 1.0.0
  */
 public class SafeTensorQuantizedReader {

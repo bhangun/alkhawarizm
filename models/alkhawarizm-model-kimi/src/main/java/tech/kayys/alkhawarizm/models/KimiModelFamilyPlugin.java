@@ -22,7 +22,6 @@ public class KimiModelFamilyPlugin implements ModelFamilyPlugin {
                                                 ModelFamilyCapability.CHAT_TEMPLATE),
                                 Map.of(
                                                 "bundle_profile", "experimental",
-                                                "origin", "3rdparty/transformers/src/transformers/models/kimi*",
                                                 "direct_safetensor", "pending_architecture_adapter",
                                                 "tokenizer", "pending",
                                                 "tokenizer_metadata_status", "pending",

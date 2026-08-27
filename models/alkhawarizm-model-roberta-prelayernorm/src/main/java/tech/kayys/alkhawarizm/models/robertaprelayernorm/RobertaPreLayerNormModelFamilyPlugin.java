@@ -29,7 +29,6 @@ public class RobertaPreLayerNormModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/roberta_prelayernorm",
                         "tokenizer", "byte_level_bpe",
                         "direct_safetensor", "pending_roberta_prelayernorm_runtime",
                         "version", "0.1.0-SNAPSHOT"));

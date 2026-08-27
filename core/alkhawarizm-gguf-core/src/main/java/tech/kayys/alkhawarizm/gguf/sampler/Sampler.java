@@ -2,7 +2,18 @@ package tech.kayys.alkhawarizm.gguf.loader.sampler;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-
+/**
+ * 
+ * Core class for kayys module.
+ *
+ * <p>Key functionality:
+ * <ul>
+ * <li>Provides core class operations
+ * </ul>
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public class Sampler {
     private final float temperature;
     private final int topK;

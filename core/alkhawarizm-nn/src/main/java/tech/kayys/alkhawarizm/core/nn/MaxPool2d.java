@@ -4,6 +4,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 
 /**
  * 2D max pooling layer.
+ * @author bhangun
  */
 public class MaxPool2d extends NNModule {
 

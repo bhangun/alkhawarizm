@@ -16,6 +16,7 @@ import java.util.function.Supplier;
  * <p>The slot owns weak per-model cache storage plus the prepare/admit path for
  * a single {@link GgufPreparedCachePolicy.Family}; {@link GgufPreparedMatrixStore} keeps only the public
  * routing facade.</p>
+ * @author bhangun
  */
 final class GgufSlot<M extends PreparedMatrix, C extends GgufPreparedMatrixCache<GgufKey, M>> {
     private static final int RECENT_MATRIX_SLOTS = 256;

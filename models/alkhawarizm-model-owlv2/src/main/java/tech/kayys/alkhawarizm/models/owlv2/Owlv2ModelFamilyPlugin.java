@@ -25,7 +25,6 @@ public class Owlv2ModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/owlv2",
                         "tokenizer", "clip_byte_level_bpe",
                         "image_processor", "owlv2_image_processor",
                         "direct_safetensor", "pending_owlv2_open_vocab_detection_runtime",

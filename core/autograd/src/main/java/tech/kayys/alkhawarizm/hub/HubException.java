@@ -2,6 +2,7 @@ package tech.kayys.alkhawarizm.ml.hub;
 
 /**
  * Exception thrown when model hub operations fail.
+ * @author bhangun
  */
 public class HubException extends RuntimeException {
 

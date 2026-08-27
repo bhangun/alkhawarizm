@@ -24,7 +24,6 @@ public class XlmModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.CAUSAL_LM, ModelFamilyCapability.TOKENIZER, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/xlm",
                         "tokenizer", "xlm_vocab_merges_bpe",
                         "direct_safetensor", "pending_xlm_language_embedding_runtime",
                         "version", "0.1.0-SNAPSHOT"));

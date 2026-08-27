@@ -24,7 +24,6 @@ public class XClipModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/x_clip",
                         "tokenizer", "clip_byte_level_bpe",
                         "video_processor", "xclip_processor",
                         "direct_safetensor", "pending_video_temporal_transformer_runtime",

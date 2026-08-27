@@ -26,7 +26,6 @@ public class MetaClip2ModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/metaclip_2",
                         "tokenizer", "clip_byte_level_bpe",
                         "image_processor", "metaclip_2_image_processor",
                         "direct_safetensor", "pending_metaclip2_dual_encoder_runtime",

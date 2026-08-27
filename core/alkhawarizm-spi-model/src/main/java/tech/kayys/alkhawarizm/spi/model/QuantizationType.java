@@ -11,7 +11,7 @@ import tech.kayys.alkhawarizm.core.model.ModelFormat;
  * Provides information about each quantization method including
  * quality level, compression ratio, and use cases.
  * 
- * @author Bhangun
+ * @author bhangun
  * @version 1.0.0
  */
 public enum QuantizationType {

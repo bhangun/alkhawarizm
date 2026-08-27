@@ -26,7 +26,6 @@ public class Florence2ModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/florence2",
                         "tokenizer", "processor_backed_tokenizer_json",
                         "direct_safetensor", "pending_florence2_processor_vision_seq2seq_runtime",
                         "version", "0.1.0-SNAPSHOT"));

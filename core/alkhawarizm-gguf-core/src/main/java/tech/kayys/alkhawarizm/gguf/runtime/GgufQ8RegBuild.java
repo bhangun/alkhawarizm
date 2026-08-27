@@ -19,6 +19,7 @@ import java.nio.ByteOrder;
 
 /**
  * Prepared matrix builder for regular one-block-per-scale Q8-family formats.
+ * @author bhangun
  */
 final class GgufQ8RegBuild {
     private static final ValueLayout.OfShort LE_SHORT = ValueLayout.JAVA_SHORT_UNALIGNED

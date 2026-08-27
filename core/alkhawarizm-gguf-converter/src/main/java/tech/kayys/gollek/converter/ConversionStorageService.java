@@ -20,7 +20,7 @@ import java.nio.file.Paths;
  * Provides tenant-isolated storage with quota management and
  * security controls.
  * 
- * @author Bhangun
+ * @author bhangun
  * @version 1.0.0
  */
 @ApplicationScoped

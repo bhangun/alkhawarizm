@@ -24,6 +24,7 @@ import java.util.*;
  *   [N bytes UTF-8]       – JSON header  {"tensor_name": {"dtype": "F32", "shape": [..], "data_offsets": [start, end]}, "__metadata__": {...}}
  *   [data blob]           – raw tensor bytes at offsets from JSON
  * </pre>
+ * @author bhangun
  */
 public final class SafetensorsReader implements AutoCloseable {
 

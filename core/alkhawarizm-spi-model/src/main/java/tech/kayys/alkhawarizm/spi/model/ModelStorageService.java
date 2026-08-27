@@ -20,6 +20,7 @@ import io.smallrye.mutiny.Uni;
  * All operations are asynchronous and return {@link Uni} for reactive
  * processing.
  * </p>
+ * @author bhangun
  */
 public interface ModelStorageService {
 

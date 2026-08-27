@@ -24,7 +24,6 @@ public class AlignModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/align",
                         "tokenizer", "wordpiece_with_align_processor",
                         "image_processor", "align_efficientnet_image_processor",
                         "direct_safetensor", "pending_align_dual_encoder_runtime",

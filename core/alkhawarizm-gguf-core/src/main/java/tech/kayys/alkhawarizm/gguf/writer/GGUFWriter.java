@@ -24,6 +24,7 @@ import java.util.Objects;
 
 /**
  * GGUF v3 writer for Tensor-backed training models.
+ * @author bhangun
  */
 public final class GGUFWriter {
 

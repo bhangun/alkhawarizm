@@ -14,6 +14,7 @@ import java.util.Objects;
  * <p>This class chooses between prepared caches and raw row kernels. Keeping
  * the policy here makes cache admission and fallback routing easier to tune
  * without growing the public tensor facade.</p>
+ * @author bhangun
  */
 final class GgufMatVec {
     private static final int RECENT_PLAN_SLOTS = 256;

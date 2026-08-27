@@ -117,15 +117,10 @@ public class ModelExporter {
      * Quantization methods for model compression.
      */
     public enum Quantization {
-        /** No quantization (FP32) */
         NONE,
-        /** 16-bit floating point */
         FP16,
-        /** 8-bit integer */
         INT8,
-        /** 4-bit integer (GPTQ-style) */
         INT4,
-        /** 4-bit NormalFloat (QLoRA-style) */
         NF4
     }
 

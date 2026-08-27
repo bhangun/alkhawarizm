@@ -21,8 +21,8 @@ import java.util.concurrent.Executors;
 /**
  * OpenAI-compatible /v1/embeddings endpoint.
  * Uses reflection to access EmbeddingEngine to avoid circular dependencies.
+ * @author bhangun
  */
-@jakarta.ws.rs.Path("/v1/embeddings")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Tag(name = "Embeddings", description = "Text embedding generation")

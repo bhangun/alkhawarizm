@@ -25,7 +25,6 @@ public class GraniteModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/granite,granitemoe,granitemoehybrid,granitemoeshared",
                         "tokenizer", "hf_tokenizer_json_or_bpe",
                         "direct_safetensor", "pending_granite_moe_and_hybrid_runtime",
                         "version", "0.1.0-SNAPSHOT"));

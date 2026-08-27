@@ -5,7 +5,7 @@ import tech.kayys.alkhawarizm.error.ErrorCode;
 /**
  * Exception for device-related errors (GPU/TPU/NPU unavailable, OOM, etc.).
  * 
- * @author Bhangun
+ * @author bhangun
  * @since 1.0.0
  */
 public class DeviceException extends InferenceException {

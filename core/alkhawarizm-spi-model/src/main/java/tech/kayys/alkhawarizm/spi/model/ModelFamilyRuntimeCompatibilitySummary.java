@@ -2,6 +2,13 @@ package tech.kayys.alkhawarizm.spi.model;
 
 import java.util.List;
 import java.util.Map;
+/**
+ * Immutable record representing modelfamilyruntimecompatibilitysummary data.
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
+
 
 public record ModelFamilyRuntimeCompatibilitySummary(
         int familyCount,

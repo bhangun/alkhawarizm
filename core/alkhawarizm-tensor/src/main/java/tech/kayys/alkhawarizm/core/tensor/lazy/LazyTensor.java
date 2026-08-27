@@ -14,6 +14,7 @@ import java.util.List;
  * When actual data is requested via eval() or array access, the DAG is
  * compiled,
  * optimized, and executed on the provided ComputeBackend.
+ * @author bhangun
  */
 public class LazyTensor implements Tensor {
 

@@ -25,7 +25,6 @@ public class VisionTextDualEncoderModelFamilyPlugin implements ModelFamilyPlugin
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/vision_text_dual_encoder",
                         "tokenizer", "delegated_text_model_tokenizer",
                         "image_processor", "delegated_vision_model_processor",
                         "direct_safetensor", "pending_composite_dual_encoder_runtime",

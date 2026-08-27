@@ -35,6 +35,7 @@ import org.jboss.logging.Logger;
  * <p>
  * All fields default to sensible values if absent from the JSON — this
  * handles both slim community configs and full Transformers library exports.
+ * @author bhangun
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ModelConfig {

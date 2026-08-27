@@ -2,6 +2,7 @@ package tech.kayys.gollek.ml.gguf;
 
 /**
  * GGUF tensor data types.
+ * @author bhangun
  */
 public enum GgmlType {
     F32(0, 1, 4),

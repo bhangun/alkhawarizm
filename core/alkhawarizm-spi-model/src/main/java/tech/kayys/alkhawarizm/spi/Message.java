@@ -20,6 +20,7 @@ import java.util.Objects;
  * adds
  * multi-modal content parts, tool calls, etc. and bridges to this type where
  * needed.
+ * @author bhangun
  */
 public final class Message {
 

@@ -31,7 +31,7 @@ import java.util.*;
  * </ul>
  * </p>
  *
- * @author Bhangun
+ * @author bhangun
  * @version 1.0.0
  */
 public class SafeTensorQuantizedWriter {

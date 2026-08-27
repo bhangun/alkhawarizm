@@ -22,6 +22,7 @@ import java.util.regex.Pattern;
  * converter outputs and future model/tokenizer styles (GPT-2 byte-level,
  * raw UTF-8 tokenizers like Qwen/Tiktoken, and any converters that emit
  * alternate metadata keys).
+ * @author bhangun
  */
 public final class GGUFTokenizer implements Tokenizer {
     private static final Logger log = Logger.getLogger(GGUFTokenizer.class);
@@ -191,11 +192,6 @@ public final class GGUFTokenizer implements Tokenizer {
 
     /**
      * Heuristic to detect whether tokens are raw UTF-8 strings or GPT-2 byte-level encodings.
-     */
-    /**
-     * Detects whether tokens are raw UTF-8 strings or GPT-2 byte-level encodings
-     * using a single-pass sampled scoring heuristic. This is fast and tunable
-     * and avoids cascading if/else checks.
      */
     private boolean detectRawUtf8Vocab(Map<String, Object> meta, String arch, String tokenizerModel, List<String> tokens) {
         // 1) explicit override metadata (strongest signal)

@@ -11,6 +11,7 @@ import java.util.UUID;
 
 /**
  * Session for GGUF model execution.
+ * @author bhangun
  */
 public interface GgufRunnerSession extends RunnerSession {
     

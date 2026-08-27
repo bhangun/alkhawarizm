@@ -15,6 +15,7 @@ import java.nio.ByteOrder;
  * <p>This helper owns deterministic byte-layout expansion for GGUF quant blocks
  * so {@link GgufTensorOps} can keep matrix construction separate from format
  * unpack details.</p>
+ * @author bhangun
  */
 final class GgufQuantUnpacker {
     private static final ValueLayout.OfInt LE_INT = ValueLayout.JAVA_INT_UNALIGNED

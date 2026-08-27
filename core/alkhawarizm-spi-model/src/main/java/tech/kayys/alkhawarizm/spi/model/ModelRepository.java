@@ -11,7 +11,7 @@
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
  *
- * @author Bhangun
+ * @author bhangun
  */
 package tech.kayys.alkhawarizm.spi.model;
 
@@ -23,7 +23,13 @@ import io.smallrye.mutiny.Uni;
 
 import java.nio.file.Path;
 import java.util.List;
-
+/**
+ * 
+ * Core interface for kayys module.
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public interface ModelRepository {
     Uni<ModelManifest> findById(String modelId, String requestId);
 

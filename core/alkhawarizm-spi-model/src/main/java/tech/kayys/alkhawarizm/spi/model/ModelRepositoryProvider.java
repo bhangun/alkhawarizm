@@ -6,6 +6,7 @@ import tech.kayys.alkhawarizm.core.model.ModelFormat;
 
 /**
  * Provider interface for model repositories.
+ * @author bhangun
  */
 public interface ModelRepositoryProvider {
 

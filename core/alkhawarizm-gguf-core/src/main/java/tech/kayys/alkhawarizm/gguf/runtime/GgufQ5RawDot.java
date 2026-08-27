@@ -20,6 +20,7 @@ import java.nio.ByteOrder;
  * <p>Q5_K extends Q4_K's nibbles with separate high-bit planes. This helper
  * owns direct dot products, no-min fast paths, and the mat-vec variant that
  * reuses precomputed vector group sums for min correction.</p>
+ * @author bhangun
  */
 final class GgufQ5RawDot {
     private static final int QK_GROUPS = QK_K / 32;

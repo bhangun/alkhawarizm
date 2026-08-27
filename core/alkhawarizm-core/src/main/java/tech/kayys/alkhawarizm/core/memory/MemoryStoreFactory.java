@@ -37,12 +37,12 @@ package tech.kayys.alkhawarizm.core.memory;
  *     ...
  * }
  * }</pre>
+ * @author bhangun
  */
 public final class MemoryStoreFactory {
 
     /** System property key: {@code -Dalkhawarizm.memory.store=rocksdb|helixdb} */
     public static final String PROPERTY_KEY = "alkhawarizm.memory.store";
-    /** Environment variable: {@code ALKHAWARIZM_MEMORY_STORE=rocksdb|helixdb} */
     public static final String ENV_KEY = "ALKHAWARIZM_MEMORY_STORE";
 
     public static final String BACKEND_ROCKSDB = "rocksdb";

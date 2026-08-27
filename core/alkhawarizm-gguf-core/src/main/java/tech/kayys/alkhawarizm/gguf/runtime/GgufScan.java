@@ -11,6 +11,7 @@ import java.util.Objects;
 
 /**
  * Shared scanner for prepared-matrix cache planning and preparation.
+ * @author bhangun
  */
 final class GgufScan {
     private int scannedTensors;

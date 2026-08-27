@@ -25,7 +25,6 @@ public class SwitchTransformersModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/switch_transformers",
                         "tokenizer", "sentencepiece_unigram_metadata_only",
                         "direct_safetensor", "pending_switch_transformers_moe_seq2seq_runtime",
                         "version", "0.1.0-SNAPSHOT"));

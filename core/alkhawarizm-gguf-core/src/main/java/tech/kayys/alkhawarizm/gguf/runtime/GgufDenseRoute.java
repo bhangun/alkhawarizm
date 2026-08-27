@@ -8,6 +8,7 @@ import tech.kayys.alkhawarizm.gguf.core.GgmlType;
  * <p>Dense tensors only have three supported scalar formats, but this path is
  * used for both direct row dots and fallback matvecs. Routing once lets callers
  * jump straight to the F32, F16, or BF16 implementation.</p>
+ * @author bhangun
  */
 final class GgufDenseRoute {
     static final int UNSUPPORTED = 0;

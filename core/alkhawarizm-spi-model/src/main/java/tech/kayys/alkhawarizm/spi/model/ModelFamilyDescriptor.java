@@ -22,6 +22,7 @@ import java.util.Map;
  * @param capabilities  set of capability flags declared by this family
  * @param metadata      freeform key-value metadata (e.g.
  *                      {@code "bundle_profile", "optional"})
+ * @author bhangun
  */
 public record ModelFamilyDescriptor(
         String id,

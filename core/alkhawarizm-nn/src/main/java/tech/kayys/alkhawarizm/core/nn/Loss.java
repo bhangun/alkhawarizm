@@ -14,6 +14,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
  * <p>
  * Methods follow the PyTorch / libtorch naming convention and accept the same
  * argument semantics (mean reduction by default).
+ * @author bhangun
  */
 public final class Loss {
 

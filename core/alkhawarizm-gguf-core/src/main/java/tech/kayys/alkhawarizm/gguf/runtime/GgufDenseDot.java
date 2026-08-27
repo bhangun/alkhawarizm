@@ -22,6 +22,7 @@ import jdk.incubator.vector.VectorOperators;
  * <p>F32, F16, and BF16 tensors do not need quant deconstruction, but their
  * scalar and Vector API reductions are still hot-path code. Keeping them here
  * separates dense arithmetic from the mixed-format tensor facade.</p>
+ * @author bhangun
  */
 final class GgufDenseDot {
     private static final ValueLayout.OfShort LE_SHORT = ValueLayout.JAVA_SHORT_UNALIGNED

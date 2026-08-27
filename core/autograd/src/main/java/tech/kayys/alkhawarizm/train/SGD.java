@@ -6,6 +6,7 @@ import java.util.Map;
 
 /**
  * Stochastic Gradient Descent optimizer.
+ * @author bhangun
  */
 public final class SGD implements Optimizer {
     private final float lr;

@@ -8,6 +8,7 @@ import java.util.concurrent.RecursiveAction;
  *
  * <p>Parallel thresholds are intentionally centralized here so each kernel can
  * ask the same policy before paying stream parallelism overhead.</p>
+ * @author bhangun
  */
 final class GgufParallelConfig {
     private static final long DEFAULT_PARALLEL_MIN_OPS = 131_072L;

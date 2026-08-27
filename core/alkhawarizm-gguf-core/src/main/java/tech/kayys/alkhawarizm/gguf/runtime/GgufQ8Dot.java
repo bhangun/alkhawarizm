@@ -8,6 +8,7 @@ import static tech.kayys.alkhawarizm.gguf.runtime.GgufQuantFormats.Q4_0_BLOCK_SI
  *
  * <p>These reducers walk pre-unpacked signed-byte Q8 rows and combine per-block
  * scales with the low-level signed-byte dot kernels in {@link GgufDot}.</p>
+ * @author bhangun
  */
 final class GgufQ8Dot {
     private GgufQ8Dot() {

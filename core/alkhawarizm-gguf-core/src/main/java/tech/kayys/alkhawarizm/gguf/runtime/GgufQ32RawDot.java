@@ -18,6 +18,7 @@ import java.nio.ByteOrder;
  * <p>Q4_0, Q4_1, Q5_0, and Q5_1 all consume 32-value blocks directly from
  * {@link MemorySegment} data. This helper owns their unpack-on-read arithmetic
  * so {@link GgufTensorOps} can stay focused on dispatch and scheduling.</p>
+ * @author bhangun
  */
 final class GgufQ32RawDot {
     private static final ValueLayout.OfShort LE_SHORT = ValueLayout.JAVA_SHORT_UNALIGNED

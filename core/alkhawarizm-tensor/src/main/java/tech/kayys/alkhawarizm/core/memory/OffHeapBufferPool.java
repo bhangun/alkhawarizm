@@ -40,6 +40,7 @@ import java.util.concurrent.atomic.LongAdder;
  * <p>
  * Each bucket's free-list is independently synchronized. The pool is safe
  * for concurrent use from multiple threads (e.g. parallel token generation).
+ * @author bhangun
  */
 public final class OffHeapBufferPool implements AutoCloseable {
 

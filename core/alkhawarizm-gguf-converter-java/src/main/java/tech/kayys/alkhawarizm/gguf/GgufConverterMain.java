@@ -20,6 +20,7 @@ import java.util.Arrays;
  *   --version &lt;str&gt;              Model version string (default: 1.0)
  *   --verbose                    Enable verbose logging
  * </pre>
+ * @author bhangun
  */
 public final class GgufConverterMain {
 

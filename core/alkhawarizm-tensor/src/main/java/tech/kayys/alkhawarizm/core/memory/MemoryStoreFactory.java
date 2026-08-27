@@ -37,17 +37,16 @@ package tech.kayys.alkhawarizm.core.memory;
  *     Optional<MemorySegment> seg = store.getZeroCopy("kv-key".getBytes(), arena);
  * }
  * }</pre>
+ * @author bhangun
  */
 public final class MemoryStoreFactory {
 
     /** System property key for backend selection. */
     public static final String PROPERTY_KEY = "alkhawarizm.memory.store";
-    /** Environment variable key for backend selection. */
     public static final String ENV_KEY = "ALKHAWARIZM_MEMORY_STORE";
 
     /** Backend identifier for RocksDB. */
     public static final String BACKEND_ROCKSDB = "rocksdb";
-    /** Backend identifier for HelixDB. */
     public static final String BACKEND_HELIXDB = "helixdb";
 
     private MemoryStoreFactory() {

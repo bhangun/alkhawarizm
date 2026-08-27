@@ -2,7 +2,18 @@ package tech.kayys.alkhawarizm.gguf.loader.tokenizer;
 
 import tech.kayys.alkhawarizm.gguf.loader.gguf.GGUFFile;
 import java.util.*;
-
+/**
+ * 
+ * Core class for kayys module.
+ *
+ * <p>Key functionality:
+ * <ul>
+ * <li>Provides core class operations
+ * </ul>
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public class BPETokenizer {
     private final String[] pieces;
     private final Map<String, Integer> pieceToId;

@@ -9,6 +9,7 @@ import tech.kayys.alkhawarizm.gguf.runtime.GgufTensorOps.Q32Matrix;
  *
  * <p>This helper keeps prepared row traversal close to the Q32 row-dot reducers
  * while {@link GgufTensorOps} remains the public facade.</p>
+ * @author bhangun
  */
 final class GgufQ32Rows {
     private GgufQ32Rows() {

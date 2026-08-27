@@ -6,6 +6,7 @@ import tech.kayys.gollek.plugin.runner.RunnerSession;
 
 /**
  * Backend interface for GGUF execution.
+ * @author bhangun
  */
 public interface GgufBackend {
     <T> RunnerResult<T> execute(RunnerRequest request);

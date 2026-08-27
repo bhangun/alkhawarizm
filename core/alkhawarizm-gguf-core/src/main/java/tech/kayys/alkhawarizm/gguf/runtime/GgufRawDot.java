@@ -8,6 +8,7 @@ import java.lang.foreign.MemorySegment;
  * <p>Raw multi-row execution lives in {@link GgufRawMatVec}; this helper keeps
  * decode-time one-row dispatch in one narrow place so scheduling code does not
  * grow every direct-dot variant.</p>
+ * @author bhangun
  */
 final class GgufRawDot {
     private GgufRawDot() {

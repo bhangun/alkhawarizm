@@ -24,7 +24,6 @@ public class ColPaliModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/colpali",
                         "tokenizer", "paligemma_sentencepiece_with_retrieval_processor",
                         "processor", "colpali_retrieval_processor",
                         "direct_safetensor", "pending_multivector_retrieval_runtime",

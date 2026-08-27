@@ -14,6 +14,7 @@ import tech.kayys.alkhawarizm.spi.model.ModelRuntimeTraits.AttentionRuntimeTrait
  * This keeps attention kernel and projection preferences separate from
  * broader runtime traits. Model farms can add family-specific attention policy
  * here without growing {@link ModelRuntimeTraits}.
+ * @author bhangun
  */
 public final class ModelAttentionTraitsPolicy {
 

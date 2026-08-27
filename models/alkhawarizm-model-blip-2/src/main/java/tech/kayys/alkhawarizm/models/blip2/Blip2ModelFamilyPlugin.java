@@ -25,7 +25,6 @@ public class Blip2ModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER, ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/blip_2",
                         "tokenizer", "processor_backed_text_tokenizer",
                         "image_processor", "blip2_image_processor",
                         "direct_safetensor", "pending_blip2_qformer_runtime",

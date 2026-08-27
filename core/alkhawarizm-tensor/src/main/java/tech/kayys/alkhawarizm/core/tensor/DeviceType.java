@@ -2,6 +2,7 @@ package tech.kayys.alkhawarizm.core.tensor;
 
 /**
  * Target device for model inference and memory allocation.
+ * @author bhangun
  */
 public enum DeviceType {
     /** Auto-select best available device */

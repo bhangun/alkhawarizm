@@ -26,7 +26,6 @@ public class ClipModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/clip",
                         "tokenizer", "byte_level_bpe",
                         "direct_safetensor", "not_causal_lm",
                         "version", "0.1.0-SNAPSHOT"));

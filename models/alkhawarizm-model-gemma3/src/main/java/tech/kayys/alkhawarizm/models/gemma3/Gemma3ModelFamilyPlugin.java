@@ -24,7 +24,6 @@ public class Gemma3ModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE, ModelFamilyCapability.DIRECT_SAFETENSOR_INFERENCE),
                 Map.of(
                         "bundle_profile", "optional",
-                        "origin", "3rdparty/transformers/src/transformers/models/gemma3",
                         "direct_safetensor", "text_adapter_only",
                         "multimodal_architecture", "Gemma3ForConditionalGeneration",
                         "version", "0.1.0-SNAPSHOT"));

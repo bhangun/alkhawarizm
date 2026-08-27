@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 /**
  * Multimodal request for inference.
  * Supports multiple input modalities and output configurations.
+ * @author bhangun
  */
 public class MultimodalRequest {
 

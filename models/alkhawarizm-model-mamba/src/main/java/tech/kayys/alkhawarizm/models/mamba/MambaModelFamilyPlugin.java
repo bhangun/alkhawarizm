@@ -22,7 +22,6 @@ public class MambaModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.CAUSAL_LM, ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/mamba",
                         "tokenizer", "byte_level_bpe",
                         "direct_safetensor", "pending_selective_state_space_runtime",
                         "version", "0.1.0-SNAPSHOT"));

@@ -53,7 +53,7 @@ import org.slf4j.LoggerFactory;
  * <li><b>GGUF input:</b> Direct quantization via llama.cpp FFM bindings</li>
  * </ul>
  *
- * @author Bhangun
+ * @author bhangun
  * @version 1.0.0
  */
 @ApplicationScoped

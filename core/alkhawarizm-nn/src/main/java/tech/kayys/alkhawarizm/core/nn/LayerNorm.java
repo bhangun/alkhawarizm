@@ -4,6 +4,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 
 /**
  * Layer Normalization.
+ * @author bhangun
  */
 public class LayerNorm extends NNModule {
 

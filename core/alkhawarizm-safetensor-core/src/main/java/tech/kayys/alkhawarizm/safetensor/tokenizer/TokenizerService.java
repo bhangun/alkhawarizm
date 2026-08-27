@@ -60,6 +60,7 @@ import java.util.*;
 
 /**
  * CDI service that loads and caches {@link HuggingFaceTokenizer} instances.
+ * @author bhangun
  */
 @ApplicationScoped
 public class TokenizerService {

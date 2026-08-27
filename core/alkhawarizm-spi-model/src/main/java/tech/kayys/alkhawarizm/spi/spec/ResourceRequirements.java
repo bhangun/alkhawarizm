@@ -4,6 +4,7 @@ import tech.kayys.alkhawarizm.core.tensor.DeviceType;
 
 /**
  * Represents the resource requirements for running a model.
+ * @author bhangun
  */
 public record ResourceRequirements(
                 MemoryRequirements memory,

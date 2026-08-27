@@ -16,7 +16,17 @@ import java.util.*;
 
 // Ref:
 // https://arxiv.org/abs/2005.08314
-// "Training Deep Nets with Subquadratic Superposition"
+// "Training Deep Nets with Subquadratic Superposition"/**
+ * Core class for tech module.
+ *
+ * <p>Key functionality:
+ * <ul>
+ * <li>Provides core class operations
+ * </ul>
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public final class AttentionGrad implements GradFn {
         @Override
         public Map<GValueId, GValueId> backward(

@@ -8,6 +8,7 @@ import java.util.Map;
 
 /**
  * Representation of a parsed GGUF model in memory.
+ * @author bhangun
  */
 @RegisterForReflection
 public final class GGUFModel implements AutoCloseable {

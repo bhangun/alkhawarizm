@@ -53,6 +53,7 @@ package tech.kayys.alkhawarizm.ml.metrics;
  * <li>Accuracy plateau: EarlyStopping(5, true, 1, "max")</li>
  * <li>Strict mode (high patience): EarlyStopping(30, true, 0.5, "min")</li>
  * </ul>
+ * @author bhangun
  */
 public class EarlyStopping {
 

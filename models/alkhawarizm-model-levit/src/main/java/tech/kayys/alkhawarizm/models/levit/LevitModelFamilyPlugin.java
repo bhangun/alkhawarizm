@@ -22,7 +22,6 @@ public class LevitModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.VISION, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/levit",
                         "image_processor", "levit_image_processor",
                         "direct_safetensor", "pending_levit_hybrid_cnn_attention_runtime",
                         "version", "0.1.0-SNAPSHOT"));

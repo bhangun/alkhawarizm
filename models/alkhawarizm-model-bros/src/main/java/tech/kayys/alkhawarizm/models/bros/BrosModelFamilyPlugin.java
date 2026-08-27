@@ -24,7 +24,6 @@ public class BrosModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/bros",
                         "tokenizer", "wordpiece",
                         "processor", "bros_bbox_processor",
                         "direct_safetensor", "pending_spade_relation_extractor_runtime",

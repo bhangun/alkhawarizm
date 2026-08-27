@@ -27,6 +27,7 @@ import java.nio.ByteOrder;
  *
  * <p>Q1_0, TQ1_0, and TQ2_0 are compact low-bit encodings that expand through
  * small lookup tables while reading raw {@link MemorySegment} data.</p>
+ * @author bhangun
  */
 final class GgufTqRawDot {
     private static final ValueLayout.OfShort LE_SHORT = ValueLayout.JAVA_SHORT_UNALIGNED

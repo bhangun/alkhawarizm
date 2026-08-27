@@ -22,6 +22,7 @@ import java.util.Objects;
 
 /**
  * Prepared matrix builders for K-quant formats without group mins.
+ * @author bhangun
  */
 final class GgufKPlainBuild {
     private static final ValueLayout.OfShort LE_SHORT = ValueLayout.JAVA_SHORT_UNALIGNED

@@ -21,6 +21,7 @@ import java.util.Optional;
  * <p>The Java K-quant encoders are useful as a portability fallback, but ggml's
  * native implementation is the compatibility source of truth for files that are
  * loaded by llama.cpp.</p>
+ * @author bhangun
  */
 final class GgmlNativeQuantizer {
     private static final String PROP_DISABLED = "gollek.gguf.native_quant.disable";

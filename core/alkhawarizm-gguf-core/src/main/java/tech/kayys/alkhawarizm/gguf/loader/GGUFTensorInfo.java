@@ -4,6 +4,7 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 
 /**
  * Metadata and offset for a single tensor within a GGUF file.
+ * @author bhangun
  */
 @RegisterForReflection
 public record GGUFTensorInfo(

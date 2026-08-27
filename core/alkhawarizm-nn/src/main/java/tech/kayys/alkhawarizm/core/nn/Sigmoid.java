@@ -4,6 +4,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 
 /**
  * Sigmoid activation layer.
+ * @author bhangun
  */
 public class Sigmoid extends NNModule {
 

@@ -9,6 +9,7 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * Shared model utilities.
+ * @author bhangun
  */
 public final class ModelUtils {
 

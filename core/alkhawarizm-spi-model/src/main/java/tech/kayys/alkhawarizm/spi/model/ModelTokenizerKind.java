@@ -8,6 +8,7 @@ package tech.kayys.alkhawarizm.spi.model;
  * model-family JARs can advertise tokenizer compatibility without depending on
  * a concrete tokenizer runtime.
  * </p>
+ * @author bhangun
  */
 public enum ModelTokenizerKind {
     HUGGING_FACE_BPE,

@@ -76,7 +76,18 @@ public record ModelManifest(
             return (Map<String, Object>) scores;
         }
         return Map.of();
-    }
+    }/**
+ * Builder for constructing complex  objects.
+ *
+ * <p>Key functionality:
+ * <ul>
+ * <li>Provides core class operations
+ * </ul>
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
+
 
     public static class Builder {
         private String modelId;

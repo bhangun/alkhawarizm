@@ -18,6 +18,7 @@ import tech.kayys.alkhawarizm.ml.autograd.VectorOps;
  * RegressionMetrics.Result r = RegressionMetrics.compute(pred, actual);
  * System.out.printf("MAE=%.4f RMSE=%.4f R²=%.4f%n", r.mae(), r.rmse(), r.r2());
  * }</pre>
+ * @author bhangun
  */
 public final class RegressionMetrics {
 

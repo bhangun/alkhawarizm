@@ -26,7 +26,6 @@ public class JinaEmbeddingsV3ModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of( ModelFamilyCapability.EMBEDDING, ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/jina_embeddings_v3",
                         "tokenizer", "xlm_roberta_sentencepiece_metadata_only",
                         "direct_safetensor", "not_causal_lm_embedding_encoder_runtime_pending",
                         "version", "0.1.0-SNAPSHOT"));

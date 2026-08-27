@@ -7,6 +7,7 @@ import java.util.Map;
 
 /**
  * Registry for managing models and their versions.
+ * @author bhangun
  */
 public interface ModelRegistry {
 

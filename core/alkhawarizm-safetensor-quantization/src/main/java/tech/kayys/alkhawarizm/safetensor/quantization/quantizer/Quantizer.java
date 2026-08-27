@@ -15,7 +15,7 @@ import tech.kayys.alkhawarizm.safetensor.quantization.QuantConfig;
 /**
  * Interface for quantization implementations.
  *
- * @author Bhangun
+ * @author bhangun
  * @version 1.0.0
  */
 public interface Quantizer {

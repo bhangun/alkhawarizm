@@ -17,6 +17,7 @@ import java.util.Set;
  * This keeps prompt defaults, BOS insertion, and control-token validation
  * policy out of broader runtime traits so model-family prompt behavior can
  * evolve independently from attention and modality policy.
+ * @author bhangun
  */
 public record ModelPromptTraits(
         PromptBosPolicy promptBosPolicy,

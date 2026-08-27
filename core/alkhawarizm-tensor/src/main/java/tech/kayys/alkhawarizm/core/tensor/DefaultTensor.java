@@ -3,7 +3,12 @@ package tech.kayys.alkhawarizm.core.tensor;
 import tech.kayys.alkhawarizm.core.backend.ComputeBackend;
 import tech.kayys.alkhawarizm.core.memory.Buffer;
 
-/** Default concrete tensor backed by a {@link Buffer}. */
+/**
+ * Default concrete tensor backed by a {@link Buffer}.
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public final class DefaultTensor implements Tensor {
 
     private final Shape shape;

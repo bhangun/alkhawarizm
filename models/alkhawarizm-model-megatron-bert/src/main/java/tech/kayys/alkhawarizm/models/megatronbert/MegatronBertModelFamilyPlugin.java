@@ -28,7 +28,6 @@ public class MegatronBertModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/megatron_bert",
                         "tokenizer", "bert_wordpiece",
                         "direct_safetensor", "pending_megatron_bert_encoder_runtime",
                         "version", "0.1.0-SNAPSHOT"));

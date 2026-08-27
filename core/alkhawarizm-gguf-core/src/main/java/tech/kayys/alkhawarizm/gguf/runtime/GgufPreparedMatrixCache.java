@@ -18,6 +18,7 @@ import java.util.Map;
  *
  * <p>Estimate caching avoids rescanning quantized tensor bytes while planning
  * which matrices are worth preparing for repeated mat-vec calls.</p>
+ * @author bhangun
  */
 final class PreparedMatrixEstimateModelCache {
     private final Map<GgufKey, Long> estimates = new LinkedHashMap<>();

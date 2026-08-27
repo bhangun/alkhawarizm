@@ -49,6 +49,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * Every {@link SafetensorTensor} vended by this object shares backing memory
  * with the single {@link Arena} managed here. Closing this result invalidates
  * all tensors simultaneously.
+ * @author bhangun
  */
 public final class SafetensorLoadResult implements AutoCloseable {
 
@@ -89,15 +90,7 @@ public final class SafetensorLoadResult implements AutoCloseable {
      * How the tensor data was loaded into memory.
      */
     public enum LoadMode {
-        /**
-         * Memory-mapped: the OS maps the file into the process address space.
-         * Zero-copy, lazy — only pages actually read cause disk I/O.
-         */
         MMAP,
-        /**
-         * Copied into a native memory allocation.
-         * Used when mmap is unavailable (e.g., network filesystems, some OSes).
-         */
         COPY
     }
 

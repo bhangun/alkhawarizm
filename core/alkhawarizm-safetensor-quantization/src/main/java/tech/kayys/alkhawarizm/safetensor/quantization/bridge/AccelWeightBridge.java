@@ -30,6 +30,7 @@ import java.util.Set;
  * <p>
  * F32 weights are wrapped directly (zero-copy).
  * BF16/F16 weights are upcast to F32 (copy).
+ * @author bhangun
  */
 @ApplicationScoped
 public class AccelWeightBridge {

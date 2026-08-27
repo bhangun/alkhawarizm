@@ -53,6 +53,7 @@ import java.util.*;
  * <p>
  * Provides tensor-name → shard-file lookup and shard enumeration.
  * Immutable and thread-safe after construction.
+ * @author bhangun
  */
 public final class SafetensorShardIndex {
 

@@ -7,6 +7,7 @@ import java.nio.file.Path;
  * Resolves and downloads model artifacts.
  * This interface is retained for compatibility with the cache and local
  * repository layers.
+ * @author bhangun
  */
 public interface ArtifactResolver {
 

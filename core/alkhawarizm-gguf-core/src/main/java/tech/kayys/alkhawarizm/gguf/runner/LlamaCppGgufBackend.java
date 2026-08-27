@@ -10,6 +10,7 @@ import java.util.UUID;
 
 /**
  * GGUF backend powered by llama.cpp native bindings.
+ * @author bhangun
  */
 public class LlamaCppGgufBackend implements GgufBackend {
     

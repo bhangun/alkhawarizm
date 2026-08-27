@@ -12,6 +12,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
  * <p>
  * Use these helpers when you need a functional (stateless) style and do not
  * want to instantiate a {@link NNModule} subclass.
+ * @author bhangun
  */
 public final class Functional {
 

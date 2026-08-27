@@ -31,7 +31,6 @@ public class Qwen25OmniModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE, ModelFamilyCapability.VISION, ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/qwen2_5_omni",
                         "tokenizer", "qwen_hf_bpe_with_omni_processors",
                         "direct_safetensor", "pending_qwen2_5_omni_thinker_talker_token2wav_runtime",
                         "version", "0.1.0-SNAPSHOT"));

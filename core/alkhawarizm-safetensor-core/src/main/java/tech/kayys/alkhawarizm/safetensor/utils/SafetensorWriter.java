@@ -24,6 +24,7 @@ import java.util.Map;
  * <li><b>Data:</b> Raw binary data stored at offsets specified in the
  * header</li>
  * </ul>
+ * @author bhangun
  */
 public class SafetensorWriter {
 

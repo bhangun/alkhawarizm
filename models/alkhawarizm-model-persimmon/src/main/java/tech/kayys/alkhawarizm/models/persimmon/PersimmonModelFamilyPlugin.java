@@ -23,7 +23,6 @@ public class PersimmonModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.CAUSAL_LM, ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/persimmon",
                         "tokenizer", "tokenizer_json_bpe",
                         "direct_safetensor", "pending_persimmon_rotary_runtime",
                         "version", "0.1.0-SNAPSHOT"));

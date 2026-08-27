@@ -29,7 +29,6 @@ public class SeamlessM4TModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/seamless_m4t,seamless_m4t_v2",
                         "tokenizer", "seamless_m4t_processor_tokenizer",
                         "direct_safetensor", "pending_seamless_m4t_conformer_t2u_hifigan_runtime",
                         "version", "0.1.0-SNAPSHOT"));

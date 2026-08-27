@@ -26,7 +26,6 @@ public class Qwen2AudioModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/qwen2_audio",
                         "tokenizer", "qwen_hf_bpe_with_audio_processor",
                         "direct_safetensor", "pending_qwen2_audio_encoder_projector_runtime",
                         "version", "0.1.0-SNAPSHOT"));

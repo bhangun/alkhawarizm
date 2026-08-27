@@ -23,7 +23,6 @@ public class MptModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/mpt",
                         "tokenizer", "byte_level_bpe",
                         "direct_safetensor", "pending_alibi_attention_and_mpt_block_runtime",
                         "version", "0.1.0-SNAPSHOT"));

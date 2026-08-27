@@ -4,7 +4,18 @@ import tech.kayys.alkhawarizm.data.*;
 import tech.kayys.gollek.ir.*;
 import tech.kayys.alkhawarizm.core.tensor.Tensor;
 import java.util.Map;
-
+/**
+ * 
+ * Core class for tech module.
+ *
+ * <p>Key functionality:
+ * <ul>
+ * <li>Provides core class operations
+ * </ul>
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public final class TrainingLoop {
     private final Trainer trainer;
     private final CheckpointManager checkpoint;

@@ -30,6 +30,7 @@ import java.util.List;
  * <li>Gemma 4: Per-layer input gating and projection</li>
  * <li>Gemma 4: Post per-layer input normalization</li>
  * </ul>
+ * @author bhangun
  */
 public final class GemmaArchMapper {
 

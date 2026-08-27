@@ -33,6 +33,7 @@ import java.util.Map;
  * // Load from local path
  * ModelHub.loadInto(model, "local:/path/to/model");
  * }</pre>
+ * @author bhangun
  */
 public final class ModelHub {
 

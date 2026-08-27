@@ -21,7 +21,6 @@ public class PvtV2ModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.VISION, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/pvt_v2",
                         "image_processor", "pvt_v2_image_processor",
                         "direct_safetensor", "pending_pvt_v2_linear_attention_runtime",
                         "version", "0.1.0-SNAPSHOT"));

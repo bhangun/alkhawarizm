@@ -26,7 +26,6 @@ public class Mistral3ModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/mistral3",
                         "tokenizer", "mistral_tekken_with_vision_processor",
                         "direct_safetensor", "pending_mistral3_vision_projector_runtime",
                         "version", "0.1.0-SNAPSHOT"));

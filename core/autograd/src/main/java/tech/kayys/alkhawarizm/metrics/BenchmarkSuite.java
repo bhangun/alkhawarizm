@@ -21,6 +21,7 @@ import java.util.*;
  * suite.run();
  * suite.printReport();
  * }</pre>
+ * @author bhangun
  */
 public final class BenchmarkSuite {
 

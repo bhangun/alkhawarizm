@@ -25,7 +25,6 @@ public class Wav2Vec2BertModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/wav2vec2_bert",
                         "tokenizer", "wav2vec2_bert_processor",
                         "direct_safetensor", "pending_audio_conformer_runtime",
                         "version", "0.1.0-SNAPSHOT"));

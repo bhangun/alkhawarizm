@@ -6,6 +6,13 @@ import tech.kayys.alkhawarizm.core.model.ModelFormat;
 
 import java.net.URI;
 import java.util.Map;
+/**
+ * Immutable record representing modeldescriptor data.
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
+
 
 public record ModelDescriptor(
                 String id,

@@ -6,7 +6,7 @@ import tech.kayys.alkhawarizm.gguf.core.*;
 /**
  * Exception thrown during GGUF conversion operations.
  * 
- * @author Bhangun
+ * @author bhangun
  * @version 1.0.0
  */
 public class GGUFException extends RuntimeException {

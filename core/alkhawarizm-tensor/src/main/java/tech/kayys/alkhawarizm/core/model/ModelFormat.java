@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 /**
  * Enumeration of supported model formats.
+ * @author bhangun
  */
 public enum ModelFormat {
 

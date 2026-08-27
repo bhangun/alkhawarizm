@@ -5,6 +5,7 @@ import java.util.List;
 /**
  * Sealed hierarchy for typed GGUF metadata values.
  * Mirrors the {@code gguf_value} union from the C spec.
+ * @author bhangun
  */
 public sealed interface GgufMetaValue
         permits GgufMetaValue.UInt8Val, GgufMetaValue.Int8Val,

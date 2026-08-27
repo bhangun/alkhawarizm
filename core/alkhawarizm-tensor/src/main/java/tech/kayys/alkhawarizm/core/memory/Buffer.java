@@ -19,6 +19,7 @@ import java.lang.foreign.MemorySegment;
  * must free the underlying memory when the reference count drops to zero after
  * {@link #release()}
  * is called.
+ * @author bhangun
  */
 public interface Buffer {
     java.lang.foreign.Arena arena();

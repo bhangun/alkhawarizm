@@ -16,6 +16,7 @@ import java.nio.ByteOrder;
  * paths. This helper scans only compact scale/min metadata so callers can pick
  * one of those paths once per mat-vec instead of rediscovering min state inside
  * every row dot.</p>
+ * @author bhangun
  */
 final class GgufKMeta {
     private static final long HIGH_NIBBLE_MASK = 0xF0F0F0F0F0F0F0F0L;

@@ -11,6 +11,7 @@ import java.util.*;
 /**
  * SDK-friendly GGUF Reader.
  * Supports dequantization of Q4_0 and Q8_0 tensors.
+ * @author bhangun
  */
 public final class GgufReader implements AutoCloseable {
 

@@ -7,15 +7,13 @@ package tech.kayys.alkhawarizm.spi.model;
  * The tier is declared as a string value ({@code "core"}, {@code "optional"},
  * {@code "experimental"}) inside the descriptor metadata map and parsed at
  * validation time.
+ * @author bhangun
  */
 public enum ModelFamilyBundleProfile {
     /** Shipped by default; always included in the standard distribution. */
     CORE("core"),
-    /** Opt-in; available but not included by default. */
     OPTIONAL("optional"),
-    /** Only metadata; no artifacts included. */
     METADATA_ONLY("metadata_only"),
-    /** Preview quality; may change or be removed without notice. */
     EXPERIMENTAL("experimental");
 
     private final String key;

@@ -4,6 +4,7 @@ import tech.kayys.alkhawarizm.core.tensor.DeviceType;
 
 /**
  * Represents storage requirements for a model.
+ * @author bhangun
  */
 public record StorageRequirements(
         Long minStorageMb,

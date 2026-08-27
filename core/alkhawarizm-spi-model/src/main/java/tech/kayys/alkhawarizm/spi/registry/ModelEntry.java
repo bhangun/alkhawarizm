@@ -4,6 +4,13 @@ import tech.kayys.alkhawarizm.core.model.ModelFormat;
 import java.nio.file.Path;
 import java.time.Instant;
 import java.util.Map;
+/**
+ * Immutable record representing modelentry data.
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
+
 
 public record ModelEntry(
         String modelId,
@@ -28,7 +35,18 @@ public record ModelEntry(
 
     public static Builder builder() {
         return new Builder();
-    }
+    }/**
+ * Builder for constructing complex  objects.
+ *
+ * <p>Key functionality:
+ * <ul>
+ * <li>Provides core class operations
+ * </ul>
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
+
 
     public static class Builder {
         private String modelId;

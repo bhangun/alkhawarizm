@@ -26,7 +26,6 @@ public class BridgeTowerModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.MULTIMODAL, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/bridgetower",
                         "tokenizer", "processor_backed_wordpiece",
                         "image_processor", "bridgetower_image_processor",
                         "direct_safetensor", "pending_bridgetower_cross_modal_layer_runtime",

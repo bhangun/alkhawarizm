@@ -15,7 +15,7 @@ import java.util.Objects;
 /**
  * Result of a quantization operation.
  *
- * @author Bhangun
+ * @author bhangun
  * @version 1.0.0
  */
 public class QuantResult {

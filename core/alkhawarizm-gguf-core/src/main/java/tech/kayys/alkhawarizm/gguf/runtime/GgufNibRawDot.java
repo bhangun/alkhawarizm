@@ -30,6 +30,7 @@ import java.nio.ByteOrder;
  *
  * <p>MXFP4, NVFP4, IQ4_NL, and IQ4_XS all decode packed nibbles through small
  * lookup tables before applying per-block or per-group scales.</p>
+ * @author bhangun
  */
 final class GgufNibRawDot {
     private static final ValueLayout.OfShort LE_SHORT = ValueLayout.JAVA_SHORT_UNALIGNED

@@ -31,6 +31,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * // Producer is done; drops its own reference.
  * ma.close();
  * }</pre>
+ * @author bhangun
  */
 public final class ManagedArena implements AutoCloseable {
 

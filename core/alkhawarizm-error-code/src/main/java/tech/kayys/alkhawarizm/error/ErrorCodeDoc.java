@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Utility to generate Markdown documentation for {@link ErrorCode}.
+ * @author bhangun
  */
 public final class ErrorCodeDoc {
 

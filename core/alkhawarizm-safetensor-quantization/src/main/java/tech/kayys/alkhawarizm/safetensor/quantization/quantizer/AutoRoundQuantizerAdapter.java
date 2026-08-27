@@ -14,6 +14,7 @@ import java.util.Arrays;
 
 /**
  * Adapter for AutoRound quantization.
+ * @author bhangun
  */
 public class AutoRoundQuantizerAdapter implements Quantizer {
 

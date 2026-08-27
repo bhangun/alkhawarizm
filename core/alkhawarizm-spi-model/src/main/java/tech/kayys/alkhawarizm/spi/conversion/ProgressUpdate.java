@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
  * Progress update DTO for streaming.
+ * @author bhangun
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProgressUpdate {

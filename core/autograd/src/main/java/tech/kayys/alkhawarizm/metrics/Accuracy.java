@@ -54,6 +54,7 @@ package tech.kayys.alkhawarizm.ml.metrics;
  * @see Precision
  * @see Recall
  * @see F1Score
+ * @author bhangun
  */
 public class Accuracy {
 

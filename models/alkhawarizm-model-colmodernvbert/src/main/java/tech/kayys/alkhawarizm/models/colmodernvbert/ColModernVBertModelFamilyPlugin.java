@@ -24,7 +24,6 @@ public class ColModernVBertModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/colmodernvbert",
                         "tokenizer", "idefics3_style_bpe_metadata_only",
                         "processor", "colmodernvbert_retrieval_processor",
                         "direct_safetensor", "pending_multivector_retrieval_runtime",

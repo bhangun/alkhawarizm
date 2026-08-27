@@ -25,6 +25,7 @@ import java.util.*;
  * }
  * // Then: tensorboard --logdir runs/
  * }</pre>
+ * @author bhangun
  */
 public final class TensorBoardWriter implements AutoCloseable {
 

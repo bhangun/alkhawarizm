@@ -19,6 +19,7 @@ import java.util.*;
  * // ROUGE-1
  * float rouge1 = NLPMetrics.rouge(hypothesis, reference, n = 1);
  * }</pre>
+ * @author bhangun
  */
 public final class NLPMetrics {
 

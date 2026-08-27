@@ -25,12 +25,7 @@ import java.util.function.BiFunction;
  * 
  * trainer.fit(trainingData, trainingLabels, batchSize);
  * }</pre>
- */
-/**
- * @deprecated Legacy experimental trainer variant retained for compatibility.
- *             Prefer {@link tech.kayys.alkhawarizm.trainer.Trainers} and the
- *             canonical {@link tech.kayys.alkhawarizm.ml.train.Trainer}
- *             runtime.
+ * @author bhangun
  */
 @Deprecated(since = "0.1.0", forRemoval = false)
 public class Trainer {

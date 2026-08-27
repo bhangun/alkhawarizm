@@ -24,7 +24,6 @@ public class StableLmModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/stablelm",
                         "tokenizer", "byte_level_bpe",
                         "direct_safetensor", "pending_stablelm_parallel_residual_and_qk_norm_runtime",
                         "version", "0.1.0-SNAPSHOT"));

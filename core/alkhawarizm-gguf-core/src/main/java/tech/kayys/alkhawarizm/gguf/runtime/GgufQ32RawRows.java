@@ -10,6 +10,7 @@ import java.lang.foreign.MemorySegment;
  *
  * <p>The methods here only advance rows and write mat-vec outputs. Arithmetic
  * stays in {@link GgufQ32RawDot}, keeping traversal separate from quant math.</p>
+ * @author bhangun
  */
 final class GgufQ32RawRows {
     private GgufQ32RawRows() {

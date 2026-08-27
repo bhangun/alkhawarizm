@@ -11,6 +11,7 @@ import java.util.Map;
  * providing a stable mapper interface so that callers in other modules
  * (e.g. {@code alkhawarizm-gguf-core}) do not depend directly on the static
  * factory method and can be swapped or mocked in tests.</p>
+ * @author bhangun
  */
 public class GgufMetadataMapper {
 

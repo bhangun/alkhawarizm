@@ -22,7 +22,6 @@ public class GPTNeoModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.CAUSAL_LM, ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/gpt_neo",
                         "tokenizer", "byte_level_bpe",
                         "direct_safetensor", "pending_gpt_neo_local_attention_runtime",
                         "version", "0.1.0-SNAPSHOT"));

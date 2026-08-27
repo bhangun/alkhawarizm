@@ -14,6 +14,7 @@ import java.util.Arrays;
 
 /**
  * Adapter for GPTQ quantization.
+ * @author bhangun
  */
 public class GPTQQuantizerAdapter implements Quantizer {
 

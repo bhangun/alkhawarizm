@@ -25,7 +25,6 @@ public class ChameleonModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/chameleon",
                         "tokenizer", "image_token_aware_tokenizer_json",
                         "direct_safetensor", "pending_chameleon_vqvae_image_token_runtime",
                         "version", "0.1.0-SNAPSHOT"));

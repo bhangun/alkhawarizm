@@ -6,6 +6,7 @@ import java.util.Random;
 /**
  * Shared Gaussian noise helpers for model initialization, diffusion latents,
  * and latent-variable training.
+ * @author bhangun
  */
 public final class GaussianNoise {
     private GaussianNoise() {

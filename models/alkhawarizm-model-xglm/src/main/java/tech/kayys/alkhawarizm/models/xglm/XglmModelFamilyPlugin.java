@@ -23,7 +23,6 @@ public class XglmModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.CAUSAL_LM, ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/xglm",
                         "tokenizer", "unigram_metaspace_tokenizer_json",
                         "direct_safetensor", "pending_xglm_unigram_tokenizer_and_decoder_runtime",
                         "version", "0.1.0-SNAPSHOT"));

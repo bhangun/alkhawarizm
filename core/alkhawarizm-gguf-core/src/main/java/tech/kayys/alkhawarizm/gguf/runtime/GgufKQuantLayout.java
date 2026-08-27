@@ -11,6 +11,7 @@ import java.nio.ByteOrder;
  *
  * <p>The K-family formats pack group scales, mins, and high bits differently;
  * this class isolates those layouts from the arithmetic kernels.</p>
+ * @author bhangun
  */
 final class GgufKQuantLayout {
     private static final ValueLayout.OfInt LE_INT = ValueLayout.JAVA_INT_UNALIGNED

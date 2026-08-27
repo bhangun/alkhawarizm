@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 /**
  * Request DTOs for GGUF converter API.
  * 
- * @author Bhangun
+ * @author bhangun
  * @version 1.0.0
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)

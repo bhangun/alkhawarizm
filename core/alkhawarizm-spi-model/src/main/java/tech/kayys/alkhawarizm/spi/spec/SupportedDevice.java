@@ -5,6 +5,7 @@ import tech.kayys.alkhawarizm.core.tensor.DeviceType;
 /**
  * Represents a device that is supported by a model, including minimum
  * requirements.
+ * @author bhangun
  */
 public record SupportedDevice(
         DeviceType type,

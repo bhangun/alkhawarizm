@@ -4,6 +4,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 
 /**
  * 2D convolution layer.
+ * @author bhangun
  */
 public class Conv2d extends NNModule {
 

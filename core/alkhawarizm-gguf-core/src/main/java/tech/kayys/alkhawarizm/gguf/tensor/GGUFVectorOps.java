@@ -11,6 +11,7 @@ import java.nio.ByteOrder;
 
 /**
  * High-performance tensor operations implemented with the <b>Java Vector API</b>.
+ * @author bhangun
  */
 public final class GGUFVectorOps {
 

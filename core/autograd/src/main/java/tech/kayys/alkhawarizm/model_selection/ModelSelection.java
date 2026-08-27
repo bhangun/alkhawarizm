@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 /**
  * Cross-validation and model selection utilities.
+ * @author bhangun
  */
 public class ModelSelection {
 

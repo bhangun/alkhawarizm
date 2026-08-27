@@ -12,6 +12,7 @@ import java.nio.ByteOrder;
  * <p>
  * All methods operate on off-heap memory to avoid heap pressure when
  * processing large model weight tensors.
+ * @author bhangun
  */
 public final class TensorConverter {
 

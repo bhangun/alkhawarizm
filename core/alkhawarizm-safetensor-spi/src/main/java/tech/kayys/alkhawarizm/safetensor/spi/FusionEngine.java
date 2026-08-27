@@ -10,6 +10,7 @@ import java.util.List;
  * <p>A FusionEngine takes pre-processed modality inputs (text embeddings, 
  * image patches, etc.) and merges them into a unified sequence that can 
  * be processed by the transformer forward pass.
+ * @author bhangun
  */
 public interface FusionEngine {
 

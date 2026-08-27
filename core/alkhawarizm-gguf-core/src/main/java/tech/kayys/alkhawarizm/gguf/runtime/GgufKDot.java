@@ -13,6 +13,7 @@ import jdk.incubator.vector.VectorOperators;
  * <p>K-family prepared rows use 16-value or 32-value groups with optional
  * per-group mins. This helper keeps those group reducers separate from row
  * scheduling and from the lower-level signed-byte dot kernels.</p>
+ * @author bhangun
  */
 final class GgufKDot {
     private GgufKDot() {

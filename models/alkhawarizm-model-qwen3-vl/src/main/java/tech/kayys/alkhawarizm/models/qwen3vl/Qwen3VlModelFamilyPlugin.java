@@ -26,7 +26,6 @@ public class Qwen3VlModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/qwen3_vl",
                         "tokenizer", "qwen_hf_bpe_with_qwen3_vl_processor",
                         "direct_safetensor", "pending_qwen3_vl_deepstack_mrope_video_runtime",
                         "version", "0.1.0-SNAPSHOT"));

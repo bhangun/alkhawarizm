@@ -8,6 +8,7 @@ import java.util.Locale;
  * <p>Prepared matrices trade memory for faster repeated mat-vec calls. This
  * class keeps the default budget heap-aware and makes every related property
  * accept the same human-readable byte suffixes.</p>
+ * @author bhangun
  */
 public final class GgufBudget {
     private static final long KIB = 1024L;

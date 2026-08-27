@@ -21,13 +21,17 @@ public class RagModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of("rag"),
                 List.of("RagModel", "RagSequenceForGeneration", "RagTokenForGeneration"),
                 List.of(
-                        ModelFamilyCapability.TOKENIZER),
+                        ModelFamilyCapability.TOKENIZER,
+                        ModelFamilyCapability.DIRECT_SAFETENSOR_INFERENCE),
                 Map.of(
-                        "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/rag",
-                        "tokenizer", "composite_question_encoder_generator_tokenizer",
-                        "direct_safetensor", "pending_retriever_index_and_generator_composition_runtime",
+                        "bundle_profile", "optional",
+                        "direct_safetensor", "ready_text_path_guarded_by_runtime",
                         "version", "0.1.0-SNAPSHOT"));
+    }
+
+    @Override
+    public List<tech.kayys.alkhawarizm.spi.model.ModelArchitecture> architectureAdapters() {
+        return List.of(new RagFamily());
     }
 
     @Override
@@ -40,6 +44,6 @@ public class RagModelFamilyPlugin implements ModelFamilyPlugin {
                 Map.of(
                         "tokenizer", "tokenization_rag",
                         "retriever", "retrieval_rag",
-                        "status", "metadata_only")));
+                        "status", "optional")));
     }
 }

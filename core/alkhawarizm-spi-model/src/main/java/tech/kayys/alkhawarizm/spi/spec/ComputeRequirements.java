@@ -4,6 +4,7 @@ import tech.kayys.alkhawarizm.core.tensor.DeviceType;
 
 /**
  * Represents compute requirements for a model.
+ * @author bhangun
  */
 public record ComputeRequirements(
         Integer minCpuCores,

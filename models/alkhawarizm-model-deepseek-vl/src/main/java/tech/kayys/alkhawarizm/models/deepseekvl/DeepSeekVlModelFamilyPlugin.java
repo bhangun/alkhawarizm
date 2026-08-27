@@ -26,7 +26,6 @@ public class DeepSeekVlModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "experimental",
-                        "origin", "3rdparty/transformers/src/transformers/models/deepseek_vl",
                         "tokenizer", "deepseek_hf_bpe_with_vl_processor",
                         "direct_safetensor", "pending_deepseek_vl_vision_aligner_runtime",
                         "version", "0.1.0-SNAPSHOT"));

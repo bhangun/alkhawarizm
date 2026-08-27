@@ -24,7 +24,6 @@ public class ByT5ModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/byt5",
                         "tokenizer", "byte_level_no_vocab",
                         "direct_safetensor", "not_direct_runtime_tokenizer_only_over_t5_backbone",
                         "version", "0.1.0-SNAPSHOT"));

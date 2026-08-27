@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * GGUF Metadata value container.
+ * @author bhangun
  */
 public sealed interface GgufMetaValue {
 

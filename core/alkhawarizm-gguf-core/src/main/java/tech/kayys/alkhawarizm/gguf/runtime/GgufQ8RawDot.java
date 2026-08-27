@@ -24,6 +24,7 @@ import jdk.incubator.vector.VectorOperators;
  *
  * <p>Q8_0, Q8_1, and Q8_K all reduce signed byte quant blocks with per-block
  * scales. This helper keeps their scalar and Vector API kernels together.</p>
+ * @author bhangun
  */
 final class GgufQ8RawDot {
     private static final ValueLayout.OfShort LE_SHORT = ValueLayout.JAVA_SHORT_UNALIGNED

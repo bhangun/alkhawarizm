@@ -24,7 +24,6 @@ public class BartphoModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/bartpho",
                         "tokenizer", "sentencepiece_bpe_with_monolingual_vocab",
                         "direct_safetensor", "not_direct_runtime_tokenizer_only_over_bart_backbone",
                         "version", "0.1.0-SNAPSHOT"));

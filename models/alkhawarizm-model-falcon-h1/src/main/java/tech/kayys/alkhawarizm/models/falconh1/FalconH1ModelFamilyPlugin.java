@@ -23,7 +23,6 @@ public class FalconH1ModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/falcon_h1",
                         "tokenizer", "tokenizer_json_bpe",
                         "direct_safetensor", "pending_falcon_h1_hybrid_state_space_runtime",
                         "version", "0.1.0-SNAPSHOT"));

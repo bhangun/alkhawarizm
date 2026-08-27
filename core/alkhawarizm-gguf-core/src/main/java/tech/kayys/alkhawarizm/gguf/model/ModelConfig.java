@@ -1,6 +1,13 @@
 package tech.kayys.alkhawarizm.gguf.model;
 
 import tech.kayys.alkhawarizm.gguf.loader.gguf.GGUFFile;
+/**
+ * Configuration class for Model settings and properties.
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
+
 
 public record ModelConfig(int contextLength, int embeddingDim, int nLayers, int ffnDim,
                          int nHeads, int nKVHeads, int headDim, int vocabSize,

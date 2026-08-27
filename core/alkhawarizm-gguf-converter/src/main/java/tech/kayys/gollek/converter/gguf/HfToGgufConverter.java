@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
  * <p><b>For new integrations prefer {@link SafetensorToGgufConverter}</b>,
  * which exposes a cleaner Options API and progress callbacks. This class is
  * retained for backwards-compatibility with the existing CLI entry-point.
+ * @author bhangun
  */
 public final class HfToGgufConverter {
 

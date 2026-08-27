@@ -1,6 +1,13 @@
 package tech.kayys.alkhawarizm.spi.model;
 
 import java.util.List;
+/**
+ * Immutable record representing modelfamilyclaimconflict data.
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
+
 
 public record ModelFamilyClaimConflict(
         String claimType,

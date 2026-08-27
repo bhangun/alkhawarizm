@@ -26,7 +26,6 @@ public class ViltModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.MULTIMODAL, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/vilt",
                         "tokenizer", "wordpiece_with_vilt_processor",
                         "image_processor", "vilt_image_processor",
                         "direct_safetensor", "pending_vilt_patch_embedding_and_multimodal_runtime",

@@ -4,6 +4,7 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 
 /**
  * Tanh activation layer.
+ * @author bhangun
  */
 public class Tanh extends NNModule {
 

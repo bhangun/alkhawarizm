@@ -21,7 +21,6 @@ public class RegNetModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.VISION, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/regnet",
                         "image_processor", "regnet_image_processor",
                         "direct_safetensor", "pending_regnet_stage_runtime_validation",
                         "version", "0.1.0-SNAPSHOT"));

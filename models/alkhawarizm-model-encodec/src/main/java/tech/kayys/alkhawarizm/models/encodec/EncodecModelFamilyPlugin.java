@@ -21,7 +21,6 @@ public class EncodecModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of( ),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/encodec",
                         "feature_extractor", "encodec_feature_extractor",
                         "direct_safetensor", "pending_neural_audio_codec_runtime",
                         "version", "0.1.0-SNAPSHOT"));

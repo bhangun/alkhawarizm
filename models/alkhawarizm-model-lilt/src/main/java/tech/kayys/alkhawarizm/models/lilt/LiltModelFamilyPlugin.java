@@ -24,7 +24,6 @@ public class LiltModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/lilt",
                         "tokenizer", "base_text_tokenizer_metadata",
                         "processor", "lilt_layout_bbox_processor",
                         "direct_safetensor", "pending_layout_embeddings_runtime",

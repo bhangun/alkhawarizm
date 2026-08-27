@@ -47,6 +47,7 @@ import java.util.logging.Logger;
  * This implementation is an <em>in-process</em> store. Entries do not
  * survive JVM restarts. The {@code dbPath} parameter is reserved for a future
  * mmap-backed persistence layer.
+ * @author bhangun
  */
 public final class HelixDbMemoryStore implements UnifiedMemoryStore {
 

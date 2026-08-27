@@ -40,7 +40,7 @@ import java.util.Objects;
  * <li>Code prefix must match its category.</li>
  * </ul>
  *
- * @author Bhangun
+ * @author bhangun
  * @since 1.0.0
  */
 public enum ErrorCode {

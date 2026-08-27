@@ -24,6 +24,7 @@ import java.util.*;
  * <li>SentencePiece vocab from {@code tokenizer.model} binary</li>
  * <li>Merges from {@code tokenizer.json} added_tokens for BPE</li>
  * </ul>
+ * @author bhangun
  */
 public final class HfConfigParser {
 
@@ -57,11 +58,8 @@ public final class HfConfigParser {
             boolean tieWordEmbeddings,
             /** Sliding-window attention size (0 = disabled). */
             int slidingWindow,
-            /** Whether Q/K/V projections have a bias. */
             boolean attentionBias,
-            /** Fraction of head-dim used for rotary embedding (e.g. 0.4 for Phi-2). */
             float partialRotaryFactor,
-            /** Explicit head_dim override (0 = derive from hiddenSize/numAttentionHeads). */
             int headDim,
             JsonObject raw) {
     }

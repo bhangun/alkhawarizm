@@ -23,7 +23,6 @@ public class VaultGemmaModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/vaultgemma",
                         "tokenizer", "gemma_sentencepiece_bpe",
                         "direct_safetensor", "pending_vaultgemma_runtime_validation",
                         "version", "0.1.0-SNAPSHOT"));

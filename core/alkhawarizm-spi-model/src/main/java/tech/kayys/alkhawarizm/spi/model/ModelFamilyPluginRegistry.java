@@ -7,7 +7,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
+/**
+ * 
+ * Core class for kayys module.
+ *
+ * <p>Key functionality:
+ * <ul>
+ * <li>Provides core class operations
+ * </ul>
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public class ModelFamilyPluginRegistry {
     private static final ModelFamilyPluginRegistry INSTANCE = new ModelFamilyPluginRegistry();
     private final Map<String, ModelFamilyPlugin> plugins = new LinkedHashMap<>();

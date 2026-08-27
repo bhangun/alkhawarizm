@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 /**
  * Descriptor for a single tensor inside a GGUF file.
+ * @author bhangun
  */
 public record GGUFTensorInfo(
         String name,

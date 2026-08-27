@@ -25,7 +25,6 @@ public class GotOcr2ModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/got_ocr2",
                         "tokenizer", "qwen_hf_bpe",
                         "image_processor", "got_ocr2_image_processor",
                         "direct_safetensor", "pending_ocr_vision_projector_runtime",

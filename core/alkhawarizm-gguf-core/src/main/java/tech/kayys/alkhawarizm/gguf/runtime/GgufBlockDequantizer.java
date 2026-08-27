@@ -15,6 +15,7 @@ import java.nio.ByteOrder;
  * <p>This class owns single-block expansion for non-K and nibble-family
  * formats. Larger K-family block decoders can move here in smaller follow-up
  * slices once their call sites are isolated.</p>
+ * @author bhangun
  */
 final class GgufBlockDequantizer {
     private static final ValueLayout.OfShort LE_SHORT = ValueLayout.JAVA_SHORT_UNALIGNED

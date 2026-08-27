@@ -28,6 +28,7 @@ import java.util.Map;
  * <li>Jamba / Mamba</li>
  * <li>MPT</li>
  * </ul>
+ * @author bhangun
  */
 public final class LlamaArchMapper {
 

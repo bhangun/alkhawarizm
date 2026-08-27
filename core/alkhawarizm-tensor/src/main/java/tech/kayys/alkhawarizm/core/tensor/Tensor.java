@@ -20,6 +20,7 @@ import tech.kayys.alkhawarizm.core.backend.ComputeBackend;
  * using the Java Foreign
  * Function &amp; Memory API (FFM), while a GPU backend allocates memory on the
  * device.
+ * @author bhangun
  */
 public interface Tensor {
     /**

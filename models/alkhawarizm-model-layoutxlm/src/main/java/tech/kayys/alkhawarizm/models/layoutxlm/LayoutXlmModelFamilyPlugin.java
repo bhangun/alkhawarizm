@@ -25,7 +25,6 @@ public class LayoutXlmModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.VISION, ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/layoutxlm",
                         "tokenizer", "layoutxlm_sentencepiece_bpe_metadata_only",
                         "processor", "layoutxlm_processor",
                         "direct_safetensor", "pending_layoutxlm_processor_runtime",

@@ -6,6 +6,7 @@ import tech.kayys.alkhawarizm.core.model.ModelFormat;
 
 /**
  * Options for pulling a model from a repository.
+ * @author bhangun
  */
 public class PullOptions {
 

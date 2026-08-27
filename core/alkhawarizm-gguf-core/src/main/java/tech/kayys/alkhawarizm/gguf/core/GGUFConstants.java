@@ -1,5 +1,16 @@
 package tech.kayys.alkhawarizm.gguf.core;
-
+/**
+ * 
+ * Core class for kayys module.
+ *
+ * <p>Key functionality:
+ * <ul>
+ * <li>Provides core class operations
+ * </ul>
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public final class GGUFConstants {
     private GGUFConstants() {}
 

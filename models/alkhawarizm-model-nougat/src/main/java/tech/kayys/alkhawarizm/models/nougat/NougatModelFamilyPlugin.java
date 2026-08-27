@@ -25,7 +25,6 @@ public class NougatModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/nougat",
                         "tokenizer", "nougat_processor_tokenizer",
                         "direct_safetensor", "pending_nougat_vision_encoder_decoder_processor_runtime",
                         "version", "0.1.0-SNAPSHOT"));

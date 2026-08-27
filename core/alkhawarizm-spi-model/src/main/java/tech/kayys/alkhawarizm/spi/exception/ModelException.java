@@ -20,6 +20,7 @@ import tech.kayys.alkhawarizm.error.ErrorCode;
  * Base exception for model-related errors.
  *
  * @since 2.1.0
+ * @author bhangun
  */
 public class ModelException extends InferenceException {
 

@@ -23,7 +23,6 @@ public class OneFormerModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/oneformer",
                         "tokenizer", "wordpiece_task_text",
                         "image_processor", "oneformer_image_processor",
                         "direct_safetensor", "pending_universal_segmentation_text_task_runtime",

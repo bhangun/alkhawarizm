@@ -35,6 +35,7 @@ import java.util.logging.Logger;
  * <p>
  * Each session must be used from a single thread. For parallel token
  * generation, create one {@code InferenceSession} per request/thread.
+ * @author bhangun
  */
 public final class InferenceSession implements AutoCloseable {
 

@@ -25,7 +25,6 @@ public class PLBartModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/plbart",
                         "tokenizer", "sentencepiece_programming_language_bart",
                         "direct_safetensor", "pending_plbart_seq2seq_runtime",
                         "version", "0.1.0-SNAPSHOT"));

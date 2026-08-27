@@ -22,7 +22,6 @@ public class SegformerModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.VISION, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/segformer",
                         "image_processor", "segformer_image_processor",
                         "direct_safetensor", "pending_segformer_decode_head_runtime",
                         "version", "0.1.0-SNAPSHOT"));

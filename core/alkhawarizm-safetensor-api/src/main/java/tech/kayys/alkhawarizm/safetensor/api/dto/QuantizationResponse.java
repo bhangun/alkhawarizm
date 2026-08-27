@@ -15,6 +15,7 @@ import java.time.Duration;
 /**
  * Response payload for quantization operations.
  * DTO moved to use primitive types to avoid circular dependencies with Quantization module.
+ * @author bhangun
  */
 public class QuantizationResponse {
 

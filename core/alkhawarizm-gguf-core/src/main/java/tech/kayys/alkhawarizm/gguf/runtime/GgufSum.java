@@ -14,6 +14,7 @@ import tech.kayys.alkhawarizm.gguf.runtime.GgufTensorOps.Q4KWorkBuffer;
  * <p>Prepared kernels with per-group minima need the sum of each matching input
  * vector group. This helper owns the scratch-buffer reuse and vectorized
  * accumulation without making the main tensor facade carry that detail.</p>
+ * @author bhangun
  */
 final class GgufSum {
     private GgufSum() {

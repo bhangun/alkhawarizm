@@ -31,6 +31,7 @@ import jakarta.inject.Inject;
 /**
  * CDI configuration class — produces application-scoped beans for the
  * safetensor module.
+ * @author bhangun
  */
 @ApplicationScoped
 public class SafetensorBeans {

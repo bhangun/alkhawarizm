@@ -23,7 +23,6 @@ public class NomicBertModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of( ModelFamilyCapability.TOKENIZER, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/nomic_bert",
                         "tokenizer", "wordpiece_or_tokenizer_json",
                         "direct_safetensor", "not_causal_lm_embedding_encoder_runtime_pending",
                         "version", "0.1.0-SNAPSHOT"));

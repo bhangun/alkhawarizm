@@ -26,7 +26,6 @@ public class LukeModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of( ModelFamilyCapability.TOKENIZER, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/luke",
                         "tokenizer", "byte_level_bpe_with_entity_vocab",
                         "direct_safetensor", "pending_entity_aware_encoder_runtime",
                         "version", "0.1.0-SNAPSHOT"));

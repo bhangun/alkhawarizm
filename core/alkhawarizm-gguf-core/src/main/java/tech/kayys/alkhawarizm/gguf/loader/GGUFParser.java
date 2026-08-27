@@ -11,6 +11,7 @@ import java.util.Map;
 
 /**
  * Pure Java GGUF parser. Extracts model structure and metadata.
+ * @author bhangun
  */
 public final class GGUFParser {
 

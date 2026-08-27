@@ -15,6 +15,7 @@ import java.util.Map;
  * This class is only called by ModelHub if the alkhawarizm-safetensor-loader is
  * on
  * the classpath.
+ * @author bhangun
  */
 class SafeTensorBridge {
 

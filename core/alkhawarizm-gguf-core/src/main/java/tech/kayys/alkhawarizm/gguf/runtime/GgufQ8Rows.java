@@ -9,6 +9,7 @@ import tech.kayys.alkhawarizm.gguf.runtime.GgufTensorOps.Q8Matrix;
  *
  * <p>Prepared Q8 matrices can use several block widths. This helper chooses the
  * matching row-dot reducer and keeps that dispatch out of the public facade.</p>
+ * @author bhangun
  */
 final class GgufQ8Rows {
     private GgufQ8Rows() {

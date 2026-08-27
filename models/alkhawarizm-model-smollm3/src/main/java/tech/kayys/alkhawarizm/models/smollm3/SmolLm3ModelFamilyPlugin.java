@@ -25,7 +25,6 @@ public class SmolLm3ModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/smollm3",
                         "tokenizer", "huggingface_bpe",
                         "direct_safetensor", "pending_smollm3_runtime_validation",
                         "version", "0.1.0-SNAPSHOT"));

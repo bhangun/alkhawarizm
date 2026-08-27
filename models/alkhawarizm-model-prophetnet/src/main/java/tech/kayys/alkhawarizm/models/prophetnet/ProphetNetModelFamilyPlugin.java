@@ -25,7 +25,6 @@ public class ProphetNetModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CAUSAL_LM, ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/prophetnet",
                         "tokenizer", "wordpiece_prophetnet",
                         "direct_safetensor", "pending_prophetnet_n_stream_seq2seq_runtime",
                         "version", "0.1.0-SNAPSHOT"));

@@ -24,7 +24,6 @@ public class ConvBertModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of( ModelFamilyCapability.TOKENIZER, ModelFamilyCapability.EMBEDDING),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/convbert",
                         "tokenizer", "wordpiece",
                         "direct_safetensor", "pending_separable_conv_attention_runtime",
                         "version", "0.1.0-SNAPSHOT"));

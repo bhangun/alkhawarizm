@@ -3,7 +3,13 @@ package tech.kayys.alkhawarizm.gguf.loader.model;
 import tech.kayys.alkhawarizm.gguf.loader.inference.KVCache;
 import tech.kayys.alkhawarizm.gguf.core.GGUFTensorInfo;
 import tech.kayys.alkhawarizm.gguf.loader.tensor.GGUFVectorOps;
-
+/**
+ * 
+ * Core class for kayys module.
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public class LlamaForward {
     private final ModelConfig cfg;
     private final LlamaWeights w;

@@ -14,6 +14,7 @@ import java.util.Locale;
  * This keeps audio, vision, and broad multimodal classification separate from
  * prompt, attention, and tensor-runtime policy. Model-family modules can evolve
  * modality rules here without growing {@link ModelRuntimeTraits}.
+ * @author bhangun
  */
 public record ModelModalityTraits(
         boolean audioModel,

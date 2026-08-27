@@ -27,6 +27,7 @@ import java.util.Map;
  * @param directSafetensorCaveats extra runtime requirement metadata keyed by
  *                                scope
  * @param metadata                additional freeform key-value pairs
+ * @author bhangun
  */
 public record ModelFamilySupportReport(
         String familyId,

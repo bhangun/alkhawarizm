@@ -24,7 +24,6 @@ public class VipLlavaModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/vipllava",
                         "tokenizer", "delegated_llama_or_clip_tokenizer",
                         "image_processor", "vipllava_image_processor",
                         "direct_safetensor", "pending_vipllava_visual_prompt_runtime",

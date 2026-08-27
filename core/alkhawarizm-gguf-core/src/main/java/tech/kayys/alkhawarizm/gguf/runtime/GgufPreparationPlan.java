@@ -15,6 +15,7 @@ import java.util.Objects;
  *
  * <p>This helper decides which GGUF tensors are worth unpacking before
  * generation starts while delegating estimate-cache details to {@link GgufPreparedMatrixEstimator}.</p>
+ * @author bhangun
  */
 final class GgufPreparationPlan {
     private GgufPreparationPlan() {

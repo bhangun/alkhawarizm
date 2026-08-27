@@ -42,6 +42,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * Inject this bean wherever you need to record load / error events.
  * The metrics are automatically published to whatever Micrometer registry
  * is configured in the Quarkus application (Prometheus, Datadog, etc.).
+ * @author bhangun
  */
 @ApplicationScoped
 public class SafetensorMetrics {

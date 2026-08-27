@@ -27,7 +27,6 @@ public class Kosmos2ModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.MULTIMODAL),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/kosmos2",
                         "tokenizer", "processor_backed_text_grounding_tokenizer",
                         "image_processor", "kosmos2_image_processor",
                         "direct_safetensor", "pending_grounding_processor_and_vision_text_runtime",

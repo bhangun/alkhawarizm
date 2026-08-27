@@ -44,6 +44,7 @@ import java.util.stream.Collectors;
  *         .build();
  * SafetensorToGgufConverter.convert(opts);
  * }</pre>
+ * @author bhangun
  */
 public final class SafetensorToGgufConverter {
 

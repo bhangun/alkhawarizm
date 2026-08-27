@@ -10,6 +10,7 @@ import java.util.Arrays;
 
 /**
  * Adapter that bridges the optimized TurboQuant core engine with the Safetensor runner.
+ * @author bhangun
  */
 public class TurboQuantAdapter implements Quantizer {
 

@@ -22,6 +22,7 @@ import tech.kayys.alkhawarizm.ml.autograd.VectorOps;
  * float iou = SegmentationMetrics.iou(predicted, target);
  * float dice = SegmentationMetrics.dice(predicted, target);
  * }</pre>
+ * @author bhangun
  */
 public final class SegmentationMetrics {
 

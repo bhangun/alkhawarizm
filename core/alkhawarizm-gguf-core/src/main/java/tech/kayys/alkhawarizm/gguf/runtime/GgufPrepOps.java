@@ -9,6 +9,7 @@ import tech.kayys.alkhawarizm.gguf.loader.GGUFTensorInfo;
  * <p>{@link GgufPreparedCachePolicy} decides whether a tensor belongs to a prepared-cache
  * family; this helper owns the concrete prepare and mat-vec calls for that
  * family so callers do not grow parallel per-quant switches.</p>
+ * @author bhangun
  */
 final class GgufPrepOps {
     private GgufPrepOps() {

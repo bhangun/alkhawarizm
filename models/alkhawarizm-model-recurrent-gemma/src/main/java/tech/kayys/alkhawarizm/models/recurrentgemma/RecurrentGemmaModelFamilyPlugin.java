@@ -23,7 +23,6 @@ public class RecurrentGemmaModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/recurrent_gemma",
                         "tokenizer", "gemma_sentencepiece_bpe",
                         "direct_safetensor", "pending_recurrent_gemma_griffin_runtime",
                         "version", "0.1.0-SNAPSHOT"));

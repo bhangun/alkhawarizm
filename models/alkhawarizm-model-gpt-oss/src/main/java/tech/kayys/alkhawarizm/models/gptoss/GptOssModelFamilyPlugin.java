@@ -24,7 +24,6 @@ public class GptOssModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/gpt_oss",
                         "tokenizer", "huggingface_bpe",
                         "direct_safetensor", "pending_gpt_oss_attention_and_cache_runtime_validation",
                         "version", "0.1.0-SNAPSHOT"));

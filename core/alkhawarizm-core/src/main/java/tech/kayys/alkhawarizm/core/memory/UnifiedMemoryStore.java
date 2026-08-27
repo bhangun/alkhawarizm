@@ -8,6 +8,7 @@ import java.util.Optional;
  * Unified abstract interface for zero-copy off-heap memory storage across the
  * ecosystem.
  * Backed by native storage engines like RocksDB or HelixDB.
+ * @author bhangun
  */
 public interface UnifiedMemoryStore extends AutoCloseable {
 

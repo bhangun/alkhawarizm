@@ -45,6 +45,7 @@ import java.util.Objects;
  * {@link tech.kayys.gollek.inference.safetensor.ffm.SafetensorLoadResult}
  * that produced it has been {@link AutoCloseable#close() closed}. Accessing
  * a closed segment causes a JVM-level exception from the FFM layer.
+ * @author bhangun
  */
 public final class SafetensorTensor implements AutoCloseable {
 

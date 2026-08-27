@@ -1,5 +1,11 @@
 package tech.kayys.alkhawarizm.core.tensor;
 
+/**
+ * Tensor operations utilities for mathematical computations.
+ *
+ * @author bhangun
+ * @since 0.1.0
+ */
 public class TensorOps {
     public static Tensor einsum(String equation, Tensor... tensors) {
         // Stub for einsum

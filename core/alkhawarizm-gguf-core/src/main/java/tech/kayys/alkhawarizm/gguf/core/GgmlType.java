@@ -4,6 +4,7 @@ package tech.kayys.alkhawarizm.gguf.core;
  * ggml_type enum – tensor element types supported in GGUF.
  * Each entry records: on-disk id, human label, block size,
  * and the number of bytes per block (type_size in ggml terms).
+ * @author bhangun
  */
 public enum GgmlType {
     F32(0, "F32", 1, 4),
@@ -56,7 +57,6 @@ public enum GgmlType {
     public final String label;
     /** Number of elements per quantization block. */
     public final int blockSize;
-    /** Bytes consumed per block on disk. */
     public final int typeSize;
 
     GgmlType(int id, String label, int blockSize, int typeSize) {

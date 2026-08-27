@@ -23,6 +23,7 @@ import java.util.Map;
  * to the concrete tensor type internally.
  *
  * @see SafetensorLoaderFacade
+ * @author bhangun
  */
 public interface SafetensorEngine {
 
@@ -30,7 +31,6 @@ public interface SafetensorEngine {
      * A fully-loaded SafeTensor model ready for inference.
      */
     interface LoadedModel {
-        /** The filesystem path from which this model was loaded. */
         Path path();
 
         /** All weight tensors keyed by their parameter name. */

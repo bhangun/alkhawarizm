@@ -53,6 +53,7 @@ import java.util.List;
  *         Path.of("/models/llama3"), "lm_head.weight",
  *         tensor -> tensor.toFloatArray());
  * }</pre>
+ * @author bhangun
  */
 @ApplicationScoped
 public class SafetensorLoaderFacade {

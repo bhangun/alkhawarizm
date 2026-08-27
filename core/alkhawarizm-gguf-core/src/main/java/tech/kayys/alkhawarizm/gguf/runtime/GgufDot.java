@@ -14,6 +14,7 @@ import jdk.incubator.vector.VectorOperators;
  * <p>Prepared matrices store unpacked quant values as signed bytes. Keeping the
  * scalar and Vector API reductions here lets {@link GgufTensorOps} focus on row
  * dispatch while this helper owns the low-level arithmetic variants.</p>
+ * @author bhangun
  */
 final class GgufDot {
     private GgufDot() {

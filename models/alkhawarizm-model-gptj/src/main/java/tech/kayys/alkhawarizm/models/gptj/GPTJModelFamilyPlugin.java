@@ -23,7 +23,6 @@ public class GPTJModelFamilyPlugin implements ModelFamilyPlugin {
                 List.of(ModelFamilyCapability.CAUSAL_LM, ModelFamilyCapability.TOKENIZER),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/gptj",
                         "tokenizer", "byte_level_bpe",
                         "direct_safetensor", "pending_gptj_rotary_attention_runtime",
                         "version", "0.1.0-SNAPSHOT"));

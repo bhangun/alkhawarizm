@@ -13,6 +13,7 @@ import java.util.Map;
  * @param detached    whether the runtime must run in a separate process
  * @param description human-readable reason for the requirement
  * @param metadata    additional key/value pairs for tooling
+ * @author bhangun
  */
 public record ModelFamilyUnifiedRuntimeRequirement(
         String modelType,

@@ -15,6 +15,7 @@ import java.util.function.Consumer;
  * @deprecated Legacy training entrypoint retained for compatibility.
  *             Prefer {@link tech.kayys.alkhawarizm.trainer.Trainers} and the
  *             richer {@link tech.kayys.alkhawarizm.ml.train.Trainer} runtime.
+ * @author bhangun
  */
 @Deprecated(since = "0.1.0", forRemoval = false)
 public final class Trainer {

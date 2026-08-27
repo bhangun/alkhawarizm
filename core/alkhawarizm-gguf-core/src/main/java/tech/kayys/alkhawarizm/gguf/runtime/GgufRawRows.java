@@ -8,6 +8,7 @@ import java.lang.foreign.MemorySegment;
  * <p>Raw mat-vec kernels all need the same sequential, parallel, and confined
  * {@link MemorySegment} fallback policy. Keeping that policy here prevents the
  * per-format router from carrying three copies of the same scheduling code.</p>
+ * @author bhangun
  */
 final class GgufRawRows {
     private GgufRawRows() {

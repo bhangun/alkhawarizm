@@ -24,7 +24,6 @@ public class ArceeModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.CHAT_TEMPLATE),
                 Map.of(
                         "bundle_profile", "metadata_only",
-                        "origin", "3rdparty/transformers/src/transformers/models/arcee",
                         "tokenizer", "llama_compatible_tokenizer",
                         "direct_safetensor", "pending_arcee_llama_variant_runtime_validation",
                         "version", "0.1.0-SNAPSHOT"));
