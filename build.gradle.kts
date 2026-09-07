@@ -20,7 +20,7 @@ plugins {
     id("io.quarkus") version "3.32.2" apply false
 }
 
-extra["alkhawarizmVersion"] = "0.1.0-SNAPSHOT"
+extra["alkhawarizmVersion"] = "0.1.1"
 extra["quarkusVersion"] = "3.32.2"
 
 allprojects {
@@ -242,13 +242,22 @@ subprojects {
             repositories {
                 // ── GitHub Packages ───────────────────────────────────────────
                 // Credentials: set GITHUB_ACTOR and GITHUB_TOKEN as repository secrets.
-                // They are automatically available inside GitHub Actions workflows.
+                // GitHub Packages Maven registry requires: https://maven.pkg.github.com/OWNER/REPOSITORY
+                val repoUrlProperty = providers.gradleProperty("deployment.repo.url").orNull
+                val githubRepo = System.getenv("GITHUB_REPOSITORY")
+                    ?: providers.gradleProperty("github.repository").orNull
+                    ?: run {
+                        val ghOwner = System.getenv("GITHUB_REPOSITORY_OWNER")
+                            ?: System.getenv("GITHUB_ACTOR")
+                            ?: "bhangun"
+                        "$ghOwner/alkhawarizm"
+                    }
                 val ghActor  = System.getenv("GITHUB_ACTOR")  ?: providers.gradleProperty("gpr.user").orNull
                 val ghToken  = System.getenv("GITHUB_TOKEN")  ?: providers.gradleProperty("gpr.key").orNull
                 if (!ghToken.isNullOrBlank() && !ghActor.isNullOrBlank()) {
                     maven {
                         name = "GitHubPackages"
-                        url  = uri("https://maven.pkg.github.com/wayang-platform/wayang-platform")
+                        url  = uri(repoUrlProperty ?: "https://maven.pkg.github.com/$githubRepo")
                         credentials {
                             username = ghActor
                             password = ghToken
