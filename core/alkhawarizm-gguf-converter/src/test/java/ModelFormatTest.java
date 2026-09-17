@@ -18,16 +18,16 @@ class ModelFormatTest {
     @Test
     @DisplayName("Should have correct properties for PyTorch format")
     void testPyTorchProperties() {
-        ModelFormat pylibtorch = ModelFormat.PYTORCH;
+        ModelFormat pytorch = ModelFormat.PYTORCH;
 
-        assertEquals("pylibtorch", pylibtorch.getId());
-        assertEquals("PyTorch", pylibtorch.getDisplayName());
-        assertTrue(pylibtorch.isConvertible());
-        assertTrue(pylibtorch.requiresConversion());
-        assertTrue(pylibtorch.getFileExtensions().contains(".bin"));
-        assertTrue(pylibtorch.getFileExtensions().contains(".pt"));
-        assertTrue(pylibtorch.getFileExtensions().contains(".pth"));
-        assertTrue(pylibtorch.getMarkerFiles().contains("pylibtorch_model.bin"));
+        assertEquals("pytorch", pytorch.getId());
+        assertEquals("PyTorch", pytorch.getDisplayName());
+        assertTrue(pytorch.isConvertible());
+        assertTrue(pytorch.requiresConversion());
+        assertTrue(pytorch.getFileExtensions().contains(".bin"));
+        assertTrue(pytorch.getFileExtensions().contains(".pt"));
+        assertTrue(pytorch.getFileExtensions().contains(".pth"));
+        assertTrue(pytorch.getMarkerFiles().contains("pytorch_model.bin"));
     }
 
     @Test
@@ -58,7 +58,7 @@ class ModelFormatTest {
     @Test
     @DisplayName("Should find format by ID")
     void testFromId() {
-        assertEquals(ModelFormat.PYTORCH, ModelFormat.fromId("pylibtorch"));
+        assertEquals(ModelFormat.PYTORCH, ModelFormat.fromId("pytorch"));
         assertEquals(ModelFormat.SAFETENSORS, ModelFormat.fromId("safetensors"));
         assertEquals(ModelFormat.GGUF, ModelFormat.fromId("gguf"));
         assertEquals(ModelFormat.UNKNOWN, ModelFormat.fromId("invalid"));

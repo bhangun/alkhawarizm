@@ -20,6 +20,7 @@ repositories {
 dependencies {
     implementation(project(":core:alkhawarizm-nn"))
     implementation(project(":core:alkhawarizm-tensor"))
+    testImplementation(project(":backend:cpu:alkhawarizm-backend-cpu"))
     testImplementation(group = "org.junit.jupiter", name = "junit-jupiter")
 }
 

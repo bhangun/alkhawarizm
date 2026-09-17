@@ -28,6 +28,21 @@ public final class ModelAttentionTraitsPolicy {
                 false, false, false, false, false, false, false, 0, false, false, false);
     }
 
+    public static AttentionRuntimeTraits nativeBf16Matvec() {
+        return new AttentionRuntimeTraits(
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                0,
+                false,
+                false,
+                false);
+    }
+
     public static AttentionRuntimeTraits generic(ModelConfig config, boolean perLayerInputPath) {
         return new AttentionRuntimeTraits(
                 false,
@@ -44,6 +59,22 @@ public final class ModelAttentionTraitsPolicy {
     }
 
     
+    public static AttentionRuntimeTraits qwenText(ModelConfig config) {
+        boolean compact = isCompactAttentionMatvecCandidate(config);
+        return new AttentionRuntimeTraits(
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                compact ? DEFAULT_QWEN_PAGED_METAL_PREFILL_MAX_TOKENS : 0,
+                compact,
+                isLargeAttentionMatvecCandidate(config, false, false),
+                false);
+    }
+
     public static AttentionRuntimeTraits phiText(ModelConfig config) {
         return new AttentionRuntimeTraits(
                 false,
@@ -55,7 +86,7 @@ public final class ModelAttentionTraitsPolicy {
                 false,
                 0,
                 false,
-                false,
+                isLargeAttentionMatvecCandidate(config, false, false),
                 true);
     }
 

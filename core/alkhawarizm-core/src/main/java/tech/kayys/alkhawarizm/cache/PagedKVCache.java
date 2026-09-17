@@ -28,7 +28,7 @@ public class PagedKVCache {
     public synchronized void put(long key, float[] data) {
         // create direct byte buffer and fill with floats
         int bytes = data.length * 4;
-        ByteBuffer buf = ByteBuffer.allocateDirect(bytes);
+        ByteBuffer buf = ByteBuffer.allocateDirect(bytes).order(java.nio.ByteOrder.nativeOrder());
         buf.asFloatBuffer().put(data);
         // position at zero for consumers
         buf.position(0);

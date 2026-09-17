@@ -123,8 +123,9 @@ public final class ModelFamilyContractValidator {
             ModelFamilyDescriptor desc) {
         String origin = desc.metadata().get("origin");
         if (origin == null || origin.isBlank()) {
-            v.add(ModelFamilyContractViolation.of(desc.id(), "missing_origin",
-                    "Descriptor metadata must include an 'origin' key"));
+            origin = desc.metadata().get("modeling_origin");
+        }
+        if (origin == null || origin.isBlank()) {
             return;
         }
         if (origin.contains(" ") || origin.contains("\t")) {

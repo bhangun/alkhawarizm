@@ -158,7 +158,12 @@ public class INT8Quantizer implements Quantizer {
 
     @Override
     public boolean supports(QuantConfig config) {
-        return config.getBits() == 8;
+        if (config == null) return false;
+        if (config.getStrategy() == tech.kayys.alkhawarizm.safetensor.quantization.QuantizationEngine.QuantStrategy.FP8) {
+            return false;
+        }
+        return config.getBits() == 8
+                || config.getStrategy() == tech.kayys.alkhawarizm.safetensor.quantization.QuantizationEngine.QuantStrategy.INT8;
     }
 
     // ─────────────────────────────────────────────────────────────────────────

@@ -128,7 +128,7 @@ public class QuantConfig {
      * @return INT8 configuration
      */
     public static QuantConfig int8() {
-        return builder().strategy(QuantizationEngine.QuantStrategy.INT8).perChannel(true).build();
+        return builder().strategy(QuantizationEngine.QuantStrategy.INT8).bits(8).perChannel(true).build();
     }
 
     /**
@@ -235,6 +235,11 @@ public class QuantConfig {
 
         public Builder strategy(QuantizationEngine.QuantStrategy strategy) {
             this.strategy = strategy;
+            if (strategy == QuantizationEngine.QuantStrategy.INT8 || strategy == QuantizationEngine.QuantStrategy.FP8) {
+                this.bits = 8;
+            } else if (strategy == QuantizationEngine.QuantStrategy.INT4) {
+                this.bits = 4;
+            }
             return this;
         }
 

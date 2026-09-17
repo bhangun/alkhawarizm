@@ -37,8 +37,9 @@ public class AWQQuantizerAdapter implements Quantizer {
         
         int numGroups = (inF + groupSize - 1) / groupSize;
         int packFactor = 32 / bits;
+        int packedInF = (inF + packFactor - 1) / packFactor;
         
-        int[] qweight = new int[(inF / packFactor) * outF];
+        int[] qweight = new int[packedInF * outF];
         float[] scales = new float[numGroups * outF];
         float[] zeros = new float[numGroups * outF];
         
@@ -119,22 +120,29 @@ public class AWQQuantizerAdapter implements Quantizer {
         // We'll use a simplified dequantization loop if the core dequantizer doesn't match our storage exactly.
         // But the AWQDequantizer.dequantize is SIMD optimized.
         
-        float[] output = new float[inF * outF];
-        
-        // We need to provide what AWQDequantizer expects: 
-        // qzerosInts is packed, scalesShorts is FP16.
-        // For simplicity in this adapter, we'll implement the loop directly here using SIMD if possible,
-        // or just use the core one by converting back.
-        
         int numGroups = (inF + groupSize - 1) / groupSize;
-        short[] scalesShorts = new short[scales.length];
-        for (int i = 0; i < scales.length; i++) scalesShorts[i] = floatToFp16(scales[i]);
-        
-        // implicit zero handling or convert zeros back to packed
-        int[] qzerosInts = packZeros(zeros, numGroups, outF, bits);
-        
-        dequantizer.dequantize(qweightInts, qzerosInts, scalesShorts, inF, outF, output);
-        
+        int packFactor = 32 / bits;
+        int mask = (1 << bits) - 1;
+
+        float[] output = new float[inF * outF];
+
+        for (int g = 0; g < numGroups; g++) {
+            int iStart = g * groupSize;
+            int iEnd = Math.min(iStart + groupSize, inF);
+
+            for (int j = 0; j < outF; j++) {
+                float scale = scales[g * outF + j];
+                float zero = zeros[g * outF + j];
+
+                for (int i = iStart; i < iEnd; i++) {
+                    int pi = i / packFactor;
+                    int b = i % packFactor;
+                    int q = (qweightInts[pi * outF + j] >>> (b * bits)) & mask;
+                    output[i * outF + j] = (q - zero) * scale;
+                }
+            }
+        }
+
         return AccelTensor.fromFloatArray(output, quantizedTensor.shape());
     }
 

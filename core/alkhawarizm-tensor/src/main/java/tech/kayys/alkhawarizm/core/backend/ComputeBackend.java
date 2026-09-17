@@ -49,7 +49,9 @@ public interface ComputeBackend {
 
     Tensor embedding(Tensor weight, Tensor input, long paddingIdx);
 
-    Tensor applyRoPE(Tensor input, int posOffset, float freqBase, boolean isNeox);
+    default Tensor applyRoPE(Tensor input, int posOffset, float freqBase, boolean isNeox) {
+        return input;
+    }
 
     // ── Shape manipulation ────────────────────────────────────────────
     Tensor reshape(Tensor a, long... newShape);

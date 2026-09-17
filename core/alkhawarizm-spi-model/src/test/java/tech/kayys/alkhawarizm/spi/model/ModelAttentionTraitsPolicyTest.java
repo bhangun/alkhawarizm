@@ -17,7 +17,7 @@ class ModelAttentionTraitsPolicyTest {
 
   @Test
   void nativeBf16MatvecEnablesSpecialMetalAttentionPolicy() {
-    AttentionRuntimeTraits traits = ModelAttentionTraitsPolicy.empty();
+    AttentionRuntimeTraits traits = ModelAttentionTraitsPolicy.nativeBf16Matvec();
 
     assertTrue(traits.splitHalfRope());
     assertTrue(traits.attentionSoftCapAppliesToFinalLogitsOnly());

@@ -177,13 +177,13 @@ public class QuantStats {
         if (bytes < 1024) {
             return bytes + " B";
         } else if (bytes < 1024 * 1024) {
-            return String.format("%.2f KB", bytes / 1024.0);
+            return String.format(java.util.Locale.ROOT, "%.2f KB", bytes / 1024.0);
         } else if (bytes < 1024 * 1024 * 1024) {
-            return String.format("%.2f MB", bytes / (1024.0 * 1024.0));
+            return String.format(java.util.Locale.ROOT, "%.2f MB", bytes / (1024.0 * 1024.0));
         } else if (bytes < 1024L * 1024L * 1024L * 1024L) {
-            return String.format("%.2f GB", bytes / (1024.0 * 1024.0 * 1024.0));
+            return String.format(java.util.Locale.ROOT, "%.2f GB", bytes / (1024.0 * 1024.0 * 1024.0));
         } else {
-            return String.format("%.2f TB", bytes / (1024.0 * 1024.0 * 1024.0 * 1024.0));
+            return String.format(java.util.Locale.ROOT, "%.2f TB", bytes / (1024.0 * 1024.0 * 1024.0 * 1024.0));
         }
     }
 

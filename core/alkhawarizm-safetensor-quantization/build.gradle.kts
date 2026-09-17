@@ -22,6 +22,7 @@ dependencies {
     // quantization tests use awaitility
     testImplementation("org.awaitility:awaitility:4.2.1")
     testImplementation("io.quarkus:quarkus-junit5")
+    testImplementation("io.rest-assured:rest-assured:5.4.0")
 }
 
 tasks.test {

@@ -123,6 +123,10 @@ public class GPTQQuantizerAdapter implements Quantizer {
 
     @Override
     public boolean supports(QuantConfig config) {
-        return config.getStrategy() == tech.kayys.alkhawarizm.safetensor.quantization.QuantizationEngine.QuantStrategy.GPTQ;
+        if (config == null) return false;
+        var s = config.getStrategy();
+        return s == tech.kayys.alkhawarizm.safetensor.quantization.QuantizationEngine.QuantStrategy.GPTQ
+                || s == tech.kayys.alkhawarizm.safetensor.quantization.QuantizationEngine.QuantStrategy.INT4
+                || s == tech.kayys.alkhawarizm.safetensor.quantization.QuantizationEngine.QuantStrategy.INT8;
     }
 }

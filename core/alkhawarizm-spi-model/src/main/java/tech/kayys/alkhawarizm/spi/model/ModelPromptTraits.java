@@ -30,6 +30,49 @@ public record ModelPromptTraits(
         boolean requiresChatTemplateFormatting) {
 
     public static final String DEFAULT_SYSTEM_PROMPT = "You are a helpful assistant.";
+    public static final String QWEN_DEFAULT_SYSTEM_PROMPT = "You are a helpful assistant.";
+
+    public static ModelPromptTraits fromConfig(ModelConfig config) {
+        if (config == null) {
+            return new ModelPromptTraits(PromptBosPolicy.DEFAULT, Set.of(), false, false, false, DEFAULT_SYSTEM_PROMPT, Set.of(), false);
+        }
+        String arch = (config.primaryArchitecture() != null ? config.primaryArchitecture() : "").toLowerCase(Locale.ROOT);
+        String modelType = (config.modelType() != null ? config.modelType() : "").toLowerCase(Locale.ROOT);
+        if (arch.contains("gemma4") || modelType.startsWith("gemma4")) {
+            return new ModelPromptTraits(
+                    PromptBosPolicy.NEVER,
+                    Set.of("<|channel>", "<channel|>", "<|think|>", "<|turn>", "<turn|>"),
+                    true,
+                    true,
+                    true,
+                    DEFAULT_SYSTEM_PROMPT,
+                    Set.of(),
+                    false);
+        }
+        if (arch.contains("gemma") || modelType.contains("gemma")) {
+            return new ModelPromptTraits(
+                    PromptBosPolicy.TURN_AWARE,
+                    Set.of(),
+                    false,
+                    false,
+                    false,
+                    DEFAULT_SYSTEM_PROMPT,
+                    Set.of(),
+                    false);
+        }
+        if (arch.contains("qwen") || modelType.contains("qwen")) {
+            return new ModelPromptTraits(
+                    PromptBosPolicy.DEFAULT,
+                    Set.of("<|im_start|>", "<|im_end|>"),
+                    false,
+                    false,
+                    false,
+                    QWEN_DEFAULT_SYSTEM_PROMPT,
+                    Set.of(),
+                    true);
+        }
+        return new ModelPromptTraits(PromptBosPolicy.DEFAULT, Set.of(), false, false, false, DEFAULT_SYSTEM_PROMPT, Set.of(), false);
+    }
 
     public ModelPromptTraits {
         promptBosPolicy = promptBosPolicy == null ? PromptBosPolicy.DEFAULT : promptBosPolicy;

@@ -401,6 +401,7 @@ class ModelFamilyPluginRegistryTest {
     @Test
     void pluginRuntimeTraitsDelegateToMatchingArchitectureAdapter() throws Exception {
         ModelRuntimeTraits adapterTraits = ModelRuntimeTraits.builder()
+                .qwenText()
                 .perLayerInputEmbedding()
                 .build();
         ModelFamilyPlugin plugin = new ModelFamilyPlugin() {

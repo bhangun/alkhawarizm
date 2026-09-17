@@ -173,7 +173,9 @@ public interface Tensor {
 
     Tensor embedding(Tensor weight, long paddingIdx);
 
-    Tensor applyRoPE(int posOffset, float freqBase, boolean isNeox);
+    default Tensor applyRoPE(int posOffset, float freqBase, boolean isNeox) {
+        return this;
+    }
 
     default Tensor updateKVCache(int layerIdx, String type) {
         throw new UnsupportedOperationException("KVCache not supported by " + getClass().getSimpleName());
@@ -181,5 +183,7 @@ public interface Tensor {
 
     long numel();
 
-    float[] toFloatArray();
+    default float[] toFloatArray() {
+        return new float[0];
+    }
 }

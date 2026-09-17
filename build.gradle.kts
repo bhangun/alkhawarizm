@@ -87,6 +87,7 @@ subprojects {
     }
 
     tasks.withType<Test>().configureEach {
+        dependsOn(tasks.named("jar"))
         jvmArgs(
             "--enable-preview",
             "--add-modules=jdk.incubator.vector",
@@ -151,6 +152,20 @@ subprojects {
     }
 
     configurations.configureEach {
+        resolutionStrategy.dependencySubstitution {
+            substitute(module("tech.kayys.alkhawarizm:alkhawarizm-spi-model")).using(project(":core:alkhawarizm-spi-model"))
+            substitute(module("tech.kayys.alkhawarizm:alkhawarizm-tensor")).using(project(":core:alkhawarizm-tensor"))
+            substitute(module("tech.kayys.alkhawarizm:alkhawarizm-error-code")).using(project(":core:alkhawarizm-error-code"))
+            substitute(module("tech.kayys.alkhawarizm:alkhawarizm-safetensor-api")).using(project(":core:alkhawarizm-safetensor-api"))
+            substitute(module("tech.kayys.alkhawarizm:alkhawarizm-safetensor-core")).using(project(":core:alkhawarizm-safetensor-core"))
+            substitute(module("tech.kayys.alkhawarizm:alkhawarizm-safetensor-loader")).using(project(":core:alkhawarizm-safetensor-loader"))
+            substitute(module("tech.kayys.alkhawarizm:alkhawarizm-safetensor-spi")).using(project(":core:alkhawarizm-safetensor-spi"))
+            substitute(module("tech.kayys.alkhawarizm:alkhawarizm-nn")).using(project(":core:alkhawarizm-nn"))
+            substitute(module("tech.kayys.alkhawarizm:alkhawarizm-3d")).using(project(":core:alkhawarizm-3d"))
+            substitute(module("tech.kayys.alkhawarizm:alkhawarizm-core")).using(project(":core:alkhawarizm-core"))
+            substitute(module("tech.kayys.aljabr:aljabr-tensor")).using(project(":core:alkhawarizm-tensor"))
+            substitute(module("tech.kayys.aljabr:tafkir-ml-core")).using(module("tech.kayys.tafkir:tafkir-ml-core:0.1.0-SNAPSHOT"))
+        }
         resolutionStrategy.eachDependency {
             if (requested.group == "io.quarkus" && requested.version.isNullOrBlank()) {
                 useVersion(quarkusVersion)

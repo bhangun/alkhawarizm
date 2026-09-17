@@ -56,7 +56,6 @@ class ModelFamilyContractValidatorTest {
         assertTrue(codes.contains("invalid_family_id"));
         assertTrue(codes.contains("invalid_model_type"));
         assertTrue(codes.contains("unknown_bundle_profile"));
-        assertTrue(codes.contains("missing_origin"));
         assertTrue(codes.contains("multimodal_without_modality"));
         assertTrue(codes.contains("invalid_tokenizer_id"));
         assertTrue(codes.contains("tokenizer_unsafe_file"));

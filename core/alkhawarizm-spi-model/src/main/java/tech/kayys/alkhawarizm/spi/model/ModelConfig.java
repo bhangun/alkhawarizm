@@ -2229,6 +2229,30 @@ public class ModelConfig {
         return architectures;
     }
 
+    // JavaBean-style compatibility getters
+    public String getModelType() { return modelType(); }
+    public String getPrimaryArchitecture() { return primaryArchitecture(); }
+    public int getHiddenSize() { return hiddenSize(); }
+    public int getNumHiddenLayers() { return numHiddenLayers(); }
+    public int getNumAttentionHeads() { return numAttentionHeads(); }
+    public int getIntermediateSize() { return intermediateSize(); }
+    public int getVocabSize() { return vocabSize(); }
+    public int getMaxPositionEmbeddings() { return maxPositionEmbeddings(); }
+    public int getHiddenSizePerLayerInput() { return hiddenSizePerLayerInput(); }
+    public int getVocabSizePerLayerInput() { return vocabSizePerLayerInput(); }
+    public String getLayerType(int layerIdx) { return layerType(layerIdx); }
+    public Double getFinalLogitSoftcapping() { return finalLogitSoftcapping(); }
+    public Double getAttnLogitSoftcapping() { return attnLogitSoftcapping(); }
+    public int getSlidingWindowSize() { return slidingWindowSize(); }
+    public int getResolvedHeadDim() { return resolvedHeadDim(); }
+    public int getResolvedMaxHeadDim() { return resolvedMaxHeadDim(); }
+    public int getResolvedNumKvSharedLayers() { return resolvedNumKvSharedLayers(); }
+    public double getRmsNormEps() { return rmsNormEps(); }
+    public double getRopeTheta() { return ropeTheta(); }
+    public List<String> getArchitectures() { return architectures(); }
+    public Optional<Integer> getBosTokenId() { return bosTokenId(); }
+    public Optional<Integer> getEosTokenId() { return eosTokenId(); }
+
     // ─────────────────────────────────────────────────────────────────────────
     // Nested types
     // ─────────────────────────────────────────────────────────────────────────
@@ -2293,11 +2317,19 @@ public class ModelConfig {
         return numLocalExperts != null ? numLocalExperts : 0;
     }
 
+    public int getNumLocalExperts() {
+        return numLocalExperts();
+    }
+
     /**
      * Get number of experts per token (for MoE models).
      */
     public int numExpertsPerTok() {
         return numExpertsPerTok != null ? numExpertsPerTok : 0;
+    }
+
+    public int getNumExpertsPerTok() {
+        return numExpertsPerTok();
     }
 
     public boolean enableMoeBlock() {

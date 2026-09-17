@@ -228,12 +228,18 @@ public record ModelRuntimeTraits(
         return ModelModalityTraits.detectMultimodalModel(config);
     }
 
+    public static final String QWEN_DEFAULT_SYSTEM_PROMPT = ModelPromptTraits.QWEN_DEFAULT_SYSTEM_PROMPT;
+
+    public boolean qwenText() {
+        return promptBosPolicy == PromptBosPolicy.TURN_AWARE;
+    }
+
     public boolean skipDefaultSystemPromptInjection() {
         return nativeBf16Matvec;
     }
 
     public String defaultSystemPrompt() {
-        return ModelPromptTraits.DEFAULT_SYSTEM_PROMPT;
+        return qwenText() ? QWEN_DEFAULT_SYSTEM_PROMPT : ModelPromptTraits.DEFAULT_SYSTEM_PROMPT;
     }
 
     private static String normalizedModelType(ModelConfig config) {
@@ -281,6 +287,13 @@ public record ModelRuntimeTraits(
         private boolean multimodalModel;
 
         private Builder() {
+        }
+
+        public Builder qwenText() {
+            return promptBosPolicy(PromptBosPolicy.TURN_AWARE)
+                    .allowedControlTokenTexts(Set.of("<|im_start|>", "<|im_end|>"))
+                    .validateContinuationTokensByDecode(true)
+                    .rejectEmptyDecodedTokens(true);
         }
 
         public Builder nativeBf16Matvec() {
