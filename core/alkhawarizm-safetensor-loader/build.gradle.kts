@@ -4,7 +4,12 @@ plugins {
 
 dependencies {
     implementation(project(":core:alkhawarizm-safetensor-spi"))
-    implementation(project(":spi:gollek-spi"))
+    val gollekSpi = findProject(":spi:gollek-spi")
+    if (gollekSpi != null) {
+        implementation(gollekSpi)
+    } else {
+        implementation("tech.kayys.gollek:gollek-spi:0.1.0-SNAPSHOT")
+    }
     implementation("com.fasterxml.jackson.core:jackson-annotations:2.16.1")
     implementation("com.fasterxml.jackson.core:jackson-core:2.16.1")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")

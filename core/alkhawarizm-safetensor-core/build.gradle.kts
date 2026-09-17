@@ -21,7 +21,12 @@ dependencies {
     implementation(project(":core:alkhawarizm-safetensor-api"))
     implementation(project(":core:alkhawarizm-safetensor-spi"))
     implementation(project(":core:alkhawarizm-safetensor-loader"))
-    implementation(project(":core:gollek-tokenizer-core"))
+    val gollekTokenizer = findProject(":core:gollek-tokenizer-core")
+    if (gollekTokenizer != null) {
+        implementation(gollekTokenizer)
+    } else {
+        implementation("tech.kayys.gollek:gollek-tokenizer-core:0.1.0-SNAPSHOT")
+    }
     implementation("com.fasterxml.jackson.core:jackson-annotations:2.16.1")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
     implementation("com.google.code.gson:gson:2.10.1")

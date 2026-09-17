@@ -5,9 +5,19 @@ plugins {
 dependencies {
     implementation(project(":core:alkhawarizm-gguf-converter"))
     implementation(project(":core:alkhawarizm-gguf-core"))
-    implementation(project(":core:gollek-core"))
+    val gollekCore = findProject(":core:gollek-core")
+    if (gollekCore != null) {
+        implementation(gollekCore)
+    } else {
+        implementation("tech.kayys.gollek:gollek-core:0.1.0-SNAPSHOT")
+    }
     implementation("tech.kayys.alkhawarizm:alkhawarizm-tensor:0.1.0-SNAPSHOT")
-    implementation(project(":spi:gollek-spi"))
+    val gollekSpi = findProject(":spi:gollek-spi")
+    if (gollekSpi != null) {
+        implementation(gollekSpi)
+    } else {
+        implementation("tech.kayys.gollek:gollek-spi:0.1.0-SNAPSHOT")
+    }
     implementation(project(":core:alkhawarizm-safetensor-loader"))
     implementation("io.smallrye.reactive:mutiny:2.5.5")
     implementation("com.google.code.gson:gson:2.11.0")
