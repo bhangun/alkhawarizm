@@ -21,10 +21,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class GgufQ32OneTest {
     @Test
     void rawQ32MatVecUsesDirectDotPathForSingleDecodeRow() {
-        String previousMinRows = System.getProperty("gollek.gguf.q32.cache_min_rows");
-        String previousMaxBytes = System.getProperty("gollek.gguf.q32.cache_max_bytes");
-        System.setProperty("gollek.gguf.q32.cache_min_rows", "1");
-        System.setProperty("gollek.gguf.q32.cache_max_bytes", "1");
+        String previousMinRows = System.getProperty("alkhawarizm.gguf.q32.cache_min_rows");
+        String previousMaxBytes = System.getProperty("alkhawarizm.gguf.q32.cache_max_bytes");
+        System.setProperty("alkhawarizm.gguf.q32.cache_min_rows", "1");
+        System.setProperty("alkhawarizm.gguf.q32.cache_max_bytes", "1");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(18 + 20 + 22 + 24);
             writeQ4_0Block(segment.asSlice(0, 18), (short) 0x3c00, (byte) 0x98);
@@ -50,8 +50,8 @@ class GgufQ32OneTest {
             assertSingleRowMatVecMatchesDot(model, q5_1Tensor, vector);
             assertEquals(0, GgufTensorOps.q32MatrixCacheSize(model));
         } finally {
-            restoreProperty("gollek.gguf.q32.cache_min_rows", previousMinRows);
-            restoreProperty("gollek.gguf.q32.cache_max_bytes", previousMaxBytes);
+            restoreProperty("alkhawarizm.gguf.q32.cache_min_rows", previousMinRows);
+            restoreProperty("alkhawarizm.gguf.q32.cache_max_bytes", previousMaxBytes);
         }
     }
 }

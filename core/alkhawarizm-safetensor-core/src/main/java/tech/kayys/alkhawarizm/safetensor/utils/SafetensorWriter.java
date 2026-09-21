@@ -1,4 +1,4 @@
-package tech.kayys.gollek.safetensor.utils;
+package tech.kayys.alkhawarizm.safetensor.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

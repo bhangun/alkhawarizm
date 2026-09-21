@@ -1,5 +1,5 @@
 /*
- * Gollek Inference Engine — SafeTensor Module
+ * Alkhawarizm Inference Engine — SafeTensor Module
  * Copyright (c) 2026 Kayys.tech
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -42,7 +42,7 @@ import java.util.Objects;
  *
  * <p>
  * <b>Lifetime contract:</b> this object must not be used after the
- * {@link tech.kayys.gollek.inference.safetensor.ffm.SafetensorLoadResult}
+ * {@link tech.kayys.alkhawarizm.inference.safetensor.ffm.SafetensorLoadResult}
  * that produced it has been {@link AutoCloseable#close() closed}. Accessing
  * a closed segment causes a JVM-level exception from the FFM layer.
  * @author bhangun
@@ -75,7 +75,7 @@ public final class SafetensorTensor implements AutoCloseable {
 
     /**
      * Package-private constructor. Instantiated exclusively by
-     * {@link tech.kayys.gollek.inference.safetensor.ffm.SafetensorFFMLoader}.
+     * {@link tech.kayys.alkhawarizm.inference.safetensor.ffm.SafetensorFFMLoader}.
      *
      * @param info    tensor metadata
      * @param segment memory segment exactly spanning this tensor's bytes
@@ -134,7 +134,7 @@ public final class SafetensorTensor implements AutoCloseable {
      *
      * <p>
      * <b>WARNING:</b> the returned segment is only valid while the parent
-     * {@link tech.kayys.gollek.inference.safetensor.ffm.SafetensorLoadResult}
+     * {@link tech.kayys.alkhawarizm.inference.safetensor.ffm.SafetensorLoadResult}
      * is open.
      *
      * @return the raw off-heap segment
@@ -386,7 +386,7 @@ public final class SafetensorTensor implements AutoCloseable {
      *
      * <p>
      * In normal use, tensors are closed implicitly when the owning
-     * {@link tech.kayys.gollek.inference.safetensor.ffm.SafetensorLoadResult}
+     * {@link tech.kayys.alkhawarizm.inference.safetensor.ffm.SafetensorLoadResult}
      * is closed.
      */
     @Override

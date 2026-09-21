@@ -39,7 +39,7 @@ tasks.jar {
     manifest {
         attributes(
             mapOf(
-                "Plugin-Author" to "Aljabr Team",
+                "Plugin-Author" to "Alkhawarizm Team",
                 "Plugin-Capabilities" to "cuda-acceleration, flash-attention-2, flash-attention-3, paged-attention, gpu-inference",
                 "Plugin-Deployment" to "microservice,hybrid",
                 "Plugin-GPU-Requirement" to "NVIDIA GPU, CUDA 11.0+",

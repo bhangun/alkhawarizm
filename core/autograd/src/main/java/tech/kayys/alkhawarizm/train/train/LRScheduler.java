@@ -20,7 +20,7 @@ package tech.kayys.alkhawarizm.ml.train;
  * trainer.scheduler(scheduler);
  * }</pre>
  *
- * @author Aljabr Team
+ * @author Alkhawarizm Team
  * @version 0.1.0
  */
 public interface LRScheduler {

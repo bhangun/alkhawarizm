@@ -1,7 +1,7 @@
 import com.google.gson.JsonParser;
 import org.junit.jupiter.api.Test;
-import tech.kayys.gollek.converter.gguf.GemmaArchMapper;
-import tech.kayys.gollek.converter.gguf.HfConfigParser;
+import tech.kayys.alkhawarizm.converter.gguf.GemmaArchMapper;
+import tech.kayys.alkhawarizm.converter.gguf.HfConfigParser;
 import tech.kayys.alkhawarizm.gguf.core.GgufMetaValue;
 import tech.kayys.alkhawarizm.gguf.core.GgufModel;
 

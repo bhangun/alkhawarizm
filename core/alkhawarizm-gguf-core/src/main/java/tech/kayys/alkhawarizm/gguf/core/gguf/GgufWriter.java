@@ -1,4 +1,4 @@
-package tech.kayys.gollek.ml.gguf;
+package tech.kayys.alkhawarizm.ml.gguf;
 
 import tech.kayys.alkhawarizm.core.tensor.Tensor;
 

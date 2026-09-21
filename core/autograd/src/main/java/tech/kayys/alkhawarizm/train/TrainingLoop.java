@@ -1,7 +1,7 @@
 package tech.kayys.alkhawarizm.train;
 
 import tech.kayys.alkhawarizm.data.*;
-import tech.kayys.gollek.ir.*;
+import tech.kayys.alkhawarizm.ir.*;
 import tech.kayys.alkhawarizm.core.tensor.Tensor;
 import java.util.Map;
 /**

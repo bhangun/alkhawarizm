@@ -18,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class GgufQ32CacheTest {
     @Test
     void boundsPreparedQ32MatrixCacheByEstimatedBytes() {
-        String previous = System.getProperty("gollek.gguf.q32.cache_max_bytes");
-        System.setProperty("gollek.gguf.q32.cache_max_bytes", "40");
+        String previous = System.getProperty("alkhawarizm.gguf.q32.cache_max_bytes");
+        System.setProperty("alkhawarizm.gguf.q32.cache_max_bytes", "40");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(2L * 18);
             writeQ4_0Block(segment.asSlice(0, 18), (short) 0x3c00, (byte) 0x98);
@@ -41,7 +41,7 @@ class GgufQ32CacheTest {
             assertNotSame(first, firstAfterEviction);
             assertEquals(1, GgufTensorOps.clearQ32MatrixCache(model));
         } finally {
-            restoreProperty("gollek.gguf.q32.cache_max_bytes", previous);
+            restoreProperty("alkhawarizm.gguf.q32.cache_max_bytes", previous);
         }
     }
 }

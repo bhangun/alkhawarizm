@@ -1,5 +1,5 @@
 /*
- * Gollek Inference Engine — SafeTensor Module
+ * Alkhawarizm Inference Engine — SafeTensor Module
  * Copyright (c) 2026 Kayys.tech
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -43,23 +43,23 @@ public final class AccelOps {
 
     private static final VectorSpecies<Float> SPECIES = FloatVector.SPECIES_PREFERRED;
     private static final String EXPERIMENTAL_SMALL_BATCH_HALF_LINEAR_PROPERTY =
-            "gollek.safetensor.experimental_small_batch_half_linear";
+            "alkhawarizm.safetensor.experimental_small_batch_half_linear";
     private static final String EXPERIMENTAL_SINGLE_TOKEN_HALF_LINEAR_PROPERTY =
-            "gollek.safetensor.experimental_single_token_half_linear";
+            "alkhawarizm.safetensor.experimental_single_token_half_linear";
     private static final String EXPERIMENTAL_SINGLE_TOKEN_SGEMV_PROPERTY =
-            "gollek.safetensor.experimental_single_token_sgemv";
+            "alkhawarizm.safetensor.experimental_single_token_sgemv";
     private static final String HALF_LINEAR_PARALLELISM_PROPERTY =
-            "gollek.safetensor.half_linear_parallelism";
+            "alkhawarizm.safetensor.half_linear_parallelism";
     private static final String HALF_LINEAR_PARALLEL_MIN_OUTPUTS_PROPERTY =
-            "gollek.safetensor.half_linear_parallel_min_outputs";
+            "alkhawarizm.safetensor.half_linear_parallel_min_outputs";
     private static final String HALF_LINEAR_PARALLEL_TARGET_OUTPUTS_PROPERTY =
-            "gollek.safetensor.half_linear_parallel_target_outputs";
+            "alkhawarizm.safetensor.half_linear_parallel_target_outputs";
     private static final int SMALL_BATCH_HALF_LINEAR_MAX_M = Integer.getInteger(
-            "gollek.safetensor.small_half_linear_max_m", 64);
+            "alkhawarizm.safetensor.small_half_linear_max_m", 64);
     private static final int SMALL_BATCH_HALF_LINEAR_VECTOR_MAX_ROWS = Integer.getInteger(
-            "gollek.safetensor.small_half_linear_vector_max_rows", 4);
+            "alkhawarizm.safetensor.small_half_linear_vector_max_rows", 4);
     private static final int SINGLE_TOKEN_HALF_LINEAR_TILE_ROWS = Integer.getInteger(
-            "gollek.safetensor.single_token_half_linear_tile_rows", 32);
+            "alkhawarizm.safetensor.single_token_half_linear_tile_rows", 32);
     private static final int HALF_LINEAR_PARALLEL_MIN_OUTPUTS = Integer.getInteger(
             HALF_LINEAR_PARALLEL_MIN_OUTPUTS_PROPERTY, 1024);
     private static final int HALF_LINEAR_PARALLEL_TARGET_OUTPUTS = Integer.getInteger(

@@ -1,5 +1,5 @@
 /*
- * Gollek Inference Engine — SafeTensor Module
+ * Alkhawarizm Inference Engine — SafeTensor Module
  * Copyright (c) 2026 Kayys.tech
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -7,7 +7,7 @@
  * ──────────────────────────────
  * CDI producer for SafeTensor configuration.
  */
-package tech.kayys.gollek.safetensor.config;
+package tech.kayys.alkhawarizm.safetensor.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.enterprise.context.ApplicationScoped;

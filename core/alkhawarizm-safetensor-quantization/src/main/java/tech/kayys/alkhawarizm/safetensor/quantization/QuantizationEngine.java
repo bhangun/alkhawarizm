@@ -1,5 +1,5 @@
 /*
- * Gollek Inference Engine — SafeTensor Module
+ * Alkhawarizm Inference Engine — SafeTensor Module
  * Copyright (c) 2026 Kayys.tech
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -465,7 +465,7 @@ public class QuantizationEngine {
         int totalToQuant = needsQuant.size();
         if (totalToQuant > 0) {
             int cpuCores = Runtime.getRuntime().availableProcessors();
-            System.err.printf("[Gollek] Quantizing %d tensors (BnB NF4) using %d CPU threads...%n",
+            System.err.printf("[Alkhawarizm] Quantizing %d tensors (BnB NF4) using %d CPU threads...%n",
                     totalToQuant, cpuCores);
         }
 
@@ -486,14 +486,14 @@ public class QuantizationEngine {
                     AccelTensor candidate = quantizer.quantizeTensor(materialized, config);
                     long ms = System.currentTimeMillis() - t0;
                     if (!isUsableQuantizedTensor(candidate)) {
-                        System.err.printf("[Gollek] [%d/%d] SKIP (unsupported output) %s  (%.1fs)%n",
+                        System.err.printf("[Alkhawarizm] [%d/%d] SKIP (unsupported output) %s  (%.1fs)%n",
                                 idx, totalToQuant, name, ms / 1000.0);
                         log.warnf("Quantizer %s produced unsupported tensor for %s", effectiveStrategy, name);
                         if (candidate != null && candidate != source && candidate != materialized) candidate.close();
                         freshQuant.put(name, source);
                         return;
                     }
-                    System.err.printf("[Gollek] [%d/%d] OK  %s  (%.1fs, %s → NF4)%n",
+                    System.err.printf("[Alkhawarizm] [%d/%d] OK  %s  (%.1fs, %s → NF4)%n",
                             idx, totalToQuant, name, ms / 1000.0, source.quantType());
                     freshQuant.put(name, candidate);
                     quantizedFresh.incrementAndGet();
@@ -501,7 +501,7 @@ public class QuantizationEngine {
                     source.close();
                 } catch (Exception e) {
                     long ms = System.currentTimeMillis() - t0;
-                    System.err.printf("[Gollek] [%d/%d] ERR %s  (%.1fs): %s%n",
+                    System.err.printf("[Alkhawarizm] [%d/%d] ERR %s  (%.1fs): %s%n",
                             idx, totalToQuant, name, ms / 1000.0, e.getMessage());
                     log.warnf(e, "Failed to quantize %s; keeping original", name);
                     freshQuant.put(name, source);
@@ -526,7 +526,7 @@ public class QuantizationEngine {
         if (cacheHits.get() > 0) {
             log.infof("Loaded %d quantized tensors from inference cache (%s)", cacheHits.get(), effectiveStrategy);
         }
-        System.err.printf("[Gollek] Quantization complete: %d fresh, %d cached, %d pass-through%n",
+        System.err.printf("[Alkhawarizm] Quantization complete: %d fresh, %d cached, %d pass-through%n",
                 quantizedFresh.get(), cacheHits.get(), passThrough.size());
         log.infof("Prepared %d inference weights with strategy %s", quantized.size(), effectiveStrategy);
         String cacheState = cacheHits.get() > 0 ? "warm" : (quantizedFresh.get() > 0 ? "cold" : "bypass");
@@ -582,9 +582,9 @@ public class QuantizationEngine {
             return null;
         }
         try {
-            String gollekHome = System.getProperty("gollek.home",
-                    Path.of(System.getProperty("user.home"), ".gollek").toString());
-            Path cacheDir = ensureInferenceCacheDirectory(Path.of(gollekHome, "cache", "direct-quant"));
+            String alkhawarizmHome = System.getProperty("alkhawarizm.home",
+                    Path.of(System.getProperty("user.home"), ".alkhawarizm").toString());
+            Path cacheDir = ensureInferenceCacheDirectory(Path.of(alkhawarizmHome, "cache", "direct-quant"));
             Path normalized = modelPath.toAbsolutePath().normalize();
             long lastModified = Files.exists(normalized) ? Files.getLastModifiedTime(normalized).toMillis() : 0L;
             long size = Files.isRegularFile(normalized) ? Files.size(normalized) : 0L;
@@ -601,7 +601,7 @@ public class QuantizationEngine {
             Files.createDirectories(preferred);
             return preferred;
         } catch (IOException preferredFailure) {
-            Path fallback = Path.of(System.getProperty("java.io.tmpdir"), "gollek-direct-quant");
+            Path fallback = Path.of(System.getProperty("java.io.tmpdir"), "alkhawarizm-direct-quant");
             Files.createDirectories(fallback);
             log.warnf(preferredFailure, "Falling back to temp inference cache directory: %s", fallback);
             return fallback;

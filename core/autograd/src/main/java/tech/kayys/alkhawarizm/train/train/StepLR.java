@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
  *         .build();
  * }</pre>
  *
- * @author Aljabr Team
+ * @author Alkhawarizm Team
  * @version 0.1.0
  */
 public class StepLR implements LRScheduler {

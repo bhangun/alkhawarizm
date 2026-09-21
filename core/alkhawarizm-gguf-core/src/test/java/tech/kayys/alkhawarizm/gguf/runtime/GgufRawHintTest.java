@@ -22,8 +22,8 @@ import static tech.kayys.alkhawarizm.gguf.runtime.GgufQuantFormats.Q4_K_BLOCK_BY
 class GgufRawHintTest {
     @Test
     void rawSingleRowRemembersKNoMinHintForOneRowMatrix() {
-        String previousMinRows = System.getProperty("gollek.gguf.q4k.cache_min_rows");
-        System.setProperty("gollek.gguf.q4k.cache_min_rows", "999");
+        String previousMinRows = System.getProperty("alkhawarizm.gguf.q4k.cache_min_rows");
+        System.setProperty("alkhawarizm.gguf.q4k.cache_min_rows", "999");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(Q4_K_BLOCK_BYTES);
             writeQ4KNoMinLaneOrderBlock(segment);
@@ -48,14 +48,14 @@ class GgufRawHintTest {
                     8));
             assertEquals(1, GgufTensorOps.preparedMatrixEstimateCacheSize(model));
         } finally {
-            restoreProperty("gollek.gguf.q4k.cache_min_rows", previousMinRows);
+            restoreProperty("alkhawarizm.gguf.q4k.cache_min_rows", previousMinRows);
         }
     }
 
     @Test
     void rawSingleRowRemembersPositiveQ32BiasHintForLargerMatrix() {
-        String previousMinRows = System.getProperty("gollek.gguf.q32.cache_min_rows");
-        System.setProperty("gollek.gguf.q32.cache_min_rows", "999");
+        String previousMinRows = System.getProperty("alkhawarizm.gguf.q32.cache_min_rows");
+        System.setProperty("alkhawarizm.gguf.q32.cache_min_rows", "999");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(Q4_1_BLOCK_BYTES * 2L);
             writeQ4_1Block(segment.asSlice(0, Q4_1_BLOCK_BYTES), (short) 0x3c00, (short) 0x3800, (byte) 0x21);
@@ -84,7 +84,7 @@ class GgufRawHintTest {
                     2));
             assertEquals(1, GgufTensorOps.preparedMatrixEstimateCacheSize(model));
         } finally {
-            restoreProperty("gollek.gguf.q32.cache_min_rows", previousMinRows);
+            restoreProperty("alkhawarizm.gguf.q32.cache_min_rows", previousMinRows);
         }
     }
 
@@ -122,8 +122,8 @@ class GgufRawHintTest {
 
     @Test
     void rawFullRowsRememberKNoMinHintWhenPreparedCacheSkipped() {
-        String previousMinRows = System.getProperty("gollek.gguf.q4k.cache_min_rows");
-        System.setProperty("gollek.gguf.q4k.cache_min_rows", "999");
+        String previousMinRows = System.getProperty("alkhawarizm.gguf.q4k.cache_min_rows");
+        System.setProperty("alkhawarizm.gguf.q4k.cache_min_rows", "999");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(Q4_K_BLOCK_BYTES * 2L);
             writeQ4KNoMinLaneOrderBlock(segment.asSlice(0, Q4_K_BLOCK_BYTES));
@@ -152,14 +152,14 @@ class GgufRawHintTest {
                     8));
             assertEquals(1, GgufTensorOps.preparedMatrixEstimateCacheSize(model));
         } finally {
-            restoreProperty("gollek.gguf.q4k.cache_min_rows", previousMinRows);
+            restoreProperty("alkhawarizm.gguf.q4k.cache_min_rows", previousMinRows);
         }
     }
 
     @Test
     void rawFullRowsRememberQ32NoBiasHintWhenPreparedCacheSkipped() {
-        String previousMinRows = System.getProperty("gollek.gguf.q32.cache_min_rows");
-        System.setProperty("gollek.gguf.q32.cache_min_rows", "999");
+        String previousMinRows = System.getProperty("alkhawarizm.gguf.q32.cache_min_rows");
+        System.setProperty("alkhawarizm.gguf.q32.cache_min_rows", "999");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(Q4_1_BLOCK_BYTES * 2L);
             writeQ4_1Block(segment.asSlice(0, Q4_1_BLOCK_BYTES), (short) 0x3c00, (short) 0, (byte) 0x21);
@@ -193,7 +193,7 @@ class GgufRawHintTest {
                     2));
             assertEquals(1, GgufTensorOps.preparedMatrixEstimateCacheSize(model));
         } finally {
-            restoreProperty("gollek.gguf.q32.cache_min_rows", previousMinRows);
+            restoreProperty("alkhawarizm.gguf.q32.cache_min_rows", previousMinRows);
         }
     }
 }

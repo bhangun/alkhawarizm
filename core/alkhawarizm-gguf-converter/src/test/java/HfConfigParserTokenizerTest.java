@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import tech.kayys.gollek.converter.gguf.HfConfigParser;
+import tech.kayys.alkhawarizm.converter.gguf.HfConfigParser;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

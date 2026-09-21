@@ -15,15 +15,6 @@ fun includeOptionalProject(projectPath: String, vararg candidatePaths: String) {
 
 includeOptionalProject("core:alkhawarizm-core", "core/alkhawarizm-core")
 
-val skipGollek = gradle.startParameter.projectProperties["skipGollek"] == "true"
-if (!skipGollek) {
-    includeOptionalProject("core:gollek-core", "../gollek/framework/core/gollek-core")
-    includeOptionalProject("core:gollek-tokenizer-core", "../gollek/framework/core/gollek-tokenizer-core")
-    includeOptionalProject("spi:gollek-spi", "../gollek/framework/spi/gollek-spi")
-    includeOptionalProject("spi:gollek-spi-multimodal", "../gollek/framework/spi/gollek-spi-multimodal")
-    includeOptionalProject("spi:gollek-spi-inference", "../gollek/framework/spi/gollek-spi-inference")
-}
-
 // Autograd is training-only; exclude from foundational builds
 val skipAutograd = true
 if (!skipAutograd) {
@@ -70,16 +61,22 @@ file("models")
 
 
 
+// GGUF Suite: alkhawarizm-gguf-api, alkhawarizm-gguf-llamacpp, alkhawarizm-gguf-core, alkhawarizm-gguf-java
+include("core:alkhawarizm-gguf-api")
+include("core:alkhawarizm-gguf-llamacpp")
+include("core:alkhawarizm-gguf-core")
+include("core:alkhawarizm-gguf-java")
+
 include("core:alkhawarizm-rocksdb")
 include("core:alkhawarizm-helixdb")
 
-include(":core:alkhawarizm-safetensor-api")
-include(":core:alkhawarizm-safetensor-core")
-include(":core:alkhawarizm-safetensor-loader")
-include(":core:alkhawarizm-safetensor-quantization")
-include(":core:alkhawarizm-safetensor-spi")
-include(":core:alkhawarizm-gguf-bridge")
-include(":core:alkhawarizm-gguf-fast-bridge")
-include(":core:alkhawarizm-gguf-converter")
-include(":core:alkhawarizm-gguf-converter-java")
-include(":core:alkhawarizm-gguf-core")
+// Modules requiring external SPI/runner dependencies:
+//include(":core:alkhawarizm-safetensor-api")
+//include(":core:alkhawarizm-safetensor-spi")
+//include(":core:alkhawarizm-safetensor-core")
+//include(":core:alkhawarizm-safetensor-loader")
+//include(":core:alkhawarizm-safetensor-quantization")
+//include(":core:alkhawarizm-gguf-bridge")
+//include(":core:alkhawarizm-gguf-fast-bridge")
+//include(":core:alkhawarizm-gguf-converter")
+//include(":core:alkhawarizm-gguf-converter-java")

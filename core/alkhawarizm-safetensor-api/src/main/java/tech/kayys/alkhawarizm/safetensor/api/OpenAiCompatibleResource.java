@@ -1,5 +1,5 @@
 /*
- * Gollek Inference Engine — SafeTensor Module
+ * Alkhawarizm Inference Engine — SafeTensor Module
  * Copyright (c) 2026 Kayys.tech
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -18,7 +18,7 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.resteasy.reactive.RestStreamElementType;
 
-import tech.kayys.gollek.safetensor.generation.GenerationConfig;
+import tech.kayys.alkhawarizm.safetensor.generation.GenerationConfig;
 
 import java.time.Instant;
 import java.util.*;
@@ -136,7 +136,7 @@ public class OpenAiCompatibleResource {
     private Multi<String> streamChat(ChatCompletionRequest req, java.nio.file.Path modelPath, String prompt,
             GenerationConfig gc, Object engine) {
         String completionId = "chatcmpl-" + UUID.randomUUID().toString().replace("-", "").substring(0, 28);
-        String model = req.model != null ? req.model : "gollek";
+        String model = req.model != null ? req.model : "alkhawarizm";
 
         try {
             Multi<?> multi = (Multi<?>) engine.getClass()
@@ -204,7 +204,7 @@ public class OpenAiCompatibleResource {
     @Operation(summary = "List available models")
     public ModelsResponse listModels() {
         List<ModelObject> models = modelRegistry.keySet().stream()
-                .map(alias -> new ModelObject(alias, "model", (int) (Instant.now().getEpochSecond()), "gollek"))
+                .map(alias -> new ModelObject(alias, "model", (int) (Instant.now().getEpochSecond()), "alkhawarizm"))
                 .toList();
         return new ModelsResponse("list", models);
     }
@@ -217,7 +217,7 @@ public class OpenAiCompatibleResource {
             throw new WebApplicationException(Response.status(404)
                     .entity(errorBody("model_not_found", "Model '" + modelId + "' not found")).build());
         }
-        return new ModelObject(modelId, "model", (int) Instant.now().getEpochSecond(), "gollek");
+        return new ModelObject(modelId, "model", (int) Instant.now().getEpochSecond(), "alkhawarizm");
     }
 
     @POST
@@ -343,7 +343,7 @@ public class OpenAiCompatibleResource {
             int completionTokens) {
         return new ChatCompletionResponse(
                 "chatcmpl-" + UUID.randomUUID().toString().replace("-", "").substring(0, 28),
-                "chat.completion", (int) Instant.now().getEpochSecond(), req.model != null ? req.model : "gollek",
+                "chat.completion", (int) Instant.now().getEpochSecond(), req.model != null ? req.model : "alkhawarizm",
                 List.of(new ChatChoice(new ChatMessage("assistant", content), 0, "stop")),
                 new Usage(promptTokens, completionTokens, promptTokens + completionTokens));
     }

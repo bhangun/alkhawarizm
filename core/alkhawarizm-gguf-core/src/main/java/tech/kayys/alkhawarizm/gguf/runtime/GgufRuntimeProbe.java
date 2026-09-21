@@ -423,14 +423,14 @@ public record GgufRuntimeProbe(
     }
 
     private static PreparedMatrixCacheSelection selectProbeDecoderPreparedMatrixCache(GGUFModel model) {
-        int explicitMinRows = Math.max(0, Integer.getInteger("gollek.gguf.java_probe_prepare_min_rows", 0));
+        int explicitMinRows = Math.max(0, Integer.getInteger("alkhawarizm.gguf.java_probe_prepare_min_rows", 0));
         if (explicitMinRows > 0) {
             return selectDecoderPreparedMatrixCache(model, explicitMinRows, false, 1, 0L);
         }
-        boolean autoPrepare = Boolean.parseBoolean(System.getProperty("gollek.gguf.java_probe_auto_prepare", "true"));
-        int autoMinRows = Math.max(1, Integer.getInteger("gollek.gguf.java_probe_auto_prepare_min_rows", 32));
+        boolean autoPrepare = Boolean.parseBoolean(System.getProperty("alkhawarizm.gguf.java_probe_auto_prepare", "true"));
+        int autoMinRows = Math.max(1, Integer.getInteger("alkhawarizm.gguf.java_probe_auto_prepare_min_rows", 32));
         long budgetBytes = GgufBudget.byteSizeProperty(
-                "gollek.gguf.java_probe_auto_prepare_budget_bytes",
+                "alkhawarizm.gguf.java_probe_auto_prepare_budget_bytes",
                 GgufBudget.defaultAutoPrepareBytes());
         return selectDecoderPreparedMatrixCache(model, 0, autoPrepare, autoMinRows, budgetBytes);
     }

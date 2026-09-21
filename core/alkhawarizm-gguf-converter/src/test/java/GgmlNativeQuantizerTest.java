@@ -1,4 +1,4 @@
-package tech.kayys.gollek.converter.gguf;
+package tech.kayys.alkhawarizm.converter.gguf;
 
 import org.junit.jupiter.api.Test;
 import tech.kayys.alkhawarizm.gguf.core.GgmlType;

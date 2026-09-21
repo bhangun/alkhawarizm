@@ -166,7 +166,7 @@ static int alkhawarizm_metal_gated_ffn_matvec_half_impl(
     const void *downW, int input_dim, int intermediate_dim, int output_dim,
     int is_bf16, int activation_kind,
     id<MTLComputePipelineState> activation_pipeline) {
-  AljabrMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
+  AlkhawarizmMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
   if (!g_initialized)
     return -1;
   if (activation_pipeline == nil)
@@ -365,7 +365,7 @@ static int alkhawarizm_metal_gated_ffn_matvec_rows_bf16_impl(
     void *C, const void *A, const void *gateW, const void *upW,
     const void *downW, int M, int input_dim, int intermediate_dim,
     int output_dim, int activation_kind) {
-  AljabrMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
+  AlkhawarizmMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
   if (!g_initialized)
     return -1;
   if (M <= 0 || input_dim <= 0 || intermediate_dim <= 0 || output_dim <= 0)
@@ -458,7 +458,7 @@ static int alkhawarizm_metal_gated_ffn_matvec_rows_bf16_impl(
 int alkhawarizm_metal_bf16_ffn_matvec_rows_variant(void) {
   if (!g_initialized)
     return -1;
-  AljabrMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
+  AlkhawarizmMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
   if (pipelines->matvec_bf16_rows_gated_pair_x4 != nil &&
       pipelines->matvec_bf16_rows_x4 != nil) {
     return 2;

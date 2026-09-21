@@ -19,8 +19,8 @@ import static tech.kayys.alkhawarizm.gguf.runtime.GgufKFx.writeQ5KBlock;
 class GgufQ5KPrepTest {
     @Test
     void preparesAndCachesQ5KMatrixForGenericMatVec() {
-        String previous = System.getProperty("gollek.gguf.q5k.cache_min_rows");
-        System.setProperty("gollek.gguf.q5k.cache_min_rows", "1");
+        String previous = System.getProperty("alkhawarizm.gguf.q5k.cache_min_rows");
+        System.setProperty("alkhawarizm.gguf.q5k.cache_min_rows", "1");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(2L * 176);
             writeQ5KBlock(segment.asSlice(0, 176), (byte) 0xFF, (byte) 0);
@@ -54,7 +54,7 @@ class GgufQ5KPrepTest {
             assertEquals(4352.0f, preparedOutput[1], 0.0f);
             assertEquals(1, GgufTensorOps.clearQ5KMatrixCache(model));
         } finally {
-            restoreProperty("gollek.gguf.q5k.cache_min_rows", previous);
+            restoreProperty("alkhawarizm.gguf.q5k.cache_min_rows", previous);
         }
     }
 

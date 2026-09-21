@@ -1,5 +1,5 @@
 /*
- * Gollek Inference Engine — SafeTensor Module
+ * Alkhawarizm Inference Engine — SafeTensor Module
  * Copyright (c) 2026 Kayys.tech
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -173,7 +173,7 @@ class QuantizerIntegrationTest {
     void testSdkQuantizationServiceAvailable() {
         // SDK depends on quantization module, so this test only passes when SDK is on classpath
         // For now, just verify the class name is correct
-        String sdkClassName = "tech.kayys.gollek.sdk.api.QuantizationService";
+        String sdkClassName = "tech.kayys.alkhawarizm.sdk.api.QuantizationService";
         try {
             Class.forName(sdkClassName);
             assertTrue(true, "SDK QuantizationService is available");

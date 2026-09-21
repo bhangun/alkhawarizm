@@ -1,4 +1,4 @@
-package tech.kayys.gollek.safetensor.utils;
+package tech.kayys.alkhawarizm.safetensor.utils;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

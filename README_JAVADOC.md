@@ -154,7 +154,7 @@ Documentation Errors:            0
 
 ### POM Metadata
 - ✅ Project name (dynamic)
-- ✅ Description: "Aljabr ML Framework Module"
+- ✅ Description: "Alkhawarizm ML Framework Module"
 - ✅ License: Apache License 2.0
 - ✅ Repository: GitHub (alkhawarizm)
 - ✅ Developers: Wayang Platform
@@ -197,7 +197,7 @@ tasks.withType<Javadoc> {
 ### Error Code Registry
 ```java
 /**
- * Central registry for all Aljabr error codes.
+ * Central registry for all Alkhawarizm error codes.
  *
  * <p>
  * Pattern: CATEGORY_NNN (example: MODEL_001)

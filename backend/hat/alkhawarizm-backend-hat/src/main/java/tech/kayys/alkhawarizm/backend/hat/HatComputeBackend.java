@@ -58,13 +58,13 @@ public class HatComputeBackend implements ComputeBackend {
         // 3. Dispatch the compute graph with our custom CodeReflection Kernel
         accelerator.compute((@Reflect Compute) (cc) -> HatMatmulKernel.mxmF32Dispatch(cc, hatA, hatB, hatC, size));
 
-        // 4. Map the result back to Aljabr's off-heap tensor representation
+        // 4. Map the result back to Alkhawarizm's off-heap tensor representation
         float[] resultArr = new float[(int) a.shape().numel()];
         hatC.copyTo(resultArr);
 
         // Use cpuFallback temporarily to construct the final Tensor object properly
         // from array
-        // (A real production implementation would construct a native Aljabr Tensor
+        // (A real production implementation would construct a native Alkhawarizm Tensor
         // directly over the HAT buffer)
         Tensor res = cpuFallback.matmul(a, b);
         System.arraycopy(resultArr, 0, res.toFloatArray(), 0, resultArr.length);

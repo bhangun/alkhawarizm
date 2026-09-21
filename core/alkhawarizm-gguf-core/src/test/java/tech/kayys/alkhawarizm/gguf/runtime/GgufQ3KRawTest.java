@@ -19,10 +19,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class GgufQ3KRawTest {
     @Test
     void rawQ3KMatVecStreamsWhenPreparedCacheIsTooSmall() {
-        String previousMinRows = System.getProperty("gollek.gguf.q3k.cache_min_rows");
-        String previousMaxBytes = System.getProperty("gollek.gguf.q3k.cache_max_bytes");
-        System.setProperty("gollek.gguf.q3k.cache_min_rows", "1");
-        System.setProperty("gollek.gguf.q3k.cache_max_bytes", "1");
+        String previousMinRows = System.getProperty("alkhawarizm.gguf.q3k.cache_min_rows");
+        String previousMaxBytes = System.getProperty("alkhawarizm.gguf.q3k.cache_max_bytes");
+        System.setProperty("alkhawarizm.gguf.q3k.cache_min_rows", "1");
+        System.setProperty("alkhawarizm.gguf.q3k.cache_max_bytes", "1");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(2L * 110);
             writeQ3KBlock(segment.asSlice(0, 110), 1, (byte) 0x55, (byte) 0xFF);
@@ -39,8 +39,8 @@ class GgufQ3KRawTest {
             assertEquals(640L, GgufTensorOps.estimatePreparedMatrixCacheBytes(model, tensor));
             assertEquals(1, GgufTensorOps.preparedMatrixEstimateCacheSize(model));
         } finally {
-            restoreProperty("gollek.gguf.q3k.cache_min_rows", previousMinRows);
-            restoreProperty("gollek.gguf.q3k.cache_max_bytes", previousMaxBytes);
+            restoreProperty("alkhawarizm.gguf.q3k.cache_min_rows", previousMinRows);
+            restoreProperty("alkhawarizm.gguf.q3k.cache_max_bytes", previousMaxBytes);
         }
     }
 

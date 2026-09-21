@@ -1,5 +1,5 @@
 /*
- * Gollek Inference Engine — SafeTensor Module
+ * Alkhawarizm Inference Engine — SafeTensor Module
  * Copyright (c) 2026 Kayys.tech
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -41,15 +41,15 @@
  *
  * Both strategies implement the same HuggingFaceTokenizer interface.
  */
-package tech.kayys.gollek.safetensor.tokenizer;
+package tech.kayys.alkhawarizm.safetensor.tokenizer;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import tech.kayys.gollek.tokenizer.runtime.TokenizerFactory;
-import tech.kayys.gollek.tokenizer.spi.Tokenizer;
+import tech.kayys.alkhawarizm.tokenizer.runtime.TokenizerFactory;
+import tech.kayys.alkhawarizm.tokenizer.spi.Tokenizer;
 
 import org.jboss.logging.Logger;
 

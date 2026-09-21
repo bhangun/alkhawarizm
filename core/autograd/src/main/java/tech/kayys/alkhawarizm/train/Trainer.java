@@ -5,8 +5,8 @@ import tech.kayys.alkhawarizm.core.tensor.Tensor;
 import tech.kayys.alkhawarizm.core.tensor.DeviceType;
 import tech.kayys.alkhawarizm.data.Batch;
 import tech.kayys.alkhawarizm.data.DataLoader;
-import tech.kayys.gollek.ir.GGraph;
-import tech.kayys.gollek.ir.GValueId;
+import tech.kayys.alkhawarizm.ir.GGraph;
+import tech.kayys.alkhawarizm.ir.GValueId;
 
 import java.util.*;
 import java.util.function.Consumer;

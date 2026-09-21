@@ -12,7 +12,7 @@ import tech.kayys.alkhawarizm.core.tensor.DeviceType;
 import tech.kayys.alkhawarizm.core.tensor.DefaultTensor;
 
 /**
- * Abstract base class for all neural network modules in Aljabr.
+ * Abstract base class for all neural network modules in Alkhawarizm.
  * Manages parameters, buffers, and submodules.
  * @author bhangun
  */

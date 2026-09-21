@@ -1,5 +1,5 @@
 /*
- * Gollek Inference Engine — SafeTensor Module
+ * Alkhawarizm Inference Engine — SafeTensor Module
  * Copyright (c) 2026 Kayys.tech
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -7,16 +7,16 @@
  * ───────────────────────────
  * SmallRye config mapping for the FFM-based SafeTensors loader.
  *
- * All properties live under the {@code gollek.safetensor.loader} namespace.
+ * All properties live under the {@code alkhawarizm.safetensor.loader} namespace.
  *
  * Example application.properties:
  * ─────────────────────────────────────────────────────────────────────────────
- *   gollek.safetensor.loader.prefer-mmap=true
- *   gollek.safetensor.loader.read-chunk-bytes=8388608
- *   gollek.safetensor.loader.validation.strict=true
- *   gollek.safetensor.loader.validation.check-overlaps=true
- *   gollek.safetensor.loader.cache.enabled=true
- *   gollek.safetensor.loader.cache.max-size=8
+ *   alkhawarizm.safetensor.loader.prefer-mmap=true
+ *   alkhawarizm.safetensor.loader.read-chunk-bytes=8388608
+ *   alkhawarizm.safetensor.loader.validation.strict=true
+ *   alkhawarizm.safetensor.loader.validation.check-overlaps=true
+ *   alkhawarizm.safetensor.loader.cache.enabled=true
+ *   alkhawarizm.safetensor.loader.cache.max-size=8
  * ─────────────────────────────────────────────────────────────────────────────
  */
 package tech.kayys.alkhawarizm.safetensor.loader;
@@ -27,7 +27,7 @@ import io.smallrye.config.WithName;
 
 /**
  * Configuration contract for
- * {@link tech.kayys.gollek.inference.safetensor.ffm.SafetensorFFMLoader}.
+ * {@link tech.kayys.alkhawarizm.inference.safetensor.ffm.SafetensorFFMLoader}.
  *
  * <p>
  * Inject this interface wherever loader-level configuration is needed:
@@ -38,7 +38,7 @@ import io.smallrye.config.WithName;
  * }</pre>
  * @author bhangun
  */
-@ConfigMapping(prefix = "gollek.safetensor.loader")
+@ConfigMapping(prefix = "alkhawarizm.safetensor.loader")
 public interface SafetensorLoaderConfig {
 
     // ── Loading strategy ──────────────────────────────────────────────────────
@@ -116,7 +116,7 @@ public interface SafetensorLoaderConfig {
      *
      * <p>
      * When enabled, the loader keeps recently-used
-     * {@link tech.kayys.gollek.inference.safetensor.ffm.SafetensorLoadResult}
+     * {@link tech.kayys.alkhawarizm.inference.safetensor.ffm.SafetensorLoadResult}
      * objects alive in a bounded LRU cache to avoid repeated mmap calls for
      * frequently-accessed model checkpoints.
      */

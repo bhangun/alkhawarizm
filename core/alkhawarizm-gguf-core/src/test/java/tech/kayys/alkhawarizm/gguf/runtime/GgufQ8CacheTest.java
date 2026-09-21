@@ -17,8 +17,8 @@ import static tech.kayys.alkhawarizm.gguf.runtime.GgufQFx.writeQ8Block;
 class GgufQ8CacheTest {
     @Test
     void boundsPreparedQ8MatrixCacheByEstimatedBytes() {
-        String previous = System.getProperty("gollek.gguf.q8.cache_max_bytes");
-        System.setProperty("gollek.gguf.q8.cache_max_bytes", "36");
+        String previous = System.getProperty("alkhawarizm.gguf.q8.cache_max_bytes");
+        System.setProperty("alkhawarizm.gguf.q8.cache_max_bytes", "36");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(2L * 34);
             writeQ8Block(segment.asSlice(0, 34), (short) 0x3c00, (byte) 1);
@@ -39,7 +39,7 @@ class GgufQ8CacheTest {
             assertNotSame(first, firstAfterEviction);
             assertEquals(1, GgufTensorOps.clearQ8MatrixCache(model));
         } finally {
-            restoreProperty("gollek.gguf.q8.cache_max_bytes", previous);
+            restoreProperty("alkhawarizm.gguf.q8.cache_max_bytes", previous);
         }
     }
 }

@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class GgufBudgetTest {
-    private static final String BUDGET_PROPERTY = "gollek.gguf.test_budget";
+    private static final String BUDGET_PROPERTY = "alkhawarizm.gguf.test_budget";
 
     @Test
     void parsesHumanReadableByteSizes() {

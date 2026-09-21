@@ -26,10 +26,10 @@ class GgufQ8RawTest {
 
     @Test
     void rawQ8MatVecSkipsPreparedAdmissionWhenCacheIsDisabled() {
-        String previousMinRows = System.getProperty("gollek.gguf.q8.cache_min_rows");
-        String previousMaxBytes = System.getProperty("gollek.gguf.q8.cache_max_bytes");
-        System.setProperty("gollek.gguf.q8.cache_min_rows", "1");
-        System.setProperty("gollek.gguf.q8.cache_max_bytes", "0");
+        String previousMinRows = System.getProperty("alkhawarizm.gguf.q8.cache_min_rows");
+        String previousMaxBytes = System.getProperty("alkhawarizm.gguf.q8.cache_max_bytes");
+        System.setProperty("alkhawarizm.gguf.q8.cache_min_rows", "1");
+        System.setProperty("alkhawarizm.gguf.q8.cache_max_bytes", "0");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(2L * 34);
             writeQ8Block(segment.asSlice(0, 34), (short) 0x3c00, (byte) 1);
@@ -45,17 +45,17 @@ class GgufQ8RawTest {
             assertEquals(0, GgufTensorOps.q8MatrixCacheSize(model));
             assertEquals(0, GgufTensorOps.preparedMatrixEstimateCacheSize(model));
         } finally {
-            restoreProperty("gollek.gguf.q8.cache_min_rows", previousMinRows);
-            restoreProperty("gollek.gguf.q8.cache_max_bytes", previousMaxBytes);
+            restoreProperty("alkhawarizm.gguf.q8.cache_min_rows", previousMinRows);
+            restoreProperty("alkhawarizm.gguf.q8.cache_max_bytes", previousMaxBytes);
         }
     }
 
     @Test
     void rawQ8MatVecStreamsWhenPreparedCacheIsTooSmall() {
-        String previousMinRows = System.getProperty("gollek.gguf.q8.cache_min_rows");
-        String previousMaxBytes = System.getProperty("gollek.gguf.q8.cache_max_bytes");
-        System.setProperty("gollek.gguf.q8.cache_min_rows", "1");
-        System.setProperty("gollek.gguf.q8.cache_max_bytes", "1");
+        String previousMinRows = System.getProperty("alkhawarizm.gguf.q8.cache_min_rows");
+        String previousMaxBytes = System.getProperty("alkhawarizm.gguf.q8.cache_max_bytes");
+        System.setProperty("alkhawarizm.gguf.q8.cache_min_rows", "1");
+        System.setProperty("alkhawarizm.gguf.q8.cache_max_bytes", "1");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(2L * 34);
             writeQ8Block(segment.asSlice(0, 34), (short) 0x3c00, (byte) 1);
@@ -72,17 +72,17 @@ class GgufQ8RawTest {
             assertEquals(72L, GgufTensorOps.estimatePreparedMatrixCacheBytes(model, tensor));
             assertEquals(1, GgufTensorOps.preparedMatrixEstimateCacheSize(model));
         } finally {
-            restoreProperty("gollek.gguf.q8.cache_min_rows", previousMinRows);
-            restoreProperty("gollek.gguf.q8.cache_max_bytes", previousMaxBytes);
+            restoreProperty("alkhawarizm.gguf.q8.cache_min_rows", previousMinRows);
+            restoreProperty("alkhawarizm.gguf.q8.cache_max_bytes", previousMaxBytes);
         }
     }
 
     @Test
     void rawQ8MatVecPreservesSignedVectorLaneOrder() {
-        String previousMinRows = System.getProperty("gollek.gguf.q8.cache_min_rows");
-        String previousMaxBytes = System.getProperty("gollek.gguf.q8.cache_max_bytes");
-        System.setProperty("gollek.gguf.q8.cache_min_rows", "1");
-        System.setProperty("gollek.gguf.q8.cache_max_bytes", "1");
+        String previousMinRows = System.getProperty("alkhawarizm.gguf.q8.cache_min_rows");
+        String previousMaxBytes = System.getProperty("alkhawarizm.gguf.q8.cache_max_bytes");
+        System.setProperty("alkhawarizm.gguf.q8.cache_min_rows", "1");
+        System.setProperty("alkhawarizm.gguf.q8.cache_max_bytes", "1");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(2L * 34);
             writeQ8RampBlock(segment.asSlice(0, 34), (short) 0x3c00, -16);
@@ -97,17 +97,17 @@ class GgufQ8RawTest {
             assertEquals(-2464.0f, output[1], 0.0f);
             assertEquals(0, GgufTensorOps.q8MatrixCacheSize(model));
         } finally {
-            restoreProperty("gollek.gguf.q8.cache_min_rows", previousMinRows);
-            restoreProperty("gollek.gguf.q8.cache_max_bytes", previousMaxBytes);
+            restoreProperty("alkhawarizm.gguf.q8.cache_min_rows", previousMinRows);
+            restoreProperty("alkhawarizm.gguf.q8.cache_max_bytes", previousMaxBytes);
         }
     }
 
     @Test
     void rawQ8_1MatVecSkipsPreparedAdmissionWhenCacheIsDisabled() {
-        String previousMinRows = System.getProperty("gollek.gguf.q8.cache_min_rows");
-        String previousMaxBytes = System.getProperty("gollek.gguf.q8.cache_max_bytes");
-        System.setProperty("gollek.gguf.q8.cache_min_rows", "1");
-        System.setProperty("gollek.gguf.q8.cache_max_bytes", "0");
+        String previousMinRows = System.getProperty("alkhawarizm.gguf.q8.cache_min_rows");
+        String previousMaxBytes = System.getProperty("alkhawarizm.gguf.q8.cache_max_bytes");
+        System.setProperty("alkhawarizm.gguf.q8.cache_min_rows", "1");
+        System.setProperty("alkhawarizm.gguf.q8.cache_max_bytes", "0");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(2L * 36);
             writeQ8_1Block(segment.asSlice(0, 36), (short) 0x3c00, (byte) 1);
@@ -123,19 +123,19 @@ class GgufQ8RawTest {
             assertEquals(0, GgufTensorOps.q8MatrixCacheSize(model));
             assertEquals(0, GgufTensorOps.preparedMatrixEstimateCacheSize(model));
         } finally {
-            restoreProperty("gollek.gguf.q8.cache_min_rows", previousMinRows);
-            restoreProperty("gollek.gguf.q8.cache_max_bytes", previousMaxBytes);
+            restoreProperty("alkhawarizm.gguf.q8.cache_min_rows", previousMinRows);
+            restoreProperty("alkhawarizm.gguf.q8.cache_max_bytes", previousMaxBytes);
         }
     }
 
     @Test
     void rawQ8FamilyTinyMatVecSlicesBypassWorkerProbe() {
-        String previousMinOps = System.getProperty("gollek.gguf.parallel_min_ops");
-        String previousThreads = System.getProperty("gollek.gguf.parallel_threads");
-        String previousChunks = System.getProperty("gollek.gguf.parallel_chunks_per_thread");
-        System.setProperty("gollek.gguf.parallel_min_ops", "1");
-        System.setProperty("gollek.gguf.parallel_threads", "2");
-        System.setProperty("gollek.gguf.parallel_chunks_per_thread", "1");
+        String previousMinOps = System.getProperty("alkhawarizm.gguf.parallel_min_ops");
+        String previousThreads = System.getProperty("alkhawarizm.gguf.parallel_threads");
+        String previousChunks = System.getProperty("alkhawarizm.gguf.parallel_chunks_per_thread");
+        System.setProperty("alkhawarizm.gguf.parallel_min_ops", "1");
+        System.setProperty("alkhawarizm.gguf.parallel_threads", "2");
+        System.setProperty("alkhawarizm.gguf.parallel_chunks_per_thread", "1");
         GgufParallelConfig.resetParallelConfig();
         GgufRows.clearRawWorkerAccessCache();
         try {
@@ -226,9 +226,9 @@ class GgufQ8RawTest {
             assertEquals(0, GgufRows.recentRawWorkerAccessCacheSize());
             assertEquals(0, GgufRows.recentRawWorkerAccessFastCacheSize());
         } finally {
-            restoreProperty("gollek.gguf.parallel_min_ops", previousMinOps);
-            restoreProperty("gollek.gguf.parallel_threads", previousThreads);
-            restoreProperty("gollek.gguf.parallel_chunks_per_thread", previousChunks);
+            restoreProperty("alkhawarizm.gguf.parallel_min_ops", previousMinOps);
+            restoreProperty("alkhawarizm.gguf.parallel_threads", previousThreads);
+            restoreProperty("alkhawarizm.gguf.parallel_chunks_per_thread", previousChunks);
             GgufParallelConfig.resetParallelConfig();
             GgufRows.clearRawWorkerAccessCache();
         }

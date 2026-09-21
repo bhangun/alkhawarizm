@@ -1,5 +1,5 @@
 /*
- * Gollek Inference Engine — SafeTensor Module
+ * Alkhawarizm Inference Engine — SafeTensor Module
  * Copyright (c) 2026 Kayys.tech
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -11,7 +11,7 @@
  * ══════════════
  * This object is the root owner of the FFM {@link java.lang.foreign.Arena}
  * that backs all tensor memory segments.  Closing this object:
- *   1. Marks all constituent {@link tech.kayys.gollek.inference.safetensor.model.SafetensorTensor}
+ *   1. Marks all constituent {@link tech.kayys.alkhawarizm.inference.safetensor.model.SafetensorTensor}
  *      instances as closed (fast-fail on subsequent access).
  *   2. Closes the Arena, which either:
  *       - unmaps the memory-mapped file segment (MMAP mode), or
@@ -34,7 +34,7 @@ package tech.kayys.alkhawarizm.safetensor.loader;
 
 import org.jboss.logging.Logger;
 
-import tech.kayys.gollek.safetensor.exception.SafetensorException;
+import tech.kayys.alkhawarizm.safetensor.exception.SafetensorException;
 
 import java.lang.foreign.Arena;
 import java.lang.foreign.MemorySegment;

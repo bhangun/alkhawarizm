@@ -365,8 +365,20 @@ public class ModelFamilyPluginRegistry {
                             problemCodes.add(ModelFamilyProblemCodes.QUANTIZED_WEIGHT_LOADER_PENDING);
                             if (configContent.contains("mobile")) {
                                 problemCodes.add(ModelFamilyProblemCodes.QAT_MOBILE_LOADER_PENDING);
+                                // Extract the container value from the config JSON so the hint
+                                // accurately reflects whether this is a 'transformers' or
+                                // 'compressed_tensors' (or other) container format.
+                                String container = extractJsonStringField(configContent, "container");
+                                if (container.isEmpty()) {
+                                    container = "compressed_tensors";
+                                }
                                 remediationHints.add(
-                                        "Waiting for loader support for mobile quantized weights in compressed_tensors.");
+                                        "Waiting for loader support for mobile quantized weights in " + container + ".");
+                            }
+                            if (configContent.contains("q4_0")) {
+                                problemCodes.add(ModelFamilyProblemCodes.QAT_Q4_0_LOADER_PENDING);
+                                remediationHints.add(
+                                        "Waiting for loader support for q4_0 quantized weights in gguf.");
                             }
                             if (configContent.contains("future_format")) {
                                 remediationHints.add("future_format quantized weights in future_container");
@@ -404,5 +416,16 @@ public class ModelFamilyPluginRegistry {
             });
         }
         return new ModelFamilyRuntimeCompatibilitySummary(familyIds.size(), compatible, Map.of());
+    }
+
+    /**
+     * Extracts the value of a JSON string field by name using a simple regex.
+     * Returns an empty string if the field is not found or has a non-string value.
+     */
+    private static String extractJsonStringField(String json, String fieldName) {
+        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(
+                "\"" + java.util.regex.Pattern.quote(fieldName) + "\"\\s*:\\s*\"([^\"]+)\"");
+        java.util.regex.Matcher matcher = pattern.matcher(json);
+        return matcher.find() ? matcher.group(1) : "";
     }
 }

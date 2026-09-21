@@ -12,7 +12,7 @@ java {
 }
 
 dependencies {
-    // Core building blocks exposed as stable API for consumers (e.g., gollek)
+    // Core building blocks exposed as stable API for consumers (e.g., alkhawarizm)
     api(project(":core:alkhawarizm-tensor"))
     // Removed orphaned dependencies that were causing build failures
 

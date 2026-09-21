@@ -28,7 +28,7 @@ static int cpu_rmsnorm_rows(void *out, const void *x, const void *weight,
 }
 
 int alkhawarizm_metal_add(void *C, const void *A, const void *B, int N) {
-  AljabrMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
+  AlkhawarizmMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
   if (!g_initialized || N <= 0)
     return alkhawarizm_metal_cpu_add(C, A, B, N);
   if (!g_elementwise_enabled || pipelines->add == nil)
@@ -62,7 +62,7 @@ int alkhawarizm_metal_add(void *C, const void *A, const void *B, int N) {
 
 int alkhawarizm_metal_rope(void *out, const void *x, int N, int headDim,
                            int posOffset, float freqBase, int isNeox) {
-  AljabrMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
+  AlkhawarizmMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
   if (!g_initialized || N <= 0 || !g_elementwise_enabled ||
       pipelines->rope == nil) {
     return 1; // Fallback to CPU
@@ -111,7 +111,7 @@ int alkhawarizm_metal_rope(void *out, const void *x, int N, int headDim,
 
 int alkhawarizm_metal_rmsnorm(void *out, const void *x, const void *weight,
                               int N, float eps, int addOne) {
-  AljabrMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
+  AlkhawarizmMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
   if (!g_initialized || N <= 0)
     return alkhawarizm_metal_cpu_rmsnorm(out, x, weight, N, eps, addOne);
   if (!g_elementwise_enabled || pipelines->rmsnorm == nil ||
@@ -154,7 +154,7 @@ int alkhawarizm_metal_rmsnorm(void *out, const void *x, const void *weight,
 
 int alkhawarizm_metal_rmsnorm_rows(void *out, const void *x, const void *weight,
                                    int rows, int N, float eps, int addOne) {
-  AljabrMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
+  AlkhawarizmMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
   if (rows <= 0 || N <= 0)
     return 0;
   if (!g_initialized || !g_elementwise_enabled ||
@@ -194,7 +194,7 @@ int alkhawarizm_metal_rmsnorm_rows(void *out, const void *x, const void *weight,
 }
 
 int alkhawarizm_metal_softmax(void *out, const void *x, int N) {
-  AljabrMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
+  AlkhawarizmMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
   if (!g_initialized || N <= 0)
     return -5;
   if (!g_elementwise_enabled || pipelines->softmax == nil)
@@ -223,7 +223,7 @@ int alkhawarizm_metal_softmax(void *out, const void *x, int N) {
 }
 
 int alkhawarizm_metal_softmax_rows(void *out, const void *x, int rows, int N) {
-  AljabrMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
+  AlkhawarizmMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
   if (rows <= 0 || N <= 0)
     return 0;
   if (!g_initialized || !g_elementwise_enabled ||
@@ -255,7 +255,7 @@ int alkhawarizm_metal_softmax_rows(void *out, const void *x, int rows, int N) {
 
 int alkhawarizm_metal_silu_ffn(void *out, const void *gate, const void *up,
                                int N) {
-  AljabrMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
+  AlkhawarizmMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
   if (!g_initialized || N <= 0)
     return alkhawarizm_metal_cpu_silu_ffn(out, gate, up, N);
   if (!g_elementwise_enabled || pipelines->silu_ffn == nil)
@@ -289,7 +289,7 @@ int alkhawarizm_metal_silu_ffn(void *out, const void *gate, const void *up,
 
 int alkhawarizm_metal_gelu_ffn(void *out, const void *gate, const void *up,
                                int N) {
-  AljabrMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
+  AlkhawarizmMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
   if (!g_initialized || N <= 0)
     return alkhawarizm_metal_cpu_gelu_ffn(out, gate, up, N);
   if (!g_elementwise_enabled || pipelines->gelu_ffn == nil)
@@ -336,7 +336,7 @@ static int cpu_layernorm_rows(void *out, const void *x, const void *weight,
 
 int alkhawarizm_metal_layernorm(void *out, const void *x, const void *weight,
                                 const void *bias, int N, float eps) {
-  AljabrMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
+  AlkhawarizmMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
   if (!g_initialized || N <= 0)
     return alkhawarizm_metal_cpu_layernorm(out, x, weight, bias, N, eps);
   if (!g_elementwise_enabled || pipelines->layernorm == nil ||
@@ -384,7 +384,7 @@ int alkhawarizm_metal_layernorm(void *out, const void *x, const void *weight,
 int alkhawarizm_metal_layernorm_rows(void *out, const void *x,
                                      const void *weight, const void *bias,
                                      int rows, int N, float eps) {
-  AljabrMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
+  AlkhawarizmMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
   if (rows <= 0 || N <= 0)
     return 0;
   if (!g_initialized || !g_elementwise_enabled ||
@@ -433,7 +433,7 @@ int alkhawarizm_metal_layernorm_rows(void *out, const void *x,
 }
 
 int alkhawarizm_metal_silu(void *out, const void *x, int N) {
-  AljabrMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
+  AlkhawarizmMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
   if (!g_initialized || N <= 0)
     return alkhawarizm_metal_cpu_silu(out, x, N);
   if (!g_elementwise_enabled || pipelines->silu == nil)
@@ -464,7 +464,7 @@ int alkhawarizm_metal_silu(void *out, const void *x, int N) {
 }
 
 int alkhawarizm_metal_gelu(void *out, const void *x, int N) {
-  AljabrMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
+  AlkhawarizmMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
   if (!g_initialized || N <= 0)
     return alkhawarizm_metal_cpu_gelu(out, x, N);
   if (!g_elementwise_enabled || pipelines->gelu == nil)

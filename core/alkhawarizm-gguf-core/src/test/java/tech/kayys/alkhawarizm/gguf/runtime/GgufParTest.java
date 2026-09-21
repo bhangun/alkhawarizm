@@ -10,12 +10,12 @@ import static tech.kayys.alkhawarizm.gguf.runtime.GgufFx.restoreProperty;
 class GgufParTest {
     @Test
     void adaptsParallelMatVecToWorkSizeAndConfiguredChunks() {
-        String previousMinOps = System.getProperty("gollek.gguf.parallel_min_ops");
-        String previousThreads = System.getProperty("gollek.gguf.parallel_threads");
-        String previousChunks = System.getProperty("gollek.gguf.parallel_chunks_per_thread");
-        System.setProperty("gollek.gguf.parallel_min_ops", "1024");
-        System.setProperty("gollek.gguf.parallel_threads", "3");
-        System.setProperty("gollek.gguf.parallel_chunks_per_thread", "2");
+        String previousMinOps = System.getProperty("alkhawarizm.gguf.parallel_min_ops");
+        String previousThreads = System.getProperty("alkhawarizm.gguf.parallel_threads");
+        String previousChunks = System.getProperty("alkhawarizm.gguf.parallel_chunks_per_thread");
+        System.setProperty("alkhawarizm.gguf.parallel_min_ops", "1024");
+        System.setProperty("alkhawarizm.gguf.parallel_threads", "3");
+        System.setProperty("alkhawarizm.gguf.parallel_chunks_per_thread", "2");
         GgufParallelConfig.resetParallelConfig();
         try {
             assertFalse(GgufTensorOps.shouldParallelize(false, 1024, 1024));
@@ -31,58 +31,58 @@ class GgufParTest {
             assertEquals(4, GgufTensorOps.parallelChunkCount(true, 4, 256));
             assertEquals(6, GgufTensorOps.parallelChunkCount(true, 64, 1024));
         } finally {
-            restoreProperty("gollek.gguf.parallel_min_ops", previousMinOps);
-            restoreProperty("gollek.gguf.parallel_threads", previousThreads);
-            restoreProperty("gollek.gguf.parallel_chunks_per_thread", previousChunks);
+            restoreProperty("alkhawarizm.gguf.parallel_min_ops", previousMinOps);
+            restoreProperty("alkhawarizm.gguf.parallel_threads", previousThreads);
+            restoreProperty("alkhawarizm.gguf.parallel_chunks_per_thread", previousChunks);
         }
     }
 
     @Test
     void usesTwoParallelChunksPerThreadByDefault() {
-        String previousThreads = System.getProperty("gollek.gguf.parallel_threads");
-        String previousChunks = System.getProperty("gollek.gguf.parallel_chunks_per_thread");
-        System.setProperty("gollek.gguf.parallel_threads", "3");
-        System.clearProperty("gollek.gguf.parallel_chunks_per_thread");
+        String previousThreads = System.getProperty("alkhawarizm.gguf.parallel_threads");
+        String previousChunks = System.getProperty("alkhawarizm.gguf.parallel_chunks_per_thread");
+        System.setProperty("alkhawarizm.gguf.parallel_threads", "3");
+        System.clearProperty("alkhawarizm.gguf.parallel_chunks_per_thread");
         GgufParallelConfig.resetParallelConfig();
         try {
             assertEquals(6, GgufTensorOps.parallelChunkCount(64));
             assertEquals(4, GgufTensorOps.parallelChunkCount(4));
             assertEquals(1, GgufTensorOps.parallelChunkCount(1));
         } finally {
-            restoreProperty("gollek.gguf.parallel_threads", previousThreads);
-            restoreProperty("gollek.gguf.parallel_chunks_per_thread", previousChunks);
+            restoreProperty("alkhawarizm.gguf.parallel_threads", previousThreads);
+            restoreProperty("alkhawarizm.gguf.parallel_chunks_per_thread", previousChunks);
         }
     }
 
     @Test
     void reusesParallelConfigUntilExplicitReset() {
-        String previousThreads = System.getProperty("gollek.gguf.parallel_threads");
-        String previousChunks = System.getProperty("gollek.gguf.parallel_chunks_per_thread");
-        System.setProperty("gollek.gguf.parallel_threads", "2");
-        System.setProperty("gollek.gguf.parallel_chunks_per_thread", "1");
+        String previousThreads = System.getProperty("alkhawarizm.gguf.parallel_threads");
+        String previousChunks = System.getProperty("alkhawarizm.gguf.parallel_chunks_per_thread");
+        System.setProperty("alkhawarizm.gguf.parallel_threads", "2");
+        System.setProperty("alkhawarizm.gguf.parallel_chunks_per_thread", "1");
         GgufParallelConfig.resetParallelConfig();
         try {
             assertEquals(2, GgufTensorOps.parallelChunkCount(64));
 
-            System.setProperty("gollek.gguf.parallel_threads", "4");
+            System.setProperty("alkhawarizm.gguf.parallel_threads", "4");
             assertEquals(2, GgufTensorOps.parallelChunkCount(64));
 
             GgufParallelConfig.resetParallelConfig();
             assertEquals(4, GgufTensorOps.parallelChunkCount(64));
         } finally {
-            restoreProperty("gollek.gguf.parallel_threads", previousThreads);
-            restoreProperty("gollek.gguf.parallel_chunks_per_thread", previousChunks);
+            restoreProperty("alkhawarizm.gguf.parallel_threads", previousThreads);
+            restoreProperty("alkhawarizm.gguf.parallel_chunks_per_thread", previousChunks);
         }
     }
 
     @Test
     void cachesRequestedParallelChunkCountsUntilConfigReset() {
-        String previousMinOps = System.getProperty("gollek.gguf.parallel_min_ops");
-        String previousThreads = System.getProperty("gollek.gguf.parallel_threads");
-        String previousChunks = System.getProperty("gollek.gguf.parallel_chunks_per_thread");
-        System.setProperty("gollek.gguf.parallel_min_ops", "1");
-        System.setProperty("gollek.gguf.parallel_threads", "2");
-        System.setProperty("gollek.gguf.parallel_chunks_per_thread", "1");
+        String previousMinOps = System.getProperty("alkhawarizm.gguf.parallel_min_ops");
+        String previousThreads = System.getProperty("alkhawarizm.gguf.parallel_threads");
+        String previousChunks = System.getProperty("alkhawarizm.gguf.parallel_chunks_per_thread");
+        System.setProperty("alkhawarizm.gguf.parallel_min_ops", "1");
+        System.setProperty("alkhawarizm.gguf.parallel_threads", "2");
+        System.setProperty("alkhawarizm.gguf.parallel_chunks_per_thread", "1");
         GgufParallelConfig.resetParallelConfig();
         try {
             assertEquals(0, GgufParallelConfig.recentChunkCacheSize());
@@ -96,7 +96,7 @@ class GgufParTest {
             assertEquals(1, GgufParallelConfig.recentChunkCacheSize());
             assertEquals(1, GgufParallelConfig.recentChunkFastCacheSize());
 
-            System.setProperty("gollek.gguf.parallel_threads", "4");
+            System.setProperty("alkhawarizm.gguf.parallel_threads", "4");
             assertEquals(2, GgufParallelConfig.parallelChunkCount(true, 4, 32));
 
             GgufParallelConfig.resetParallelConfig();
@@ -106,9 +106,9 @@ class GgufParTest {
             assertEquals(1, GgufParallelConfig.recentChunkCacheSize());
             assertEquals(1, GgufParallelConfig.recentChunkFastCacheSize());
         } finally {
-            restoreProperty("gollek.gguf.parallel_min_ops", previousMinOps);
-            restoreProperty("gollek.gguf.parallel_threads", previousThreads);
-            restoreProperty("gollek.gguf.parallel_chunks_per_thread", previousChunks);
+            restoreProperty("alkhawarizm.gguf.parallel_min_ops", previousMinOps);
+            restoreProperty("alkhawarizm.gguf.parallel_threads", previousThreads);
+            restoreProperty("alkhawarizm.gguf.parallel_chunks_per_thread", previousChunks);
             GgufParallelConfig.resetParallelConfig();
         }
     }

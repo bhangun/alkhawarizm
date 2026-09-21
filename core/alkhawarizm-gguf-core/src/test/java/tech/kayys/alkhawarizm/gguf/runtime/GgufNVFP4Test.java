@@ -19,8 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class GgufNVFP4Test {
     @Test
     void supportsNVFP4RowDotAndPreparedMatVec() {
-        String previous = System.getProperty("gollek.gguf.q8.cache_min_rows");
-        System.setProperty("gollek.gguf.q8.cache_min_rows", "1");
+        String previous = System.getProperty("alkhawarizm.gguf.q8.cache_min_rows");
+        System.setProperty("alkhawarizm.gguf.q8.cache_min_rows", "1");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(2L * 36);
             writeNVFP4Block(segment.asSlice(0, 36), (byte) 0x40, (byte) 0xA5);
@@ -72,7 +72,7 @@ class GgufNVFP4Test {
             assertEquals(-32.0f, preparedOutput[1], 0.0f);
             assertEquals(1, GgufTensorOps.clearQ8MatrixCache(model));
         } finally {
-            restoreProperty("gollek.gguf.q8.cache_min_rows", previous);
+            restoreProperty("alkhawarizm.gguf.q8.cache_min_rows", previous);
         }
     }
 }

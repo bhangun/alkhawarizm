@@ -42,7 +42,7 @@ public class GradientClipper {
 
     private boolean clipByValue(Collection<Tensor> parameters) {
         throw new UnsupportedOperationException(
-                "BY_VALUE clipping requires Tensor.clamp() which is not in Aljabr API. " +
+                "BY_VALUE clipping requires Tensor.clamp() which is not in Alkhawarizm API. " +
                         "Use ClipMode.BY_NORM instead.");
     }
 

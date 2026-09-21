@@ -1,6 +1,6 @@
-# Aljabr Metal Kernel
+# Alkhawarizm Metal Kernel
 
-Apple Metal GPU acceleration kernel for Aljabr inference engine.
+Apple Metal GPU acceleration kernel for Alkhawarizm inference engine.
 
 ## Features
 

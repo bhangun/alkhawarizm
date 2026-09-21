@@ -18,8 +18,8 @@ import static tech.kayys.alkhawarizm.gguf.runtime.GgufKFx.writeQ6KBlock;
 class GgufQ6KLimitTest {
     @Test
     void boundsPreparedQ6KMatrixCacheByEstimatedBytes() {
-        String previous = System.getProperty("gollek.gguf.q6k.cache_max_bytes");
-        System.setProperty("gollek.gguf.q6k.cache_max_bytes", "320");
+        String previous = System.getProperty("alkhawarizm.gguf.q6k.cache_max_bytes");
+        System.setProperty("alkhawarizm.gguf.q6k.cache_max_bytes", "320");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(2L * 210);
             writeQ6KBlock(segment.asSlice(0, 210), (byte) 0x11, (byte) 0xAA, (byte) 1);
@@ -41,7 +41,7 @@ class GgufQ6KLimitTest {
             assertNotSame(first, firstAfterEviction);
             assertEquals(1, GgufTensorOps.clearQ6KMatrixCache(model));
         } finally {
-            restoreProperty("gollek.gguf.q6k.cache_max_bytes", previous);
+            restoreProperty("alkhawarizm.gguf.q6k.cache_max_bytes", previous);
         }
     }
 }

@@ -8,7 +8,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 import tech.kayys.alkhawarizm.spi.exception.InferenceException;
 import tech.kayys.alkhawarizm.runner.RunnerCapabilities;
 import tech.kayys.alkhawarizm.runner.RunnerConfiguration;
-import tech.kayys.alkhawarizm.extension.AbstractAljabrRunner;
+import tech.kayys.alkhawarizm.extension.AbstractAlkhawarizmRunner;
 import tech.kayys.alkhawarizm.blackwell.binding.BlackwellBinding;
 import tech.kayys.alkhawarizm.blackwell.config.BlackwellRunnerMode;
 import tech.kayys.alkhawarizm.blackwell.detection.BlackwellDetector;
@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * NVIDIA Blackwell ModelRunner for Aljabr.
+ * NVIDIA Blackwell ModelRunner for Alkhawarizm.
  *
  * <p>
  * Runs {@link ModelFormat#GGUF} and {@link ModelFormat#SAFETENSORS} models
@@ -129,7 +129,7 @@ import java.util.Map;
  * </pre>
  */
 @ApplicationScoped
-public class BlackwellRunner extends AbstractAljabrRunner {
+public class BlackwellRunner extends AbstractAlkhawarizmRunner {
 
     public static final String RUNNER_NAME = "blackwell";
 

@@ -1,5 +1,5 @@
 /*
- * Gollek Inference Engine — SafeTensor Module
+ * Alkhawarizm Inference Engine — SafeTensor Module
  * Copyright (c) 2026 Kayys.tech
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -31,7 +31,7 @@ import java.lang.foreign.MemorySegment;
 import java.lang.foreign.ValueLayout;
 import java.nio.ByteOrder;
 
-import tech.kayys.gollek.safetensor.exception.SafetensorException;
+import tech.kayys.alkhawarizm.safetensor.exception.SafetensorException;
 
 /**
  * Stateless bulk dtype conversion utilities.

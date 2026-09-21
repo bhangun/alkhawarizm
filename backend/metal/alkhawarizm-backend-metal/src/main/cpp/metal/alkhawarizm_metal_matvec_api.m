@@ -1,5 +1,5 @@
 /**
- * alkhawarizm_metal_matvec_api.m — exported Metal matvec C API for Aljabr.
+ * alkhawarizm_metal_matvec_api.m — exported Metal matvec C API for Alkhawarizm.
  *
  * Optimized for reduced memory pressure and fixed KV cache layout.
  */
@@ -104,7 +104,7 @@ int alkhawarizm_metal_matvec_tb_half(void *C, const void *A, const void *B,
           alkhawarizm_metal_mps_matvec_validate_every_call();
       BOOL autotune =
           alkhawarizm_metal_mps_matvec_autotune_enabled_for_output(N);
-      AljabrMetalMpsMatvecShapeState shapeState =
+      AlkhawarizmMetalMpsMatvecShapeState shapeState =
           alkhawarizm_metal_mps_matvec_shape_state(shapeKey, validateEveryCall,
                                                    autotune);
       if (!shapeState.failed && !shapeState.custom_preferred) {
@@ -284,7 +284,7 @@ int alkhawarizm_metal_matvec_tb_half_mps(void *C, const void *A, const void *B,
     return -2;
 
   @synchronized(alkhawarizm_metal_mps_matvec_policy_lock()) {
-    AljabrMetalMpsMatvecOverrideSnapshot snapshot =
+    AlkhawarizmMetalMpsMatvecOverrideSnapshot snapshot =
         alkhawarizm_metal_mps_matvec_force_shape(K, N);
     if (!env_truthy("ALKHAWARIZM_METAL_VALIDATE_LOGITS_MPS_MATVEC") &&
         !env_truthy("ALKHAWARIZM_METAL_MPS_MATVEC_VALIDATE_EVERY_CALL")) {
@@ -528,7 +528,7 @@ int alkhawarizm_metal_matvec_tb_bf16(void *C, const void *A, const void *B,
           alkhawarizm_metal_mps_matvec_validate_every_call();
       BOOL autotune =
           alkhawarizm_metal_mps_matvec_autotune_enabled_for_output(N);
-      AljabrMetalMpsMatvecShapeState shapeState =
+      AlkhawarizmMetalMpsMatvecShapeState shapeState =
           alkhawarizm_metal_mps_matvec_shape_state(shapeKey, validateEveryCall,
                                                    autotune);
       if (!shapeState.failed && !shapeState.custom_preferred) {

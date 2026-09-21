@@ -1,5 +1,5 @@
 /*
- * Gollek Inference Engine - SafeTensor Module
+ * Alkhawarizm Inference Engine - SafeTensor Module
  * Copyright (c) 2026 Kayys.tech
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -30,7 +30,8 @@ public record ModelPromptTraits(
         boolean requiresChatTemplateFormatting) {
 
     public static final String DEFAULT_SYSTEM_PROMPT = "You are a helpful assistant.";
-    public static final String QWEN_DEFAULT_SYSTEM_PROMPT = "You are a helpful assistant.";
+    public static final String QWEN_DEFAULT_SYSTEM_PROMPT =
+            "You are Qwen, created by Alibaba Cloud. You are a helpful assistant.";
 
     public static ModelPromptTraits fromConfig(ModelConfig config) {
         if (config == null) {

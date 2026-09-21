@@ -13,5 +13,7 @@ public enum ModelFamilyCapability {
     DIRECT_SAFETENSOR_INFERENCE,
     EMBEDDING,
     VISION,
-    CHAT_TEMPLATE
+    CHAT_TEMPLATE,
+    AUDIO,
+    MOE
 }

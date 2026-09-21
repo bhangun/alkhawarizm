@@ -1,5 +1,5 @@
 /*
- * Gollek Inference Engine — SafeTensor Module
+ * Alkhawarizm Inference Engine — SafeTensor Module
  * Copyright (c) 2026 Kayys.tech
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -9,11 +9,11 @@
  *
  * Metrics emitted
  * ═══════════════
- *   gollek.safetensor.load.duration   (Timer)    — load wall-clock time
- *   gollek.safetensor.load.bytes      (Counter)  — bytes loaded (cumulative)
- *   gollek.safetensor.load.total      (Counter)  — total load operations
- *   gollek.safetensor.load.errors     (Counter)  — load failures
- *   gollek.safetensor.open.files      (Gauge)    — currently open mmap'd files
+ *   alkhawarizm.safetensor.load.duration   (Timer)    — load wall-clock time
+ *   alkhawarizm.safetensor.load.bytes      (Counter)  — bytes loaded (cumulative)
+ *   alkhawarizm.safetensor.load.total      (Counter)  — total load operations
+ *   alkhawarizm.safetensor.load.errors     (Counter)  — load failures
+ *   alkhawarizm.safetensor.open.files      (Gauge)    — currently open mmap'd files
  *
  * Tags on every metric
  * ════════════════════
@@ -49,7 +49,7 @@ public class SafetensorMetrics {
 
         // ── Metric name constants ─────────────────────────────────────────────────
 
-        private static final String PREFIX = "gollek.safetensor";
+        private static final String PREFIX = "alkhawarizm.safetensor";
         private static final String LOAD_DURATION = PREFIX + ".load.duration";
         private static final String LOAD_BYTES = PREFIX + ".load.bytes";
         private static final String LOAD_TOTAL = PREFIX + ".load.total";

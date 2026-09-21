@@ -11,9 +11,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-static AljabrMetalPipelines g_pipelines;
+static AlkhawarizmMetalPipelines g_pipelines;
 
-AljabrMetalPipelines *alkhawarizm_metal_pipelines(void) { return &g_pipelines; }
+AlkhawarizmMetalPipelines *alkhawarizm_metal_pipelines(void) { return &g_pipelines; }
 
 static id<MTLComputePipelineState> compile_pipeline(id<MTLLibrary> library,
                                                     NSString *name) {
@@ -70,7 +70,7 @@ static BOOL should_compile_bf16_x8_pipeline(void) {
 }
 
 void alkhawarizm_metal_compile_runtime_pipelines(
-    AljabrMetalPipelines *pipelines) {
+    AlkhawarizmMetalPipelines *pipelines) {
   if (pipelines == NULL || g_device == nil) {
     return;
   }

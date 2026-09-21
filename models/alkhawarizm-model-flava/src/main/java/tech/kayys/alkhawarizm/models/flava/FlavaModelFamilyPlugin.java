@@ -25,6 +25,7 @@ public class FlavaModelFamilyPlugin implements ModelFamilyPlugin {
                 Map.of(
                         "bundle_profile", "metadata_only",
                         "tokenizer", "wordpiece",
+                        "modalities", "text,image",
                         "direct_safetensor", "not_causal_lm",
                         "version", "0.1.0-SNAPSHOT"));
     }

@@ -1,5 +1,5 @@
 /*
- * Gollek Inference Engine — SafeTensor Module
+ * Alkhawarizm Inference Engine — SafeTensor Module
  * Copyright (c) 2026 Kayys.tech
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -14,7 +14,7 @@
  * It provides:
  *  • Transparent single-file / sharded model routing
  *  • LRU caching of open load results
- *  • Structured error mapping to ProviderException for Gollek SPI consumers
+ *  • Structured error mapping to ProviderException for Alkhawarizm SPI consumers
  *  • Reactive (Mutiny) wrappers for integration with async request pipelines
  *  • Header-only inspection for lightweight model catalogue queries
  */
@@ -24,8 +24,8 @@ import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.jboss.logging.Logger;
-import tech.kayys.gollek.spi.exception.ProviderException;
-import tech.kayys.gollek.safetensor.exception.SafetensorException;
+import tech.kayys.alkhawarizm.spi.exception.ProviderException;
+import tech.kayys.alkhawarizm.safetensor.exception.SafetensorException;
 import tech.kayys.alkhawarizm.safetensor.loader.SafetensorShardLoader.SafetensorShardSession;
 
 import java.nio.file.Files;

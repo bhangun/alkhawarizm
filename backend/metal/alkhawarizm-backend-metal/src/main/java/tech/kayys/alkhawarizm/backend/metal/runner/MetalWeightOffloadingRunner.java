@@ -9,7 +9,7 @@ import tech.kayys.alkhawarizm.spi.exception.InferenceException;
 import tech.kayys.alkhawarizm.runner.RunnerCapabilities;
 import tech.kayys.alkhawarizm.runner.RunnerConfiguration;
 import tech.kayys.alkhawarizm.plugin.runner.RunnerInitializationException;
-import tech.kayys.alkhawarizm.extension.AbstractAljabrRunner;
+import tech.kayys.alkhawarizm.extension.AbstractAlkhawarizmRunner;
 import tech.kayys.alkhawarizm.metal.binding.MetalBinding;
 import tech.kayys.alkhawarizm.metal.config.MetalRunnerMode;
 import tech.kayys.alkhawarizm.metal.detection.AppleSiliconDetector;
@@ -124,7 +124,7 @@ import java.util.Map;
  * </pre>
  */
 @ApplicationScoped
-public class MetalWeightOffloadingRunner extends AbstractAljabrRunner {
+public class MetalWeightOffloadingRunner extends AbstractAlkhawarizmRunner {
 
     public static final String RUNNER_NAME = "metal-weight-offload";
 

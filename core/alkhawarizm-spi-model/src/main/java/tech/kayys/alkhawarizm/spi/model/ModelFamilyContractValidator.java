@@ -99,12 +99,14 @@ public final class ModelFamilyContractValidator {
         }
     }
 
+    private static final java.util.regex.Pattern SAFE_MODEL_TYPE = java.util.regex.Pattern.compile("[a-z][a-z0-9_.-]*");
+
     private static void checkModelTypes(List<ModelFamilyContractViolation> v,
             ModelFamilyDescriptor desc) {
         for (String type : desc.modelTypes()) {
-            if (!SAFE_ID.matcher(type).matches()) {
+            if (!SAFE_MODEL_TYPE.matcher(type).matches()) {
                 v.add(ModelFamilyContractViolation.of(desc.id(), "invalid_model_type",
-                        "Model type '" + type + "' must match [a-z][a-z0-9_]*"));
+                        "Model type '" + type + "' must match [a-z][a-z0-9_.-]*"));
             }
         }
     }

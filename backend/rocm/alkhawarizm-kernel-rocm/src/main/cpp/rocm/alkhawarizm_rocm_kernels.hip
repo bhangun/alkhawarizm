@@ -1,5 +1,5 @@
 /**
- * alkhawarizm_rocm_kernels.hip — ROCm/HIP kernels for Aljabr
+ * alkhawarizm_rocm_kernels.hip — ROCm/HIP kernels for Alkhawarizm
  *
  * Hipified from the CUDA sources (alkhawarizm_fa4_kernels.cu, alkhawarizm_gdn_kernels.cu,
  * alkhawarizm_evicpress.cu) using hipify-clang. The HIP API mirrors the CUDA API

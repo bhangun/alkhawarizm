@@ -2,7 +2,7 @@ package tech.kayys.alkhawarizm.spi.model;
 
 /**
  * Functional interface for executing multimodal requests.
- * Allows decoupling high-level builders from AljabrSdk or specific engine
+ * Allows decoupling high-level builders from AlkhawarizmSdk or specific engine
  * implementations.
  * @author bhangun
  */

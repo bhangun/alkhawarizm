@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Detects Apple Silicon capabilities at startup and integrates them into
- * Aljabr's hardware discovery path.
+ * Alkhawarizm's hardware discovery path.
  *
  * <h2>What it detects</h2>
  * <ul>
@@ -21,12 +21,12 @@ import java.util.concurrent.atomic.AtomicReference;
  * {@code libalkhawarizm_metal.dylib}</li>
  * </ul>
  *
- * <h2>Integration with Aljabr's SelectionPolicy</h2>
+ * <h2>Integration with Alkhawarizm's SelectionPolicy</h2>
  * <p>
  * The existing
  * {@link tech.kayys.alkhawarizm.engine.routing.policy.SelectionPolicy}
- * in Aljabr only checks {@code hw.hasCUDA()}. This detector populates a
- * {@link MetalCapabilities} record so that Aljabr's scoring for
+ * in Alkhawarizm only checks {@code hw.hasCUDA()}. This detector populates a
+ * {@link MetalCapabilities} record so that Alkhawarizm's scoring for
  * {@link tech.kayys.alkhawarizm.spi.model.DeviceType#METAL} works correctly:
  *
  * <pre>{@code

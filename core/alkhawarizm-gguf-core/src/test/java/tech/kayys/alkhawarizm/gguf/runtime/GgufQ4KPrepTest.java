@@ -20,8 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 class GgufQ4KPrepTest {
     @Test
     void genericQ4KMatVecCanUsePreparedCachePath() {
-        String previous = System.getProperty("gollek.gguf.q4k.cache_min_rows");
-        System.setProperty("gollek.gguf.q4k.cache_min_rows", "1");
+        String previous = System.getProperty("alkhawarizm.gguf.q4k.cache_min_rows");
+        System.setProperty("alkhawarizm.gguf.q4k.cache_min_rows", "1");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(2L * 144);
             writeQ4KBlockWithAllScalesAndMins(segment.asSlice(0, 144));
@@ -36,7 +36,7 @@ class GgufQ4KPrepTest {
             assertEquals(128.0f, output[0], 0.0f);
             assertEquals(128.0f, output[1], 0.0f);
         } finally {
-            restoreProperty("gollek.gguf.q4k.cache_min_rows", previous);
+            restoreProperty("alkhawarizm.gguf.q4k.cache_min_rows", previous);
         }
     }
 

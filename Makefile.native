@@ -1,5 +1,5 @@
 # Native Library Installation Makefile
-# Helps copy native libraries to standard Aljabr location (~/.alkhawarizm/libs/)
+# Helps copy native libraries to standard Alkhawarizm location (~/.alkhawarizm/libs/)
 
 .PHONY: help install-native-libs install-gguf-libs install-onnx-libs install-libtorch-libs install-litert-libs clean-native-libs
 
@@ -24,7 +24,7 @@ else
 endif
 
 help:
-	@echo "Aljabr Native Library Installation"
+	@echo "Alkhawarizm Native Library Installation"
 	@echo "==================================="
 	@echo ""
 	@echo "Usage:"

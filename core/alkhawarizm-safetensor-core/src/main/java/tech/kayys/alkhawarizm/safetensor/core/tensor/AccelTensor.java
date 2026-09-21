@@ -1,5 +1,5 @@
 /*
- * Gollek Inference Engine — SafeTensor Module
+ * Alkhawarizm Inference Engine — SafeTensor Module
  * Copyright (c) 2026 Kayys.tech
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -74,7 +74,7 @@ public class AccelTensor implements AutoCloseable {
     private static final ThreadLocal<java.lang.foreign.MemorySegment> scratchSeg = ThreadLocal.withInitial(() -> scratchArena.get().allocate(0));
 
     private static final String MAX_CACHED_DEQUANTIZED_BYTES_PROPERTY =
-            "gollek.safetensor.max_cached_dequantized_bytes";
+            "alkhawarizm.safetensor.max_cached_dequantized_bytes";
 
     /**
      * Dequantizes this tensor back to Float32 if it is quantized.

@@ -17,10 +17,10 @@ import static tech.kayys.alkhawarizm.gguf.runtime.GgufKFx.writeQ6KLaneOrderBlock
 class GgufQ6LaneTest {
     @Test
     void rawQ6KMatVecPreservesPackedLowAndHighLaneOrder() {
-        String previousMinRows = System.getProperty("gollek.gguf.q6k.cache_min_rows");
-        String previousMaxBytes = System.getProperty("gollek.gguf.q6k.cache_max_bytes");
-        System.setProperty("gollek.gguf.q6k.cache_min_rows", "1");
-        System.setProperty("gollek.gguf.q6k.cache_max_bytes", "1");
+        String previousMinRows = System.getProperty("alkhawarizm.gguf.q6k.cache_min_rows");
+        String previousMaxBytes = System.getProperty("alkhawarizm.gguf.q6k.cache_max_bytes");
+        System.setProperty("alkhawarizm.gguf.q6k.cache_min_rows", "1");
+        System.setProperty("alkhawarizm.gguf.q6k.cache_max_bytes", "1");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(210);
             writeQ6KLaneOrderBlock(segment);
@@ -35,8 +35,8 @@ class GgufQ6LaneTest {
             assertArrayEquals(GgufQ6LaneFx.expectedRow(), dequantizedRow(model, tensor), 0.0f);
             assertEquals(0, GgufTensorOps.q6KMatrixCacheSize(model));
         } finally {
-            restoreProperty("gollek.gguf.q6k.cache_min_rows", previousMinRows);
-            restoreProperty("gollek.gguf.q6k.cache_max_bytes", previousMaxBytes);
+            restoreProperty("alkhawarizm.gguf.q6k.cache_min_rows", previousMinRows);
+            restoreProperty("alkhawarizm.gguf.q6k.cache_max_bytes", previousMaxBytes);
         }
     }
 }

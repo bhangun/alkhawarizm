@@ -8,7 +8,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 import tech.kayys.alkhawarizm.runner.RunnerCapabilities;
 import tech.kayys.alkhawarizm.runner.RunnerConfiguration;
 import tech.kayys.alkhawarizm.plugin.runner.RunnerInitializationException;
-import tech.kayys.alkhawarizm.extension.AbstractAljabrRunner;
+import tech.kayys.alkhawarizm.extension.AbstractAlkhawarizmRunner;
 import tech.kayys.alkhawarizm.metal.binding.MetalBinding;
 import tech.kayys.alkhawarizm.metal.binding.MetalFlashAttentionBinding;
 import tech.kayys.alkhawarizm.metal.config.MetalRunnerMode;
@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Apple Silicon Metal ModelRunner for Aljabr.
+ * Apple Silicon Metal ModelRunner for Alkhawarizm.
  *
  * <h2>What this runner does</h2>
  * <p>
@@ -91,7 +91,7 @@ import java.util.Map;
  * {@code alkhawarizm_metal_buffers.m} wraps pointers with
  * {@code newBufferWithBytesNoCopy}
  * to give Metal a {@code MTLStorageModeShared} view — <b>zero copy</b>.
- * Aljabr's K/V pool
+ * Alkhawarizm's K/V pool
  * ({@link tech.kayys.alkhawarizm.kvcache.PhysicalBlockPool#rawKPool()})
  * is already in off-heap memory, so KV cache accesses are zero-copy too.
  *
@@ -118,7 +118,7 @@ import java.util.Map;
  * </pre>
  */
 @ApplicationScoped
-public class MetalRunner extends AbstractAljabrRunner {
+public class MetalRunner extends AbstractAlkhawarizmRunner {
 
     public static final String RUNNER_NAME = "metal-apple-silicon";
 
@@ -537,7 +537,7 @@ public class MetalRunner extends AbstractAljabrRunner {
     // ── KV gather helper ──────────────────────────────────────────────────────
 
     /**
-     * Gather K/V vectors from Aljabr's paged KV pool into contiguous buffers
+     * Gather K/V vectors from Alkhawarizm's paged KV pool into contiguous buffers
      * for the FA4/SDPA kernel. Zero-copy on Apple Silicon because both the
      * paged pool and the gather buffers are in unified DRAM.
      */

@@ -15,7 +15,7 @@ public final class ErrorCodeDoc {
     public static String toMarkdown() {
         String nl = System.lineSeparator();
         StringBuilder builder = new StringBuilder();
-        builder.append("# Aljabr Error Codes").append(nl).append(nl);
+        builder.append("# Alkhawarizm Error Codes").append(nl).append(nl);
         builder.append("Generated from `ErrorCode` at build time.").append(nl).append(nl);
 
         for (ErrorCode.ErrorCategory category : ErrorCode.ErrorCategory.values()) {

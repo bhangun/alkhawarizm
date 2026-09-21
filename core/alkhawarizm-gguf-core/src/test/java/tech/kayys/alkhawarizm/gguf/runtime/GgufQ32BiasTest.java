@@ -96,8 +96,8 @@ class GgufQ32BiasTest {
 
     @Test
     void rawQ4_1AndQ5_1MatVecRememberBiasHintsWhenEstimateHintIsMissing() {
-        String previousMinRows = System.getProperty("gollek.gguf.q32.cache_min_rows");
-        System.setProperty("gollek.gguf.q32.cache_min_rows", "32");
+        String previousMinRows = System.getProperty("alkhawarizm.gguf.q32.cache_min_rows");
+        System.setProperty("alkhawarizm.gguf.q32.cache_min_rows", "32");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(20 + 24);
             writeQ4_1Block(segment.asSlice(0, 20), (short) 0x3c00, (short) 0x3800, (byte) 0x21);
@@ -117,16 +117,16 @@ class GgufQ32BiasTest {
             assertEquals(0, GgufTensorOps.q32MatrixCacheSize(model));
             assertEquals(2, GgufTensorOps.preparedMatrixEstimateCacheSize(model));
         } finally {
-            restoreProperty("gollek.gguf.q32.cache_min_rows", previousMinRows);
+            restoreProperty("alkhawarizm.gguf.q32.cache_min_rows", previousMinRows);
         }
     }
 
     @Test
     void rawKnownBiasQ32MatVecUsesDirectRowsForSingleDecodeRow() {
-        String previousMinRows = System.getProperty("gollek.gguf.q32.cache_min_rows");
-        String previousMaxBytes = System.getProperty("gollek.gguf.q32.cache_max_bytes");
-        System.setProperty("gollek.gguf.q32.cache_min_rows", "1");
-        System.setProperty("gollek.gguf.q32.cache_max_bytes", "1");
+        String previousMinRows = System.getProperty("alkhawarizm.gguf.q32.cache_min_rows");
+        String previousMaxBytes = System.getProperty("alkhawarizm.gguf.q32.cache_max_bytes");
+        System.setProperty("alkhawarizm.gguf.q32.cache_min_rows", "1");
+        System.setProperty("alkhawarizm.gguf.q32.cache_max_bytes", "1");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(20 + 24);
             writeQ4_1Block(segment.asSlice(0, 20), (short) 0x3c00, (short) 0x3800, (byte) 0x21);
@@ -146,8 +146,8 @@ class GgufQ32BiasTest {
             assertEquals(0, GgufTensorOps.q32MatrixCacheSize(model));
             assertEquals(2, GgufTensorOps.preparedMatrixEstimateCacheSize(model));
         } finally {
-            restoreProperty("gollek.gguf.q32.cache_min_rows", previousMinRows);
-            restoreProperty("gollek.gguf.q32.cache_max_bytes", previousMaxBytes);
+            restoreProperty("alkhawarizm.gguf.q32.cache_min_rows", previousMinRows);
+            restoreProperty("alkhawarizm.gguf.q32.cache_max_bytes", previousMaxBytes);
         }
     }
 

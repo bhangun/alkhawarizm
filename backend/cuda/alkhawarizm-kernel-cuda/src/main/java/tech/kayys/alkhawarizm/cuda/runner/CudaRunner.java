@@ -9,7 +9,7 @@ import tech.kayys.alkhawarizm.spi.exception.InferenceException;
 import tech.kayys.alkhawarizm.runner.RunnerCapabilities;
 import tech.kayys.alkhawarizm.runner.RunnerConfiguration;
 import tech.kayys.alkhawarizm.plugin.runner.RunnerInitializationException;
-import tech.kayys.alkhawarizm.extension.AbstractAljabrRunner;
+import tech.kayys.alkhawarizm.extension.AbstractAlkhawarizmRunner;
 import tech.kayys.alkhawarizm.cuda.binding.CudaBinding;
 import tech.kayys.alkhawarizm.cuda.config.CudaRunnerMode;
 import tech.kayys.alkhawarizm.cuda.detection.CudaDetector;
@@ -37,7 +37,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * NVIDIA CUDA ModelRunner for Aljabr.
+ * NVIDIA CUDA ModelRunner for Alkhawarizm.
  *
  * <p>
  * Runs {@link ModelFormat#GGUF} and {@link ModelFormat#SAFETENSORS} models
@@ -104,7 +104,7 @@ import java.util.Map;
  * </pre>
  */
 @ApplicationScoped
-public class CudaRunner extends AbstractAljabrRunner {
+public class CudaRunner extends AbstractAlkhawarizmRunner {
 
     public static final String RUNNER_NAME = "cuda";
 

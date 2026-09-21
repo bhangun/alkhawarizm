@@ -1,5 +1,5 @@
 /**
- * Core quantization abstractions and data structures for the Aljabr framework.
+ * Core quantization abstractions and data structures for the Alkhawarizm framework.
  * 
  * <p>
  * This package contains the foundational classes for supporting block-quantized

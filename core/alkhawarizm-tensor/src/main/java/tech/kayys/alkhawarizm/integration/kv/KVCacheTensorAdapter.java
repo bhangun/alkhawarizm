@@ -12,7 +12,7 @@ import java.nio.ByteBuffer;
 /**
  * Adapter to produce an alkhawarizm Tensor backed by a PagedKVCache page
  * without copying.
- * Reflection is used to avoid compile-time dependency on gollek-core.
+ * Reflection is used to avoid compile-time dependency on alkhawarizm-core.
  * @author bhangun
  */
 public final class KVCacheTensorAdapter {

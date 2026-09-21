@@ -36,7 +36,7 @@ public class MetalLibraryDiscovery {
                 return candidate;
         }
 
-        // 3. Standard Aljabr installation path (~/.alkhawarizm/libs)
+        // 3. Standard Alkhawarizm installation path (~/.alkhawarizm/libs)
         String home = System.getProperty("user.home");
         if (home != null) {
             Path p = Path.of(home, ".alkhawarizm", "libs", LIB_NAME);

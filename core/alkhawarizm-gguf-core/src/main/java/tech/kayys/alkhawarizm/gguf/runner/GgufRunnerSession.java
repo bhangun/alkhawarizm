@@ -1,8 +1,8 @@
-package tech.kayys.gollek.plugin.runner.gguf;
+package tech.kayys.alkhawarizm.plugin.runner.gguf;
 
-import tech.kayys.gollek.plugin.runner.RunnerSession;
-import tech.kayys.gollek.spi.inference.InferenceRequest;
-import tech.kayys.gollek.spi.inference.InferenceResponse;
+import tech.kayys.alkhawarizm.plugin.runner.RunnerSession;
+import tech.kayys.alkhawarizm.spi.inference.InferenceRequest;
+import tech.kayys.alkhawarizm.spi.inference.InferenceResponse;
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
 

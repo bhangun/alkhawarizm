@@ -79,12 +79,12 @@ class GgufKPrepTest {
 
     @Test
     void preparedTinyNoMinMatVecRowsMatchDirectWalkersAcrossFamilies() {
-        String previousMinOps = System.getProperty("gollek.gguf.parallel_min_ops");
-        String previousThreads = System.getProperty("gollek.gguf.parallel_threads");
-        String previousChunks = System.getProperty("gollek.gguf.parallel_chunks_per_thread");
-        System.setProperty("gollek.gguf.parallel_min_ops", "1");
-        System.setProperty("gollek.gguf.parallel_threads", "2");
-        System.setProperty("gollek.gguf.parallel_chunks_per_thread", "1");
+        String previousMinOps = System.getProperty("alkhawarizm.gguf.parallel_min_ops");
+        String previousThreads = System.getProperty("alkhawarizm.gguf.parallel_threads");
+        String previousChunks = System.getProperty("alkhawarizm.gguf.parallel_chunks_per_thread");
+        System.setProperty("alkhawarizm.gguf.parallel_min_ops", "1");
+        System.setProperty("alkhawarizm.gguf.parallel_threads", "2");
+        System.setProperty("alkhawarizm.gguf.parallel_chunks_per_thread", "1");
         GgufParallelConfig.resetParallelConfig();
         try {
             assertTinyK16NoMinRows();
@@ -92,9 +92,9 @@ class GgufKPrepTest {
             assertTinyQ32NoBiasRows();
             assertTinyQ8Rows();
         } finally {
-            restoreProperty("gollek.gguf.parallel_min_ops", previousMinOps);
-            restoreProperty("gollek.gguf.parallel_threads", previousThreads);
-            restoreProperty("gollek.gguf.parallel_chunks_per_thread", previousChunks);
+            restoreProperty("alkhawarizm.gguf.parallel_min_ops", previousMinOps);
+            restoreProperty("alkhawarizm.gguf.parallel_threads", previousThreads);
+            restoreProperty("alkhawarizm.gguf.parallel_chunks_per_thread", previousChunks);
             GgufParallelConfig.resetParallelConfig();
         }
     }

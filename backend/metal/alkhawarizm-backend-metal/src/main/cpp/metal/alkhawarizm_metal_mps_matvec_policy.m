@@ -138,9 +138,9 @@ BOOL alkhawarizm_metal_mps_matvec_autotune_enabled_for_output(int N) {
          (maxOutput <= 0 || N <= maxOutput);
 }
 
-AljabrMetalMpsMatvecShapeState alkhawarizm_metal_mps_matvec_shape_state(
+AlkhawarizmMetalMpsMatvecShapeState alkhawarizm_metal_mps_matvec_shape_state(
     NSString *shapeKey, BOOL validateEveryCall, BOOL autotune) {
-  AljabrMetalMpsMatvecShapeState state = {NO, NO, NO, NO};
+  AlkhawarizmMetalMpsMatvecShapeState state = {NO, NO, NO, NO};
   if (shapeKey == nil) {
     return state;
   }
@@ -201,9 +201,9 @@ void alkhawarizm_metal_mps_matvec_mark_disable_after_failure(void) {
   }
 }
 
-AljabrMetalMpsMatvecOverrideSnapshot
+AlkhawarizmMetalMpsMatvecOverrideSnapshot
 alkhawarizm_metal_mps_matvec_force_shape(int K, int N) {
-  AljabrMetalMpsMatvecOverrideSnapshot snapshot;
+  AlkhawarizmMetalMpsMatvecOverrideSnapshot snapshot;
   @synchronized(alkhawarizm_metal_mps_matvec_policy_lock()) {
     snapshot.enabled = g_enable_mps_matvec;
     snapshot.max_inner_override = g_max_inner_override;
@@ -216,7 +216,7 @@ alkhawarizm_metal_mps_matvec_force_shape(int K, int N) {
 }
 
 void alkhawarizm_metal_mps_matvec_restore_overrides(
-    AljabrMetalMpsMatvecOverrideSnapshot snapshot) {
+    AlkhawarizmMetalMpsMatvecOverrideSnapshot snapshot) {
   @synchronized(alkhawarizm_metal_mps_matvec_policy_lock()) {
     g_enable_mps_matvec = snapshot.enabled;
     g_max_inner_override = snapshot.max_inner_override;

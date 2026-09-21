@@ -25,7 +25,7 @@ import tech.kayys.alkhawarizm.trainer.api.TrainingSummary;
  * }
  * }</pre>
  *
- * @author Aljabr Team
+ * @author Alkhawarizm Team
  * @version 0.1.0
  */
 public interface Callback extends Closeable, TrainingListener {

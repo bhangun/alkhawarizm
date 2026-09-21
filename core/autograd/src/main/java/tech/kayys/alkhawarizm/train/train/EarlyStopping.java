@@ -23,7 +23,7 @@ import java.util.function.DoubleSupplier;
  *         .build();
  * }</pre>
  *
- * @author Aljabr Team
+ * @author Alkhawarizm Team
  * @version 0.1.0
  */
 public class EarlyStopping implements Callback {

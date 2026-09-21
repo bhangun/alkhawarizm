@@ -19,10 +19,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class GgufQ4KRawTest {
     @Test
     void rawQ4KNoMinMatVecPreservesPackedNibbleLaneOrder() {
-        String previousMinRows = System.getProperty("gollek.gguf.q4k.cache_min_rows");
-        String previousMaxBytes = System.getProperty("gollek.gguf.q4k.cache_max_bytes");
-        System.setProperty("gollek.gguf.q4k.cache_min_rows", "1");
-        System.setProperty("gollek.gguf.q4k.cache_max_bytes", "1");
+        String previousMinRows = System.getProperty("alkhawarizm.gguf.q4k.cache_min_rows");
+        String previousMaxBytes = System.getProperty("alkhawarizm.gguf.q4k.cache_max_bytes");
+        System.setProperty("alkhawarizm.gguf.q4k.cache_min_rows", "1");
+        System.setProperty("alkhawarizm.gguf.q4k.cache_max_bytes", "1");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(144);
             writeQ4KNoMinLaneOrderBlock(segment);
@@ -37,17 +37,17 @@ class GgufQ4KRawTest {
             assertArrayEquals(expectedQ4KLaneOrderRow(false), dequantizedRow(model, tensor), 0.0f);
             assertEquals(0, GgufTensorOps.q4KMatrixCacheSize(model));
         } finally {
-            restoreProperty("gollek.gguf.q4k.cache_min_rows", previousMinRows);
-            restoreProperty("gollek.gguf.q4k.cache_max_bytes", previousMaxBytes);
+            restoreProperty("alkhawarizm.gguf.q4k.cache_min_rows", previousMinRows);
+            restoreProperty("alkhawarizm.gguf.q4k.cache_max_bytes", previousMaxBytes);
         }
     }
 
     @Test
     void rawQ4KMinMatVecPreservesPackedNibbleLaneOrder() {
-        String previousMinRows = System.getProperty("gollek.gguf.q4k.cache_min_rows");
-        String previousMaxBytes = System.getProperty("gollek.gguf.q4k.cache_max_bytes");
-        System.setProperty("gollek.gguf.q4k.cache_min_rows", "1");
-        System.setProperty("gollek.gguf.q4k.cache_max_bytes", "1");
+        String previousMinRows = System.getProperty("alkhawarizm.gguf.q4k.cache_min_rows");
+        String previousMaxBytes = System.getProperty("alkhawarizm.gguf.q4k.cache_max_bytes");
+        System.setProperty("alkhawarizm.gguf.q4k.cache_min_rows", "1");
+        System.setProperty("alkhawarizm.gguf.q4k.cache_max_bytes", "1");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(144);
             writeQ4KMinLaneOrderBlock(segment);
@@ -62,8 +62,8 @@ class GgufQ4KRawTest {
             assertArrayEquals(expectedQ4KLaneOrderRow(true), dequantizedRow(model, tensor), 0.0f);
             assertEquals(0, GgufTensorOps.q4KMatrixCacheSize(model));
         } finally {
-            restoreProperty("gollek.gguf.q4k.cache_min_rows", previousMinRows);
-            restoreProperty("gollek.gguf.q4k.cache_max_bytes", previousMaxBytes);
+            restoreProperty("alkhawarizm.gguf.q4k.cache_min_rows", previousMinRows);
+            restoreProperty("alkhawarizm.gguf.q4k.cache_max_bytes", previousMaxBytes);
         }
     }
 

@@ -1,4 +1,4 @@
-name: Deploy Aljabr
+name: Deploy Alkhawarizm
 
 on:
   push:
@@ -32,7 +32,7 @@ jobs:
       - name: Make deploy script executable
         run: chmod +x alkhawarizm/scripts/deploy.sh
 
-      - name: Run Aljabr deploy (publish to mavenLocal or remote)
+      - name: Run Alkhawarizm deploy (publish to mavenLocal or remote)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

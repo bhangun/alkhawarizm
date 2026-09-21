@@ -12,7 +12,7 @@
 #include <stdint.h>
 
 static BOOL is_bf16_pair_x4_pipeline(id<MTLComputePipelineState> pipeline) {
-  AljabrMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
+  AlkhawarizmMetalPipelines *pipelines = alkhawarizm_metal_pipelines();
   return pipeline == pipelines->matvec_bf16_pair_x4 ||
          pipeline == pipelines->matvec_bf16_pair_x4_simd;
 }

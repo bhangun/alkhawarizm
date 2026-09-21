@@ -21,8 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class GgufTQ1Test {
     @Test
     void supportsTQ1_0RowDotAndPreparedMatVec() {
-        String previous = System.getProperty("gollek.gguf.q8.cache_min_rows");
-        System.setProperty("gollek.gguf.q8.cache_min_rows", "1");
+        String previous = System.getProperty("alkhawarizm.gguf.q8.cache_min_rows");
+        System.setProperty("alkhawarizm.gguf.q8.cache_min_rows", "1");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(2L * 54);
             writeTQ1_0Block(segment.asSlice(0, 54), (short) 0x3c00, (byte) 49);
@@ -64,7 +64,7 @@ class GgufTQ1Test {
             assertEquals(256.0f, preparedOutput[1], 0.0f);
             assertEquals(1, GgufTensorOps.clearQ8MatrixCache(model));
         } finally {
-            restoreProperty("gollek.gguf.q8.cache_min_rows", previous);
+            restoreProperty("alkhawarizm.gguf.q8.cache_min_rows", previous);
         }
     }
 

@@ -1,6 +1,6 @@
 package tech.kayys.alkhawarizm.safetensor.spi;
 
-import tech.kayys.gollek.spi.inference.InferenceRequest;
+import tech.kayys.alkhawarizm.spi.inference.InferenceRequest;
 import tech.kayys.alkhawarizm.spi.model.ModelConfig;
 import java.util.List;
 

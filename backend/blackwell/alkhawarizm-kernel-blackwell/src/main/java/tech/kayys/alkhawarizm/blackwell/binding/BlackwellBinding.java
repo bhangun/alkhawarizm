@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * FFM-based binding to the Aljabr Blackwell CUDA bridge
+ * FFM-based binding to the Alkhawarizm Blackwell CUDA bridge
  * ({@code libalkhawarizm_blackwell.so}).
  *
  * <p>

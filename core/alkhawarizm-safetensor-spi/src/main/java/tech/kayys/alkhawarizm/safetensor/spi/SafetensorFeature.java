@@ -7,7 +7,7 @@ package tech.kayys.alkhawarizm.safetensor.spi;
  * {@code SafetensorProvider} during startup. Each feature can be conditionally
  * enabled or disabled through configuration:
  * <pre>
- * gollek.safetensor.feature.[id].enabled=false
+ * alkhawarizm.safetensor.feature.[id].enabled=false
  * </pre>
  *
  * <p>Implement this interface and annotate the class with {@code @ApplicationScoped}
@@ -20,7 +20,7 @@ public interface SafetensorFeature {
      * Unique identifier for this feature (e.g. {@code "audio"}, {@code "vision"}).
      *
      * <p>Used as the configuration key suffix:
-     * {@code gollek.safetensor.feature.[id].enabled}.
+     * {@code alkhawarizm.safetensor.feature.[id].enabled}.
      *
      * @return feature identifier string
      */

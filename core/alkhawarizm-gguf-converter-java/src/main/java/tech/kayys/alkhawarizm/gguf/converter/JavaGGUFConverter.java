@@ -1,17 +1,17 @@
-package tech.kayys.gollek.converter.java;
+package tech.kayys.alkhawarizm.converter.java;
 
 import tech.kayys.alkhawarizm.gguf.core.*;
 
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
 import io.smallrye.mutiny.infrastructure.Infrastructure;
-import tech.kayys.gollek.converter.java.gguf.SafetensorToGgufConverter;
+import tech.kayys.alkhawarizm.converter.java.gguf.SafetensorToGgufConverter;
 
-import tech.kayys.gollek.converter.model.ConversionProgress;
-import tech.kayys.gollek.converter.model.ConversionResult;
-import tech.kayys.gollek.converter.model.GGUFConversionParams;
-import tech.kayys.gollek.converter.model.ModelMetadata;
-import tech.kayys.gollek.converter.model.QuantizationType;
+import tech.kayys.alkhawarizm.converter.model.ConversionProgress;
+import tech.kayys.alkhawarizm.converter.model.ConversionResult;
+import tech.kayys.alkhawarizm.converter.model.GGUFConversionParams;
+import tech.kayys.alkhawarizm.converter.model.ModelMetadata;
+import tech.kayys.alkhawarizm.converter.model.QuantizationType;
 import tech.kayys.alkhawarizm.core.model.ModelFormat;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

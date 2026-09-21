@@ -27,10 +27,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 class GgufQ32RawTest {
     @Test
     void rawQ32MatVecStreamsWhenPreparedCacheIsTooSmall() {
-        String previousMinRows = System.getProperty("gollek.gguf.q32.cache_min_rows");
-        String previousMaxBytes = System.getProperty("gollek.gguf.q32.cache_max_bytes");
-        System.setProperty("gollek.gguf.q32.cache_min_rows", "1");
-        System.setProperty("gollek.gguf.q32.cache_max_bytes", "40");
+        String previousMinRows = System.getProperty("alkhawarizm.gguf.q32.cache_min_rows");
+        String previousMaxBytes = System.getProperty("alkhawarizm.gguf.q32.cache_max_bytes");
+        System.setProperty("alkhawarizm.gguf.q32.cache_min_rows", "1");
+        System.setProperty("alkhawarizm.gguf.q32.cache_max_bytes", "40");
         GgufRawPathHints.clearRecentHintCache();
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(2L * 18);
@@ -62,8 +62,8 @@ class GgufQ32RawTest {
             assertEquals(0, stats.cacheEntries());
             assertEquals(0L, stats.cacheBytes());
         } finally {
-            restoreProperty("gollek.gguf.q32.cache_min_rows", previousMinRows);
-            restoreProperty("gollek.gguf.q32.cache_max_bytes", previousMaxBytes);
+            restoreProperty("alkhawarizm.gguf.q32.cache_min_rows", previousMinRows);
+            restoreProperty("alkhawarizm.gguf.q32.cache_max_bytes", previousMaxBytes);
             GgufRawPathHints.clearRecentHintCache();
         }
     }

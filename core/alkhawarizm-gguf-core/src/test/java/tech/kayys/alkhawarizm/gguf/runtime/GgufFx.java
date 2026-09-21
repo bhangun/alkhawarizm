@@ -18,7 +18,7 @@ final class GgufFx {
         } else {
             System.setProperty(name, value);
         }
-        if (name.startsWith("gollek.gguf.parallel_")) {
+        if (name.startsWith("alkhawarizm.gguf.parallel_")) {
             GgufParallelConfig.resetParallelConfig();
         }
     }

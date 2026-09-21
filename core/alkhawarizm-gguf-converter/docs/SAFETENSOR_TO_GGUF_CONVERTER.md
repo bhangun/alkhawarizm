@@ -42,7 +42,7 @@ This document describes the pure Java-based Safetensors to GGUF converter implem
 
 ### 1. SafetensorToGgufConverter
 
-**Location**: `gollek/plugins/runner/gguf/gollek-gguf-converter/src/main/java/tech/kayys/gollek/converter/SafetensorToGgufConverter.java`
+**Location**: `alkhawarizm/plugins/runner/gguf/alkhawarizm-gguf-converter/src/main/java/tech/kayys/alkhawarizm/converter/SafetensorToGgufConverter.java`
 
 **Key Methods**:
 
@@ -84,7 +84,7 @@ public ConversionResult convert(
 
 ### 2. LlamaFfmBindings
 
-**Location**: `gollek/plugins/runner/gguf/gollek-gguf-converter/src/main/java/tech/kayys/gollek/converter/LlamaFfmBindings.java`
+**Location**: `alkhawarizm/plugins/runner/gguf/alkhawarizm-gguf-converter/src/main/java/tech/kayys/alkhawarizm/converter/LlamaFfmBindings.java`
 
 **Purpose**: Low-level FFM bindings for llama.cpp quantization functions.
 
@@ -103,9 +103,9 @@ String getLastError()
 
 **Library Loading Strategy**:
 
-1. System property: `-Dgollek.llama.library.path=/path/to/libllama.dylib`
-2. Standard location: `~/.gollek/libs/llama/libllama.dylib`
-3. Build directory: `gollek/plugins/runner/gguf/gollek-ext-runner-gguf/build/`
+1. System property: `-Dalkhawarizm.llama.library.path=/path/to/libllama.dylib`
+2. Standard location: `~/.alkhawarizm/libs/llama/libllama.dylib`
+3. Build directory: `alkhawarizm/plugins/runner/gguf/alkhawarizm-ext-runner-gguf/build/`
 4. System library path: `System.loadLibrary("llama")`
 
 ### 3. GGUF File Format
@@ -157,7 +157,7 @@ Offset  Size  Field
 @Inject
 SafetensorToGgufConverter converter;
 
-Path modelDir = Path.of("~/.gollek/models/safetensors/Qwen/Qwen2.5-0.5B-Instruct");
+Path modelDir = Path.of("~/.alkhawarizm/models/safetensors/Qwen/Qwen2.5-0.5B-Instruct");
 Path outputFile = Path.of("/tmp/qwen2_5-0_5b-f16.gguf");
 
 ConversionResult result = converter.convert(
@@ -223,14 +223,14 @@ resultUni.subscribe()
 
 ```bash
 # Run all tests
-mvn test -pl gollek/plugins/runner/gguf/gollek-gguf-converter
+mvn test -pl alkhawarizm/plugins/runner/gguf/alkhawarizm-gguf-converter
 
 # Run specific test
-mvn test -pl gollek/plugins/runner/gguf/gollek-gguf-converter \
+mvn test -pl alkhawarizm/plugins/runner/gguf/alkhawarizm-gguf-converter \
     -Dtest=SafetensorToGgufConverterTest
 
 # Run with Qwen2.5 model (if available)
-mvn test -pl gollek/plugins/runner/gguf/gollek-gguf-converter \
+mvn test -pl alkhawarizm/plugins/runner/gguf/alkhawarizm-gguf-converter \
     -Dtest=SafetensorToGgufConverterTest#shouldConvertQwen2_5F16
 ```
 
@@ -239,10 +239,10 @@ mvn test -pl gollek/plugins/runner/gguf/gollek-gguf-converter \
 ```bash
 # Download Qwen2.5-0.5B-Instruct in Safetensors format
 huggingface-cli download Qwen/Qwen2.5-0.5B-Instruct \
-    --local-dir ~/.gollek/models/safetensors/Qwen/Qwen2.5-0.5B-Instruct
+    --local-dir ~/.alkhawarizm/models/safetensors/Qwen/Qwen2.5-0.5B-Instruct
 
 # Verify files exist
-ls -la ~/.gollek/models/safetensors/Qwen/Qwen2.5-0.5B-Instruct/
+ls -la ~/.alkhawarizm/models/safetensors/Qwen/Qwen2.5-0.5B-Instruct/
 # Should contain:
 # - config.json
 # - model.safetensors
@@ -296,13 +296,13 @@ ls -la ~/.gollek/models/safetensors/Qwen/Qwen2.5-0.5B-Instruct/
 **Solution**:
 ```bash
 # Build llama.cpp
-cd gollek/plugins/runner/gguf/gollek-ext-runner-gguf
+cd alkhawarizm/plugins/runner/gguf/alkhawarizm-ext-runner-gguf
 mkdir -p build && cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 cmake --build . --config Release
 
 # Or set library path
-export GOLLEK_LLAMA_LIBRARY_PATH=/path/to/libllama.dylib
+export ALKHAWARIZM_LLAMA_LIBRARY_PATH=/path/to/libllama.dylib
 ```
 
 #### 2. "config.json not found"
@@ -334,7 +334,7 @@ Enable detailed logging:
 
 ```bash
 export JAVA_OPTS="-Dlogger.level=DEBUG"
-mvn quarkus:dev -pl gollek/plugins/runner/gguf/gollek-gguf-converter
+mvn quarkus:dev -pl alkhawarizm/plugins/runner/gguf/alkhawarizm-gguf-converter
 ```
 
 ## Advanced Topics

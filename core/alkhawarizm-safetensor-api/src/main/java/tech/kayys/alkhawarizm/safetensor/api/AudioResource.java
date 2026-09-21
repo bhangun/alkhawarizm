@@ -1,5 +1,5 @@
 /*
- * Gollek Inference Engine — SafeTensor Module
+ * Alkhawarizm Inference Engine — SafeTensor Module
  * Copyright (c) 2026 Kayys.tech
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -36,7 +36,7 @@ public class AudioResource {
     @Inject
     jakarta.enterprise.inject.Instance<Object> whisperEngineInstance;
 
-    @ConfigProperty(name = "gollek.audio.whisper.default-model", defaultValue = "")
+    @ConfigProperty(name = "alkhawarizm.audio.whisper.default-model", defaultValue = "")
     String defaultWhisperModel;
 
     private final Map<String, java.nio.file.Path> modelRegistry = new ConcurrentHashMap<>();
@@ -162,7 +162,7 @@ public class AudioResource {
                     jakarta.ws.rs.core.Response.status(400)
                             .entity(Map.of("error", Map.of(
                                     "message", "No Whisper model configured. "
-                                            + "Set gollek.audio.whisper.default-model or pass model in request.")))
+                                            + "Set alkhawarizm.audio.whisper.default-model or pass model in request.")))
                             .build());
         }
         java.nio.file.Path p = modelRegistry.get(modelId);

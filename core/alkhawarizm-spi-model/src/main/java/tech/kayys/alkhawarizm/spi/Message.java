@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  * Minimal, dependency-free chat message for tokenizer/template formatting in
- * the Aljabr foundation.
+ * the Alkhawarizm foundation.
  *
  * <p>
  * This is intentionally a lightweight value type with no serving-layer
@@ -16,7 +16,7 @@ import java.util.Objects;
  * serving-engine concepts.
  *
  * <p>
- * The serving engine (Gollek) defines its own richer {@code Message} type that
+ * The serving engine (Alkhawarizm) defines its own richer {@code Message} type that
  * adds
  * multi-modal content parts, tool calls, etc. and bridges to this type where
  * needed.

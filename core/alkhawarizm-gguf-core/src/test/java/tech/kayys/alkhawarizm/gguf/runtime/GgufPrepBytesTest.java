@@ -18,12 +18,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class GgufPrepBytesTest {
     @Test
     void plansNoMinKQuantMatricesByExactPreparedBytes() {
-        String previousQ2MaxBytes = System.getProperty("gollek.gguf.q2k.cache_max_bytes");
-        String previousQ4MaxBytes = System.getProperty("gollek.gguf.q4k.cache_max_bytes");
-        String previousQ5MaxBytes = System.getProperty("gollek.gguf.q5k.cache_max_bytes");
-        System.setProperty("gollek.gguf.q2k.cache_max_bytes", "320");
-        System.setProperty("gollek.gguf.q4k.cache_max_bytes", "288");
-        System.setProperty("gollek.gguf.q5k.cache_max_bytes", "288");
+        String previousQ2MaxBytes = System.getProperty("alkhawarizm.gguf.q2k.cache_max_bytes");
+        String previousQ4MaxBytes = System.getProperty("alkhawarizm.gguf.q4k.cache_max_bytes");
+        String previousQ5MaxBytes = System.getProperty("alkhawarizm.gguf.q5k.cache_max_bytes");
+        System.setProperty("alkhawarizm.gguf.q2k.cache_max_bytes", "320");
+        System.setProperty("alkhawarizm.gguf.q4k.cache_max_bytes", "288");
+        System.setProperty("alkhawarizm.gguf.q5k.cache_max_bytes", "288");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(84 + 144 + 176);
             writeQ2KBlock(segment.asSlice(0, 84), (byte) 0x01, (byte) 0x55);
@@ -56,9 +56,9 @@ class GgufPrepBytesTest {
             assertEquals(3, GgufTensorOps.preparedMatrixEstimateCacheSize(model));
             assertEquals(3, GgufTensorOps.clearPreparedMatrixCaches(model));
         } finally {
-            restoreProperty("gollek.gguf.q2k.cache_max_bytes", previousQ2MaxBytes);
-            restoreProperty("gollek.gguf.q4k.cache_max_bytes", previousQ4MaxBytes);
-            restoreProperty("gollek.gguf.q5k.cache_max_bytes", previousQ5MaxBytes);
+            restoreProperty("alkhawarizm.gguf.q2k.cache_max_bytes", previousQ2MaxBytes);
+            restoreProperty("alkhawarizm.gguf.q4k.cache_max_bytes", previousQ4MaxBytes);
+            restoreProperty("alkhawarizm.gguf.q5k.cache_max_bytes", previousQ5MaxBytes);
         }
     }
 }

@@ -9,7 +9,7 @@ import tech.kayys.alkhawarizm.spi.exception.InferenceException;
 import tech.kayys.alkhawarizm.runner.RunnerCapabilities;
 import tech.kayys.alkhawarizm.runner.RunnerConfiguration;
 import tech.kayys.alkhawarizm.plugin.runner.RunnerInitializationException;
-import tech.kayys.alkhawarizm.extension.AbstractAljabrRunner;
+import tech.kayys.alkhawarizm.extension.AbstractAlkhawarizmRunner;
 import tech.kayys.alkhawarizm.rocm.binding.RocmHipBinding;
 import tech.kayys.alkhawarizm.rocm.binding.RocmHipCpuFallback;
 import tech.kayys.alkhawarizm.kvcache.PagedKVCacheManager;
@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * AMD ROCm ModelRunner for Aljabr.
+ * AMD ROCm ModelRunner for Alkhawarizm.
  *
  * <p>
  * Runs {@link ModelFormat#GGUF} and {@link ModelFormat#SAFETENSORS} models
@@ -102,7 +102,7 @@ import java.util.Map;
  * </pre>
  */
 @ApplicationScoped
-public class RocmRunner extends AbstractAljabrRunner {
+public class RocmRunner extends AbstractAlkhawarizmRunner {
 
     public static final String RUNNER_NAME = "rocm-hip";
 

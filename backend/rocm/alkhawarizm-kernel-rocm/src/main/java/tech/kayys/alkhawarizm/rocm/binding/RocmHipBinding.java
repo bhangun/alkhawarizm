@@ -23,7 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * HIP (Heterogeneous-Compute Interface for Portability) is AMD's runtime
  * API that mirrors the CUDA runtime API almost 1:1. The same CUDA kernel code
  * can be ported to HIP with minimal changes using {@code hipify-clang}. The
- * Aljabr extension module's CUDA kernels (FA4, GDN, QLoRA, EP, Offload,
+ * Alkhawarizm extension module's CUDA kernels (FA4, GDN, QLoRA, EP, Offload,
  * EVICPRESS) all have direct HIP equivalents compiled from the same sources
  * with {@code hipcc} instead of {@code nvcc}.
  *

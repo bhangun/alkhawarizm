@@ -1,10 +1,10 @@
 [
     {
-        "name": "tech.kayys.gollek.converter.GGUFNative",
+        "name": "tech.kayys.alkhawarizm.converter.GGUFNative",
         "allDeclaredMethods": true
     },
     {
-        "name": "tech.kayys.gollek.converter.GGUFConverter",
+        "name": "tech.kayys.alkhawarizm.converter.GGUFConverter",
         "allDeclaredMethods": true
     }
 ]

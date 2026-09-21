@@ -16,7 +16,7 @@ To understand Al-Khawarizm, it helps to see where it sits in the broader Kayys A
 graph TD
     W[Wayang<br>Agentic AI Platform] --> G
     T[Tafkir<br>Training Framework] --> A
-    G[Gollek<br>Inference Engine & SDK] --> A
+    G[Alkhawarizm<br>Inference Engine & SDK] --> A
     
     subgraph Al-Khawarizm Foundation
     A[Al-Khawarizm<br>Tensors, Math, Backends, Models]
@@ -26,10 +26,10 @@ graph TD
 ### The Separation of Concerns
 1. **Al-Khawarizm (Foundation)**: Knows how to multiply matrices, allocate memory on a GPU, parse SafeTensors, and define what a "Gemma" model looks like.
 2. **Tafkir (Training)**: Knows how to calculate loss, apply gradients, run optimizers, and execute training loops. Depends on Al-Khawarizm for math and autograd.
-3. **Gollek (Inference)**: Knows how to sample tokens, handle continuous batching, and route requests. Depends on Al-Khawarizm for fast forward passes and KV caching.
-4. **Wayang (Application)**: Knows how to orchestrate multi-agent reasoning and RAG workflows. Depends on Gollek for text generation.
+3. **Alkhawarizm (Inference)**: Knows how to sample tokens, handle continuous batching, and route requests. Depends on Al-Khawarizm for fast forward passes and KV caching.
+4. **Wayang (Application)**: Knows how to orchestrate multi-agent reasoning and RAG workflows. Depends on Alkhawarizm for text generation.
 
-By isolating the heavy infrastructure into Al-Khawarizm, both Tafkir and Gollek can share the exact same hardware backends and memory models without dragging each other's specific dependencies around.
+By isolating the heavy infrastructure into Al-Khawarizm, both Tafkir and Alkhawarizm can share the exact same hardware backends and memory models without dragging each other's specific dependencies around.
 
 ## 🏗️ Core Architecture & Modules
 
@@ -48,7 +48,7 @@ Al-Khawarizm is designed with a strict modular structure to maintain a clear Sep
 
 ## 🧑‍💻 Developer Guidance
 
-When contributing to Al-Khawarizm or any downstream framework (`gollek` / `tafkir`), strictly adhere to the following principles:
+When contributing to Al-Khawarizm or any downstream framework (`alkhawarizm` / `tafkir`), strictly adhere to the following principles:
 
 ### 1. Capabilities over Identities
 **Never** write code that checks the identity of a model (e.g., `if (modelType.equals("gemma3"))`). This breaks extensibility.
@@ -56,7 +56,7 @@ Instead, check for operational capabilities (e.g., `if (traits.requiresTurnAware
 
 ### 2. Strict Separation of Concerns
 * **Al-Khawarizm** handles math, tensors, and static topology. It should never contain code related to continuous batching, sampling temperature, or KV cache orchestration.
-* **Gollek** handles the stateful, dynamic process of inference. It uses Al-Khawarizm's math and topology to execute the forward pass.
+* **Alkhawarizm** handles the stateful, dynamic process of inference. It uses Al-Khawarizm's math and topology to execute the forward pass.
 * **Tafkir** handles the stateful process of training. It uses Al-Khawarizm's autograd and math to execute the backward pass.
 
 ### 3. Adding New Models

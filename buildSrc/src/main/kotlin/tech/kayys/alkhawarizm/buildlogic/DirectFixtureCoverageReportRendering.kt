@@ -69,7 +69,7 @@ object DirectFixtureCoverageReportRendering {
     fun schemaPayload(): Map<String, Any> = mapOf(
         "\$schema" to "https://json-schema.org/draft/2020-12/schema",
         "\$id" to DirectFixtureCoverageReportSpec.schemaId,
-        "title" to "Gollek direct model-family fixture coverage report",
+        "title" to "Alkhawarizm direct model-family fixture coverage report",
         "type" to "object",
         "additionalProperties" to false,
         "required" to DirectFixtureCoverageReportSpec.rootFields,

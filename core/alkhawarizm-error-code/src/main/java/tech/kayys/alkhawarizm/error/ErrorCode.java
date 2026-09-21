@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Central registry for all Aljabr error codes.
+ * Central registry for all Alkhawarizm error codes.
  *
  * <p>
  * Pattern: CATEGORY_NNN (example: MODEL_001)

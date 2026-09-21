@@ -18,7 +18,7 @@ public final class ObjExporter {
 
     public static String exportToString(Mesh3D mesh) {
         StringBuilder sb = new StringBuilder();
-        sb.append("# Gollek 3D Wavefront OBJ Exporter\n");
+        sb.append("# Alkhawarizm 3D Wavefront OBJ Exporter\n");
         sb.append("# Mesh: ").append(mesh.name()).append("\n");
         sb.append("o ").append(mesh.name()).append("\n\n");
 

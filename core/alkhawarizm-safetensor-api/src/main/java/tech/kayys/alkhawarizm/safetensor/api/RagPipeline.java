@@ -1,12 +1,12 @@
 /*
- * Gollek Inference Engine — SafeTensor Module
+ * Alkhawarizm Inference Engine — SafeTensor Module
  * Copyright (c) 2026 Kayys.tech
  * SPDX-License-Identifier: Apache-2.0
  */
 package tech.kayys.alkhawarizm.safetensor.api;
 
 import io.smallrye.mutiny.Uni;
-import tech.kayys.gollek.safetensor.generation.GenerationConfig;
+import tech.kayys.alkhawarizm.safetensor.generation.GenerationConfig;
 
 import java.nio.file.Path;
 import java.util.List;

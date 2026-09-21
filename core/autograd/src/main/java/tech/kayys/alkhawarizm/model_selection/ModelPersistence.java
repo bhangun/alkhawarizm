@@ -71,7 +71,7 @@ public class ModelPersistence {
         pmml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
         pmml.append("<PMML version=\"4.4\" xmlns=\"http://www.dmg.org/PMML-4_4\">\n");
         pmml.append("  <Header>\n");
-        pmml.append("    <Application name=\"Aljabr ML\"/>\n");
+        pmml.append("    <Application name=\"Alkhawarizm ML\"/>\n");
         pmml.append("    <Timestamp>").append(new Date()).append("</Timestamp>\n");
         pmml.append("  </Header>\n");
         pmml.append("  <DataDictionary>\n");

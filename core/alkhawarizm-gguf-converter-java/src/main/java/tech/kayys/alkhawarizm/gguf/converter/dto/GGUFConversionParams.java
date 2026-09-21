@@ -1,4 +1,4 @@
-package tech.kayys.gollek.converter.model;
+package tech.kayys.alkhawarizm.converter.model;
 
 import java.nio.file.Path;
 import java.util.Map;

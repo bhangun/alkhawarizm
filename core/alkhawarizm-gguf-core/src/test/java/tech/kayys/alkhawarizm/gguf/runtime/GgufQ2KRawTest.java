@@ -19,10 +19,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class GgufQ2KRawTest {
     @Test
     void rawQ2KMatVecReusesVectorGroupSumsWhenPreparedCacheIsTooSmall() {
-        String previousMinRows = System.getProperty("gollek.gguf.q2k.cache_min_rows");
-        String previousMaxBytes = System.getProperty("gollek.gguf.q2k.cache_max_bytes");
-        System.setProperty("gollek.gguf.q2k.cache_min_rows", "1");
-        System.setProperty("gollek.gguf.q2k.cache_max_bytes", "320");
+        String previousMinRows = System.getProperty("alkhawarizm.gguf.q2k.cache_min_rows");
+        String previousMaxBytes = System.getProperty("alkhawarizm.gguf.q2k.cache_max_bytes");
+        System.setProperty("alkhawarizm.gguf.q2k.cache_min_rows", "1");
+        System.setProperty("alkhawarizm.gguf.q2k.cache_max_bytes", "320");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(2L * 84);
             writeQ2KBlockWithMin(segment.asSlice(0, 84), (byte) 0x12, (byte) 0x55);
@@ -39,15 +39,15 @@ class GgufQ2KRawTest {
             assertEquals(0, GgufTensorOps.q2KMatrixCacheSize(model));
             assertEquals(768L, GgufTensorOps.estimatePreparedMatrixCacheBytes(model, tensor));
         } finally {
-            restoreProperty("gollek.gguf.q2k.cache_min_rows", previousMinRows);
-            restoreProperty("gollek.gguf.q2k.cache_max_bytes", previousMaxBytes);
+            restoreProperty("alkhawarizm.gguf.q2k.cache_min_rows", previousMinRows);
+            restoreProperty("alkhawarizm.gguf.q2k.cache_max_bytes", previousMaxBytes);
         }
     }
 
     @Test
     void rawQ2KMatVecRemembersHintWhenEstimateHintIsMissing() {
-        String previous = System.getProperty("gollek.gguf.q2k.cache_min_rows");
-        System.setProperty("gollek.gguf.q2k.cache_min_rows", "32");
+        String previous = System.getProperty("alkhawarizm.gguf.q2k.cache_min_rows");
+        System.setProperty("alkhawarizm.gguf.q2k.cache_min_rows", "32");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(84);
             writeQ2KBlockWithMin(segment, (byte) 0x12, (byte) 0x55);
@@ -61,7 +61,7 @@ class GgufQ2KRawTest {
             assertEquals(0, GgufTensorOps.q2KMatrixCacheSize(model));
             assertEquals(1, GgufTensorOps.preparedMatrixEstimateCacheSize(model));
         } finally {
-            restoreProperty("gollek.gguf.q2k.cache_min_rows", previous);
+            restoreProperty("alkhawarizm.gguf.q2k.cache_min_rows", previous);
         }
     }
 

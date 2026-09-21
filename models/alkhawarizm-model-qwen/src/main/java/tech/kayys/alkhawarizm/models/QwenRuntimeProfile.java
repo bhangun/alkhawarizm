@@ -20,6 +20,7 @@ public final class QwenRuntimeProfile {
     public static ModelRuntimeTraits text(ModelConfig config) {
         boolean compact = ModelAttentionTraitsPolicy.isCompactAttentionMatvecCandidate(config);
         return ModelRuntimeTraits.builder()
+                .qwenText()
                 .prompt(prompt())
                 .attention(new ModelRuntimeTraits.AttentionRuntimeTraits(false, false, false, false, false, false, false, compact ? 128 : 0, compact, ModelAttentionTraitsPolicy.isLargeAttentionMatvecCandidate(config, false, false), false))
                 .build();

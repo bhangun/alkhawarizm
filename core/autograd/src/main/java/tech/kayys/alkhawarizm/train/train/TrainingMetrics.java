@@ -23,7 +23,7 @@ import tech.kayys.alkhawarizm.trainer.api.TrainingSummary;
  * List<Double> trainLosses = metrics.getTrainLosses();
  * }</pre>
  *
- * @author Aljabr Team
+ * @author Alkhawarizm Team
  * @version 0.1.0
  */
 public class TrainingMetrics {

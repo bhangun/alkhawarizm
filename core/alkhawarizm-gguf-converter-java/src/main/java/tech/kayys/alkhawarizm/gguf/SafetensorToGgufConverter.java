@@ -1,4 +1,4 @@
-package tech.kayys.gollek.converter.java.gguf;
+package tech.kayys.alkhawarizm.converter.java.gguf;
 
 import tech.kayys.alkhawarizm.gguf.core.*;
 
@@ -286,8 +286,8 @@ public final class SafetensorToGgufConverter {
             GgmlType srcType = entry.ggmlType();
             GgmlType dstType = TensorConverter.targetType(ggufName, opts.quantType);
             if (isKQuant(dstType)) {
-                throw new IOException("gollek-gguf-converter-java cannot safely write llama.cpp-compatible "
-                        + dstType.label + " blocks. Use :runner:gguf:gollek-gguf-converter, which routes "
+                throw new IOException("alkhawarizm-gguf-converter-java cannot safely write llama.cpp-compatible "
+                        + dstType.label + " blocks. Use :runner:gguf:alkhawarizm-gguf-converter, which routes "
                         + "K-quant tensors through ggml's native quantizer, or convert as F16/BF16.");
             }
 

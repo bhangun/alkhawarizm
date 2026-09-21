@@ -2,7 +2,7 @@
 
 ## Overview
 
-Successfully implemented a comprehensive quantization engine for the Gollek SafeTensor inference platform with full integration across all modules.
+Successfully implemented a comprehensive quantization engine for the Alkhawarizm SafeTensor inference platform with full integration across all modules.
 
 ## Implementation Completed
 
@@ -117,8 +117,8 @@ QuantizationEngine getQuantizationEngine()
 - Atomic alias promotion
 
 **POM Dependencies:**
-- Added `gollek-safetensor-quantization` module
-- Integrated with `gollek-safetensor-engine`
+- Added `alkhawarizm-safetensor-quantization` module
+- Integrated with `alkhawarizm-safetensor-engine`
 - Quarkus extensions (REST, OpenAPI, Reactive Messaging)
 - Jackson for JSON
 - Mutiny for reactive programming
@@ -149,8 +149,8 @@ QuantizationEngine getQuantizationEngine()
 ## File Structure
 
 ```
-gollek-safetensor-quantization/
-├── src/main/java/tech/kayys/gollek/safetensor/quantization/
+alkhawarizm-safetensor-quantization/
+├── src/main/java/tech/kayys/alkhawarizm/safetensor/quantization/
 │   ├── QuantizationEngine.java              [✓]
 │   ├── QuantConfig.java                     [✓]
 │   ├── QuantStats.java                      [✓]
@@ -167,7 +167,7 @@ gollek-safetensor-quantization/
 │       ├── QuantizationResource.java        [✓]
 │       ├── QuantizationRequest.java         [✓]
 │       └── QuantizationResponse.java        [✓]
-├── src/test/java/tech/kayys/gollek/safetensor/quantization/
+├── src/test/java/tech/kayys/alkhawarizm/safetensor/quantization/
 │   ├── QuantConfigTest.java                 [✓]
 │   ├── QuantStatsTest.java                  [✓]
 │   └── quantizer/
@@ -283,13 +283,13 @@ curl "http://localhost:8080/api/v1/quantization/recommend?model_size_gb=7&priori
 
 ```bash
 # Build module
-mvn clean install -pl inference-gollek/extension/runner/safetensor/gollek-safetensor-quantization
+mvn clean install -pl inference-alkhawarizm/extension/runner/safetensor/alkhawarizm-safetensor-quantization
 
 # Run tests
-mvn test -pl inference-gollek/extension/runner/safetensor/gollek-safetensor-quantization
+mvn test -pl inference-alkhawarizm/extension/runner/safetensor/alkhawarizm-safetensor-quantization
 
 # Run with coverage
-mvn test jacoco:report -pl inference-gollek/extension/runner/safetensor/gollek-safetensor-quantization
+mvn test jacoco:report -pl inference-alkhawarizm/extension/runner/safetensor/alkhawarizm-safetensor-quantization
 
 # Build entire platform
 mvn clean install -DskipTests
@@ -353,4 +353,4 @@ The quantization engine is fully implemented with:
 - ✅ Comprehensive tests
 - ✅ Documentation
 
-The implementation follows Gollek platform conventions, uses Quarkus best practices, and provides a solid foundation for model compression in production environments.
+The implementation follows Alkhawarizm platform conventions, uses Quarkus best practices, and provides a solid foundation for model compression in production environments.

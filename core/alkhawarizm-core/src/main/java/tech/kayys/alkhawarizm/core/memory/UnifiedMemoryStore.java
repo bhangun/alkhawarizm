@@ -20,7 +20,7 @@ public interface UnifiedMemoryStore extends AutoCloseable {
     /**
      * Retrieves the data as a zero-copy MemorySegment pinned to a specific Arena
      * lifecycle.
-     * This memory segment can be passed directly to Gollek's FFM native bindings or
+     * This memory segment can be passed directly to Alkhawarizm's FFM native bindings or
      * Tafkir.
      */
     Optional<MemorySegment> getZeroCopy(byte[] key, long expectedSize, Arena arena);

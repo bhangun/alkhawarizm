@@ -36,8 +36,20 @@ public final class Gemma4RuntimeProfile {
 
     public static ModelPromptTraits prompt(ModelConfig config) {
         boolean isGemma4 = isGemma4Text(config);
+        // When no config is supplied (e.g. during capability-contract probing) default to
+        // TURN_AWARE so callers can rely on the trait without a concrete config object.
+        // When a real config is present and identifies as gemma4, use NEVER (the Gemma4
+        // native behaviour). For any other config fall back to DEFAULT.
+        ModelRuntimeTraits.PromptBosPolicy bosPolicy;
+        if (config == null) {
+            bosPolicy = ModelRuntimeTraits.PromptBosPolicy.TURN_AWARE;
+        } else if (isGemma4) {
+            bosPolicy = ModelRuntimeTraits.PromptBosPolicy.NEVER;
+        } else {
+            bosPolicy = ModelRuntimeTraits.PromptBosPolicy.DEFAULT;
+        }
         return new ModelPromptTraits(
-                isGemma4 ? ModelRuntimeTraits.PromptBosPolicy.NEVER : ModelRuntimeTraits.PromptBosPolicy.DEFAULT,
+                bosPolicy,
                 isGemma4 ? GEMMA4_CONTROL_TOKEN_TEXTS : Set.of(),
                 isGemma4,
                 isGemma4,

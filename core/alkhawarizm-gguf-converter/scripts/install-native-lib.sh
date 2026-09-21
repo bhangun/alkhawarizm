@@ -3,10 +3,10 @@ set -e
 
 LIB_NAME="libgguf_bridge"
 LIB_VERSION="1.0.0"
-TARGET_DIR="$HOME/.gollek/libs/gguf_bridge/${LIB_VERSION}"
+TARGET_DIR="$HOME/.alkhawarizm/libs/gguf_bridge/${LIB_VERSION}"
 
 # Use environment variable set by Maven, or default
-BUILD_DIR="${GOLLEK_NATIVE_LIB_DIR:-$(cd "$(dirname "$0")/.." && pwd)/../gguf-bridge/build}"
+BUILD_DIR="${ALKHAWARIZM_NATIVE_LIB_DIR:-$(cd "$(dirname "$0")/.." && pwd)/../gguf-bridge/build}"
 
 # Resolve to absolute path
 BUILD_DIR=$(cd "${BUILD_DIR}" 2>/dev/null && pwd || echo "${BUILD_DIR}")
@@ -80,8 +80,8 @@ fi
 echo "Generated SHA-256 checksum"
 
 # Create symlink without version for easier access
-ln -sf "${TARGET_DIR}/${LIB_BASE_NAME}" "$HOME/.gollek/libs/${LIB_NAME}"
-echo "Created symlink: $HOME/.gollek/libs/${LIB_NAME}"
+ln -sf "${TARGET_DIR}/${LIB_BASE_NAME}" "$HOME/.alkhawarizm/libs/${LIB_NAME}"
+echo "Created symlink: $HOME/.alkhawarizm/libs/${LIB_NAME}"
 
 echo ""
 echo "========================================="

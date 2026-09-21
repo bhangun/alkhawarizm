@@ -50,7 +50,7 @@ public class Mesh3DTest {
     void testGltfExporter() {
         Mesh3D cube = Mesh3D.cube(1.0);
         String gltf = GltfExporter.exportToGltfJson(cube);
-        assertTrue(gltf.contains("\"generator\": \"Gollek 3D Engine\""));
+        assertTrue(gltf.contains("\"generator\": \"Alkhawarizm 3D Engine\""));
         assertTrue(gltf.contains("data:application/octet-stream;base64,"));
     }
 

@@ -3,7 +3,7 @@ package tech.kayys.alkhawarizm.core.tensor;
 import tech.kayys.alkhawarizm.core.backend.ComputeBackend;
 
 /**
- * The core abstraction of the Aljabr framework representing a multi-dimensional
+ * The core abstraction of the Alkhawarizm framework representing a multi-dimensional
  * array of elements.
  * 
  * <p>

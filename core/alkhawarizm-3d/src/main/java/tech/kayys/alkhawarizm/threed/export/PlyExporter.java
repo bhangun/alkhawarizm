@@ -21,7 +21,7 @@ public final class PlyExporter {
     public static String exportMesh(Mesh3D mesh) {
         StringBuilder sb = new StringBuilder();
         sb.append("ply\nformat ascii 1.0\n");
-        sb.append("comment Gollek 3D Engine\n");
+        sb.append("comment Alkhawarizm 3D Engine\n");
         sb.append("element vertex ").append(mesh.vertexCount()).append("\n");
         sb.append("property float x\nproperty float y\nproperty float z\n");
         sb.append("property float nx\nproperty float ny\nproperty float nz\n");

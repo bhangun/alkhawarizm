@@ -6,7 +6,7 @@ package tech.kayys.alkhawarizm.cuda.detection;
  * <p>
  * Produced by {@link CudaDetector#detect()} and consumed by
  * {@link tech.kayys.alkhawarizm.cuda.runner.CudaRunner#initialize}
- * and Aljabr's
+ * and Alkhawarizm's
  * {@link tech.kayys.alkhawarizm.engine.routing.policy.SelectionPolicy}
  * to decide whether to route requests to the CUDA backend.
  *

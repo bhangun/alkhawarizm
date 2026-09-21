@@ -19,8 +19,8 @@ import static tech.kayys.alkhawarizm.gguf.runtime.GgufQFx.writeQ8_1Block;
 class GgufQ81Test {
     @Test
     void supportsQ8_1RowDotAndPreparedMatVec() {
-        String previous = System.getProperty("gollek.gguf.q8.cache_min_rows");
-        System.setProperty("gollek.gguf.q8.cache_min_rows", "1");
+        String previous = System.getProperty("alkhawarizm.gguf.q8.cache_min_rows");
+        System.setProperty("alkhawarizm.gguf.q8.cache_min_rows", "1");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(2L * 36);
             writeQ8_1Block(segment.asSlice(0, 36), (short) 0x3c00, (byte) 1);
@@ -58,7 +58,7 @@ class GgufQ81Test {
             assertEquals(64.0f, preparedOutput[1], 0.0f);
             assertEquals(1, GgufTensorOps.clearQ8MatrixCache(model));
         } finally {
-            restoreProperty("gollek.gguf.q8.cache_min_rows", previous);
+            restoreProperty("alkhawarizm.gguf.q8.cache_min_rows", previous);
         }
     }
 }

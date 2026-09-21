@@ -1,5 +1,5 @@
 /*
- * Gollek Inference Engine — SafeTensor Module
+ * Alkhawarizm Inference Engine — SafeTensor Module
  * Copyright (c) 2026 Kayys.tech
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -39,7 +39,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import tech.kayys.gollek.safetensor.exception.SafetensorException;
+import tech.kayys.alkhawarizm.safetensor.exception.SafetensorException;
 
 import static org.assertj.core.api.Assertions.*;
 

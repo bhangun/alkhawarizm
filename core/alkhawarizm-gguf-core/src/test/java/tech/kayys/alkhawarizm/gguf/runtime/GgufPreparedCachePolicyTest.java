@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 class GgufPreparedCachePolicyTest {
-    private static final String Q4_MIN_ROWS = "gollek.gguf.q4k.cache_min_rows";
-    private static final String Q4_MAX_BYTES = "gollek.gguf.q4k.cache_max_bytes";
+    private static final String Q4_MIN_ROWS = "alkhawarizm.gguf.q4k.cache_min_rows";
+    private static final String Q4_MAX_BYTES = "alkhawarizm.gguf.q4k.cache_max_bytes";
 
     @Test
     void resolvesPreparedCacheFamilyByTypeId() {

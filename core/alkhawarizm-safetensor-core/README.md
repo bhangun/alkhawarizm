@@ -1,4 +1,4 @@
-# Gollek SafeTensor Runner v2
+# Alkhawarizm SafeTensor Runner v2
 
 **Enhanced SafeTensor inference engine with TTS, RAG, and zero-downtime hot-swap support**
 
@@ -6,14 +6,14 @@
 
 ## Overview
 
-Gollek SafeTensor Runner v2 is an enhanced inference engine module for the Wayang Platform, providing production-ready Safetensors model execution with advanced features including:
+Alkhawarizm SafeTensor Runner v2 is an enhanced inference engine module for the Wayang Platform, providing production-ready Safetensors model execution with advanced features including:
 
 - **Text-to-Speech** via Microsoft SpeechT5
 - **Vector Database Integration** with Qdrant for RAG pipelines
 - **Zero-Downtime Model Hot-Swapping** for seamless model updates
 - **Comprehensive Architecture Support** for 10+ model families
 
-This module supersedes the original `gollek-runner-safetensor` with improved organization, additional features, and production-hardened implementations.
+This module supersedes the original `alkhawarizm-runner-safetensor` with improved organization, additional features, and production-hardened implementations.
 
 ---
 
@@ -62,9 +62,9 @@ Production-ready Qdrant REST client:
 
 **Configuration:**
 ```properties
-gollek.rag.qdrant.url=http://localhost:6333
-gollek.rag.qdrant.api-key=your-api-key
-gollek.rag.qdrant.timeout-s=30
+alkhawarizm.rag.qdrant.url=http://localhost:6333
+alkhawarizm.rag.qdrant.api-key=your-api-key
+alkhawarizm.rag.qdrant.timeout-s=30
 ```
 
 ### 🏗️ Architecture Support (TextModelFamilies)
@@ -98,11 +98,11 @@ Optimized transformer forward pass:
 ## Module Structure
 
 ```
-gollek-runner-safetensor-v2/
+alkhawarizm-runner-safetensor-v2/
 ├── CHANGES.md                          # Version history & migration guide
 ├── README.md                           # This file
 ├── pom.xml                             # Maven build configuration
-└── src/main/java/tech/kayys/gollek/inference/safetensor/
+└── src/main/java/tech/kayys/alkhawarizm/inference/safetensor/
     ├── arch/
     │   └── TextModelFamilies.java      # Model architecture definitions
     ├── audio/
@@ -129,8 +129,8 @@ Add to your `pom.xml`:
 
 ```xml
 <dependency>
-    <groupId>tech.kayys.gollek</groupId>
-    <artifactId>gollek-runner-safetensor-v2</artifactId>
+    <groupId>tech.kayys.alkhawarizm</groupId>
+    <artifactId>alkhawarizm-runner-safetensor-v2</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
@@ -139,13 +139,13 @@ Add to your `pom.xml`:
 
 ```bash
 # Build the module
-mvn clean install -pl inference-gollek/extension/runner/safetensor/gollek-runner-safetensor-v2
+mvn clean install -pl inference-alkhawarizm/extension/runner/safetensor/alkhawarizm-runner-safetensor-v2
 
 # Build with tests
-mvn clean test -pl inference-gollek/extension/runner/safetensor/gollek-runner-safetensor-v2
+mvn clean test -pl inference-alkhawarizm/extension/runner/safetensor/alkhawarizm-runner-safetensor-v2
 
 # Build entire safetensor parent
-mvn clean install -pl inference-gollek/extension/runner/safetensor
+mvn clean install -pl inference-alkhawarizm/extension/runner/safetensor
 ```
 
 ---
@@ -156,7 +156,7 @@ mvn clean install -pl inference-gollek/extension/runner/safetensor
 
 ```yaml
 # Text-to-Speech
-gollek:
+alkhawarizm:
   audio:
     tts:
       default-voice: alloy
@@ -194,7 +194,7 @@ gollek:
 
 ```java
 import jakarta.inject.Inject;
-import tech.kayys.gollek.inference.safetensor.audio.SpeechT5Engine;
+import tech.kayys.alkhawarizm.inference.safetensor.audio.SpeechT5Engine;
 
 public class TtsService {
     @Inject SpeechT5Engine tts;
@@ -211,7 +211,7 @@ public class TtsService {
 
 ```java
 import jakarta.inject.Inject;
-import tech.kayys.gollek.inference.safetensor.lifecycle.ModelHotSwapManager;
+import tech.kayys.alkhawarizm.inference.safetensor.lifecycle.ModelHotSwapManager;
 
 public class ModelAdminService {
     @Inject ModelHotSwapManager hotSwap;
@@ -229,7 +229,7 @@ public class ModelAdminService {
 
 ```java
 import jakarta.inject.Inject;
-import tech.kayys.gollek.inference.safetensor.rag.QdrantVectorStore;
+import tech.kayys.alkhawarizm.inference.safetensor.rag.QdrantVectorStore;
 
 public class RagService {
     @Inject QdrantVectorStore qdrant;
@@ -263,14 +263,14 @@ public class RagService {
 
 - **Java 25** (configured via `maven.compiler.release`)
 - **Quarkus 3.32.2** (CDI, Config, Core)
-- **Gollek LibTorch Runner** (Tensor operations)
+- **Alkhawarizm LibTorch Runner** (Tensor operations)
 - **SmallRye Mutiny** (Reactive programming)
 - **Jackson Databind** (JSON serialization)
 
 ### Optional (for full functionality)
 
-- **Gollek MoE Module** (Mixtral/DeepSeek-MoE support)
-- **Gollek Attention Module** (Flash Attention kernels)
+- **Alkhawarizm MoE Module** (Mixtral/DeepSeek-MoE support)
+- **Alkhawarizm Attention Module** (Flash Attention kernels)
 
 ---
 
@@ -281,7 +281,7 @@ public class RagService {
 Run tests with:
 
 ```bash
-mvn test -pl inference-gollek/extension/runner/safetensor/gollek-runner-safetensor-v2
+mvn test -pl inference-alkhawarizm/extension/runner/safetensor/alkhawarizm-runner-safetensor-v2
 ```
 
 ### Integration Tests
@@ -319,12 +319,12 @@ The module includes integration tests for:
 
 ---
 
-## Migration from v1 (gollek-runner-safetensor)
+## Migration from v1 (alkhawarizm-runner-safetensor)
 
 ### API Compatibility
 
 The v2 module maintains **full backward compatibility** with v1:
-- Same package names (`tech.kayys.gollek.inference.safetensor.*`)
+- Same package names (`tech.kayys.alkhawarizm.inference.safetensor.*`)
 - Same class names and method signatures
 - Same configuration keys
 
@@ -336,7 +336,7 @@ The v2 module maintains **full backward compatibility** with v1:
 
 1. Update dependency version in `pom.xml`:
    ```xml
-   <artifactId>gollek-runner-safetensor-v2</artifactId>
+   <artifactId>alkhawarizm-runner-safetensor-v2</artifactId>
    <version>1.0.0-SNAPSHOT</version>
    ```
 

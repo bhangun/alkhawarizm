@@ -746,7 +746,7 @@ private static GgufMetaValue parseMetadataValue(JsonElement value) {
 ```java
 // New file: GgufValidator.java
 
-package tech.kayys.gollek.converter.gguf;
+package tech.kayys.alkhawarizm.converter.gguf;
 
 import java.io.IOException;
 import java.nio.file.Path;

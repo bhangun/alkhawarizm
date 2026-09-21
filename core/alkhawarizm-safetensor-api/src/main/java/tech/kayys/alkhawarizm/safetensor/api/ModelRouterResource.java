@@ -1,5 +1,5 @@
 /*
- * Gollek Inference Engine — SafeTensor Module
+ * Alkhawarizm Inference Engine — SafeTensor Module
  * Copyright (c) 2026 Kayys.tech
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -33,7 +33,7 @@ public class ModelRouterResource {
     @Inject
     jakarta.enterprise.inject.Instance<Object> routerInstance;
 
-    @ConfigProperty(name = "gollek.admin.api-key", defaultValue = "")
+    @ConfigProperty(name = "alkhawarizm.admin.api-key", defaultValue = "")
     String adminKey;
 
     private Object getRouter() {
@@ -70,7 +70,7 @@ public class ModelRouterResource {
         if (router == null) return Response.status(503).entity(Map.of("error", "Router not available")).build();
 
         try {
-            Class<?> modeEnum = Class.forName("tech.kayys.gollek.safetensor.engine.generation.ModelRouter$Mode");
+            Class<?> modeEnum = Class.forName("tech.kayys.alkhawarizm.safetensor.engine.generation.ModelRouter$Mode");
             Object mode = Enum.valueOf((Class<Enum>) modeEnum, req.mode.toUpperCase().replace("-", "_"));
             router.getClass().getMethod("setMode", modeEnum, int.class).invoke(router, mode, req.canaryPct != null ? req.canaryPct : 5);
             return Response.ok(Map.of("status", "updated", "mode", req.mode, "canaryPct", req.canaryPct)).build();

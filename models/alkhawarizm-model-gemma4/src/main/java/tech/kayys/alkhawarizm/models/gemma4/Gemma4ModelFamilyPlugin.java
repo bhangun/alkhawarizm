@@ -36,6 +36,8 @@ public class Gemma4ModelFamilyPlugin implements ModelFamilyPlugin {
                         ModelFamilyCapability.TOKENIZER,
                         ModelFamilyCapability.CHAT_TEMPLATE, ModelFamilyCapability.MULTIMODAL,
                         ModelFamilyCapability.VISION,
+                        ModelFamilyCapability.AUDIO,
+                        ModelFamilyCapability.MOE,
                         ModelFamilyCapability.DIRECT_SAFETENSOR_INFERENCE),
                 Map.ofEntries(
                         entry("bundle_profile", "optional"),
@@ -72,6 +74,7 @@ public class Gemma4ModelFamilyPlugin implements ModelFamilyPlugin {
                                 "transformers,compressed_tensors_mobile"),
                         entry("checkpoint_gemma_4_qat_mobile_scope",
                                 "metadata_only_pending_mobile_quant_loader"),
+                        entry("modalities", "text,image,audio,video"),
                         entry("tokenizer", "gemma_sentencepiece_with_audio_vision_processor"),
                         entry("processor", "Gemma4Processor"),
                         entry("image_processor", "Gemma4ImageProcessor"),

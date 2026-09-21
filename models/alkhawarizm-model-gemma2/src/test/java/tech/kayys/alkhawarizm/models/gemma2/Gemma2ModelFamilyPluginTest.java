@@ -1,7 +1,7 @@
 package tech.kayys.alkhawarizm.models.gemma2;
 
 import org.junit.jupiter.api.Test;
-import .alkhawarizm.models.;
+import tech.kayys.alkhawarizm.spi.model.FFNActivationType;
 import tech.kayys.alkhawarizm.spi.model.ModelArchitecture;
 import tech.kayys.alkhawarizm.spi.model.ModelFamilyContractValidator;
 import tech.kayys.alkhawarizm.spi.model.ModelFamilyContractViolation;

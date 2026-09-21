@@ -19,10 +19,10 @@ import static tech.kayys.alkhawarizm.gguf.runtime.GgufKFx.writeQ5KBlock;
 class GgufQ5KMissTest {
     @Test
     void genericMatVecStreamsNoMinQ5KCacheMissWithCachedNoMinEstimate() {
-        String previousMinRows = System.getProperty("gollek.gguf.q5k.cache_min_rows");
-        String previousMaxBytes = System.getProperty("gollek.gguf.q5k.cache_max_bytes");
-        System.setProperty("gollek.gguf.q5k.cache_min_rows", "1");
-        System.setProperty("gollek.gguf.q5k.cache_max_bytes", "288");
+        String previousMinRows = System.getProperty("alkhawarizm.gguf.q5k.cache_min_rows");
+        String previousMaxBytes = System.getProperty("alkhawarizm.gguf.q5k.cache_max_bytes");
+        System.setProperty("alkhawarizm.gguf.q5k.cache_min_rows", "1");
+        System.setProperty("alkhawarizm.gguf.q5k.cache_max_bytes", "288");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(2L * 176);
             writeQ5KBlock(segment.asSlice(0, 176), (byte) 0xFF, (byte) 0);
@@ -43,8 +43,8 @@ class GgufQ5KMissTest {
             assertEquals(2, GgufTensorOps.preparedMatrixEstimateCacheSize(model));
             assertEquals(1, GgufTensorOps.clearPreparedMatrixCaches(model));
         } finally {
-            restoreProperty("gollek.gguf.q5k.cache_min_rows", previousMinRows);
-            restoreProperty("gollek.gguf.q5k.cache_max_bytes", previousMaxBytes);
+            restoreProperty("alkhawarizm.gguf.q5k.cache_min_rows", previousMinRows);
+            restoreProperty("alkhawarizm.gguf.q5k.cache_max_bytes", previousMaxBytes);
         }
     }
 }

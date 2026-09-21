@@ -153,17 +153,23 @@ subprojects {
 
     configurations.configureEach {
         resolutionStrategy.dependencySubstitution {
-            substitute(module("tech.kayys.alkhawarizm:alkhawarizm-spi-model")).using(project(":core:alkhawarizm-spi-model"))
-            substitute(module("tech.kayys.alkhawarizm:alkhawarizm-tensor")).using(project(":core:alkhawarizm-tensor"))
-            substitute(module("tech.kayys.alkhawarizm:alkhawarizm-error-code")).using(project(":core:alkhawarizm-error-code"))
-            substitute(module("tech.kayys.alkhawarizm:alkhawarizm-safetensor-api")).using(project(":core:alkhawarizm-safetensor-api"))
-            substitute(module("tech.kayys.alkhawarizm:alkhawarizm-safetensor-core")).using(project(":core:alkhawarizm-safetensor-core"))
-            substitute(module("tech.kayys.alkhawarizm:alkhawarizm-safetensor-loader")).using(project(":core:alkhawarizm-safetensor-loader"))
-            substitute(module("tech.kayys.alkhawarizm:alkhawarizm-safetensor-spi")).using(project(":core:alkhawarizm-safetensor-spi"))
-            substitute(module("tech.kayys.alkhawarizm:alkhawarizm-nn")).using(project(":core:alkhawarizm-nn"))
-            substitute(module("tech.kayys.alkhawarizm:alkhawarizm-3d")).using(project(":core:alkhawarizm-3d"))
-            substitute(module("tech.kayys.alkhawarizm:alkhawarizm-core")).using(project(":core:alkhawarizm-core"))
-            substitute(module("tech.kayys.aljabr:aljabr-tensor")).using(project(":core:alkhawarizm-tensor"))
+            fun safeSubstitute(moduleNotation: String, projectPath: String) {
+                if (findProject(projectPath) != null) {
+                    substitute(module(moduleNotation)).using(project(projectPath))
+                }
+            }
+            safeSubstitute("tech.kayys.alkhawarizm:alkhawarizm-spi-model", ":core:alkhawarizm-spi-model")
+            safeSubstitute("tech.kayys.alkhawarizm:alkhawarizm-tensor", ":core:alkhawarizm-tensor")
+            safeSubstitute("tech.kayys.alkhawarizm:alkhawarizm-error-code", ":core:alkhawarizm-error-code")
+            safeSubstitute("tech.kayys.alkhawarizm:alkhawarizm-tokenizer-core", ":core:alkhawarizm-tokenizer-core")
+            safeSubstitute("tech.kayys.alkhawarizm:alkhawarizm-safetensor-api", ":core:alkhawarizm-safetensor-api")
+            safeSubstitute("tech.kayys.alkhawarizm:alkhawarizm-safetensor-core", ":core:alkhawarizm-safetensor-core")
+            safeSubstitute("tech.kayys.alkhawarizm:alkhawarizm-safetensor-loader", ":core:alkhawarizm-safetensor-loader")
+            safeSubstitute("tech.kayys.alkhawarizm:alkhawarizm-safetensor-spi", ":core:alkhawarizm-safetensor-spi")
+            safeSubstitute("tech.kayys.alkhawarizm:alkhawarizm-nn", ":core:alkhawarizm-nn")
+            safeSubstitute("tech.kayys.alkhawarizm:alkhawarizm-3d", ":core:alkhawarizm-3d")
+            safeSubstitute("tech.kayys.alkhawarizm:alkhawarizm-core", ":core:alkhawarizm-core")
+            safeSubstitute("tech.kayys.aljabr:aljabr-tensor", ":core:alkhawarizm-tensor")
             substitute(module("tech.kayys.aljabr:tafkir-ml-core")).using(module("tech.kayys.tafkir:tafkir-ml-core:0.1.0-SNAPSHOT"))
         }
         resolutionStrategy.eachDependency {
@@ -285,7 +291,7 @@ subprojects {
                     from(components["java"])
                     pom {
                         name.set(project.name)
-                        description.set("Aljabr ML Framework Module")
+                        description.set("Alkhawarizm ML Framework Module")
                         url.set("https://github.com/wayang-platform/wayang-platform")
                         licenses {
                             license {
@@ -321,5 +327,4 @@ subprojects {
         }
     }
 }
-
 

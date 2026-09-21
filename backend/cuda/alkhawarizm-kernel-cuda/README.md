@@ -1,6 +1,6 @@
-# Aljabr CUDA Kernel
+# Alkhawarizm CUDA Kernel
 
-NVIDIA CUDA GPU acceleration kernel for Aljabr inference engine.
+NVIDIA CUDA GPU acceleration kernel for Alkhawarizm inference engine.
 
 ## Features
 

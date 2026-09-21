@@ -6,7 +6,7 @@ package tech.kayys.alkhawarizm.metal.detection;
  * <p>
  * Produced by {@link AppleSiliconDetector#detect()} and consumed by
  * {@link tech.kayys.alkhawarizm.extension.metal.runner.MetalRunner#initialize}
- * and Aljabr's
+ * and Alkhawarizm's
  * {@link tech.kayys.alkhawarizm.engine.routing.policy.SelectionPolicy}
  * to decide whether to route requests to the Metal backend.
  *

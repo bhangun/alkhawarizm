@@ -17,10 +17,10 @@ import static tech.kayys.alkhawarizm.gguf.runtime.GgufQFx.*;
 class GgufQ8DirectTest {
     @Test
     void rawQ8FamilyMatVecUsesDirectDotPathForSingleDecodeRow() {
-        String previousMinRows = System.getProperty("gollek.gguf.q8.cache_min_rows");
-        String previousMaxBytes = System.getProperty("gollek.gguf.q8.cache_max_bytes");
-        System.setProperty("gollek.gguf.q8.cache_min_rows", "1");
-        System.setProperty("gollek.gguf.q8.cache_max_bytes", "1");
+        String previousMinRows = System.getProperty("alkhawarizm.gguf.q8.cache_min_rows");
+        String previousMaxBytes = System.getProperty("alkhawarizm.gguf.q8.cache_max_bytes");
+        System.setProperty("alkhawarizm.gguf.q8.cache_min_rows", "1");
+        System.setProperty("alkhawarizm.gguf.q8.cache_max_bytes", "1");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(18 + 17 + 34 + 292);
             writeQ1_0Block(segment.asSlice(0, 18), (short) 0x3c00, (byte) 0xFF);
@@ -49,8 +49,8 @@ class GgufQ8DirectTest {
             assertEquals(0, GgufTensorOps.q8MatrixCacheSize(model));
             assertEquals(4, GgufTensorOps.preparedMatrixEstimateCacheSize(model));
         } finally {
-            restoreProperty("gollek.gguf.q8.cache_min_rows", previousMinRows);
-            restoreProperty("gollek.gguf.q8.cache_max_bytes", previousMaxBytes);
+            restoreProperty("alkhawarizm.gguf.q8.cache_min_rows", previousMinRows);
+            restoreProperty("alkhawarizm.gguf.q8.cache_max_bytes", previousMaxBytes);
         }
     }
 

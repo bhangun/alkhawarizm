@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * FFM-based binding to the Aljabr Metal bridge
+ * FFM-based binding to the Alkhawarizm Metal bridge
  * ({@code libalkhawarizm_metal.dylib}).
  *
  * <p>
@@ -902,7 +902,7 @@ public class MetalBinding {
      * Paged softmax attention via Metal MPS.
      *
      * <p>
-     * K/V cache is accessed directly from Aljabr's
+     * K/V cache is accessed directly from Alkhawarizm's
      * {@link tech.kayys.alkhawarizm.kvcache.PhysicalBlockPool} off-heap slabs —
      * no copy on Apple Silicon because the slabs are already in shared DRAM.
      *

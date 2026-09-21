@@ -23,4 +23,10 @@ public record ModelFamilyRuntimeCompatibility(
         problemCodes = problemCodes == null ? List.of() : List.copyOf(problemCodes);
         remediationHints = remediationHints == null ? List.of() : List.copyOf(remediationHints);
     }
+
+    public List<String> architectureAdapterIds() {
+        return selectedArchitectureAdapterId == null || selectedArchitectureAdapterId.isEmpty()
+                ? List.of()
+                : List.of(selectedArchitectureAdapterId);
+    }
 }

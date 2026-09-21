@@ -21,9 +21,9 @@ dependencies {
     implementation(project(":core:alkhawarizm-safetensor-api"))
     implementation(project(":core:alkhawarizm-safetensor-spi"))
     implementation(project(":core:alkhawarizm-safetensor-loader"))
-    val gollekTokenizer = findProject(":core:gollek-tokenizer-core")
-    if (gollekTokenizer != null) {
-        implementation(gollekTokenizer)
+    val tokenizerProject = findProject(":core:alkhawarizm-tokenizer-core") ?: findProject(":core:gollek-tokenizer-core")
+    if (tokenizerProject != null) {
+        implementation(tokenizerProject)
     } else {
         implementation("tech.kayys.gollek:gollek-tokenizer-core:0.1.0-SNAPSHOT")
     }

@@ -1,6 +1,6 @@
-# Aljabr Blackwell Kernel
+# Alkhawarizm Blackwell Kernel
 
-NVIDIA Blackwell GPU acceleration kernel for Aljabr inference engine.
+NVIDIA Blackwell GPU acceleration kernel for Alkhawarizm inference engine.
 
 ## Features
 

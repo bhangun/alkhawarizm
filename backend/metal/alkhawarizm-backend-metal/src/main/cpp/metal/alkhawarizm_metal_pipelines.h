@@ -65,10 +65,10 @@ typedef struct {
   __strong id<MTLComputePipelineState> softmax_rows;
   __strong id<MTLComputePipelineState> decode_attention;
   __strong id<MTLComputePipelineState> flash_attention;
-} AljabrMetalPipelines;
+} AlkhawarizmMetalPipelines;
 
-AljabrMetalPipelines *alkhawarizm_metal_pipelines(void);
+AlkhawarizmMetalPipelines *alkhawarizm_metal_pipelines(void);
 void alkhawarizm_metal_compile_runtime_pipelines(
-    AljabrMetalPipelines *pipelines);
+    AlkhawarizmMetalPipelines *pipelines);
 
 #endif

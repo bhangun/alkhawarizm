@@ -34,7 +34,7 @@ import java.util.Map;
  * exporter.toLiteRT("model.litert");
  * }</pre>
  *
- * @author Aljabr Team
+ * @author Alkhawarizm Team
  * @version 0.1.0
  */
 public class ModelExporter {

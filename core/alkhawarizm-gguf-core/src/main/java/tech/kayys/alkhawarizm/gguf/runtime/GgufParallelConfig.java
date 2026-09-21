@@ -90,9 +90,9 @@ final class GgufParallelConfig {
         if (config != null) {
             return config;
         }
-        String minOpsProperty = System.getProperty("gollek.gguf.parallel_min_ops");
-        String threadsProperty = System.getProperty("gollek.gguf.parallel_threads");
-        String chunksProperty = System.getProperty("gollek.gguf.parallel_chunks_per_thread");
+        String minOpsProperty = System.getProperty("alkhawarizm.gguf.parallel_min_ops");
+        String threadsProperty = System.getProperty("alkhawarizm.gguf.parallel_threads");
+        String chunksProperty = System.getProperty("alkhawarizm.gguf.parallel_chunks_per_thread");
         ParallelConfig updated = new ParallelConfig(
                 Math.max(0L, parseLongProperty(minOpsProperty, DEFAULT_PARALLEL_MIN_OPS)),
                 Math.max(1, parseIntProperty(threadsProperty, Runtime.getRuntime().availableProcessors())),

@@ -4,9 +4,9 @@ import tech.kayys.alkhawarizm.gguf.loader.GGUFModel;
 import tech.kayys.alkhawarizm.gguf.loader.GGUFTensorInfo;
 import tech.kayys.alkhawarizm.gguf.loader.GGUFReader;
 import tech.kayys.alkhawarizm.gguf.loader.GGUFParser;
-import tech.kayys.gollek.spi.tensor.weights.TensorData;
-import tech.kayys.gollek.spi.tensor.weights.TransformerLayerWeights;
-import tech.kayys.gollek.spi.tensor.weights.Dequantizer;
+import tech.kayys.alkhawarizm.spi.tensor.weights.TensorData;
+import tech.kayys.alkhawarizm.spi.tensor.weights.TransformerLayerWeights;
+import tech.kayys.alkhawarizm.spi.tensor.weights.Dequantizer;
 import tech.kayys.alkhawarizm.safetensor.core.tensor.AccelTensor;
 
 import java.lang.foreign.Arena;

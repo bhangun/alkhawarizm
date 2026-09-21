@@ -19,10 +19,10 @@ import static tech.kayys.alkhawarizm.gguf.runtime.GgufQ32Fx.writeQ5_1Block;
 class GgufQ32ZeroTest {
     @Test
     void zeroBiasQ32MatricesUseCompactPreparedAndRawFallbackEstimates() {
-        String previousMinRows = System.getProperty("gollek.gguf.q32.cache_min_rows");
-        String previousMaxBytes = System.getProperty("gollek.gguf.q32.cache_max_bytes");
-        System.setProperty("gollek.gguf.q32.cache_min_rows", "1");
-        System.setProperty("gollek.gguf.q32.cache_max_bytes", "1");
+        String previousMinRows = System.getProperty("alkhawarizm.gguf.q32.cache_min_rows");
+        String previousMaxBytes = System.getProperty("alkhawarizm.gguf.q32.cache_max_bytes");
+        System.setProperty("alkhawarizm.gguf.q32.cache_min_rows", "1");
+        System.setProperty("alkhawarizm.gguf.q32.cache_max_bytes", "1");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(20 + 24);
             writeQ4_1Block(segment.asSlice(0, 20), (short) 0x3c00, (short) 0, (byte) 0x21);
@@ -54,8 +54,8 @@ class GgufQ32ZeroTest {
             assertEquals(36L, q4Matrix.estimatedBytes());
             assertEquals(36L, q5Matrix.estimatedBytes());
         } finally {
-            restoreProperty("gollek.gguf.q32.cache_min_rows", previousMinRows);
-            restoreProperty("gollek.gguf.q32.cache_max_bytes", previousMaxBytes);
+            restoreProperty("alkhawarizm.gguf.q32.cache_min_rows", previousMinRows);
+            restoreProperty("alkhawarizm.gguf.q32.cache_max_bytes", previousMaxBytes);
         }
     }
 }

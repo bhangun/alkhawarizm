@@ -1,5 +1,5 @@
 /**
- * alkhawarizm_metal_fa4.m — Metal FA4 bridge for Aljabr
+ * alkhawarizm_metal_fa4.m — Metal FA4 bridge for Alkhawarizm
  *
  * Implements the FlashAttention-4 algorithm on Apple Silicon using
  * MPSGraph.scaledDotProductAttentionWithQuery (available macOS 15.0+).
@@ -12,7 +12,7 @@
  *   UMMA tcgen05.mma         MPSGraph SDPA or AMX-accelerated MPS matmuls
  *   Async UMMA pipelines     Metal GPU command buffers / concurrent blits
  *   Software exp() on FMA    Apple Silicon FP16/BF16 exp via scalar intrinsics
- *   2-CTA MMA backward       Not applicable (forward-only path used by Aljabr)
+ *   2-CTA MMA backward       Not applicable (forward-only path used by Alkhawarizm)
  *
  * On M3/M4 hardware MPSGraph.scaledDotProductAttentionWithQuery dispatches to
  * a fused Metal kernel that keeps the S = QK^T tile on the GPU's L1 cache
@@ -362,7 +362,7 @@ int alkhawarizm_metal_fa4_attention(void *output, const void *query,
       [cmdBuf waitUntilCompleted];
 
       if ([cmdBuf status] == MTLCommandBufferStatusError) {
-        NSLog(@"[AljabrMetal FA4] SDPA error: %@", [cmdBuf error]);
+        NSLog(@"[AlkhawarizmMetal FA4] SDPA error: %@", [cmdBuf error]);
         if (maskData)
           free(maskData);
         return -1;

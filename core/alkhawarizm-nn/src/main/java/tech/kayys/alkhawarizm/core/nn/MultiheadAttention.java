@@ -65,7 +65,7 @@ public class MultiheadAttention extends NNModule {
         }
 
         // Split into Q, K, V -> each is [seq_len, batch_size, embed_dim]
-        // Note: Aljabr Tensor API split may vary. We'll use chunking along last dim.
+        // Note: Alkhawarizm Tensor API split may vary. We'll use chunking along last dim.
         // As a fallback/placeholder, we assume we can just pass it through a simpler
         // linear for now.
         // For full correctness, we'd need Tensor.split or tensor slicing.

@@ -1,5 +1,5 @@
 /**
- * alkhawarizm_metal_bridge.m — compatibility anchor for the Aljabr Metal dylib.
+ * alkhawarizm_metal_bridge.m — compatibility anchor for the Alkhawarizm Metal dylib.
  *
  * The exported runtime, buffer, matvec, FFN, attention, and FA4 entry points
  * now live in focused modules next to this file. Keep this translation unit so

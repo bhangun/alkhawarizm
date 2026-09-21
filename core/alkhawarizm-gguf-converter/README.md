@@ -65,9 +65,9 @@ The GGUF native bridge library (`libgguf_bridge`) can be loaded from multiple lo
 
 ### Loading Order
 
-1. **Explicit path** via system property `gollek.gguf.native.library.path`
+1. **Explicit path** via system property `alkhawarizm.gguf.native.library.path`
 2. **Extracted JAR resources** (bundled with the application)
-3. **Standard installation** at `~/.gollek/libs/gguf_bridge/1.0.0/`
+3. **Standard installation** at `~/.alkhawarizm/libs/gguf_bridge/1.0.0/`
 4. **Build directory** (development mode)
 5. **System library path** via `java.library.path`
 
@@ -76,15 +76,15 @@ The GGUF native bridge library (`libgguf_bridge`) can be loaded from multiple lo
 When building the project, the native library is automatically installed to the standard location:
 
 ```bash
-cd gollek-gguf-converter
+cd alkhawarizm-gguf-converter
 mvn clean install
 ```
 
 This will:
 - Build the native library from `gguf-bridge/` directory
-- Copy it to `~/.gollek/libs/gguf_bridge/1.0.0/`
+- Copy it to `~/.alkhawarizm/libs/gguf_bridge/1.0.0/`
 - Generate a SHA-256 checksum file
-- Create a symlink at `~/.gollek/libs/libgguf_bridge`
+- Create a symlink at `~/.alkhawarizm/libs/libgguf_bridge`
 - Clear macOS quarantine attributes (if applicable)
 
 ### Option 2: Manual Installation
@@ -97,17 +97,17 @@ cmake .. -DCMAKE_BUILD_TYPE=Release
 cmake --build . --config Release
 
 # Install to standard location
-mkdir -p ~/.gollek/libs/gguf_bridge/1.0.0
-cp build/libgguf_bridge.dylib ~/.gollek/libs/gguf_bridge/1.0.0/  # macOS
+mkdir -p ~/.alkhawarizm/libs/gguf_bridge/1.0.0
+cp build/libgguf_bridge.dylib ~/.alkhawarizm/libs/gguf_bridge/1.0.0/  # macOS
 # or
-cp build/libgguf_bridge.so ~/.gollek/libs/gguf_bridge/1.0.0/     # Linux
+cp build/libgguf_bridge.so ~/.alkhawarizm/libs/gguf_bridge/1.0.0/     # Linux
 
 # Generate checksum (optional but recommended)
-shasum -a 256 ~/.gollek/libs/gguf_bridge/1.0.0/libgguf_bridge.dylib > \
-  ~/.gollek/libs/gguf_bridge/1.0.0/libgguf_bridge.dylib.sha256
+shasum -a 256 ~/.alkhawarizm/libs/gguf_bridge/1.0.0/libgguf_bridge.dylib > \
+  ~/.alkhawarizm/libs/gguf_bridge/1.0.0/libgguf_bridge.dylib.sha256
 
 # Clear macOS quarantine (if applicable)
-xattr -dr com.apple.quarantine ~/.gollek/libs/gguf_bridge/1.0.0/
+xattr -dr com.apple.quarantine ~/.alkhawarizm/libs/gguf_bridge/1.0.0/
 ```
 
 ### Option 3: Explicit Path Configuration
@@ -116,10 +116,10 @@ Set the library path via system property or environment variable:
 
 ```bash
 # Using system property
-java -Dgollek.gguf.native.library.path=/path/to/libgguf_bridge.dylib ...
+java -Dalkhawarizm.gguf.native.library.path=/path/to/libgguf_bridge.dylib ...
 
 # Using environment variable
-export GOLLEK_GGUF_NATIVE_LIB_PATH=/path/to/libgguf_bridge.dylib
+export ALKHAWARIZM_GGUF_NATIVE_LIB_PATH=/path/to/libgguf_bridge.dylib
 java ...
 ```
 
@@ -129,10 +129,10 @@ Set the library directory (the loader will look for the platform-specific librar
 
 ```bash
 # Using system property
-java -Dgollek.gguf.native.library.dir=/path/to/libs ...
+java -Dalkhawarizm.gguf.native.library.dir=/path/to/libs ...
 
 # Using environment variable
-export GOLLEK_GGUF_NATIVE_LIB_DIR=/path/to/libs
+export ALKHAWARIZM_GGUF_NATIVE_LIB_DIR=/path/to/libs
 java ...
 ```
 
@@ -186,8 +186,8 @@ The service will start on `http://localhost:8082` with:
 java --enable-preview \
      --enable-native-access=ALL-UNNAMED \
      -Djava.library.path=/path/to/native/libs \
-     -Dgollek.converter.base=~/.gollek/conversions \
-     -Dgollek.model.base=~/.gollek/models \
+     -Dalkhawarizm.converter.base=~/.alkhawarizm/conversions \
+     -Dalkhawarizm.model.base=~/.alkhawarizm/models \
      -jar target/quarkus-app/quarkus-run.jar
 ```
 
@@ -198,8 +198,8 @@ docker build -f src/main/docker/Dockerfile.jvm -t gguf-converter:latest .
 docker run -p 8082:8082 \
            -v /models:/var/lib/inference/models \
            -e converter.storage.base-path=/var/lib/inference/models \
-           -e GOLLEK_CONVERTER_BASE=/var/lib/inference/models \
-           -e GOLLEK_MODEL_BASE=/var/lib/inference/models \
+           -e ALKHAWARIZM_CONVERTER_BASE=/var/lib/inference/models \
+           -e ALKHAWARIZM_MODEL_BASE=/var/lib/inference/models \
            gguf-converter:latest
 ```
 
@@ -248,9 +248,9 @@ curl -X POST http://localhost:8082/v1/converter/gguf/convert/preview \
   }'
 ```
 
-Relative `inputPath` values are resolved against `GOLLEK_MODEL_BASE` (default
-`~/.gollek/models`). Relative `outputPath` values are resolved against
-`GOLLEK_CONVERTER_BASE` (default `~/.gollek/conversions`). If `outputPath` is a
+Relative `inputPath` values are resolved against `ALKHAWARIZM_MODEL_BASE` (default
+`~/.alkhawarizm/models`). Relative `outputPath` values are resolved against
+`ALKHAWARIZM_CONVERTER_BASE` (default `~/.alkhawarizm/conversions`). If `outputPath` is a
 directory, the converter writes `<model>-<quant>.gguf` into that directory.
 Set `overwriteExisting=true` to replace existing output files.
 Set `dryRun=true` to resolve input/output paths without running conversion.
@@ -261,11 +261,11 @@ Example preview response:
 {
   "success": true,
   "dryRun": true,
-  "inputPath": "/Users/you/.gollek/models/llama-2-7b",
-  "outputPath": "/Users/you/.gollek/conversions/llama-2-7b-q4_k_m.gguf",
+  "inputPath": "/Users/you/.alkhawarizm/models/llama-2-7b",
+  "outputPath": "/Users/you/.alkhawarizm/conversions/llama-2-7b-q4_k_m.gguf",
   "derivedOutputName": "llama-2-7b-q4_k_m.gguf",
-  "inputBasePath": "/Users/you/.gollek/models",
-  "outputBasePath": "/Users/you/.gollek/conversions"
+  "inputBasePath": "/Users/you/.alkhawarizm/models",
+  "outputBasePath": "/Users/you/.alkhawarizm/conversions"
 }
 ```
 
@@ -389,7 +389,7 @@ Key configuration options in `application.yml`:
 ```yaml
 converter:
   storage:
-    base-path: ~/.gollek/conversions
+    base-path: ~/.alkhawarizm/conversions
     tenant-quota-gb: 100
     
   conversion:
@@ -410,8 +410,8 @@ Environment variables:
 - `CONVERTER_DEFAULT_THREADS`: Default thread count
 - `NATIVE_LIBRARY_PATH`: Path to native libraries
 - `ENABLE_CUDA`: Enable CUDA support
- - `GOLLEK_CONVERTER_BASE`: Base path for relative output paths
- - `GOLLEK_MODEL_BASE`: Base path for relative input paths
+ - `ALKHAWARIZM_CONVERTER_BASE`: Base path for relative output paths
+ - `ALKHAWARIZM_MODEL_BASE`: Base path for relative input paths
 
 ## Quantization Guide
 

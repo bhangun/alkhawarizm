@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Exports a Gollek {@link NNModule} to GGUF format for llama.cpp
+ * Exports a Alkhawarizm {@link NNModule} to GGUF format for llama.cpp
  *
  * <p>
  * Quantization is applied tensor-by-tensor before writing:
@@ -97,7 +97,7 @@ public final class GgufExporter {
     private Map<String, GgufMetaValue> ggufMetadata() {
         Map<String, GgufMetaValue> ggufMeta = new LinkedHashMap<>();
         ggufMeta.put("general.architecture",
-                GgufMetaValue.ofString(metadata.getOrDefault("architecture", "gollek").toString()));
+                GgufMetaValue.ofString(metadata.getOrDefault("architecture", "alkhawarizm").toString()));
         ggufMeta.put("general.alignment", GgufMetaValue.ofUInt32(GgufModel.DEFAULT_ALIGNMENT));
         ggufMeta.put("general.quantization_version", GgufMetaValue.ofUInt32(2));
         ggufMeta.put("general.file_type", GgufMetaValue.ofUInt32(quantization.fileType));

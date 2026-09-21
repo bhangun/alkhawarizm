@@ -87,8 +87,8 @@ class GgufMatVecTest {
 
     @Test
     void smallNoHintPreparedFamilyMatVecDoesNotCreateCacheKey() {
-        String previousMinRows = System.getProperty("gollek.gguf.q8.cache_min_rows");
-        System.setProperty("gollek.gguf.q8.cache_min_rows", "32");
+        String previousMinRows = System.getProperty("alkhawarizm.gguf.q8.cache_min_rows");
+        System.setProperty("alkhawarizm.gguf.q8.cache_min_rows", "32");
         GgufMatVec.clearRecentPlanCache();
         GgufKey.clearCaches();
         try (Arena arena = Arena.ofShared()) {
@@ -108,7 +108,7 @@ class GgufMatVecTest {
             assertEquals(32.0f, output[0], 0.0f);
             assertEquals(0, GgufKey.recentKeyCacheSize());
         } finally {
-            restoreProperty("gollek.gguf.q8.cache_min_rows", previousMinRows);
+            restoreProperty("alkhawarizm.gguf.q8.cache_min_rows", previousMinRows);
             GgufMatVec.clearRecentPlanCache();
             GgufKey.clearCaches();
         }
@@ -116,8 +116,8 @@ class GgufMatVecTest {
 
     @Test
     void admittedNoHintPreparedFamilyMatVecCreatesCacheKeyLazily() {
-        String previousMinRows = System.getProperty("gollek.gguf.q8.cache_min_rows");
-        System.setProperty("gollek.gguf.q8.cache_min_rows", "2");
+        String previousMinRows = System.getProperty("alkhawarizm.gguf.q8.cache_min_rows");
+        System.setProperty("alkhawarizm.gguf.q8.cache_min_rows", "2");
         GgufMatVec.clearRecentPlanCache();
         GgufKey.clearCaches();
         try (Arena arena = Arena.ofShared()) {
@@ -139,7 +139,7 @@ class GgufMatVecTest {
             assertEquals(64.0f, output[1], 0.0f);
             assertEquals(1, GgufKey.recentKeyCacheSize());
         } finally {
-            restoreProperty("gollek.gguf.q8.cache_min_rows", previousMinRows);
+            restoreProperty("alkhawarizm.gguf.q8.cache_min_rows", previousMinRows);
             GgufMatVec.clearRecentPlanCache();
             GgufKey.clearCaches();
         }

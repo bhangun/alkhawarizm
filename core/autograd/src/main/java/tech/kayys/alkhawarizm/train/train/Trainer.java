@@ -42,7 +42,7 @@ import java.util.function.Consumer;
  * trainer.fit(trainLoader, valLoader);
  * }</pre>
  *
- * @author Aljabr Team
+ * @author Alkhawarizm Team
  * @version 0.1.0
  */
 public class Trainer implements Closeable, TrainerSession {

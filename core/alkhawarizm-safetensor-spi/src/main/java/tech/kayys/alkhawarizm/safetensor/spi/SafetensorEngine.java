@@ -1,5 +1,5 @@
 /*
- * Gollek Inference Engine — SafeTensor Module
+ * Alkhawarizm Inference Engine — SafeTensor Module
  * Copyright (c) 2026 Kayys.tech
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -7,7 +7,7 @@ package tech.kayys.alkhawarizm.safetensor.spi;
 
 import tech.kayys.alkhawarizm.spi.model.ModelConfig;
 import tech.kayys.alkhawarizm.spi.model.ModelRuntimeTraits;
-import tech.kayys.gollek.tokenizer.spi.Tokenizer;
+import tech.kayys.alkhawarizm.tokenizer.spi.Tokenizer;
 
 import java.nio.file.Path;
 import java.util.Map;

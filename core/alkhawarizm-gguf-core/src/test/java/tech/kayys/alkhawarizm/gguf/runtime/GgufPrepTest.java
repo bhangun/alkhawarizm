@@ -18,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class GgufPrepTest {
     @Test
     void plansAndPreparesOnlyMatricesThatFitSharedCacheBucket() {
-        String previous = System.getProperty("gollek.gguf.q4k.cache_max_bytes");
-        System.setProperty("gollek.gguf.q4k.cache_max_bytes", "320");
+        String previous = System.getProperty("alkhawarizm.gguf.q4k.cache_max_bytes");
+        System.setProperty("alkhawarizm.gguf.q4k.cache_max_bytes", "320");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(2L * 144);
             writeQ4KBlockWithAllScalesAndMins(segment.asSlice(0, 144));
@@ -43,7 +43,7 @@ class GgufPrepTest {
             assertEquals(320L, stats.cacheBytes());
             assertEquals(1, GgufTensorOps.clearPreparedMatrixCaches(model));
         } finally {
-            restoreProperty("gollek.gguf.q4k.cache_max_bytes", previous);
+            restoreProperty("alkhawarizm.gguf.q4k.cache_max_bytes", previous);
         }
     }
 

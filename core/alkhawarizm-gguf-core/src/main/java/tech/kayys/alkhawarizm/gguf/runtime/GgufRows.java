@@ -19,7 +19,7 @@ final class GgufRows {
     private static final int DIRECT_PREPARED_ROW_LIMIT = 4;
     private static final int RECENT_RAW_ACCESS_SLOTS = 256;
     private static final int RECENT_RAW_ACCESS_MASK = RECENT_RAW_ACCESS_SLOTS - 1;
-    private static final Thread RAW_WORKER_ACCESS_PROBE = new Thread("gollek-gguf-raw-worker-access-probe");
+    private static final Thread RAW_WORKER_ACCESS_PROBE = new Thread("alkhawarizm-gguf-raw-worker-access-probe");
     private static final ThreadLocal<RecentRawWorkerAccesses> RECENT_RAW_WORKER_ACCESSES =
             ThreadLocal.withInitial(RecentRawWorkerAccesses::new);
     private static final Map<MemorySegment, Boolean> RAW_WORKER_ACCESS_CACHE = new WeakHashMap<>();

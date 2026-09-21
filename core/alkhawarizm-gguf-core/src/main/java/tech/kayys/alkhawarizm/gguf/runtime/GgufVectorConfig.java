@@ -24,17 +24,17 @@ final class GgufVectorConfig {
     // 128-bit float vectors are enough to make byte-dot SIMD worthwhile on Apple Silicon.
     static final boolean BYTE_DOT_VECTOR_PREFERRED = FLOAT_SUM_VECTOR_LANES >= 4;
     static final boolean DENSE_F32_VECTOR_DOT_ENABLED =
-            Boolean.parseBoolean(System.getProperty("gollek.gguf.dense_f32.vector_dot", "true"));
+            Boolean.parseBoolean(System.getProperty("alkhawarizm.gguf.dense_f32.vector_dot", "true"));
     static final boolean DENSE_BF16_VECTOR_DOT_ENABLED =
             INT_SUM_SPECIES != null
                     && BF16_DOT_SHORT_SPECIES != null
-                    && Boolean.parseBoolean(System.getProperty("gollek.gguf.dense_bf16.vector_dot", "true"));
+                    && Boolean.parseBoolean(System.getProperty("alkhawarizm.gguf.dense_bf16.vector_dot", "true"));
     static final boolean RAW_Q8_VECTOR_DOT_ENABLED =
-            Boolean.parseBoolean(System.getProperty("gollek.gguf.raw_q8.vector_dot", "true"));
+            Boolean.parseBoolean(System.getProperty("alkhawarizm.gguf.raw_q8.vector_dot", "true"));
     static final boolean Q4_DOT_VECTOR_ENABLED =
-            byteDotVectorEnabled("gollek.gguf.quant.vector_dot", "gollek.gguf.q4k.vector_dot");
+            byteDotVectorEnabled("alkhawarizm.gguf.quant.vector_dot", "alkhawarizm.gguf.q4k.vector_dot");
     static final boolean SIGNED_BYTE_DOT_VECTOR_ENABLED =
-            byteDotVectorEnabled("gollek.gguf.signed_byte.vector_dot", null);
+            byteDotVectorEnabled("alkhawarizm.gguf.signed_byte.vector_dot", null);
 
     private GgufVectorConfig() {
     }

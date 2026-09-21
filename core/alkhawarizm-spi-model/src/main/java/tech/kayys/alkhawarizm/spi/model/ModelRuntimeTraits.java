@@ -1,5 +1,5 @@
 /*
- * Gollek Inference Engine — SafeTensor Module
+ * Alkhawarizm Inference Engine — SafeTensor Module
  * Copyright (c) 2026 Kayys.tech
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -25,7 +25,8 @@ public record ModelRuntimeTraits(
         AttentionRuntimeTraits attention,
         boolean audioModel,
         boolean visionModel,
-        boolean multimodalModel) {/**
+        boolean multimodalModel,
+        boolean qwenText) {/**
  * Enumeration of promptbospolicy values.
  *
  * <p>Key functionality:
@@ -71,7 +72,7 @@ public record ModelRuntimeTraits(
 
     public static final String DEFAULT_SYSTEM_PROMPT = ModelPromptTraits.DEFAULT_SYSTEM_PROMPT;
 
-    public static final ModelRuntimeTraits EMPTY = new ModelRuntimeTraits(false, false, false, false, PromptBosPolicy.DEFAULT, Set.of(), false, false, Set.of(), null, false, false, false);
+    public static final ModelRuntimeTraits EMPTY = new ModelRuntimeTraits(false, false, false, false, PromptBosPolicy.DEFAULT, Set.of(), false, false, Set.of(), null, false, false, false, false);
 
     public static Builder builder() {
         return new Builder();
@@ -109,6 +110,7 @@ public record ModelRuntimeTraits(
                 null,
                 false,
                 false,
+                false,
                 false);
     }
 
@@ -117,7 +119,7 @@ public record ModelRuntimeTraits(
             boolean validateContinuationTokensByDecode, boolean rejectEmptyDecodedTokens) {
         this(nativeBf16Matvec, geluGatedFfn, perLayerInputEmbedding, perLayerInputPath,
                 promptBosPolicy, allowedControlTokenTexts,
-                validateContinuationTokensByDecode, rejectEmptyDecodedTokens, Set.of(), null, false, false, false);
+                validateContinuationTokensByDecode, rejectEmptyDecodedTokens, Set.of(), null, false, false, false, false);
     }
 
     public ModelRuntimeTraits(boolean nativeBf16Matvec, boolean geluGatedFfn, boolean perLayerInputEmbedding,
@@ -126,7 +128,7 @@ public record ModelRuntimeTraits(
             AttentionRuntimeTraits attention) {
         this(nativeBf16Matvec, geluGatedFfn, perLayerInputEmbedding, perLayerInputPath,
                 promptBosPolicy, allowedControlTokenTexts,
-                validateContinuationTokensByDecode, rejectEmptyDecodedTokens, Set.of(), attention, false, false, false);
+                validateContinuationTokensByDecode, rejectEmptyDecodedTokens, Set.of(), attention, false, false, false, false);
     }
 
     public ModelRuntimeTraits(boolean nativeBf16Matvec, boolean geluGatedFfn, boolean perLayerInputEmbedding,
@@ -135,7 +137,7 @@ public record ModelRuntimeTraits(
             AttentionRuntimeTraits attention, boolean audioModel) {
         this(nativeBf16Matvec, geluGatedFfn, perLayerInputEmbedding, perLayerInputPath,
                 promptBosPolicy, allowedControlTokenTexts,
-                validateContinuationTokensByDecode, rejectEmptyDecodedTokens, Set.of(), attention, audioModel, false, audioModel);
+                validateContinuationTokensByDecode, rejectEmptyDecodedTokens, Set.of(), attention, audioModel, false, audioModel, false);
     }
 
     public ModelRuntimeTraits(boolean nativeBf16Matvec, boolean geluGatedFfn, boolean perLayerInputEmbedding,
@@ -145,7 +147,7 @@ public record ModelRuntimeTraits(
         this(nativeBf16Matvec, geluGatedFfn, perLayerInputEmbedding, perLayerInputPath,
                 promptBosPolicy, allowedControlTokenTexts,
                 validateContinuationTokensByDecode, rejectEmptyDecodedTokens, Set.of(), attention,
-                audioModel, false, multimodalModel);
+                audioModel, false, multimodalModel, false);
     }
 
     /**
@@ -231,7 +233,14 @@ public record ModelRuntimeTraits(
     public static final String QWEN_DEFAULT_SYSTEM_PROMPT = ModelPromptTraits.QWEN_DEFAULT_SYSTEM_PROMPT;
 
     public boolean qwenText() {
-        return promptBosPolicy == PromptBosPolicy.TURN_AWARE;
+        return qwenText;
+    }
+
+    public boolean gemma3Text() {
+        return promptBosPolicy == PromptBosPolicy.TURN_AWARE
+                && geluGatedFfn
+                && attention != null
+                && attention.splitHalfRope();
     }
 
     public boolean skipDefaultSystemPromptInjection() {
@@ -285,15 +294,18 @@ public record ModelRuntimeTraits(
         private boolean audioModel;
         private boolean visionModel;
         private boolean multimodalModel;
+        private boolean qwenText;
 
         private Builder() {
         }
 
         public Builder qwenText() {
-            return promptBosPolicy(PromptBosPolicy.TURN_AWARE)
-                    .allowedControlTokenTexts(Set.of("<|im_start|>", "<|im_end|>"))
-                    .validateContinuationTokensByDecode(true)
-                    .rejectEmptyDecodedTokens(true);
+            return qwenText(true);
+        }
+
+        public Builder qwenText(boolean qwenText) {
+            this.qwenText = qwenText;
+            return this;
         }
 
         public Builder nativeBf16Matvec() {
@@ -441,7 +453,8 @@ public record ModelRuntimeTraits(
                     attention,
                     audioModel,
                     visionModel,
-                    multimodalModel);
+                    multimodalModel,
+                    qwenText);
         }
 
         private Builder copyFrom(ModelRuntimeTraits traits) {
@@ -460,7 +473,8 @@ public record ModelRuntimeTraits(
                     .attention(traits.attention())
                     .audioModel(traits.audioModel())
                     .visionModel(traits.visionModel())
-                    .multimodalModel(traits.multimodalModel());
+                    .multimodalModel(traits.multimodalModel())
+                    .qwenText(traits.qwenText());
         }
     }
 }

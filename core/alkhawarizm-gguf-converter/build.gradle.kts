@@ -4,19 +4,8 @@ plugins {
 
 dependencies {
     implementation(project(":core:alkhawarizm-gguf-core"))
-    val gollekCore = findProject(":core:gollek-core")
-    if (gollekCore != null) {
-        implementation(gollekCore)
-    } else {
-        implementation("tech.kayys.gollek:gollek-core:0.1.0-SNAPSHOT")
-    }
-    implementation("tech.kayys.alkhawarizm:alkhawarizm-tensor:0.1.0-SNAPSHOT")
-    val gollekSpi = findProject(":spi:gollek-spi")
-    if (gollekSpi != null) {
-        implementation(gollekSpi)
-    } else {
-        implementation("tech.kayys.gollek:gollek-spi:0.1.0-SNAPSHOT")
-    }
+    implementation(project(":core:alkhawarizm-core"))
+    implementation(project(":spi:alkhawarizm-spi"))
     implementation(project(":core:alkhawarizm-safetensor-loader"))
     implementation("io.smallrye.reactive:mutiny:2.5.5")
     implementation("com.google.code.gson:gson:2.11.0")
@@ -40,7 +29,7 @@ tasks.register<JavaExec>("ggufConvert") {
     group = "gguf"
     description = "Convert a local HuggingFace/safetensors model directory to GGUF."
     classpath = sourceSets["main"].runtimeClasspath
-    mainClass.set("tech.kayys.gollek.converter.gguf.GgufConverterMain")
+    mainClass.set("tech.kayys.alkhawarizm.converter.gguf.GgufConverterMain")
 
     doFirst {
         val input = providers.gradleProperty("ggufInput").orNull

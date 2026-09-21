@@ -1,5 +1,5 @@
 /*
- * Gollek Inference Engine — SafeTensor Module
+ * Alkhawarizm Inference Engine — SafeTensor Module
  * Copyright (c) 2026 Kayys.tech
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -27,7 +27,7 @@ package tech.kayys.alkhawarizm.safetensor.loader;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import tech.kayys.gollek.safetensor.exception.SafetensorException;
+import tech.kayys.alkhawarizm.safetensor.exception.SafetensorException;
 
 import org.jboss.logging.Logger;
 
@@ -43,7 +43,7 @@ import java.util.*;
  *
  * <p>
  * Used internally by the loader when
- * {@code gollek.safetensor.loader.validation.strict=true},
+ * {@code alkhawarizm.safetensor.loader.validation.strict=true},
  * and also available directly for external model validation workflows.
  * @author bhangun
  */

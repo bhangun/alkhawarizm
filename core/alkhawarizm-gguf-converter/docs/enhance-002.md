@@ -236,7 +236,7 @@ private static int skipField(byte[] data, int pos, int wireType) {
 ```java
 // New file: ImatrixGuidedQuantization.java
 
-package tech.kayys.gollek.converter.gguf;
+package tech.kayys.alkhawarizm.converter.gguf;
 
 import java.io.*;
 import java.nio.ByteBuffer;

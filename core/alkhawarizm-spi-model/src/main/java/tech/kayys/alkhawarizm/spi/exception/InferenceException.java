@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Base exception for inference-related errors in the Aljabr math foundation.
+ * Base exception for inference-related errors in the Alkhawarizm math foundation.
  * Framework-agnostic: works with both conventional and reactive (Mutiny/RxJava)
  * calling code.
  * @author bhangun

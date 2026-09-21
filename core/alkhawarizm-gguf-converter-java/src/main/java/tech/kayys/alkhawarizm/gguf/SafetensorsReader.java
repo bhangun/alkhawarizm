@@ -1,4 +1,4 @@
-package tech.kayys.gollek.converter.java.gguf;
+package tech.kayys.alkhawarizm.converter.java.gguf;
 
 import tech.kayys.alkhawarizm.gguf.core.*;
 

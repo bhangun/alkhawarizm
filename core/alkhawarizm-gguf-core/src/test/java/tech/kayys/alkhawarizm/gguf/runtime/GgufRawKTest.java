@@ -219,12 +219,12 @@ class GgufRawKTest {
 
     @Test
     void rawKTinyAffineMatVecSlicesBypassWorkerProbe() {
-        String previousMinOps = System.getProperty("gollek.gguf.parallel_min_ops");
-        String previousThreads = System.getProperty("gollek.gguf.parallel_threads");
-        String previousChunks = System.getProperty("gollek.gguf.parallel_chunks_per_thread");
-        System.setProperty("gollek.gguf.parallel_min_ops", "1");
-        System.setProperty("gollek.gguf.parallel_threads", "2");
-        System.setProperty("gollek.gguf.parallel_chunks_per_thread", "1");
+        String previousMinOps = System.getProperty("alkhawarizm.gguf.parallel_min_ops");
+        String previousThreads = System.getProperty("alkhawarizm.gguf.parallel_threads");
+        String previousChunks = System.getProperty("alkhawarizm.gguf.parallel_chunks_per_thread");
+        System.setProperty("alkhawarizm.gguf.parallel_min_ops", "1");
+        System.setProperty("alkhawarizm.gguf.parallel_threads", "2");
+        System.setProperty("alkhawarizm.gguf.parallel_chunks_per_thread", "1");
         GgufParallelConfig.resetParallelConfig();
         GgufRows.clearRawWorkerAccessCache();
         int rows = 4;
@@ -253,9 +253,9 @@ class GgufRawKTest {
             assertEquals(0, GgufRows.recentRawWorkerAccessCacheSize());
             assertEquals(0, GgufRows.recentRawWorkerAccessFastCacheSize());
         } finally {
-            restoreProperty("gollek.gguf.parallel_min_ops", previousMinOps);
-            restoreProperty("gollek.gguf.parallel_threads", previousThreads);
-            restoreProperty("gollek.gguf.parallel_chunks_per_thread", previousChunks);
+            restoreProperty("alkhawarizm.gguf.parallel_min_ops", previousMinOps);
+            restoreProperty("alkhawarizm.gguf.parallel_threads", previousThreads);
+            restoreProperty("alkhawarizm.gguf.parallel_chunks_per_thread", previousChunks);
             GgufParallelConfig.resetParallelConfig();
             GgufRows.clearRawWorkerAccessCache();
         }
@@ -263,12 +263,12 @@ class GgufRawKTest {
 
     @Test
     void rawKTinyNoMinMatVecSlicesBypassWorkerProbe() {
-        String previousMinOps = System.getProperty("gollek.gguf.parallel_min_ops");
-        String previousThreads = System.getProperty("gollek.gguf.parallel_threads");
-        String previousChunks = System.getProperty("gollek.gguf.parallel_chunks_per_thread");
-        System.setProperty("gollek.gguf.parallel_min_ops", "1");
-        System.setProperty("gollek.gguf.parallel_threads", "2");
-        System.setProperty("gollek.gguf.parallel_chunks_per_thread", "1");
+        String previousMinOps = System.getProperty("alkhawarizm.gguf.parallel_min_ops");
+        String previousThreads = System.getProperty("alkhawarizm.gguf.parallel_threads");
+        String previousChunks = System.getProperty("alkhawarizm.gguf.parallel_chunks_per_thread");
+        System.setProperty("alkhawarizm.gguf.parallel_min_ops", "1");
+        System.setProperty("alkhawarizm.gguf.parallel_threads", "2");
+        System.setProperty("alkhawarizm.gguf.parallel_chunks_per_thread", "1");
         GgufParallelConfig.resetParallelConfig();
         GgufRows.clearRawWorkerAccessCache();
         int rows = 4;
@@ -295,9 +295,9 @@ class GgufRawKTest {
             assertEquals(0, GgufRows.recentRawWorkerAccessCacheSize());
             assertEquals(0, GgufRows.recentRawWorkerAccessFastCacheSize());
         } finally {
-            restoreProperty("gollek.gguf.parallel_min_ops", previousMinOps);
-            restoreProperty("gollek.gguf.parallel_threads", previousThreads);
-            restoreProperty("gollek.gguf.parallel_chunks_per_thread", previousChunks);
+            restoreProperty("alkhawarizm.gguf.parallel_min_ops", previousMinOps);
+            restoreProperty("alkhawarizm.gguf.parallel_threads", previousThreads);
+            restoreProperty("alkhawarizm.gguf.parallel_chunks_per_thread", previousChunks);
             GgufParallelConfig.resetParallelConfig();
             GgufRows.clearRawWorkerAccessCache();
         }

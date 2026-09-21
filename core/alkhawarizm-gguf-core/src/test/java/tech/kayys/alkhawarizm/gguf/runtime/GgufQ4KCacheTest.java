@@ -18,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class GgufQ4KCacheTest {
     @Test
     void boundsPreparedQ4KMatrixCacheByEstimatedBytes() {
-        String previous = System.getProperty("gollek.gguf.q4k.cache_max_bytes");
-        System.setProperty("gollek.gguf.q4k.cache_max_bytes", "320");
+        String previous = System.getProperty("alkhawarizm.gguf.q4k.cache_max_bytes");
+        System.setProperty("alkhawarizm.gguf.q4k.cache_max_bytes", "320");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(2L * 144);
             writeQ4KBlockWithAllScalesAndMins(segment.asSlice(0, 144));
@@ -41,14 +41,14 @@ class GgufQ4KCacheTest {
             assertNotSame(first, firstAfterEviction);
             assertEquals(1, GgufTensorOps.clearQ4KMatrixCache(model));
         } finally {
-            restoreProperty("gollek.gguf.q4k.cache_max_bytes", previous);
+            restoreProperty("alkhawarizm.gguf.q4k.cache_max_bytes", previous);
         }
     }
 
     @Test
     void canDisablePreparedQ4KMatrixCache() {
-        String previous = System.getProperty("gollek.gguf.q4k.cache_max_bytes");
-        System.setProperty("gollek.gguf.q4k.cache_max_bytes", "320");
+        String previous = System.getProperty("alkhawarizm.gguf.q4k.cache_max_bytes");
+        System.setProperty("alkhawarizm.gguf.q4k.cache_max_bytes", "320");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(144);
             writeQ4KBlockWithAllScalesAndMins(segment);
@@ -58,21 +58,21 @@ class GgufQ4KCacheTest {
             GgufTensorOps.Q4KMatrix first = GgufTensorOps.q4KMatrixCached(model, tensor);
             assertEquals(1, GgufTensorOps.q4KMatrixCacheSize(model));
 
-            System.setProperty("gollek.gguf.q4k.cache_max_bytes", "0");
+            System.setProperty("alkhawarizm.gguf.q4k.cache_max_bytes", "0");
             GgufTensorOps.Q4KMatrix second = GgufTensorOps.q4KMatrixCached(model, tensor);
 
             assertNotSame(first, second);
             assertEquals(0, GgufTensorOps.q4KMatrixCacheSize(model));
             assertEquals(0L, GgufTensorOps.q4KMatrixCacheBytes(model));
         } finally {
-            restoreProperty("gollek.gguf.q4k.cache_max_bytes", previous);
+            restoreProperty("alkhawarizm.gguf.q4k.cache_max_bytes", previous);
         }
     }
 
     @Test
     void evictsPreparedQ4KMatrixCacheWhenBudgetShrinksBelowCurrentBytes() {
-        String previous = System.getProperty("gollek.gguf.q4k.cache_max_bytes");
-        System.setProperty("gollek.gguf.q4k.cache_max_bytes", "640");
+        String previous = System.getProperty("alkhawarizm.gguf.q4k.cache_max_bytes");
+        System.setProperty("alkhawarizm.gguf.q4k.cache_max_bytes", "640");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(2L * 144);
             writeQ4KBlockWithAllScalesAndMins(segment.asSlice(0, 144));
@@ -86,14 +86,14 @@ class GgufQ4KCacheTest {
             assertEquals(2, GgufTensorOps.q4KMatrixCacheSize(model));
             assertEquals(640L, GgufTensorOps.q4KMatrixCacheBytes(model));
 
-            System.setProperty("gollek.gguf.q4k.cache_max_bytes", "320");
+            System.setProperty("alkhawarizm.gguf.q4k.cache_max_bytes", "320");
             GgufTensorOps.q4KMatrixCached(model, secondTensor);
 
             assertEquals(1, GgufTensorOps.q4KMatrixCacheSize(model));
             assertEquals(320L, GgufTensorOps.q4KMatrixCacheBytes(model));
             assertEquals(1, GgufTensorOps.clearQ4KMatrixCache(model));
         } finally {
-            restoreProperty("gollek.gguf.q4k.cache_max_bytes", previous);
+            restoreProperty("alkhawarizm.gguf.q4k.cache_max_bytes", previous);
         }
     }
 }

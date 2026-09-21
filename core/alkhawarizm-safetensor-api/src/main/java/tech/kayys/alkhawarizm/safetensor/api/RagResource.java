@@ -1,5 +1,5 @@
 /*
- * Gollek Inference Engine — SafeTensor Module
+ * Alkhawarizm Inference Engine — SafeTensor Module
  * Copyright (c) 2026 Kayys.tech
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -12,7 +12,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import tech.kayys.gollek.safetensor.generation.GenerationConfig;
+import tech.kayys.alkhawarizm.safetensor.generation.GenerationConfig;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.openapi.annotations.Operation;
@@ -36,10 +36,10 @@ public class RagResource {
     @Inject
     jakarta.enterprise.inject.Instance<Object> ragInstance;
 
-    @ConfigProperty(name = "gollek.rag.default-embedding-model", defaultValue = "")
+    @ConfigProperty(name = "alkhawarizm.rag.default-embedding-model", defaultValue = "")
     String defaultEmbeddingModel;
 
-    @ConfigProperty(name = "gollek.rag.default-llm-model", defaultValue = "")
+    @ConfigProperty(name = "alkhawarizm.rag.default-llm-model", defaultValue = "")
     String defaultLlmModel;
 
     private final Map<String, java.nio.file.Path> modelPaths = new ConcurrentHashMap<>();

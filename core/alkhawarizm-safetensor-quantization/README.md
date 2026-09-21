@@ -1,8 +1,8 @@
-# Gollek SafeTensor Quantization Module
+# Alkhawarizm SafeTensor Quantization Module
 
 ## Overview
 
-The `gollek-safetensor-quantization` module provides comprehensive model quantization support for SafeTensor models in the Gollek inference engine. It enables model compression with minimal quality loss, supporting multiple quantization strategies optimized for different hardware and use cases.
+The `alkhawarizm-safetensor-quantization` module provides comprehensive model quantization support for SafeTensor models in the Alkhawarizm inference engine. It enables model compression with minimal quality loss, supporting multiple quantization strategies optimized for different hardware and use cases.
 
 ## Features
 
@@ -25,7 +25,7 @@ The `gollek-safetensor-quantization` module provides comprehensive model quantiz
 ## Architecture
 
 ```
-gollek-safetensor-quantization/
+alkhawarizm-safetensor-quantization/
 ├── QuantizationEngine.java          # Main quantization orchestration
 ├── QuantConfig.java                 # Configuration builder
 ├── QuantStats.java                  # Statistics and metrics
@@ -319,13 +319,13 @@ public void upgradeModel() {
 ### Unit Tests
 
 ```bash
-mvn test -pl inference-gollek/extension/runner/safetensor/gollek-safetensor-quantization
+mvn test -pl inference-alkhawarizm/extension/runner/safetensor/alkhawarizm-safetensor-quantization
 ```
 
 ### Integration Tests
 
 ```bash
-mvn verify -pl inference-gollek/extension/runner/safetensor/gollek-safetensor-quantization -Pintegration
+mvn verify -pl inference-alkhawarizm/extension/runner/safetensor/alkhawarizm-safetensor-quantization -Pintegration
 ```
 
 ## Troubleshooting

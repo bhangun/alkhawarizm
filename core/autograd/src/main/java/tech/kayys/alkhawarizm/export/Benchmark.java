@@ -22,7 +22,7 @@ import java.util.List;
  * System.out.println("Throughput: " + result.throughput() + " inf/sec");
  * }</pre>
  *
- * @author Aljabr Team
+ * @author Alkhawarizm Team
  * @version 0.1.0
  */
 public class Benchmark {

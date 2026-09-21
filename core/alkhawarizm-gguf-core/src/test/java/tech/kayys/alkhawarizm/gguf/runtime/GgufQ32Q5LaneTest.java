@@ -22,10 +22,10 @@ import static tech.kayys.alkhawarizm.gguf.runtime.GgufQ32Fx.writeQ5_1LaneOrderBl
 class GgufQ32Q5LaneTest {
     @Test
     void rawQ5MatVecPreservesHighBitNibbleLaneOrder() {
-        String previousMinRows = System.getProperty("gollek.gguf.q32.cache_min_rows");
-        String previousMaxBytes = System.getProperty("gollek.gguf.q32.cache_max_bytes");
-        System.setProperty("gollek.gguf.q32.cache_min_rows", "1");
-        System.setProperty("gollek.gguf.q32.cache_max_bytes", "1");
+        String previousMinRows = System.getProperty("alkhawarizm.gguf.q32.cache_min_rows");
+        String previousMaxBytes = System.getProperty("alkhawarizm.gguf.q32.cache_max_bytes");
+        System.setProperty("alkhawarizm.gguf.q32.cache_min_rows", "1");
+        System.setProperty("alkhawarizm.gguf.q32.cache_max_bytes", "1");
         try (Arena arena = Arena.ofShared()) {
             int highBits = 0xFFFF0000;
             MemorySegment q5_0Segment = arena.allocate(22);
@@ -56,8 +56,8 @@ class GgufQ32Q5LaneTest {
                     GgufTensorOps.q32Matrix(q5_1Model, q5_1Tensor).quants());
             assertEquals(0, GgufTensorOps.q32MatrixCacheSize(q5_1Model));
         } finally {
-            restoreProperty("gollek.gguf.q32.cache_min_rows", previousMinRows);
-            restoreProperty("gollek.gguf.q32.cache_max_bytes", previousMaxBytes);
+            restoreProperty("alkhawarizm.gguf.q32.cache_min_rows", previousMinRows);
+            restoreProperty("alkhawarizm.gguf.q32.cache_max_bytes", previousMaxBytes);
         }
     }
 }

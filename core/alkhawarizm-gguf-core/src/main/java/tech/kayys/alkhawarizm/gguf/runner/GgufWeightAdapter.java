@@ -1,4 +1,4 @@
-package tech.kayys.gollek.plugin.runner.gguf;
+package tech.kayys.alkhawarizm.plugin.runner.gguf;
 
 import tech.kayys.alkhawarizm.gguf.loader.GGUFLoader;
 import tech.kayys.alkhawarizm.gguf.loader.GGUFModel;

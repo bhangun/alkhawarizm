@@ -15,6 +15,7 @@ public final class ModelFamilyProblemCodes {
 
     public static final String QUANTIZED_WEIGHT_LOADER_PENDING = "quantized_weight_loader_pending";
     public static final String QAT_MOBILE_LOADER_PENDING = "qat_mobile_loader_pending";
+    public static final String QAT_Q4_0_LOADER_PENDING = "qat_q4_0_loader_pending";
 
     public static final String MISSING_MODEL_FAMILY_PLUGIN = "model_family_not_found";
     public static final String AMBIGUOUS_MODEL_FAMILY = "model_family_ambiguous";

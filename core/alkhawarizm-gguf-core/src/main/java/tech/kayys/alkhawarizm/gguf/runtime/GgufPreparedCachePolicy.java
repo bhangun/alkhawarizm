@@ -89,13 +89,13 @@ final class GgufPreparedCachePolicy {
     }
 
     enum Family {
-        Q32(0, "gollek.gguf.q32.cache_min_rows", "gollek.gguf.q32.cache_max_bytes"),
-        Q2K(1, "gollek.gguf.q2k.cache_min_rows", "gollek.gguf.q2k.cache_max_bytes"),
-        Q3K(2, "gollek.gguf.q3k.cache_min_rows", "gollek.gguf.q3k.cache_max_bytes"),
-        Q4K(3, "gollek.gguf.q4k.cache_min_rows", "gollek.gguf.q4k.cache_max_bytes"),
-        Q5K(4, "gollek.gguf.q5k.cache_min_rows", "gollek.gguf.q5k.cache_max_bytes"),
-        Q6K(5, "gollek.gguf.q6k.cache_min_rows", "gollek.gguf.q6k.cache_max_bytes"),
-        Q8(6, "gollek.gguf.q8.cache_min_rows", "gollek.gguf.q8.cache_max_bytes");
+        Q32(0, "alkhawarizm.gguf.q32.cache_min_rows", "alkhawarizm.gguf.q32.cache_max_bytes"),
+        Q2K(1, "alkhawarizm.gguf.q2k.cache_min_rows", "alkhawarizm.gguf.q2k.cache_max_bytes"),
+        Q3K(2, "alkhawarizm.gguf.q3k.cache_min_rows", "alkhawarizm.gguf.q3k.cache_max_bytes"),
+        Q4K(3, "alkhawarizm.gguf.q4k.cache_min_rows", "alkhawarizm.gguf.q4k.cache_max_bytes"),
+        Q5K(4, "alkhawarizm.gguf.q5k.cache_min_rows", "alkhawarizm.gguf.q5k.cache_max_bytes"),
+        Q6K(5, "alkhawarizm.gguf.q6k.cache_min_rows", "alkhawarizm.gguf.q6k.cache_max_bytes"),
+        Q8(6, "alkhawarizm.gguf.q8.cache_min_rows", "alkhawarizm.gguf.q8.cache_max_bytes");
 
         private final int bucket;
         private final String minRowsProperty;

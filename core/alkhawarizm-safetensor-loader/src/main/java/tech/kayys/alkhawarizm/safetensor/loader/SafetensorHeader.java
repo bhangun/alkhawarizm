@@ -1,5 +1,5 @@
 /*
- * Gollek Inference Engine — SafeTensor Module
+ * Alkhawarizm Inference Engine — SafeTensor Module
  * Copyright (c) 2026 Kayys.tech
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -53,7 +53,7 @@ import java.util.*;
  * <p>
  * This is the full, structured view of everything between the 8-byte length
  * prefix and the first tensor byte. It is produced by
- * {@link tech.kayys.gollek.inference.safetensor.ffm.SafetensorHeaderParser}
+ * {@link tech.kayys.alkhawarizm.inference.safetensor.ffm.SafetensorHeaderParser}
  * and consumed by the tensor accessor layer.
  * @author bhangun
  */
@@ -89,7 +89,7 @@ public final class SafetensorHeader {
 
     /**
      * Build a header from already-parsed components. Used by
-     * {@link tech.kayys.gollek.inference.safetensor.ffm.SafetensorHeaderParser}.
+     * {@link tech.kayys.alkhawarizm.inference.safetensor.ffm.SafetensorHeaderParser}.
      *
      * @param dataBlobOffset absolute file byte offset where tensor data begins
      * @param tensors        per-tensor info map (will be defensively copied)
@@ -222,7 +222,7 @@ public final class SafetensorHeader {
      *
      * <p>
      * The {@code dataBlobOffset} is injected after deserialization by
-     * {@link tech.kayys.gollek.inference.safetensor.ffm.SafetensorHeaderParser}
+     * {@link tech.kayys.alkhawarizm.inference.safetensor.ffm.SafetensorHeaderParser}
      * because it depends on the byte-level header length, which is known only
      * during file parsing.
      */

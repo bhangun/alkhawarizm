@@ -17,11 +17,11 @@ import tech.kayys.alkhawarizm.model.core.HardwareDetector;
 import java.util.List;
 
 /**
- * Metal-aware SelectionPolicy decorator for Aljabr.
+ * Metal-aware SelectionPolicy decorator for Alkhawarizm.
  *
  * <h2>The gap this fills</h2>
  * <p>
- * Aljabr's built-in {@link SelectionPolicy} calls {@code hw.hasCUDA()} to gate
+ * Alkhawarizm's built-in {@link SelectionPolicy} calls {@code hw.hasCUDA()} to gate
  * CUDA runners, but for all other device types — including
  * {@link DeviceType#METAL} — it simply returns {@code true} without checking
  * whether the hardware is actually present. On an Apple Silicon Mac this means

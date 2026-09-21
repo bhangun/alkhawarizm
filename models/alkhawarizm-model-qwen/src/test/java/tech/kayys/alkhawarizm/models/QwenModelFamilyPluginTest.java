@@ -1,4 +1,4 @@
-package tech.kayys.tafkir.models;
+package tech.kayys.alkhawarizm.models;
 
 import org.junit.jupiter.api.Test;
 import tech.kayys.alkhawarizm.spi.model.ModelAttentionTraitsPolicy;

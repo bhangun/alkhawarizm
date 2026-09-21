@@ -21,8 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 class GgufQ32PrepTest {
     @Test
     void preparesAndCachesQ32MatrixForGenericMatVec() {
-        String previous = System.getProperty("gollek.gguf.q32.cache_min_rows");
-        System.setProperty("gollek.gguf.q32.cache_min_rows", "1");
+        String previous = System.getProperty("alkhawarizm.gguf.q32.cache_min_rows");
+        System.setProperty("alkhawarizm.gguf.q32.cache_min_rows", "1");
         try (Arena arena = Arena.ofShared()) {
             MemorySegment segment = arena.allocate(2L * 18);
             writeQ4_0Block(segment.asSlice(0, 18), (short) 0x3c00, (byte) 0x98);
@@ -53,7 +53,7 @@ class GgufQ32PrepTest {
             assertEquals(48.0f, preparedOutput[1], 0.0f);
             assertEquals(1, GgufTensorOps.clearQ32MatrixCache(model));
         } finally {
-            restoreProperty("gollek.gguf.q32.cache_min_rows", previous);
+            restoreProperty("alkhawarizm.gguf.q32.cache_min_rows", previous);
         }
     }
 

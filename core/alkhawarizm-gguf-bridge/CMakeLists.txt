@@ -86,8 +86,8 @@ set(LLAMA_SEARCH_PATHS
     "${CMAKE_CURRENT_SOURCE_DIR}/../llama.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/vendor/llama.cpp"
     "${CMAKE_SOURCE_DIR}/llama.cpp"
-    "$ENV{HOME}/.gollek/source/vendor/llama.cpp/llama.cpp"
-    "$ENV{HOME}/.gollek/source/vendor/llama.cpp"
+    "$ENV{HOME}/.alkhawarizm/source/vendor/llama.cpp/llama.cpp"
+    "$ENV{HOME}/.alkhawarizm/source/vendor/llama.cpp"
     "/opt/llama.cpp"
 )
 
@@ -124,7 +124,7 @@ else()
             "llama.cpp not found. Please clone it to one of these locations:\n"
             "  ${CMAKE_CURRENT_SOURCE_DIR}/llama.cpp\n"
             "  ${CMAKE_CURRENT_SOURCE_DIR}/vendor/llama.cpp\n"
-            "  ~/.gollek/source/vendor/llama.cpp\n"
+            "  ~/.alkhawarizm/source/vendor/llama.cpp\n"
             "Or set LLAMA_SOURCE_DIR to the correct path.")
     endif()
 endif()

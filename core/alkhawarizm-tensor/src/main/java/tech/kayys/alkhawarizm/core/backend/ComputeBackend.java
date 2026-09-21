@@ -9,7 +9,7 @@ import java.util.List;
  * <p>
  * Implementations must provide hardware-specific kernels for all methods.
  * This interface mirrors the full op-set of {@code libtorch::nn::functional}
- * so that {@code gollek-runner-libtorch} can swap its native LibTorch FFM calls
+ * so that {@code alkhawarizm-runner-libtorch} can swap its native LibTorch FFM calls
  * for pure alkhawarizm backends without changing caller code.
  *
  * <p>

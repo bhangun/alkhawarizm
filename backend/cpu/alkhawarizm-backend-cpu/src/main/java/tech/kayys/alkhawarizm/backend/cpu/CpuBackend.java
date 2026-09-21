@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Pure-Java CPU backend for the Aljabr compute engine.
+ * Pure-Java CPU backend for the Alkhawarizm compute engine.
  *
  * <p>
  * All pointwise operations delegate to {@link CpuOps} which uses the JDK

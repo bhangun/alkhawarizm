@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Test;
 
-import tech.kayys.gollek.converter.model.ModelMetadata;
-import tech.kayys.gollek.converter.model.QuantizationType;
+import tech.kayys.alkhawarizm.converter.model.ModelMetadata;
+import tech.kayys.alkhawarizm.converter.model.QuantizationType;
 import tech.kayys.alkhawarizm.core.model.ModelFormat;
 
 import org.junit.jupiter.api.DisplayName;

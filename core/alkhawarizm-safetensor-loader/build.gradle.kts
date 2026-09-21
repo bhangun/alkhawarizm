@@ -4,12 +4,7 @@ plugins {
 
 dependencies {
     implementation(project(":core:alkhawarizm-safetensor-spi"))
-    val gollekSpi = findProject(":spi:gollek-spi")
-    if (gollekSpi != null) {
-        implementation(gollekSpi)
-    } else {
-        implementation("tech.kayys.gollek:gollek-spi:0.1.0-SNAPSHOT")
-    }
+    implementation(project(":spi:alkhawarizm-spi"))
     implementation("com.fasterxml.jackson.core:jackson-annotations:2.16.1")
     implementation("com.fasterxml.jackson.core:jackson-core:2.16.1")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
@@ -26,7 +21,7 @@ dependencies {
 sourceSets {
     main {
         java {
-            exclude("tech/kayys/gollek/safetensor/loader/SafetensorLoaderConfig.java")
+            exclude("tech/kayys/alkhawarizm/safetensor/loader/SafetensorLoaderConfig.java")
         }
     }
 }

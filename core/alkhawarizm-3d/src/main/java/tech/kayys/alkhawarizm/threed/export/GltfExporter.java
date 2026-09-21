@@ -73,7 +73,7 @@ public final class GltfExporter {
 
         return String.format(Locale.US,
             "{\n" +
-            "  \"asset\": { \"version\": \"2.0\", \"generator\": \"Gollek 3D Engine\" },\n" +
+            "  \"asset\": { \"version\": \"2.0\", \"generator\": \"Alkhawarizm 3D Engine\" },\n" +
             "  \"scenes\": [{ \"nodes\": [0] }],\n" +
             "  \"nodes\": [{ \"mesh\": 0, \"name\": \"%s\" }],\n" +
             "  \"meshes\": [{\n" +

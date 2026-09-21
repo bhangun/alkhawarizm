@@ -4,12 +4,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.io.TempDir;
 import jakarta.inject.Inject;
-import tech.kayys.gollek.converter.GGUFConverter;
-import tech.kayys.gollek.converter.GGUFException;
-import tech.kayys.gollek.converter.model.ConversionProgress;
-import tech.kayys.gollek.converter.model.GGUFConversionParams;
-import tech.kayys.gollek.converter.model.ModelMetadata;
-import tech.kayys.gollek.converter.model.QuantizationType;
+import tech.kayys.alkhawarizm.converter.GGUFConverter;
+import tech.kayys.alkhawarizm.converter.GGUFException;
+import tech.kayys.alkhawarizm.converter.model.ConversionProgress;
+import tech.kayys.alkhawarizm.converter.model.GGUFConversionParams;
+import tech.kayys.alkhawarizm.converter.model.ModelMetadata;
+import tech.kayys.alkhawarizm.converter.model.QuantizationType;
 import tech.kayys.alkhawarizm.core.model.ModelFormat;
 
 import java.nio.file.Files;

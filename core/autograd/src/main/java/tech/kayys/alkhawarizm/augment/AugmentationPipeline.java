@@ -26,7 +26,7 @@ import java.util.Random;
  * GradTensor augmented = pipeline.apply(input);
  * }</pre>
  *
- * @author Aljabr Team
+ * @author Alkhawarizm Team
  * @version 0.1.0
  */
 public final class AugmentationPipeline {

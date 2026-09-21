@@ -168,7 +168,7 @@ public final class BenchmarkSuite {
      */
     public void printReport() {
         System.out.println("=".repeat(80));
-        System.out.println("Aljabr Benchmark Suite");
+        System.out.println("Alkhawarizm Benchmark Suite");
         System.out.println("=".repeat(80));
         results.forEach(System.out::println);
         System.out.println("=".repeat(80));

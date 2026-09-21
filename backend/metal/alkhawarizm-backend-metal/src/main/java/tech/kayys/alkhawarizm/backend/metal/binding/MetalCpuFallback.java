@@ -9,7 +9,7 @@ import java.lang.foreign.ValueLayout;
  * <p>
  * Activated automatically when {@code libalkhawarizm_metal.dylib} is absent —
  * identical to the pattern used by {@code FlashAttention3CpuFallback} and
- * {@code PagedAttentionCpuFallback} already in Aljabr. Correct but not
+ * {@code PagedAttentionCpuFallback} already in Alkhawarizm. Correct but not
  * performance-optimised; intended for development and CI on non-Apple hardware.
  */
 final class MetalCpuFallback {

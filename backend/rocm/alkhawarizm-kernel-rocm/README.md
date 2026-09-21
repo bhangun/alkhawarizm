@@ -1,6 +1,6 @@
-# Aljabr ROCm Kernel
+# Alkhawarizm ROCm Kernel
 
-AMD ROCm GPU acceleration kernel for Aljabr inference engine.
+AMD ROCm GPU acceleration kernel for Alkhawarizm inference engine.
 
 ## Features
 

@@ -30,7 +30,7 @@ import java.util.List;
  *         .build();
  * }</pre>
  *
- * @author Aljabr Team
+ * @author Alkhawarizm Team
  * @version 0.1.0
  */
 public class ModelCheckpoint implements Callback {

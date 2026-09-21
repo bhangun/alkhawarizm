@@ -238,7 +238,7 @@ private static float getPartialRotaryFactor(JsonObject obj) {
 ```java
 // New file: VisionModelConverter.java
 
-package tech.kayys.gollek.converter.gguf;
+package tech.kayys.alkhawarizm.converter.gguf;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -312,7 +312,7 @@ public final class VisionModelConverter {
 ```java
 // New file: AudioModelConverter.java
 
-package tech.kayys.gollek.converter.gguf;
+package tech.kayys.alkhawarizm.converter.gguf;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -637,7 +637,7 @@ private static String mapTail(String tail, int layerId) {
 ```java
 // New file: ModelFamilyGuide.java
 
-package tech.kayys.gollek.converter.gguf;
+package tech.kayys.alkhawarizm.converter.gguf;
 
 import java.util.*;
 

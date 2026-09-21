@@ -6,7 +6,7 @@ package tech.kayys.alkhawarizm.blackwell.detection;
  * <p>
  * Produced by {@link BlackwellDetector#detect()} and consumed by
  * {@link tech.kayys.alkhawarizm.blackwell.runner.BlackwellRunner#initialize}
- * and Aljabr's
+ * and Alkhawarizm's
  * {@link tech.kayys.alkhawarizm.engine.routing.policy.SelectionPolicy}
  * to decide whether to route requests to the Blackwell backend.
  *

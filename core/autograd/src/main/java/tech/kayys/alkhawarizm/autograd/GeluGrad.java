@@ -1,6 +1,6 @@
 package tech.kayys.alkhawarizm.autograd;
 
-import tech.kayys.gollek.ir.*;
+import tech.kayys.alkhawarizm.ir.*;
 import java.util.*;
 
 /**
