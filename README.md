@@ -16,7 +16,7 @@ To understand Al-Khawarizm, it helps to see where it sits in the broader Kayys A
 graph TD
     W[Andalus<br>Agentic AI Platform] --> G
     T[Tafkir<br>Training Framework] --> A
-    G[Alkhawarizm<br>Inference Engine & SDK] --> A
+    G[Gollek<br>Inference Engine & SDK] --> A
     
     subgraph Al-Khawarizm Foundation
     A[Al-Khawarizm<br>Tensors, Math, Backends, Models]
