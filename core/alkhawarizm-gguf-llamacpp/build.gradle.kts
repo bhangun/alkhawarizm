@@ -18,8 +18,36 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":core:alkhawarizm-gguf-api"))
+    // Alkhawarizm modules
+    api(project(":core:alkhawarizm-gguf-api"))
+    api(project(":core:alkhawarizm-gguf-core"))
+    implementation("tech.kayys.alkhawarizm:alkhawarizm-spi-model:0.1.0-SNAPSHOT")
+
+    // Gollek SPI (runner contracts & inference types)
     implementation("tech.kayys.gollek:gollek-plugin-runner-core:0.1.0-SNAPSHOT")
+    implementation("tech.kayys.gollek:gollek-spi-inference:0.1.0-SNAPSHOT")
+    implementation("tech.kayys.gollek:gollek-spi:0.1.0-SNAPSHOT")
+
+    // Logging
+    implementation("org.jboss.logging:jboss-logging:3.6.1.Final")
+
+    // Reactive (for LlamaCppRunner streaming)
+    implementation("io.smallrye.reactive:mutiny:2.5.5")
+
+    // Metrics
+    implementation("io.micrometer:micrometer-core:1.14.4")
+
+    // Chat template
+    implementation("com.hubspot.jinjava:jinjava:2.7.3")
+
+    // SmallRye Config (for LlamaCppProviderConfig @ConfigMapping interface)
+    compileOnly("io.smallrye.config:smallrye-config:3.8.3")
+
+    // Jakarta CDI API (annotations only, no container needed)
+    compileOnly("jakarta.enterprise:jakarta.enterprise.cdi-api:4.0.1")
+    compileOnly("jakarta.inject:jakarta.inject-api:2.0.1")
+
+
     testImplementation(group = "org.junit.jupiter", name = "junit-jupiter")
     testRuntimeOnly(group = "org.junit.platform", name = "junit-platform-launcher")
 }
@@ -52,3 +80,5 @@ tasks.jar {
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 }
+
+

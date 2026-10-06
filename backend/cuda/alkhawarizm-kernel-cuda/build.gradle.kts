@@ -34,14 +34,7 @@ sourceSets {
 }
 
 dependencies {
-    //implementation(project(":spi:alkhawarizm-spi-provider"))
-
-    //implementation(project(":core:plugin:alkhawarizm-plugin-runner-core"))
-   // implementation(group = "tech.kayys.alkhawarizm", name = "alkhawarizm-engine")
-   // implementation(project(":optimization:alkhawarizm-plugin-kv-cache"))
     implementation(project(":core:alkhawarizm-tensor"))
-   /*  implementation(project(":optimization:alkhawarizm-plugin-fa4"))
-    implementation(project(":optimization:alkhawarizm-plugin-fa3")) */
     implementation(group = "io.quarkus", name = "quarkus-arc")
     testImplementation(group = "org.junit.jupiter", name = "junit-jupiter")
     testImplementation(group = "org.assertj", name = "assertj-core")

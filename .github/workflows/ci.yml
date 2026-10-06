@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout alkhawarizm
         uses: actions/checkout@v4
 
       - name: Setup Java 25
@@ -47,6 +47,30 @@ jobs:
           distribution: temurin
           java-version: '25'
           cache: gradle
+
+      # ── Tafkir composite build bootstrap ─────────────────────────────────
+      # alkhawarizm-safetensor-quantization depends on tech.kayys.tafkir:*
+      # SNAPSHOT artifacts. When tafkir is checked out as a sibling directory,
+      # settings.gradle.kts includes it as a composite build and Gradle
+      # substitutes the Maven coordinates with source-project dependencies —
+      # no binary SNAPSHOT resolution needed.
+      - name: Checkout tafkir (quantizer composite build)
+        uses: actions/checkout@v4
+        with:
+          repository: bhangun/tafkir
+          path: ../tafkir
+          ref: main
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: alkhawarizm-gradle-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties', 'build.gradle.kts', 'settings.gradle.kts') }}
+          restore-keys: |
+            alkhawarizm-gradle-
+      # ─────────────────────────────────────────────────────────────────────
 
       - name: Build and Test (CPU)
         shell: bash
@@ -63,7 +87,7 @@ jobs:
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
 
     steps:
-      - name: Checkout
+      - name: Checkout alkhawarizm
         uses: actions/checkout@v4
 
       - name: Setup Java 25
@@ -72,6 +96,13 @@ jobs:
           distribution: temurin
           java-version: '25'
           cache: gradle
+
+      - name: Checkout tafkir (quantizer composite build)
+        uses: actions/checkout@v4
+        with:
+          repository: bhangun/tafkir
+          path: ../tafkir
+          ref: main
 
       - name: Publish to Maven Local
         shell: bash

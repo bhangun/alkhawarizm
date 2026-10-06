@@ -18,13 +18,8 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":spi:alkhawarizm-spi-provider"))
-    implementation(project(":core:alkhawarizm-model-runner"))
-    implementation(project(":core:plugin:alkhawarizm-plugin-runner-core"))
-    implementation(group = "tech.kayys.alkhawarizm", name = "alkhawarizm-engine")
-    implementation(project(":optimization:alkhawarizm-plugin-kv-cache"))
-    implementation(group = "io.quarkus", name = "quarkus-arc")
-    implementation(group = "io.smallrye.reactive", name = "mutiny")
+    // ROCm backend: implements ComputeBackend from alkhawarizm-tensor
+    implementation(project(":core:alkhawarizm-tensor"))
     compileOnly(group = "org.jboss.logging", name = "jboss-logging")
     testImplementation(group = "org.junit.jupiter", name = "junit-jupiter")
 }

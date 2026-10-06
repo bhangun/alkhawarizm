@@ -5,7 +5,6 @@ plugins {
 dependencies {
     implementation(project(":core:alkhawarizm-gguf-core"))
     implementation(project(":core:alkhawarizm-core"))
-    implementation(project(":spi:alkhawarizm-spi"))
     implementation(project(":core:alkhawarizm-safetensor-loader"))
     implementation("io.smallrye.reactive:mutiny:2.5.5")
     implementation("com.google.code.gson:gson:2.11.0")
