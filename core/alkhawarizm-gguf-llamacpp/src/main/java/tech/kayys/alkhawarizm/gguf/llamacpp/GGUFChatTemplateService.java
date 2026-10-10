@@ -2,7 +2,7 @@ package tech.kayys.alkhawarizm.gguf.llamacpp;
 
 import com.hubspot.jinjava.Jinjava;
 import jakarta.enterprise.context.ApplicationScoped;
-import tech.kayys.gollek.spi.Message;
+import tech.kayys.alkhawarizm.spi.Message;
 
 import java.util.HashMap;
 import java.util.List;

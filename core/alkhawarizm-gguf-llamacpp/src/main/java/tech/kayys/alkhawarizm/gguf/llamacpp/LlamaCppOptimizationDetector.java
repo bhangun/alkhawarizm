@@ -10,22 +10,22 @@ final class LlamaCppOptimizationDetector {
 
     static Set<String> detectFeatures() {
         Set<String> features = new LinkedHashSet<>();
-        if (isPresent("tech.kayys.gollek.cache.PromptCacheLookupPlugin")) {
+        if (isPresent("tech.kayys.aqli.cache.PromptCacheLookupPlugin")) {
             features.add("prompt_cache");
         }
-        if (isPresent("tech.kayys.gollek.kvcache.PagedKVCacheManager")) {
+        if (isPresent("tech.kayys.aqli.kvcache.PagedKVCacheManager")) {
             features.add("paged_kv_cache");
         }
-        if (isPresent("tech.kayys.gollek.kernel.paged.PagedAttentionBinding")) {
+        if (isPresent("tech.kayys.aqli.kernel.paged.PagedAttentionBinding")) {
             features.add("paged_attention");
         }
-        if (isPresent("tech.kayys.gollek.prefilldecode.PrefillDecodeDisaggService")) {
+        if (isPresent("tech.kayys.aqli.prefilldecode.PrefillDecodeDisaggService")) {
             features.add("prefill_decode_disagg");
         }
-        if (isPresent("tech.kayys.gollek.hybridattn.HybridAttentionGdnRunner")) {
+        if (isPresent("tech.kayys.aqli.hybridattn.HybridAttentionGdnRunner")) {
             features.add("hybrid_attention");
         }
-        if (isPresent("tech.kayys.gollek.flashattn.FlashAttention4Runner")) {
+        if (isPresent("tech.kayys.aqli.flashattn.FlashAttention4Runner")) {
             features.add("flash_attention4");
         }
         return features;

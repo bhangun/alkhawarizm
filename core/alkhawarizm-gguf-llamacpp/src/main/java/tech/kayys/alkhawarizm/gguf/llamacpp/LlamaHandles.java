@@ -26,9 +26,9 @@ final class LlamaHandles {
     // ── Model / context defaults (shim-first, then standard) ─────────────────
     final MethodHandle modelDefaultParams;       // optional — struct-return variant
     final MethodHandle contextDefaultParams;     // optional — struct-return variant
-    final MethodHandle gollekModelDefaultParamsInto;  // shim: fills existing segment
-    final MethodHandle gollekContextDefaultParamsInto;
-    final MethodHandle gollekLogDisable;
+    final MethodHandle aqliModelDefaultParamsInto;  // shim: fills existing segment
+    final MethodHandle aqliContextDefaultParamsInto;
+    final MethodHandle aqliLogDisable;
 
     // ── Model lifecycle ───────────────────────────────────────────────────────
     final MethodHandle loadModelFromFile;
@@ -106,11 +106,11 @@ final class LlamaHandles {
                 FunctionDescriptor.of(LlamaStructLayouts.MODEL_PARAMS));
         contextDefaultParams = linkOpt(linker, lookup, "llama_context_default_params",
                 FunctionDescriptor.of(LlamaStructLayouts.CONTEXT_PARAMS));
-        gollekModelDefaultParamsInto   = linkOpt(linker, lookup, "gollek_llama_model_default_params_into",
+        aqliModelDefaultParamsInto   = linkOpt(linker, lookup, "aqli_llama_model_default_params_into",
                 FunctionDescriptor.ofVoid(ValueLayout.ADDRESS));
-        gollekContextDefaultParamsInto = linkOpt(linker, lookup, "gollek_llama_context_default_params_into",
+        aqliContextDefaultParamsInto = linkOpt(linker, lookup, "aqli_llama_context_default_params_into",
                 FunctionDescriptor.ofVoid(ValueLayout.ADDRESS));
-        gollekLogDisable = linkOpt(linker, lookup, "gollek_llama_log_disable", FunctionDescriptor.ofVoid());
+        aqliLogDisable = linkOpt(linker, lookup, "aqli_llama_log_disable", FunctionDescriptor.ofVoid());
 
         loadModelFromFile = link(linker, lookup, "llama_model_load_from_file",
                 FunctionDescriptor.of(ValueLayout.ADDRESS, ValueLayout.ADDRESS, LlamaStructLayouts.MODEL_PARAMS));

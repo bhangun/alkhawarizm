@@ -18,7 +18,10 @@ repositories {
 }
 
 dependencies {
-    api("tech.kayys.gollek:gollek-plugin-runner-core:0.1.0-SNAPSHOT")
+    api(project(":core:alkhawarizm-spi-inference"))
+    api(project(":core:alkhawarizm-spi-model"))
+    api("io.smallrye.reactive:mutiny:2.5.5")
+    implementation("com.fasterxml.jackson.core:jackson-annotations:2.16.1")
 }
 
 publishing {

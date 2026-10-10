@@ -1,7 +1,7 @@
 package tech.kayys.alkhawarizm.gguf.api;
 
-import tech.kayys.gollek.plugin.runner.RunnerRequest;
-import tech.kayys.gollek.plugin.runner.RunnerResult;
+import tech.kayys.alkhawarizm.spi.inference.InferenceRequest;
+import tech.kayys.alkhawarizm.spi.inference.InferenceResponse;
 
 import java.util.Map;
 
@@ -9,7 +9,7 @@ import java.util.Map;
  * Execution contract that every GGUF backend must honour.
  *
  * <p>Backends are stateful (they hold file handles / native memory): they are
- * created once per {@code loadModel} call and released via {@link #close} when
+ * created once per model load and released via {@link #close} when
  * the model is unloaded.</p>
  */
 public interface GgufBackend extends AutoCloseable {
@@ -17,12 +17,13 @@ public interface GgufBackend extends AutoCloseable {
     /** Short stable identifier, e.g. {@code "java"} or {@code "llamacpp"}. */
     String name();
 
-    /** Diagnostic key/value pairs surfaced in {@link tech.kayys.gollek.plugin.runner.ModelHandle} metadata. */
+    /** Diagnostic key/value pairs surfaced in metadata. */
     default Map<String, Object> metadata() {
         return Map.of("backend", name());
     }
 
-    <T> RunnerResult<T> execute(RunnerRequest request);
+    /** Execute inference request against this backend. */
+    InferenceResponse execute(InferenceRequest request);
 
     @Override
     void close();

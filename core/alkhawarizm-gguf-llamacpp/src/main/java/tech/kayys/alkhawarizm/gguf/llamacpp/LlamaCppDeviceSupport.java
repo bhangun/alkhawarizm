@@ -24,14 +24,14 @@ final class LlamaCppDeviceSupport {
 
     static boolean metalAllowedByGlobalConfig() {
         String metalEnabled = firstNonBlank(
-                System.getProperty("gollek.runners.metal.enabled"),
-                System.getenv("GOLLEK_METAL_ENABLED"));
+                System.getProperty("aqli.runners.metal.enabled"),
+                System.getenv("AQLI_METAL_ENABLED"));
         if (metalEnabled != null && metalEnabled.equalsIgnoreCase("false")) {
             return false;
         }
         String metalMode = firstNonBlank(
-                System.getProperty("gollek.runners.metal.mode"),
-                System.getenv("GOLLEK_METAL_MODE"));
+                System.getProperty("aqli.runners.metal.mode"),
+                System.getenv("AQLI_METAL_MODE"));
         return metalMode == null || !metalMode.equalsIgnoreCase("disabled");
     }
 
@@ -74,7 +74,7 @@ final class LlamaCppDeviceSupport {
         if (home.isBlank()) {
             return false;
         }
-        Path base = Path.of(home, ".gollek");
+        Path base = Path.of(home, ".aqli");
         Path[] candidates = new Path[] {
                 base.resolve("libs/libggml-metal.dylib"),
                 base.resolve("libs/ggml-metal.dylib"),

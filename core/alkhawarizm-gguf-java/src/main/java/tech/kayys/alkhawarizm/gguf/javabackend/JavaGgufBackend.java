@@ -11,14 +11,13 @@ import tech.kayys.alkhawarizm.gguf.runtime.GgufRuntimeProbe;
 import tech.kayys.alkhawarizm.gguf.runtime.GgufRuntimeProfile;
 import tech.kayys.alkhawarizm.gguf.runtime.GgufTensorOps;
 import tech.kayys.alkhawarizm.gguf.tokenizer.GGUFTokenizer;
-import tech.kayys.gollek.models.core.ChatTemplateFormatter;
-import tech.kayys.gollek.plugin.runner.RunnerRequest;
-import tech.kayys.gollek.plugin.runner.RunnerResult;
-import tech.kayys.gollek.spi.Message;
-import tech.kayys.gollek.spi.inference.InferenceRequest;
-import tech.kayys.gollek.spi.inference.InferenceResponse;
-import tech.kayys.gollek.tokenizer.spi.DecodeOptions;
-import tech.kayys.gollek.tokenizer.spi.EncodeOptions;
+import tech.kayys.alkhawarizm.spi.Message;
+import tech.kayys.alkhawarizm.spi.exception.InferenceException;
+import tech.kayys.alkhawarizm.spi.inference.InferenceRequest;
+import tech.kayys.alkhawarizm.spi.inference.InferenceResponse;
+import tech.kayys.alkhawarizm.spi.tokenizer.ChatTemplateFormatter;
+import tech.kayys.alkhawarizm.spi.tokenizer.DecodeOptions;
+import tech.kayys.alkhawarizm.spi.tokenizer.EncodeOptions;
 
 import java.lang.foreign.Arena;
 import java.nio.file.Files;
@@ -28,7 +27,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 /**
  * Pure-Java GGUF engine.
@@ -113,12 +111,11 @@ final class JavaGgufBackend implements GgufBackend {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public <T> RunnerResult<T> execute(RunnerRequest request) {
+    public InferenceResponse execute(InferenceRequest request) {
         try {
             String prompt = extractPrompt(request);
-            if (prompt.isBlank()) {
-                return RunnerResult.failed("No prompt or inference request messages provided");
+            if (prompt == null || prompt.isBlank()) {
+                throw new InferenceException("No prompt or inference request messages provided");
             }
 
             SamplingParams sampling = SamplingParams.from(request);
@@ -129,10 +126,10 @@ final class JavaGgufBackend implements GgufBackend {
                     .build();
             long[] promptTokens = tokenizer.encode(prompt, encodeOptions);
             if (promptTokens.length == 0) {
-                return RunnerResult.failed("Prompt tokenized to zero tokens.");
+                throw new InferenceException("Prompt tokenized to zero tokens.");
             }
             if (promptTokens.length >= cfg.contextLength()) {
-                return RunnerResult.failed("Prompt (" + promptTokens.length
+                throw new InferenceException("Prompt (" + promptTokens.length
                         + " tokens) does not fit in context length " + cfg.contextLength());
             }
 
@@ -170,11 +167,10 @@ final class JavaGgufBackend implements GgufBackend {
             String text = tokenizer.decode(generatedTokens, decodeOptions);
             long durationMs = Duration.ofNanos(System.nanoTime() - startNanos).toMillis();
 
-            InferenceRequest inferenceRequest = request.getInferenceRequest().orElse(null);
-            InferenceResponse response = new InferenceResponse(
-                    inferenceRequest != null ? inferenceRequest.getRequestId() : java.util.UUID.randomUUID().toString(),
+            return new InferenceResponse(
+                    request != null && request.getRequestId() != null ? request.getRequestId() : java.util.UUID.randomUUID().toString(),
                     text,
-                    inferenceRequest != null ? inferenceRequest.getModel() : null,
+                    request != null ? request.getModel() : null,
                     0, // tokensUsed: 0 triggers the constructor's own inputTokens+outputTokens fallback
                     promptTokens.length,
                     generated.size(),
@@ -183,22 +179,24 @@ final class JavaGgufBackend implements GgufBackend {
                     Map.of("backend", "java"),
                     null, // toolCalls: Java engine doesn't support tool calls; constructor defaults to empty list
                     finishReason,
-                    inferenceRequest != null ? inferenceRequest.getSessionId().orElse(null) : null);
-
-            return (RunnerResult<T>) RunnerResult.success(response);
+                    request != null && request.getSessionId().isPresent() ? request.getSessionId().get() : null);
+        } catch (InferenceException ie) {
+            throw ie;
         } catch (Exception e) {
-            return RunnerResult.failed("Java GGUF generation failed: " + e.getMessage());
+            throw new InferenceException("Java GGUF generation failed: " + e.getMessage(), e);
         }
     }
 
-    private String extractPrompt(RunnerRequest request) {
-        Optional<String> explicit = request.getParameter("prompt", String.class);
-        if (explicit.isPresent() && !explicit.get().isBlank()) {
-            return explicit.get();
+    private String extractPrompt(InferenceRequest req) {
+        if (req == null) {
+            return "";
         }
-
-        InferenceRequest req = request.getInferenceRequest()
-                .orElseThrow(() -> new IllegalArgumentException("No prompt or inference request messages provided"));
+        if (req.getParameters() != null && req.getParameters().containsKey("prompt")) {
+            Object p = req.getParameters().get("prompt");
+            if (p != null && !p.toString().isBlank()) {
+                return p.toString();
+            }
+        }
 
         List<Message> messages = req.getMessages();
         if (messages != null && !messages.isEmpty() && ChatTemplateFormatter.supportsModelType(cfg.architecture())) {
@@ -250,23 +248,16 @@ final class JavaGgufBackend implements GgufBackend {
     }
 
     private record SamplingParams(float temperature, int topK, float topP, float repeatPenalty, int maxTokens) {
-        static SamplingParams from(RunnerRequest request) {
-            Optional<InferenceRequest> inference = request.getInferenceRequest();
-            if (inference.isPresent()) {
-                InferenceRequest req = inference.get();
-                return new SamplingParams(
-                        (float) req.getTemperature(),
-                        req.getTopK(),
-                        (float) req.getTopP(),
-                        (float) req.getRepeatPenalty(),
-                        req.getMaxTokens());
+        static SamplingParams from(InferenceRequest req) {
+            if (req == null) {
+                return new SamplingParams(0.2f, 40, 0.9f, 1.1f, 256);
             }
             return new SamplingParams(
-                    request.getParameter("temperature", Double.class).map(Double::floatValue).orElse(0.2f),
-                    request.getParameter("topK", Integer.class).orElse(40),
-                    request.getParameter("topP", Double.class).map(Double::floatValue).orElse(0.9f),
-                    request.getParameter("repeatPenalty", Double.class).map(Double::floatValue).orElse(1.1f),
-                    request.getParameter("maxTokens", Integer.class).orElse(256));
+                    (float) req.getTemperature(),
+                    req.getTopK(),
+                    (float) req.getTopP(),
+                    (float) req.getRepeatPenalty(),
+                    req.getMaxTokens());
         }
     }
 }

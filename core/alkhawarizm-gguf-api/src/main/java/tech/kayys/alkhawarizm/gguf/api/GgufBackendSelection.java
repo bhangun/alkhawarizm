@@ -1,25 +1,14 @@
 package tech.kayys.alkhawarizm.gguf.api;
 
-import tech.kayys.gollek.plugin.runner.ModelLoadRequest;
-import tech.kayys.gollek.plugin.runner.RunnerContext;
+import tech.kayys.alkhawarizm.spi.inference.InferenceRequest;
 
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 /**
  * Resolves which backend the caller asked for, purely as a normalized
- * string token — it does not know what backends exist. {@link GgufRunnerPlugin}
- * matches {@link #normalizedValue()} against each registered
- * {@link GgufBackendProvider}'s {@code id()}/{@code aliases()}.
- *
- * <p>Previous versions of this class hard-coded a closed {@code JAVA
- * / LLAMACPP} enum, which meant every new backend required editing this
- * class. That coupling is gone: this class only extracts and normalizes the
- * requested token; provider matching (including alias resolution) happens
- * in {@link GgufRunnerPlugin} against whatever providers are actually
- * registered.</p>
+ * string token.
  */
 public record GgufBackendSelection(
         String requestedValue,
@@ -29,11 +18,8 @@ public record GgufBackendSelection(
 
     private static final String DEFAULT_SOURCE = "default:auto";
 
-    public static GgufBackendSelection resolve(ModelLoadRequest request, RunnerContext context) {
-        Objects.requireNonNull(request, "request");
-        Objects.requireNonNull(context, "context");
-
-        Candidate candidate = firstCandidate(request.getMetadata(), context);
+    public static GgufBackendSelection resolve(Map<String, Object> metadata) {
+        Candidate candidate = firstCandidate(metadata);
         if (candidate.value().isEmpty()) {
             return auto(DEFAULT_SOURCE, "");
         }
@@ -46,14 +32,20 @@ public record GgufBackendSelection(
         return new GgufBackendSelection(raw, normalized, candidate.source(), true);
     }
 
+    public static GgufBackendSelection resolve(InferenceRequest request) {
+        if (request == null) {
+            return auto(DEFAULT_SOURCE, "");
+        }
+        return resolve(request.getMetadata());
+    }
+
     private static GgufBackendSelection auto(String source, String raw) {
         return new GgufBackendSelection(raw, "auto", source, false);
     }
 
-    private static Candidate firstCandidate(Map<String, Object> requestMetadata, RunnerContext context) {
-        Optional<String> requestPlugin = stringValue(requestMetadata.get("plugin"));
-        if (requestPlugin.isPresent()) {
-            return new Candidate(requestPlugin, "request.metadata.plugin");
+    private static Candidate firstCandidate(Map<String, Object> requestMetadata) {
+        if (requestMetadata == null || requestMetadata.isEmpty()) {
+            return new Candidate(Optional.empty(), "none");
         }
 
         Optional<String> requestBackend = stringValue(requestMetadata.get("gguf.backend"))
@@ -62,21 +54,7 @@ public record GgufBackendSelection(
             return new Candidate(requestBackend, "request.metadata.gguf.backend");
         }
 
-        Optional<String> contextBackend = context.getMetadataValue("gguf.backend")
-                .flatMap(GgufBackendSelection::stringValue)
-                .or(() -> context.getMetadataValue("backend").flatMap(GgufBackendSelection::stringValue));
-        if (contextBackend.isPresent()) {
-            return new Candidate(contextBackend, "context.metadata.gguf.backend");
-        }
-
-        Optional<String> parameterBackend = context.getParameter("gguf.backend")
-                .flatMap(GgufBackendSelection::stringValue)
-                .or(() -> context.getParameter("backend").flatMap(GgufBackendSelection::stringValue));
-        if (parameterBackend.isPresent()) {
-            return new Candidate(parameterBackend, "context.parameter.gguf.backend");
-        }
-
-        return new Candidate(Optional.empty(), DEFAULT_SOURCE);
+        return new Candidate(Optional.empty(), "none");
     }
 
     private static Optional<String> stringValue(Object value) {
@@ -88,9 +66,11 @@ public record GgufBackendSelection(
     }
 
     private static String normalize(String value) {
-        return value == null ? "" : value.trim().toLowerCase(Locale.ROOT);
+        if (value == null) {
+            return "";
+        }
+        return value.trim().toLowerCase(Locale.ROOT);
     }
 
-    private record Candidate(Optional<String> value, String source) {
-    }
+    private record Candidate(Optional<String> value, String source) {}
 }

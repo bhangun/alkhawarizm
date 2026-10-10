@@ -20,7 +20,7 @@ plugins {
     id("io.quarkus") version "3.32.2" apply false
 }
 
-extra["alkhawarizmVersion"] = "0.1.1"
+extra["alkhawarizmVersion"] = "0.1.0-SNAPSHOT"
 extra["quarkusVersion"] = "3.32.2"
 
 allprojects {

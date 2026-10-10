@@ -2,8 +2,6 @@ package tech.kayys.alkhawarizm.gguf.javabackend;
 
 import org.junit.jupiter.api.Test;
 import tech.kayys.alkhawarizm.gguf.api.GgufBackendSelection;
-import tech.kayys.gollek.plugin.runner.ModelLoadRequest;
-import tech.kayys.gollek.plugin.runner.RunnerContext;
 
 import java.util.Map;
 
@@ -15,7 +13,7 @@ class GgufBackendSelectionTest {
 
     @Test
     void defaultsToAutoWhenNoBackendRequested() {
-        GgufBackendSelection selection = resolve(Map.of(), RunnerContext.empty());
+        GgufBackendSelection selection = GgufBackendSelection.resolve(Map.of());
 
         assertEquals("auto", selection.normalizedValue());
         assertFalse(selection.explicit());
@@ -23,7 +21,7 @@ class GgufBackendSelectionTest {
 
     @Test
     void allowsExplicitJavaBackendByAlias() {
-        GgufBackendSelection selection = resolve(Map.of("gguf.backend", "java-native"), RunnerContext.empty());
+        GgufBackendSelection selection = GgufBackendSelection.resolve(Map.of("gguf.backend", "java-native"));
 
         assertEquals("java-native", selection.normalizedValue());
         assertTrue(selection.explicit());
@@ -31,28 +29,15 @@ class GgufBackendSelectionTest {
 
     @Test
     void allowsExplicitLlamaCppBackendByAlias() {
-        GgufBackendSelection selection = resolve(Map.of("gguf.backend", "llama.cpp"), RunnerContext.empty());
+        GgufBackendSelection selection = GgufBackendSelection.resolve(Map.of("gguf.backend", "llama.cpp"));
 
         assertEquals("llama.cpp", selection.normalizedValue());
         assertTrue(selection.explicit());
     }
 
     @Test
-    void readsContextParameterForBackendSelection() {
-        RunnerContext context = RunnerContext.withParameters(Map.of("gguf.backend", "llamacpp"));
-        GgufBackendSelection selection = resolve(Map.of(), context);
-
-        assertEquals("llamacpp", selection.normalizedValue());
-        assertEquals("context.parameter.gguf.backend", selection.source());
-        assertTrue(selection.explicit());
-    }
-
-    @Test
     void unknownBackendTokenBecomesExplicitRequest() {
-        // Unknown tokens are passed through as explicit — GgufRunnerPlugin will
-        // raise a clear error listing available backends rather than silently
-        // falling back.
-        GgufBackendSelection selection = resolve(Map.of("gguf.backend", "fastest-please"), RunnerContext.empty());
+        GgufBackendSelection selection = GgufBackendSelection.resolve(Map.of("gguf.backend", "fastest-please"));
 
         assertEquals("fastest-please", selection.normalizedValue());
         assertEquals("fastest-please", selection.requestedValue());
@@ -61,17 +46,9 @@ class GgufBackendSelectionTest {
 
     @Test
     void autoValueNormalizesToAutoToken() {
-        GgufBackendSelection selection = resolve(Map.of("gguf.backend", "auto"), RunnerContext.empty());
+        GgufBackendSelection selection = GgufBackendSelection.resolve(Map.of("gguf.backend", "auto"));
 
         assertEquals("auto", selection.normalizedValue());
         assertFalse(selection.explicit());
-    }
-
-    private static GgufBackendSelection resolve(Map<String, Object> metadata, RunnerContext context) {
-        ModelLoadRequest request = ModelLoadRequest.builder()
-                .modelPath("/tmp/model.gguf")
-                .metadata(metadata)
-                .build();
-        return GgufBackendSelection.resolve(request, context);
     }
 }

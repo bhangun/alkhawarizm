@@ -7,7 +7,7 @@ package tech.kayys.alkhawarizm.safetensor.spi;
 
 import tech.kayys.alkhawarizm.spi.model.ModelConfig;
 import tech.kayys.alkhawarizm.spi.model.ModelRuntimeTraits;
-import tech.kayys.alkhawarizm.tokenizer.spi.Tokenizer;
+import tech.kayys.alkhawarizm.spi.tokenizer.Tokenizer;
 
 import java.nio.file.Path;
 import java.util.Map;

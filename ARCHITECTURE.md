@@ -8,7 +8,7 @@ Alkhawarizm is the **foundational ML framework** for the Wayang platform — ana
 ┌───────────────────────────────────────────────────────┐
 │                    Wayang Platform                    │ ← Agent orchestration, RAG, MCP
 ├───────────────────────────────────────────────────────┤
-│           Gollek / Any Future Serving Engine          │ ← Pure runtime: runners, repos, SDK
+│           Aqli / Any Future Serving Engine          │ ← Pure runtime: runners, repos, SDK
 ├───────────────────────────────────────────────────────┤
 │                   Alkhawarizm SPI                     │ ← Inference + serving contracts
 │  (ModelRunner, InferenceRequest, PluginSPI, ...)      │
@@ -19,7 +19,7 @@ Alkhawarizm is the **foundational ML framework** for the Wayang platform — ana
 └───────────────────────────────────────────────────────┘
 ```
 
-The key design rule: **any compliant serving engine** (Gollek, or a future hypothetical engine) should be implementable using only Alkhawarizm contracts, without touching engine-specific code.
+The key design rule: **any compliant serving engine** (Aqli, or a future hypothetical engine) should be implementable using only Alkhawarizm contracts, without touching engine-specific code.
 
 ---
 
@@ -68,21 +68,21 @@ Pre-built model graph descriptors auto-discovered at build time. Each `alkhawari
 
 ## The SPI Elevation Plan
 
-Alkhawarizm currently hosts model-level contracts in `alkhawarizm-spi-model`. The next step is to **host all general inference/serving SPIs** here, so any engine (Gollek or otherwise) depends only on Alkhawarizm.
+Alkhawarizm currently hosts model-level contracts in `alkhawarizm-spi-model`. The next step is to **host all general inference/serving SPIs** here, so any engine (Aqli or otherwise) depends only on Alkhawarizm.
 
-### Contracts to be elevated from Gollek → Alkhawarizm
+### Contracts to be elevated from Aqli → Alkhawarizm
 
 | Contract | Current location | Target Alkhawarizm module |
 |---|---|---|
-| `InferenceRequest`, `InferenceResponse`, `StreamingResponse` | `gollek-spi-inference` | `alkhawarizm-spi-inference` (new) |
-| `InferenceEngine`, `InferencePipeline`, `InferencePhase` | `gollek-spi-inference` | `alkhawarizm-spi-inference` (new) |
-| `BatchScheduler`, `BatchConfig`, `BatchStrategy` | `gollek-spi-inference` | `alkhawarizm-spi-inference` (new) |
-| `EmbeddingRequest`, `EmbeddingResponse` | `gollek-spi-inference` | `alkhawarizm-spi-inference` (new) |
-| `ModelRunner` (interface) | `gollek-spi-runner` → `alkhawarizm-spi-model` | Already partially there |
-| `RunnerStats`, `RunnerCapabilities`, `RunnerConfiguration` | `gollek-spi-runner` | `alkhawarizm-spi-model` extension |
-| `GollekPlugin` → `AlkhawarizmPlugin` | `gollek-spi-plugin` | `alkhawarizm-spi-plugin` (new) |
-| `PluginHealth`, `PluginState`, `PluginRegistry` | `gollek-spi-plugin` | `alkhawarizm-spi-plugin` (new) |
-| `Tokenizer`, `TokenizerPool`, `PreTokenizer` SPI | `gollek-tokenizer-core/spi/` | `alkhawarizm-spi-tokenizer` (new) |
+| `InferenceRequest`, `InferenceResponse`, `StreamingResponse` | `aqli-spi-inference` | `alkhawarizm-spi-inference` (new) |
+| `InferenceEngine`, `InferencePipeline`, `InferencePhase` | `aqli-spi-inference` | `alkhawarizm-spi-inference` (new) |
+| `BatchScheduler`, `BatchConfig`, `BatchStrategy` | `aqli-spi-inference` | `alkhawarizm-spi-inference` (new) |
+| `EmbeddingRequest`, `EmbeddingResponse` | `aqli-spi-inference` | `alkhawarizm-spi-inference` (new) |
+| `ModelRunner` (interface) | `aqli-spi-runner` → `alkhawarizm-spi-model` | Already partially there |
+| `RunnerStats`, `RunnerCapabilities`, `RunnerConfiguration` | `aqli-spi-runner` | `alkhawarizm-spi-model` extension |
+| `AqliPlugin` → `AlkhawarizmPlugin` | `aqli-spi-plugin` | `alkhawarizm-spi-plugin` (new) |
+| `PluginHealth`, `PluginState`, `PluginRegistry` | `aqli-spi-plugin` | `alkhawarizm-spi-plugin` (new) |
+| `Tokenizer`, `TokenizerPool`, `PreTokenizer` SPI | `aqli-tokenizer-core/spi/` | `alkhawarizm-spi-tokenizer` (new) |
 
 ### Target module layout after elevation
 
@@ -166,4 +166,4 @@ grep -rn '^public class [A-Z].*implements\|^public class [A-Z].*extends' \
 | New model format (e.g. GGML) | `core/alkhawarizm-<format>-api` (SPI) + `core/alkhawarizm-<format>-core` (impl) |
 | New model family (e.g. Falcon) | `models/alkhawarizm-model-falcon` |
 | New tokenizer SPI | `core/alkhawarizm-spi-tokenizer` (new) |
-| New tokenizer implementation | Lives in Gollek `runtime/` or a future `alkhawarizm-tokenizer-impls` module |
+| New tokenizer implementation | Lives in Aqli `runtime/` or a future `alkhawarizm-tokenizer-impls` module |

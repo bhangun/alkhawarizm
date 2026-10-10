@@ -19,7 +19,7 @@ import java.util.Optional;
  * <h3>Minimal configuration example</h3>
  * <pre>
  * gguf.provider.enabled=true
- * gguf.provider.model.base-path=/home/user/.gollek/models/gguf
+ * gguf.provider.model.base-path=/home/user/.aqli/models/gguf
  * gguf.provider.gpu.auto-metal=true
  * </pre>
  *
@@ -59,7 +59,7 @@ public interface LlamaCppProviderConfig {
      * Base directory for GGUF model files
      */
     @WithName("model.base-path")
-    @WithDefault("${user.home}/.gollek/models/gguf")
+    @WithDefault("${user.home}/.aqli/models/gguf")
     String modelBasePath();
 
     /**
@@ -338,7 +338,7 @@ public interface LlamaCppProviderConfig {
      * Base directory for relative LoRA adapter paths.
      */
     @WithName("lora.adapter-base-path")
-    @WithDefault("${user.home}/.gollek/models/gguf/adapters")
+    @WithDefault("${user.home}/.aqli/models/gguf/adapters")
     String loraAdapterBasePath();
 
     /**

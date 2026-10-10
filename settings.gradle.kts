@@ -40,7 +40,7 @@ include("core:alkhawarizm-nn")
 
 include("core:alkhawarizm-spi-model")
 // New SPI modules — formalises Alkhawarizm as the inference/serving framework layer
-// These will host contracts elevated from Gollek (Phase 2 source migration)
+// These will host contracts elevated from Aqli (Phase 2 source migration)
 include("core:alkhawarizm-spi-inference")
 include("core:alkhawarizm-spi-plugin")
 include("core:alkhawarizm-spi-tokenizer")

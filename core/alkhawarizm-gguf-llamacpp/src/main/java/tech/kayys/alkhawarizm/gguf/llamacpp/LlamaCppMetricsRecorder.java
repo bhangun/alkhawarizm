@@ -48,20 +48,20 @@ public class LlamaCppMetricsRecorder {
         }
 
         Tags tags = this.runnerTags;
-        registry.gauge("gollek.gguf.coalesce.queue.depth", tags, coalesceMaxQueue, q -> q == null ? 0 : q);
-        registry.gauge("gollek.gguf.coalesce.batch.max", tags, coalesceBatchMax, AtomicLong::get);
-        registry.gauge("gollek.gguf.coalesce.batches.total", tags, coalesceBatches, AtomicLong::get);
-        registry.gauge("gollek.gguf.coalesce.tasks.total", tags, coalesceTasks, AtomicLong::get);
-        registry.gauge("gollek.gguf.coalesce.dropped", tags, coalesceDrops, AtomicLong::get);
-        registry.gauge("gollek.gguf.coalesce.seq.max", tags, coalesceSeqMaxObserved, AtomicLong::get);
-        registry.gauge("gollek.gguf.coalesce.seq.total", tags, coalesceSeqTotal, AtomicLong::get);
+        registry.gauge("aqli.gguf.coalesce.queue.depth", tags, coalesceMaxQueue, q -> q == null ? 0 : q);
+        registry.gauge("aqli.gguf.coalesce.batch.max", tags, coalesceBatchMax, AtomicLong::get);
+        registry.gauge("aqli.gguf.coalesce.batches.total", tags, coalesceBatches, AtomicLong::get);
+        registry.gauge("aqli.gguf.coalesce.tasks.total", tags, coalesceTasks, AtomicLong::get);
+        registry.gauge("aqli.gguf.coalesce.dropped", tags, coalesceDrops, AtomicLong::get);
+        registry.gauge("aqli.gguf.coalesce.seq.max", tags, coalesceSeqMaxObserved, AtomicLong::get);
+        registry.gauge("aqli.gguf.coalesce.seq.total", tags, coalesceSeqTotal, AtomicLong::get);
 
-        Gauge.builder("gollek.gguf.coalesce.batch.avg", () -> {
+        Gauge.builder("aqli.gguf.coalesce.batch.avg", () -> {
             long count = coalesceBatches.get();
             return (count == 0) ? 0.0 : (double) coalesceBatchTotal.get() / count;
         }).tags(tags).register(registry);
 
-        Gauge.builder("gollek.gguf.coalesce.seq.avg", () -> {
+        Gauge.builder("aqli.gguf.coalesce.seq.avg", () -> {
             long batches = coalesceBatches.get();
             return (batches == 0) ? 0.0 : (double) coalesceSeqTotal.get() / batches;
         }).tags(tags).register(registry);
@@ -93,24 +93,24 @@ public class LlamaCppMetricsRecorder {
         long decodeDuration = Math.max(0L, requestEnd - effectiveDecodeStart);
         long requestDuration = Math.max(0L, requestEnd - requestStartNanos);
 
-        Timer.builder("gollek.gguf.request.duration")
+        Timer.builder("aqli.gguf.request.duration")
                 .tags(runnerTags)
                 .register(meterRegistry)
                 .record(Duration.ofNanos(requestDuration));
 
-        Timer.builder("gollek.gguf.prompt.duration")
+        Timer.builder("aqli.gguf.prompt.duration")
                 .tags(runnerTags)
                 .register(meterRegistry)
                 .record(Duration.ofNanos(promptDuration));
 
-        Timer.builder("gollek.gguf.decode.duration")
+        Timer.builder("aqli.gguf.decode.duration")
                 .tags(runnerTags)
                 .register(meterRegistry)
                 .record(Duration.ofNanos(decodeDuration));
 
         if (firstTokenNanos > 0) {
             long ttft = Math.max(0L, firstTokenNanos - requestStartNanos);
-            Timer.builder("gollek.gguf.ttft")
+            Timer.builder("aqli.gguf.ttft")
                     .tags(runnerTags)
                     .register(meterRegistry)
                     .record(Duration.ofNanos(ttft));
@@ -118,15 +118,15 @@ public class LlamaCppMetricsRecorder {
 
         if (outputTokens > 0 && decodeDuration > 0) {
             long tpot = Math.max(1L, decodeDuration / outputTokens);
-            Timer.builder("gollek.gguf.tpot")
+            Timer.builder("aqli.gguf.tpot")
                     .tags(runnerTags)
                     .register(meterRegistry)
                     .record(Duration.ofNanos(tpot));
         }
 
-        meterRegistry.counter("gollek.gguf.tokens.input", runnerTags)
+        meterRegistry.counter("aqli.gguf.tokens.input", runnerTags)
                 .increment(Math.max(0, inputTokens));
-        meterRegistry.counter("gollek.gguf.tokens.output", runnerTags)
+        meterRegistry.counter("aqli.gguf.tokens.output", runnerTags)
                 .increment(Math.max(0, outputTokens));
     }
 

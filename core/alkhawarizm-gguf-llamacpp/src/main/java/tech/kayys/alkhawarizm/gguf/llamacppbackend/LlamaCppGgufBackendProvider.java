@@ -7,7 +7,6 @@ import tech.kayys.alkhawarizm.gguf.api.GgufBackendProvider;
 import tech.kayys.alkhawarizm.gguf.llamacpp.GGUFChatTemplateService;
 import tech.kayys.alkhawarizm.gguf.llamacpp.LlamaCppBinding;
 import tech.kayys.alkhawarizm.gguf.llamacpp.LlamaCppRunner;
-import tech.kayys.gollek.plugin.runner.RunnerContext;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,7 +14,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Registers the native llama.cpp backend with {@code GgufRunnerPlugin} via
+ * Registers the native llama.cpp backend with {@link tech.kayys.alkhawarizm.gguf.api.GgufInferenceEngine} via
  * {@link java.util.ServiceLoader}.
  *
  * <p>This provider directly instantiates {@link LlamaCppRunner} (which owns
@@ -63,12 +62,10 @@ public final class LlamaCppGgufBackendProvider implements GgufBackendProvider {
     }
 
     @Override
-    public GgufBackend create(Path modelPath, RunnerContext context) throws Exception {
+    public GgufBackend create(Path modelPath, Map<String, Object> config) throws Exception {
         LlamaCppBinding binding = LlamaCppBinding.load();
         GGUFChatTemplateService templateService = new GGUFChatTemplateService();
         LlamaCppRunner runner = new LlamaCppRunner(binding, null, templateService);
-        // Model loading happens lazily in LlamaCppRunner.initialize()
-        // via the Gollek orchestration layer (LlamaCppEngine) at inference time.
         return new LlamaCppGgufBackend(runner);
     }
 

@@ -18,10 +18,4 @@ dependencies {
     implementation("org.jboss.logging:jboss-logging:3.6.1.Final")
 }
 
-sourceSets {
-    main {
-        java {
-            exclude("tech/kayys/alkhawarizm/safetensor/loader/SafetensorLoaderConfig.java")
-        }
-    }
-}
+

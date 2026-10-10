@@ -21,12 +21,8 @@ dependencies {
     // Alkhawarizm modules
     api(project(":core:alkhawarizm-gguf-api"))
     api(project(":core:alkhawarizm-gguf-core"))
-    implementation("tech.kayys.alkhawarizm:alkhawarizm-spi-model:0.1.0-SNAPSHOT")
-
-    // Gollek SPI (runner contracts & inference types)
-    implementation("tech.kayys.gollek:gollek-plugin-runner-core:0.1.0-SNAPSHOT")
-    implementation("tech.kayys.gollek:gollek-spi-inference:0.1.0-SNAPSHOT")
-    implementation("tech.kayys.gollek:gollek-spi:0.1.0-SNAPSHOT")
+    api(project(":core:alkhawarizm-spi-inference"))
+    implementation(project(":core:alkhawarizm-spi-model"))
 
     // Logging
     implementation("org.jboss.logging:jboss-logging:3.6.1.Final")

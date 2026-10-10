@@ -134,7 +134,7 @@ public class LlamaCppModelInitializer {
         if (activeGpuLayers != configuredGpuLayers) {
             log.warnf(
                     "Large GGUF model detected (%.2f GiB). Capping initial GPU layers from %d to %d " +
-                            "for faster and safer startup. Set GOLLEK_GGUF_FORCE_GPU_FOR_LARGE_MODEL=true " +
+                            "for faster and safer startup. Set AQLI_GGUF_FORCE_GPU_FOR_LARGE_MODEL=true " +
                             "to keep requested layers.",
                     modelSizeBytes / (1024.0 * 1024.0 * 1024.0),
                     configuredGpuLayers,

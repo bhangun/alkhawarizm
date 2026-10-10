@@ -3,11 +3,12 @@ package tech.kayys.alkhawarizm.gguf.llamacpp;
 
 
 import org.jboss.logging.Logger;
-import tech.kayys.gollek.spi.inference.InferenceRequest;
-import tech.kayys.gollek.spi.inference.InferenceResponse;
-import tech.kayys.gollek.spi.inference.StreamingInferenceChunk;
-import tech.kayys.gollek.spi.embedding.EmbeddingRequest;
-import tech.kayys.gollek.spi.embedding.EmbeddingResponse;
+import tech.kayys.alkhawarizm.spi.inference.InferenceRequest;
+import tech.kayys.alkhawarizm.spi.inference.InferenceResponse;
+import tech.kayys.alkhawarizm.spi.inference.StreamingInferenceChunk;
+import tech.kayys.alkhawarizm.spi.embedding.EmbeddingRequest;
+import tech.kayys.alkhawarizm.spi.embedding.EmbeddingResponse;
+import tech.kayys.alkhawarizm.spi.Message;
 import tech.kayys.alkhawarizm.spi.model.ModelManifest;
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
@@ -183,7 +184,7 @@ public class LlamaCppRunner {
     public List<InferenceRequest> createDefaultWarmupRequests() {
         return List.of(InferenceRequest.builder()
                 .model(manifest != null ? manifest.modelId() : "unknown")
-                .message(tech.kayys.gollek.spi.Message.user("warmup"))
+                .message(Message.user("warmup"))
                 .parameter("prompt", "Hello")
                 .build());
     }

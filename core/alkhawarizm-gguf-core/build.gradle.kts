@@ -41,12 +41,7 @@ dependencies {
     api(project(":core:alkhawarizm-tensor"))
     implementation(project(":core:alkhawarizm-spi-model"))
     implementation("com.google.code.gson:gson:2.10.1")
-    val tokenizerProject = findProject(":core:alkhawarizm-tokenizer-core") ?: findProject(":core:gollek-tokenizer-core")
-    if (tokenizerProject != null) {
-        implementation(tokenizerProject)
-    } else {
-        implementation("tech.kayys.gollek:gollek-tokenizer-core:0.1.0-SNAPSHOT")
-    }
+    api(project(":core:alkhawarizm-spi-tokenizer"))
     implementation("io.quarkus:quarkus-core:3.32.2")
     implementation("org.jboss.logging:jboss-logging:3.6.1.Final")
     testImplementation("org.junit.jupiter:junit-jupiter")

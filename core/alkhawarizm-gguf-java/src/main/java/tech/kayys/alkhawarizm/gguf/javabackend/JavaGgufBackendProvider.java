@@ -7,7 +7,6 @@ import tech.kayys.alkhawarizm.gguf.loader.GGUFModel;
 import tech.kayys.alkhawarizm.gguf.loader.GGUFParser;
 import tech.kayys.alkhawarizm.gguf.loader.GGUFReader;
 import tech.kayys.alkhawarizm.gguf.runtime.GgufRuntimeProfile;
-import tech.kayys.gollek.plugin.runner.RunnerContext;
 
 import java.lang.foreign.Arena;
 import java.nio.file.Files;
@@ -33,7 +32,7 @@ import java.util.Set;
  * add that architecture's lowercase string to
  * {@link #ARCHITECTURES_READY_FOR_GENERATION}. That is the only change needed
  * to flip AUTO selection to prefer Java for that architecture — the selection
- * loop in {@link tech.kayys.alkhawarizm.gguf.api.GgufRunnerPlugin} picks the
+ * loop in {@link tech.kayys.alkhawarizm.gguf.api.GgufInferenceEngine} picks the
  * highest-priority provider that reports {@code generationReady}, so Java
  * (priority 10) automatically wins over llama.cpp (priority -10) the moment
  * it claims readiness.</p>
@@ -87,7 +86,7 @@ public final class JavaGgufBackendProvider implements GgufBackendProvider {
     }
 
     @Override
-    public GgufBackend create(Path modelPath, RunnerContext context) throws Exception {
+    public GgufBackend create(Path modelPath, Map<String, Object> config) throws Exception {
         return new JavaGgufBackend(modelPath);
     }
 

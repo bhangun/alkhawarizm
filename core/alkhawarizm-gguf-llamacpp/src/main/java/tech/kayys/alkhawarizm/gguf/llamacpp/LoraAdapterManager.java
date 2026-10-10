@@ -4,9 +4,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.jboss.logging.Logger;
 
-import tech.kayys.gollek.spi.observability.AdapterMetricSchema;
-import tech.kayys.gollek.spi.observability.AdapterMetricsRecorder;
-import tech.kayys.gollek.spi.inference.InferenceRequest;
+import tech.kayys.alkhawarizm.spi.observability.AdapterMetricSchema;
+import tech.kayys.alkhawarizm.spi.observability.AdapterMetricsRecorder;
+import tech.kayys.alkhawarizm.spi.inference.InferenceRequest;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

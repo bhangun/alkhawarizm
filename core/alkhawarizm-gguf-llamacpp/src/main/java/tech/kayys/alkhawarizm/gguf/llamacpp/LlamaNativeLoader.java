@@ -22,10 +22,10 @@ import java.util.Set;
  *
  * <p>Discovery order:
  * <ol>
- *   <li>Explicit file path via config / {@code GOLLEK_LLAMA_LIB_PATH}</li>
- *   <li>Explicit directory via config / {@code GOLLEK_LLAMA_LIB_DIR}</li>
+ *   <li>Explicit file path via config / {@code AQLI_LLAMA_LIB_PATH}</li>
+ *   <li>Explicit directory via config / {@code AQLI_LLAMA_LIB_DIR}</li>
  *   <li>{@link System#loadLibrary} (respects {@code java.library.path})</li>
- *   <li>Common runtime directories ({@code ~/.gollek/source/llama-cpp/lib}, {@code ~/.gollek/libs/llama}, Homebrew, etc.)</li>
+ *   <li>Common runtime directories ({@code ~/.aqli/source/llama-cpp/lib}, {@code ~/.aqli/libs/llama}, Homebrew, etc.)</li>
  *   <li>Classpath resource extraction to a temp directory</li>
  * </ol>
  *
@@ -103,9 +103,9 @@ final class LlamaNativeLoader {
         List<String> attempts = new ArrayList<>();
 
         Optional<String> configuredLibPath = explicitLibPath.filter(s -> !s.isBlank())
-                .or(() -> optionalEnv("GOLLEK_LLAMA_LIB_PATH"));
+                .or(() -> optionalEnv("AQLI_LLAMA_LIB_PATH"));
         Optional<String> configuredLibDir = explicitLibDir.filter(s -> !s.isBlank())
-                .or(() -> optionalEnv("GOLLEK_LLAMA_LIB_DIR"));
+                .or(() -> optionalEnv("AQLI_LLAMA_LIB_DIR"));
 
         // 1) Explicit absolute library file path
         if (configuredLibPath.isPresent()) {
@@ -264,8 +264,8 @@ final class LlamaNativeLoader {
     private static List<String> nativeResourcePrefixes() {
         boolean hasCuda = System.getenv("CUDA_PATH") != null && !System.getenv("CUDA_PATH").isBlank();
         List<String> prefixes = new ArrayList<>();
-        prefixes.add(hasCuda ? "/gollek-gguf/native-libs/cuda/" : "/gollek-gguf/native-libs/cpu/");
-        prefixes.add("/gollek-gguf/native-libs/");
+        prefixes.add(hasCuda ? "/aqli-gguf/native-libs/cuda/" : "/aqli-gguf/native-libs/cpu/");
+        prefixes.add("/aqli-gguf/native-libs/");
         prefixes.add(hasCuda ? "/native-libs/cuda/" : "/native-libs/cpu/");
         prefixes.add("/native-libs/");
         return prefixes;
@@ -275,11 +275,11 @@ final class LlamaNativeLoader {
 
     /**
      * Installs a no-op log callback to silence Metal/CUDA pipeline messages.
-     * Uses the Gollek shim if available, otherwise falls back to {@code llama_log_set}.
+     * Uses the Aqli shim if available, otherwise falls back to {@code llama_log_set}.
      */
     static void suppressNativeLogs(SymbolLookup lookup) {
         try {
-            var shimAddr = lookup.find("gollek_llama_log_disable");
+            var shimAddr = lookup.find("aqli_llama_log_disable");
             if (shimAddr.isPresent()) {
                 Linker.nativeLinker()
                         .downcallHandle(shimAddr.get(), FunctionDescriptor.ofVoid())
@@ -309,9 +309,9 @@ final class LlamaNativeLoader {
 
     private static List<Path> candidateRuntimeDirs() {
         List<Path> dirs = new ArrayList<>();
-        optionalEnv("GOLLEK_LLAMA_LIB_PATH").map(Path::of).map(Path::toAbsolutePath)
+        optionalEnv("AQLI_LLAMA_LIB_PATH").map(Path::of).map(Path::toAbsolutePath)
                 .map(Path::getParent).ifPresent(dirs::add);
-        optionalEnv("GOLLEK_LLAMA_LIB_DIR").map(Path::of).map(Path::toAbsolutePath).ifPresent(dirs::add);
+        optionalEnv("AQLI_LLAMA_LIB_DIR").map(Path::of).map(Path::toAbsolutePath).ifPresent(dirs::add);
 
         if (isMacOS()) {
             Path brew = Path.of("/opt/homebrew/opt/llama.cpp/lib");
@@ -321,20 +321,20 @@ final class LlamaNativeLoader {
         }
 
         Path sourcePathLlamaLib = Path.of(System.getProperty("user.home"),
-                ".gollek", "source", "llama-cpp", "lib").toAbsolutePath();
+                ".aqli", "source", "llama-cpp", "lib").toAbsolutePath();
         if (Files.exists(sourcePathLlamaLib)) dirs.add(sourcePathLlamaLib);
 
         Path sourcePathBin = Path.of(System.getProperty("user.home"),
-                ".gollek", "source", "vendor", "llama.cpp", "build", "bin").toAbsolutePath();
+                ".aqli", "source", "vendor", "llama.cpp", "build", "bin").toAbsolutePath();
         if (Files.exists(sourcePathBin)) dirs.add(sourcePathBin);
 
         Path sourcePathRoot = Path.of(System.getProperty("user.home"),
-                ".gollek", "source", "vendor", "llama.cpp").toAbsolutePath();
+                ".aqli", "source", "vendor", "llama.cpp").toAbsolutePath();
         if (Files.exists(sourcePathRoot)) dirs.add(sourcePathRoot);
 
-        dirs.add(Path.of(System.getProperty("user.home"), ".gollek", "libs", "llama").toAbsolutePath());
+        dirs.add(Path.of(System.getProperty("user.home"), ".aqli", "libs", "llama").toAbsolutePath());
 
-        dirs.add(Path.of(System.getProperty("user.home"), ".gollek", "native-libs").toAbsolutePath());
+        dirs.add(Path.of(System.getProperty("user.home"), ".aqli", "native-libs").toAbsolutePath());
         dirs.add(Path.of(".").toAbsolutePath());
         dirs.add(Path.of("native-libs").toAbsolutePath());
         dirs.add(Path.of("lib").toAbsolutePath());
@@ -350,8 +350,8 @@ final class LlamaNativeLoader {
 
         Path cwd = Path.of(System.getProperty("user.dir")).toAbsolutePath();
         for (int i = 0; i < 8 && cwd != null; i++) {
-            dirs.add(cwd.resolve("runner/llamacpp/gollek-runner-llamacpp/src/main/resources/native-libs"));
-            dirs.add(cwd.resolve("runner/llamacpp/gollek-runner-llamacpp/target/llama-cpp/lib"));
+            dirs.add(cwd.resolve("runner/llamacpp/aqli-runner-llamacpp/src/main/resources/native-libs"));
+            dirs.add(cwd.resolve("runner/llamacpp/aqli-runner-llamacpp/target/llama-cpp/lib"));
             dirs.add(cwd.resolve("inference/format/gguf/source/llama-cpp/llama.cpp/build/bin"));
             cwd = cwd.getParent();
         }
@@ -408,7 +408,7 @@ final class LlamaNativeLoader {
     }
 
     static String shimLibraryFileName() {
-        return (isWindows() ? "" : "lib") + "gollek_llama_shim" + nativeLibExt();
+        return (isWindows() ? "" : "lib") + "aqli_llama_shim" + nativeLibExt();
     }
 
     static boolean isMacOS() {

@@ -102,7 +102,7 @@ public class LlamaCppBinding {
     /** Suppresses verbose native log output (Metal/CUDA pipeline messages). */
     public void suppressNativeLogs() {
         try {
-            if (h.gollekLogDisable != null) { h.gollekLogDisable.invoke(); return; }
+            if (h.aqliLogDisable != null) { h.aqliLogDisable.invoke(); return; }
         } catch (Throwable ignored) {}
         LlamaNativeLoader.suppressNativeLogs(SymbolLookup.loaderLookup());
     }
@@ -111,14 +111,14 @@ public class LlamaCppBinding {
 
     /**
      * Returns a segment containing default {@code llama_model_params}.
-     * Uses the Gollek shim if available, otherwise falls back to the standard
+     * Uses the Aqli shim if available, otherwise falls back to the standard
      * llama.cpp function or hard-coded conservative defaults.
      */
     public MemorySegment getDefaultModelParams() {
         try {
             MemorySegment params = arena.allocate(LlamaStructLayouts.MODEL_PARAMS);
-            if (h.gollekModelDefaultParamsInto != null) {
-                h.gollekModelDefaultParamsInto.invoke(params);
+            if (h.aqliModelDefaultParamsInto != null) {
+                h.aqliModelDefaultParamsInto.invoke(params);
             } else if (h.modelDefaultParams != null) {
                 MemorySegment def = (MemorySegment) h.modelDefaultParams.invoke((SegmentAllocator) arena);
                 MemorySegment.copy(def, 0, params, 0, LlamaStructLayouts.MODEL_PARAMS.byteSize());
@@ -140,14 +140,14 @@ public class LlamaCppBinding {
 
     /**
      * Returns a segment containing default {@code llama_context_params}.
-     * Uses the Gollek shim if available, otherwise falls back to the standard
+     * Uses the Aqli shim if available, otherwise falls back to the standard
      * llama.cpp function or hard-coded conservative defaults.
      */
     public MemorySegment getDefaultContextParams() {
         try {
             MemorySegment params = arena.allocate(LlamaStructLayouts.CONTEXT_PARAMS);
-            if (h.gollekContextDefaultParamsInto != null) {
-                h.gollekContextDefaultParamsInto.invoke(params);
+            if (h.aqliContextDefaultParamsInto != null) {
+                h.aqliContextDefaultParamsInto.invoke(params);
             } else if (h.contextDefaultParams != null) {
                 MemorySegment def = (MemorySegment) h.contextDefaultParams.invoke((SegmentAllocator) arena);
                 MemorySegment.copy(def, 0, params, 0, LlamaStructLayouts.CONTEXT_PARAMS.byteSize());

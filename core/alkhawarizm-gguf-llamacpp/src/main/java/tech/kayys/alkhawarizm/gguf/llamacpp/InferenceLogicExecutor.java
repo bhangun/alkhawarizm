@@ -3,10 +3,10 @@ package tech.kayys.alkhawarizm.gguf.llamacpp;
 
 
 import org.jboss.logging.Logger;
-import tech.kayys.gollek.spi.inference.InferenceRequest;
-import tech.kayys.gollek.spi.inference.InferenceResponse;
+import tech.kayys.alkhawarizm.spi.inference.InferenceRequest;
+import tech.kayys.alkhawarizm.spi.inference.InferenceResponse;
 import tech.kayys.alkhawarizm.spi.model.ModelManifest;
-import tech.kayys.gollek.spi.Message;
+import tech.kayys.alkhawarizm.spi.Message;
 import java.lang.foreign.MemorySegment;
 import java.lang.foreign.ValueLayout;
 import java.lang.foreign.Arena;

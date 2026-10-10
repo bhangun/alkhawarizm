@@ -9,7 +9,7 @@ import java.util.Set;
  * <p>{@link GgufBackendProvider#probe} must answer this from GGUF header
  * metadata only (architecture string, tensor names/types, quantization
  * formats present) — never by loading full tensor data or running the
- * model — so that {@link GgufRunnerPlugin}'s AUTO selection stays cheap
+ * model — so that {@link GgufInferenceEngine}'s AUTO selection stays cheap
  * even for large models and can probe every available provider on every
  * load.</p>
  *

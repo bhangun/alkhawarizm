@@ -3,10 +3,8 @@ package tech.kayys.alkhawarizm.gguf.llamacppbackend;
 import org.jboss.logging.Logger;
 import tech.kayys.alkhawarizm.gguf.api.GgufBackend;
 import tech.kayys.alkhawarizm.gguf.llamacpp.LlamaCppRunner;
-import tech.kayys.gollek.plugin.runner.RunnerRequest;
-import tech.kayys.gollek.plugin.runner.RunnerResult;
-import tech.kayys.gollek.spi.inference.InferenceRequest;
-import tech.kayys.gollek.spi.inference.InferenceResponse;
+import tech.kayys.alkhawarizm.spi.inference.InferenceRequest;
+import tech.kayys.alkhawarizm.spi.inference.InferenceResponse;
 
 /**
  * GGUF backend powered by llama.cpp native bindings.
@@ -31,18 +29,11 @@ final class LlamaCppGgufBackend implements GgufBackend {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public <T> RunnerResult<T> execute(RunnerRequest request) {
-        if (request.getInferenceRequest().isEmpty()) {
-            return RunnerResult.failed("Unsupported request type for llama.cpp GGUF backend");
-        }
-        InferenceRequest inferenceRequest = request.getInferenceRequest().get();
+    public InferenceResponse execute(InferenceRequest request) {
         try {
-            InferenceResponse response = runner.infer(inferenceRequest);
-            return (RunnerResult<T>) RunnerResult.success(response);
+            return runner.infer(request);
         } catch (Exception e) {
-            log.errorf(e, "Llama.cpp GGUF inference failed");
-            return RunnerResult.failed("Llama.cpp GGUF inference failed: " + e.getMessage());
+            throw new tech.kayys.alkhawarizm.spi.exception.InferenceException("Llama.cpp GGUF inference failed: " + e.getMessage(), e);
         }
     }
 

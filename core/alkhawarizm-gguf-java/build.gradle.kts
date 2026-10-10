@@ -21,17 +21,9 @@ dependencies {
     implementation(project(":core:alkhawarizm-gguf-api"))
     implementation(project(":core:alkhawarizm-gguf-core"))
     implementation(project(":core:alkhawarizm-spi-model"))
-    // gollek-tokenizer-core is needed directly: JavaNativeGgufBackend uses
-    // EncodeOptions/DecodeOptions from the gollek tokenizer SPI. gguf-core
-    // declares it as 'implementation' (not 'api'), so it's not transitive.
-    val tokenizerProject = findProject(":core:alkhawarizm-tokenizer-core") ?: findProject(":core:gollek-tokenizer-core")
-    if (tokenizerProject != null) {
-        implementation(tokenizerProject)
-    } else {
-        implementation("tech.kayys.gollek:gollek-tokenizer-core:0.1.0-SNAPSHOT")
-    }
-    implementation("tech.kayys.gollek:gollek-plugin-runner-core:0.1.0-SNAPSHOT")
-    implementation("tech.kayys.gollek:gollek-spi-inference:0.1.0-SNAPSHOT")
+    implementation(project(":core:alkhawarizm-spi-tokenizer"))
+    implementation(project(":core:alkhawarizm-spi-inference"))
+
     testImplementation(group = "org.junit.jupiter", name = "junit-jupiter")
     testRuntimeOnly(group = "org.junit.platform", name = "junit-platform-launcher")
 }

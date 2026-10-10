@@ -33,7 +33,7 @@ import java.util.Objects;
  * request.getMetadata().put("attachments", List.of(image, audio));
  * }</pre>
  *
- * @author Gollek Team
+ * @author Aqli Team
  * @version 1.0.0
  */
 public final class Attachment {

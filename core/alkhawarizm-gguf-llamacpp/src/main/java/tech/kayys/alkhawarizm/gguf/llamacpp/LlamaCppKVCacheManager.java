@@ -1,7 +1,7 @@
 package tech.kayys.alkhawarizm.gguf.llamacpp;
 
 import org.jboss.logging.Logger;
-import tech.kayys.gollek.spi.inference.InferenceRequest;
+import tech.kayys.alkhawarizm.spi.inference.InferenceRequest;
 import tech.kayys.alkhawarizm.spi.model.ModelManifest;
 
 import java.lang.foreign.MemorySegment;
@@ -238,7 +238,7 @@ public class LlamaCppKVCacheManager {
         }
         String baseDir = String.valueOf(request.getParameters().getOrDefault(
                 "gguf.session.cache_dir",
-                System.getProperty("user.home") + "/.gollek/cache/gguf/sessions"));
+                System.getProperty("user.home") + "/.aqli/cache/gguf/sessions"));
         String safeModel = manifest == null ? "unknown" : manifest.modelId().replace('/', '_');
         return Path.of(baseDir, safeModel, sessionId.get() + ".bin");
     }
